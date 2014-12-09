@@ -1,0 +1,10 @@
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\bin\Debug\ActiveContour.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\bin\Debug\ActiveContour.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\x86\Debug\ActiveContour.csprojResolveAssemblyReference.cache
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\x86\Debug\ActiveContour.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\x86\Debug\ActiveContour.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\bin\Debug\ActiveContour.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\bin\Debug\ActiveContour.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\x86\Debug\ActiveContour.csprojResolveAssemblyReference.cache
+E:\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\x86\Debug\ActiveContour.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\x86\Debug\ActiveContour.pdb

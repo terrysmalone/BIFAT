@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE69CEF7-1162-4A00-88E6-9F14C28BD2E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BoreholeFeautreAnnotationToolTests</RootNamespace>
+    <AssemblyName>BoreholeFeautreAnnotationToolTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LogDataSet, Version=1.0.4323.30188, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Programming\DLLS\LogDataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="PreProcessedData">
+      <HintPath>..\..\..\..\Programming\DLLS\PreProcessedData.dll</HintPath>
+    </Reference>
+    <Reference Include="RawData">
+      <HintPath>..\..\..\..\Programming\DLLS\RawData.dll</HintPath>
+    </Reference>
+    <Reference Include="ReferencedData, Version=1.0.4317.14348, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Programming\DLLS\ReferencedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="AverageBrightnessTests.cs" />
+    <Compile Include="BestFitSineTests.cs" />
+    <Compile Include="BitmapConverterTests.cs" />
+    <Compile Include="BitmapTilerTests.cs" />
+    <Compile Include="CalculateIntersectingPointTests.cs" />
+    <Compile Include="CalculateLineEquationTests.cs" />
+    <Compile Include="CannyDetectorTests.cs" />
+    <Compile Include="EdgeLengthComparerTests.cs" />
+    <Compile Include="EdgeLinkingTests.cs" />
+    <Compile Include="EdgeTests.cs" />
+    <Compile Include="FeaturesTilerTests.cs" />
+    <Compile Include="ClusterTests.cs" />
+    <Compile Include="DrawEdgesTests.cs" />
+    <Compile Include="DrawSinesTests.cs" />
+    <Compile Include="FindEdgesOverlapTests.cs" />
+    <Compile Include="FindEdgesTests.cs" />
+    <Compile Include="InclusionTests.cs" />
+    <Compile Include="JoinEdgesTests.cs" />
+    <Compile Include="LayerTests.cs" />
+    <Compile Include="LineDirectionTests.cs" />
+    <Compile Include="PointOrientationTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveEdgesTests.cs" />
+    <Compile Include="SaveLoadBoreholeDataTests.cs" />
+    <Compile Include="SineFitTests.cs" />
+    <Compile Include="SineTests.cs" />
+    <Compile Include="SineWaveTests.cs" />
+    <Compile Include="TriangleAreaTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveContour\ActiveContour.csproj">
+      <Project>{f04de8da-ad42-4e76-b4e3-df2320c3fa77}</Project>
+      <Name>ActiveContour</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AutomaticFeatureDetection\AutomaticFeatureDetection.csproj">
+      <Project>{69f94ed8-0079-477d-994e-e5c298620e7c}</Project>
+      <Name>AutomaticFeatureDetection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoreholeFeatures\BoreholeFeatures.csproj">
+      <Project>{080d9482-3176-4022-badc-582982fb17f3}</Project>
+      <Name>BoreholeFeatures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BrightnessAnalysis\BrightnessAnalysis.csproj">
+      <Project>{74e723e2-8e43-4001-b90f-1c3d5970b703}</Project>
+      <Name>BrightnessAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrawEdges\DrawEdges.csproj">
+      <Project>{30361b28-32ee-46cb-9e90-2db6fa2c1e41}</Project>
+      <Name>DrawEdges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EdgeDetector\EdgeDetector.csproj">
+      <Project>{34fee532-f0de-4b35-840a-db77e43ccc88}</Project>
+      <Name>EdgeDetector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edges\Edges.csproj">
+      <Project>{7ecbab21-48cf-4c33-a698-53bcaa8510a7}</Project>
+      <Name>Edges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeatureAnnotationTool\FeatureAnnotationTool.csproj">
+      <Project>{67fbac61-036f-4442-83d5-b1b5002f567d}</Project>
+      <Name>FeatureAnnotationTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageTiler\ImageTiler.csproj">
+      <Project>{d3786bfd-0fa4-4c2c-9891-5da59a42d06a}</Project>
+      <Name>ImageTiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LargeBitmapFileCreator\LargeBitmapFileCreator.csproj">
+      <Project>{43414a2e-21ae-44e3-88c7-966227b7a0ee}</Project>
+      <Name>LargeBitmapFileCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LayerDetection\LayerDetection.csproj">
+      <Project>{f48752bf-2279-4590-b40b-28d921614648}</Project>
+      <Name>LayerDetection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PerformEdgeOperations\PerformEdgeOperations.csproj">
+      <Project>{93f89c65-b4b2-493d-8d54-918c31a74165}</Project>
+      <Name>PerformEdgeOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaveLoadBoreholeData\SaveLoadBoreholeData.csproj">
+      <Project>{04385dd7-7903-428c-844c-e98273b4e582}</Project>
+      <Name>SaveLoadBoreholeData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SineFitting\EdgeFitting.csproj">
+      <Project>{7fbb3ca9-97e3-4e7d-807f-9e68a8ada47c}</Project>
+      <Name>EdgeFitting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwoStageHoughTransform\TwoStageHoughTransform.csproj">
+      <Project>{d6389558-32a8-4f84-a264-06ea9b243734}</Project>
+      <Name>TwoStageHoughTransform</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TestOverlappingEdges.bmp" />
+    <None Include="Resources\TestOverlap.bmp" />
+    <None Include="Resources\LinkToCorrectEdgeImage.bmp" />
+    <None Include="Resources\1a.bmp" />
+    <Content Include="Resources\bitmapConverterTestImage.bmp" />
+    <None Include="Resources\Edge1Test.bmp" />
+    <None Include="Resources\Edge2Test.bmp" />
+    <None Include="Resources\EdgeJoiningTestImage.bmp" />
+    <None Include="Resources\EdgeLinkingTestImage.bmp" />
+    <None Include="Resources\EndToEndTestImage.bmp" />
+    <Content Include="Resources\ExcludeInclusionsTestImage.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ExcludeLayersTestImage.bmp" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

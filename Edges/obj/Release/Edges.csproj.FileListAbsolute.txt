@@ -1,0 +1,13 @@
+E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\bin\Release\Edges.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\bin\Release\Edges.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.csprojResolveAssemblyReference.cache
+E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\Edges\bin\Release\Edges.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\Edges\bin\Release\Edges.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\Edges\bin\Release\Edges.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\Edges\bin\Release\Edges.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\Edges\obj\Release\Edges.pdb

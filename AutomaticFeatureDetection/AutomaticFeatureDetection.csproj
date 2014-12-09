@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{69F94ED8-0079-477D-994E-E5C298620E7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AutomaticFeatureDetection</RootNamespace>
+    <AssemblyName>AutomaticFeatureDetection</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BitmapConverter.cs" />
+    <Compile Include="EdgeProcessingLayerDetection.cs" />
+    <Compile Include="HoughLayerDetection.cs" />
+    <Compile Include="LineDepthComparer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SineDepthComparer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveContour\ActiveContour.csproj">
+      <Project>{F04DE8DA-AD42-4E76-B4E3-DF2320C3FA77}</Project>
+      <Name>ActiveContour</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoreholeFeatures\BoreholeFeatures.csproj">
+      <Project>{080D9482-3176-4022-BADC-582982FB17F3}</Project>
+      <Name>BoreholeFeatures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrawEdges\DrawEdges.csproj">
+      <Project>{30361B28-32EE-46CB-9E90-2DB6FA2C1E41}</Project>
+      <Name>DrawEdges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EdgeDetector\EdgeDetector.csproj">
+      <Project>{34fee532-f0de-4b35-840a-db77e43ccc88}</Project>
+      <Name>EdgeDetector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edges\Edges.csproj">
+      <Project>{7ECBAB21-48CF-4C33-A698-53BCAA8510A7}</Project>
+      <Name>Edges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LayerDetection\LayerDetection.csproj">
+      <Project>{F48752BF-2279-4590-B40B-28D921614648}</Project>
+      <Name>LayerDetection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PerformEdgeOperations\PerformEdgeOperations.csproj">
+      <Project>{93F89C65-B4B2-493D-8D54-918C31A74165}</Project>
+      <Name>PerformEdgeOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SineFitting\EdgeFitting.csproj">
+      <Project>{7FBB3CA9-97E3-4E7D-807F-9E68A8ADA47C}</Project>
+      <Name>EdgeFitting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwoStageHoughTransform\TwoStageHoughTransform.csproj">
+      <Project>{d6389558-32a8-4f84-a264-06ea9b243734}</Project>
+      <Name>TwoStageHoughTransform</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

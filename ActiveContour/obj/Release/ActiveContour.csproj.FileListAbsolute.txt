@@ -1,0 +1,4 @@
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ActiveContour\bin\Release\ActiveContour.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ActiveContour\bin\Release\ActiveContour.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\Release\ActiveContour.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ActiveContour\obj\Release\ActiveContour.pdb

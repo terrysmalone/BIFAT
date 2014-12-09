@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{67FBAC61-036F-4442-83D5-B1B5002F567D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FeatureAnnotationTool</RootNamespace>
+    <AssemblyName>FeatureAnnotationTool</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>FeatureAnnotationTool.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FAT icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Diagnostic">
+      <HintPath>..\Libraries\Diagnostic.dll</HintPath>
+    </Reference>
+    <Reference Include="Header">
+      <HintPath>..\Libraries\Header.dll</HintPath>
+    </Reference>
+    <Reference Include="LasIO">
+      <HintPath>..\Libraries\LasIO.dll</HintPath>
+    </Reference>
+    <Reference Include="LogDataSet">
+      <HintPath>..\Libraries\LogDataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PreProcessedData">
+      <HintPath>..\Libraries\PreProcessedData.dll</HintPath>
+    </Reference>
+    <Reference Include="RawData">
+      <HintPath>..\Libraries\RawData.dll</HintPath>
+    </Reference>
+    <Reference Include="ReferencedData">
+      <HintPath>..\Libraries\ReferencedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnnotationToolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnnotationToolForm.designer.cs">
+      <DependentUpon>AnnotationToolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDetect\AutoConvergeSnake.cs" />
+    <Compile Include="AutoDetect\AutomaticDetectUsingHough.cs" />
+    <Compile Include="BIFAT.cs" />
+    <Compile Include="AutoDetect\AutomaticDetectUsingEdgeProcessing.cs" />
+    <Compile Include="Controller\AnnotationToolController.cs" />
+    <Compile Include="DialogBoxes\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\AboutBox.designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\AutoDetectParametersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\AutoDetectParametersForm.designer.cs">
+      <DependentUpon>AutoDetectParametersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\BoreholeDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\BoreholeDetailsForm.designer.cs">
+      <DependentUpon>BoreholeDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\ClusterPropertiesOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\ClusterPropertiesOptionsForm.designer.cs">
+      <DependentUpon>ClusterPropertiesOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\ClusterGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\ClusterGroupsForm.Designer.cs">
+      <DependentUpon>ClusterGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\HoughTransformAutoDetectParametersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\HoughTransformAutoDetectParametersForm.Designer.cs">
+      <DependentUpon>HoughTransformAutoDetectParametersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\InclusionGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\InclusionGroupsForm.Designer.cs">
+      <DependentUpon>InclusionGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\CreateNewProjectFromBitmapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\CreateNewProjectFromBitmapForm.designer.cs">
+      <DependentUpon>CreateNewProjectFromBitmapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\CreateNewProjectFromOTVForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\CreateNewProjectFromOTVForm.designer.cs">
+      <DependentUpon>CreateNewProjectFromOTVForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\DepthLuminosityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\DepthLuminosityForm.designer.cs">
+      <DependentUpon>DepthLuminosityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\DisplayBoreholeDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\DisplayBoreholeDetailsForm.Designer.cs">
+      <DependentUpon>DisplayBoreholeDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\GroupNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\GroupNameForm.Designer.cs" />
+    <Compile Include="DialogBoxes\InclusionPropertiesOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\InclusionPropertiesOptionsForm.Designer.cs" />
+    <Compile Include="DialogBoxes\LayerGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\LayerGroupsForm.Designer.cs">
+      <DependentUpon>LayerGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\LayerPropertiesOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\LayerPropertiesOptionsForm.Designer.cs">
+      <DependentUpon>LayerPropertiesOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\ProgressReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\ProgressReportForm.Designer.cs" />
+    <Compile Include="DialogBoxes\SectionSizeDialogBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\SectionSizeDialogBox.Designer.cs">
+      <DependentUpon>SectionSizeDialogBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageRotation.cs" />
+    <Compile Include="Interfaces\IModel.cs" />
+    <Compile Include="Interfaces\IModelAdapter.cs" />
+    <Compile Include="Interfaces\IView.cs" />
+    <Compile Include="Interfaces\IViewAdapter.cs" />
+    <Compile Include="Model\AnnotationToolModel.cs" />
+    <Compile Include="Model\Features.cs" />
+    <Compile Include="Model\WriteFeaturesToExcel.cs" />
+    <Compile Include="OrientationRuler.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ruler.cs" />
+    <EmbeddedResource Include="AnnotationToolForm.resx">
+      <DependentUpon>AnnotationToolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\AutoDetectParametersForm.resx">
+      <DependentUpon>AutoDetectParametersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\BoreholeDetailsForm.resx">
+      <DependentUpon>BoreholeDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\ClusterGroupsForm.resx">
+      <DependentUpon>ClusterGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\ClusterPropertiesOptionsForm.resx">
+      <DependentUpon>ClusterPropertiesOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\HoughTransformAutoDetectParametersForm.resx">
+      <DependentUpon>HoughTransformAutoDetectParametersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\InclusionGroupsForm.resx">
+      <DependentUpon>InclusionGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\CreateNewProjectFromBitmapForm.resx">
+      <DependentUpon>CreateNewProjectFromBitmapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\CreateNewProjectFromOTVForm.resx">
+      <DependentUpon>CreateNewProjectFromOTVForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\DepthLuminosityForm.resx">
+      <DependentUpon>DepthLuminosityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\DisplayBoreholeDetailsForm.resx">
+      <DependentUpon>DisplayBoreholeDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\GroupNameForm.resx" />
+    <EmbeddedResource Include="DialogBoxes\InclusionPropertiesOptionsForm.resx" />
+    <EmbeddedResource Include="DialogBoxes\LayerGroupsForm.resx" />
+    <EmbeddedResource Include="DialogBoxes\LayerPropertiesOptionsForm.resx">
+      <DependentUpon>LayerPropertiesOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\Loading.resx" />
+    <EmbeddedResource Include="DialogBoxes\OptionsForm.resx" />
+    <EmbeddedResource Include="DialogBoxes\ProgressReportForm.resx" />
+    <EmbeddedResource Include="DialogBoxes\SectionSizeDialogBox.resx">
+      <DependentUpon>SectionSizeDialogBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveContour\ActiveContour.csproj">
+      <Project>{F04DE8DA-AD42-4E76-B4E3-DF2320C3FA77}</Project>
+      <Name>ActiveContour</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AutomaticFeatureDetection\AutomaticFeatureDetection.csproj">
+      <Project>{69F94ED8-0079-477D-994E-E5C298620E7C}</Project>
+      <Name>AutomaticFeatureDetection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoreholeFeatures\BoreholeFeatures.csproj">
+      <Project>{080D9482-3176-4022-BADC-582982FB17F3}</Project>
+      <Name>BoreholeFeatures</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+    <ProjectReference Include="..\BrightnessAnalysis\BrightnessAnalysis.csproj">
+      <Project>{74E723E2-8E43-4001-B90F-1C3D5970B703}</Project>
+      <Name>BrightnessAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrawEdges\DrawEdges.csproj">
+      <Project>{30361B28-32EE-46CB-9E90-2DB6FA2C1E41}</Project>
+      <Name>DrawEdges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageTiler\ImageTiler.csproj">
+      <Project>{D3786BFD-0FA4-4C2C-9891-5DA59A42D06A}</Project>
+      <Name>ImageTiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LargeBitmapFileCreator\LargeBitmapFileCreator.csproj">
+      <Project>{43414A2E-21AE-44E3-88C7-966227B7A0EE}</Project>
+      <Name>LargeBitmapFileCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaveLoadBoreholeData\SaveLoadBoreholeData.csproj">
+      <Project>{04385DD7-7903-428C-844C-E98273B4E582}</Project>
+      <Name>SaveLoadBoreholeData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Feature Annotation Tool Logo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewDocumentHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previousSectionIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RotateLeft.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddInclusion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddInclusionPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditInclusion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RemoveInclusionPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RemoveInclusion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nextSectionIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previousSectionIcon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previousSectionIconLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FAT icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterResolveReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
+        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

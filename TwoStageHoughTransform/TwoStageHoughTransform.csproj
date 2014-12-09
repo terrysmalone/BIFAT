@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D6389558-32A8-4F84-A264-06EA9B243734}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TwoStageHoughTransform</RootNamespace>
+    <AssemblyName>TwoStageHoughTransform</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccumulatorSpace\AccumulatorSpace1D.cs" />
+    <Compile Include="AccumulatorSpace\AccumulatorSpace2D.cs" />
+    <Compile Include="CalculateSinusoidParameters.cs" />
+    <Compile Include="DepthFinder.cs" />
+    <Compile Include="EdgePointData.cs" />
+    <Compile Include="EdgePointsFinder.cs" />
+    <Compile Include="HoughTransform.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VoteTracker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DrawEdges\DrawEdges.csproj">
+      <Project>{30361b28-32ee-46cb-9e90-2db6fa2c1e41}</Project>
+      <Name>DrawEdges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edges\Edges.csproj">
+      <Project>{7ecbab21-48cf-4c33-a698-53bcaa8510a7}</Project>
+      <Name>Edges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SineFitting\EdgeFitting.csproj">
+      <Project>{7fbb3ca9-97e3-4e7d-807f-9e68a8ada47c}</Project>
+      <Name>EdgeFitting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

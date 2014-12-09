@@ -1,0 +1,263 @@
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csprojResolveAssemblyReference.cache
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.AnnotationToolForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AboutBox.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AutoDetectParametersForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.BoreholeDetailsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterGroupsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterPropertiesOptionsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionGroupsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromBitmapForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromOTVForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DepthLuminosityForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DisplayDetailsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.GroupNameForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionPropertiesOptionsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerGroupsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerPropertiesOptionsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.Loading.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.OptionsForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ProgressReportForm.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.SectionSizeDialogBox.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.Properties.Resources.resources
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csproj.GenerateResource.Cache
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe.config
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.exe
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe.config
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.exe
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Diagnostic.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Header.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LasIO.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LogDataSet.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PreProcessedData.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\RawData.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ReferencedData.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csprojResolveAssemblyReference.cache
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.AnnotationToolForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AboutBox.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AutoDetectParametersForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.BoreholeDetailsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterGroupsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterPropertiesOptionsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionGroupsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromBitmapForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromOTVForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DepthLuminosityForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DisplayDetailsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.GroupNameForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionPropertiesOptionsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerGroupsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerPropertiesOptionsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.Loading.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.OptionsForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ProgressReportForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.SectionSizeDialogBox.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.Properties.Resources.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csproj.GenerateResource.Cache
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.HoughTransformAutoDetectParametersForm.resources
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.HoughTransformAutoDetectParametersForm.resources
+I:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe.config
+I:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.exe
+I:\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Diagnostic.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Header.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LasIO.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LogDataSet.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PreProcessedData.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\RawData.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ReferencedData.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe.config
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.exe
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Diagnostic.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Header.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LasIO.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LogDataSet.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PreProcessedData.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\RawData.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ReferencedData.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.dll
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.pdb
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csprojResolveAssemblyReference.cache
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.AnnotationToolForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AboutBox.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AutoDetectParametersForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.BoreholeDetailsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterGroupsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterPropertiesOptionsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.HoughTransformAutoDetectParametersForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionGroupsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromBitmapForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromOTVForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DepthLuminosityForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DisplayDetailsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.GroupNameForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionPropertiesOptionsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerGroupsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerPropertiesOptionsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.Loading.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.OptionsForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ProgressReportForm.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.SectionSizeDialogBox.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.Properties.Resources.resources
+C:\Users\trm8\Documents\Programming\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csproj.GenerateResource.Cache
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe.config
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.exe
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\FeatureAnnotationTool.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Diagnostic.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Header.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LasIO.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LogDataSet.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PreProcessedData.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\RawData.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ReferencedData.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ActiveContour.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\AutomaticFeatureDetection.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BoreholeFeatures.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\BrightnessAnalysis.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\DrawEdges.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ImageTiler.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LargeBitmapFileCreator.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SaveLoadBoreholeData.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\SineFitting.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\Edges.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\LayerDetection.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\EdgeDetector.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\PerformEdgeOperations.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\TwoStageHoughTransform.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\bin\Release\ALGLIB.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csprojResolveAssemblyReference.cache
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.AnnotationToolForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AboutBox.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.AutoDetectParametersForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.BoreholeDetailsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterGroupsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ClusterPropertiesOptionsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.HoughTransformAutoDetectParametersForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionGroupsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromBitmapForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.CreateNewProjectFromOTVForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DepthLuminosityForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.DisplayDetailsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.GroupNameForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.InclusionPropertiesOptionsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerGroupsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.LayerPropertiesOptionsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.Loading.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.OptionsForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.ProgressReportForm.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.DialogBoxes.SectionSizeDialogBox.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.Properties.Resources.resources
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.csproj.GenerateResource.Cache
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.exe
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\FeatureAnnotationTool\obj\x86\Release\FeatureAnnotationTool.pdb

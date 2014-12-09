@@ -1,0 +1,13 @@
+E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.pdb
+E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.csprojResolveAssemblyReference.cache
+E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.dll
+E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.pdb
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.dll
+C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.pdb
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.dll
+C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.pdb
