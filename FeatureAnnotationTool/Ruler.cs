@@ -7,6 +7,9 @@ using System.Drawing.Imaging;
 
 namespace FeatureAnnotationTool
 {
+    /// <summary>
+    /// Implements the borehole depth ruler
+    /// </summary>
     public class Ruler
     {
         private int rulerStartDepth, rulerEndDepth, rulerHeight;
