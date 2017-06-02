@@ -12,23 +12,13 @@ namespace TwoStageHoughTransform
 {
     public class HoughTransform
     {
-        private bool testing = false;
+        private readonly bool[] m_EdgeData;
+        private readonly int m_ImageWidth;
+        private readonly int m_ImageHeight;
 
-        private bool[] edgeData;
-        private int imageWidth, imageHeight;
-
-        private EdgePointData edgePointData;
-
-        private int maxSineAmplitude = 20;
-
-        private int peakThreshold = 100;
-
-        private double edgeJoinBonus = 0;
-        private double edgeLengthBonus = 0;
+        private EdgePointData m_EdgePointData;
 
         private DepthFinder depthCheck;
-
-        private List<Sine> sines = new List<Sine>();
 
         private int numOfEdges;
 
@@ -36,126 +26,73 @@ namespace TwoStageHoughTransform
 
         # region properties
 
-        public List<Sine> Sines
-        {
-            get
-            {
-                return sines;
-            }
-        }
+        public List<Sine> Sines { get; } = new List<Sine>();
 
-        public double EdgeJoinBonus
-        {
-            get
-            {
-                return edgeJoinBonus;
-            }
-            set
-            {
-                edgeJoinBonus = value;
-            }
-        }
+        public double EdgeJoinBonus { get; set; } = 0;
 
-        public double EdgeLengthBonus
-        {
-            get
-            {
-                return edgeLengthBonus;
-            }
-            set
-            {
-                edgeLengthBonus = value;
-            }
-        }
+        public double EdgeLengthBonus { get; set; } = 0;
 
-        public int PeakThreshold
-        {
-            get
-            {
-                return peakThreshold;
-            }
-            set
-            {
-                peakThreshold = value;
-            }
-        }
+        public int PeakThreshold { get; set; } = 100;
 
-        public int MaxSineAmplitude
-        {
-            get
-            {
-                return maxSineAmplitude;
-            }
-            set
-            {
-                maxSineAmplitude = value;
-            }
-        }
+        public int MaxSineAmplitude { get; set; } = 20;
 
-        public bool Testing
-        {
-            get
-            {
-                return testing;
-            }
-            set
-            {
-                testing = value;
-            }
-        }
+        public bool Testing { get; set; }
 
-        #endregion
+        #endregion properties
 
         public HoughTransform(bool[] edgeData, int imageWidth, int imageHeight)
         {
-            this.edgeData = edgeData;
-            this.imageWidth = imageWidth;
-            this.imageHeight = imageHeight;
+            this.m_EdgeData = edgeData;
+            this.m_ImageWidth = imageWidth;
+            this.m_ImageHeight = imageHeight;
 
             BuildEdgePointsList();
         }
 
         private void BuildEdgePointsList()
         {
-            EdgePointsFinder edgePointsFinder = new EdgePointsFinder(edgeData, imageWidth, imageHeight);
+            var edgePointsFinder = new EdgePointsFinder(m_EdgeData, 
+                                                        m_ImageWidth, 
+                                                        m_ImageHeight);
+
             edgePointsFinder.RunFinder();
 
-            edgePointData = edgePointsFinder.EdgePointData;
+            m_EdgePointData = edgePointsFinder.EdgePointData;
             numOfEdges = edgePointsFinder.NumOfEdges;
         }
 
         public void RunHoughTransform()
         {
-            int stage = 0;
-            bool allPeaksFound = false;
+            var stage = 0;
+            var allPeaksFound = false;
 
-            int sizeToCheckEachWay = 2; //For testing
+            const int sizeToCheckEachWay = 2; //For testing
 
             RunDepthChecker();
 
             while (!allPeaksFound)
             {
-                int depthOfSine = depthCheck.GetTopPeak(peakThreshold);
+                var depthOfSine = depthCheck.GetTopPeak(PeakThreshold);
 
-                if (depthOfSine < imageHeight)
+                if (depthOfSine < m_ImageHeight)
                 {
-                    if (testing)
+                    if (Testing)
                         DrawAccumulatorSpaceToImage(stage, sizeToCheckEachWay);
 
-                    CalculateSinusoidParameters calculateParameters = new CalculateSinusoidParameters(depthOfSine, MaxSineAmplitude, edgePointData, imageWidth, imageHeight);
-                    calculateParameters.Testing = testing;
+                    CalculateSinusoidParameters calculateParameters = new CalculateSinusoidParameters(depthOfSine, MaxSineAmplitude, m_EdgePointData, m_ImageWidth, m_ImageHeight);
+                    calculateParameters.Testing = Testing;
                     calculateParameters.Run();
 
                     Sine currentSine = calculateParameters.Sine;
 
-                    sines.Add(currentSine);
+                    Sines.Add(currentSine);
 
-                    if (testing)
+                    if (Testing)
                         DrawSinesToImage(stage);
 
                     RemoveSine(currentSine);
 
-                    if (testing)
+                    if (Testing)
                         DrawEdgePointsImage(stage);
 
                     stage++;
@@ -164,7 +101,7 @@ namespace TwoStageHoughTransform
                     allPeaksFound = true;
             }
 
-            if (testing)
+            if (Testing)
                 DrawAccumulatorSpaceToImage(stage, sizeToCheckEachWay);
             //CheckForDepths();             
         }
@@ -201,12 +138,12 @@ namespace TwoStageHoughTransform
                 int yPoint = currentPoint.Y;
 
                 //if (edgePoints.Contains(new EdgePoint(currentPoint.X, currentPoint.Y)))
-                if (edgePointData.IsEdgePointAt(xPoint, yPoint))
+                if (m_EdgePointData.IsEdgePointAt(xPoint, yPoint))
                 {
                     //EdgePoint foundPoint = edgePoints.Find(point => point.GetXPos() == currentPoint.X && point.GetYPos() == currentPoint.Y);
 
                     //int edgeNumber = foundPoint.GetEdgeSet();
-                    int edgeNumber = edgePointData.GetEdgeNumAt(xPoint, yPoint);
+                    int edgeNumber = m_EdgePointData.GetEdgeNumAt(xPoint, yPoint);
 
                     if (!edgeSetsOnSine.Contains(edgeNumber))
                     {
@@ -240,14 +177,14 @@ namespace TwoStageHoughTransform
 
         private void RunDepthChecker()
         {
-            depthCheck = new DepthFinder(edgeData, edgePointData, numOfEdges, imageWidth, imageHeight);
+            depthCheck = new DepthFinder(m_EdgeData, m_EdgePointData, numOfEdges, m_ImageWidth, m_ImageHeight);
 
-            depthCheck.MaxSineAmplitude = maxSineAmplitude;
+            depthCheck.MaxSineAmplitude = MaxSineAmplitude;
 
-            depthCheck.EdgeJoinBonus = edgeJoinBonus;
-            depthCheck.EdgeLengthBonus = edgeLengthBonus;
+            depthCheck.EdgeJoinBonus = EdgeJoinBonus;
+            depthCheck.EdgeLengthBonus = EdgeLengthBonus;
 
-            depthCheck.Testing = testing;
+            depthCheck.Testing = Testing;
 
             depthCheck.Run();
         }
@@ -288,9 +225,9 @@ namespace TwoStageHoughTransform
 
             double scaleFactor = 1.0;
 
-            if (maxCell >= imageWidth)
+            if (maxCell >= m_ImageWidth)
             {
-                scaleFactor = (double)imageWidth / (double)maxCell;
+                scaleFactor = (double)m_ImageWidth / (double)maxCell;
                 //scaleFactor += 0.1;
             }
 
@@ -320,7 +257,7 @@ namespace TwoStageHoughTransform
             }
 
             DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Point");
-            DrawEdgesImage drawImage = factory.setUpDrawEdges(points, imageWidth, imageHeight);
+            DrawEdgesImage drawImage = factory.setUpDrawEdges(points, m_ImageWidth, m_ImageHeight);
 
             drawImage.setBackgroundColour(Color.White);
             drawImage.setEdgeColour(Color.LawnGreen);
@@ -337,11 +274,11 @@ namespace TwoStageHoughTransform
         {
             List<Point> points = new List<Point>();
 
-            int numOfEdges = edgePointData.NumberOfEdges;
+            int numOfEdges = m_EdgePointData.NumberOfEdges;
 
             for (int i = 0; i < numOfEdges; i++)
             {
-                List<Point> pointsInEdge = edgePointData.GetPointsAtNum(i);
+                List<Point> pointsInEdge = m_EdgePointData.GetPointsAtNum(i);
 
                 //Maybe add check of edge bounds to speed up EdgePointData can calculate min and max values of each edge set on creation 
                 int numOfPoints = pointsInEdge.Count;
@@ -353,7 +290,7 @@ namespace TwoStageHoughTransform
             }
 
             DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Point");
-            DrawEdgesImage drawImage = factory.setUpDrawEdges(points, imageWidth, imageHeight);
+            DrawEdgesImage drawImage = factory.setUpDrawEdges(points, m_ImageWidth, m_ImageHeight);
 
             drawImage.setBackgroundColour(Color.Black);
             drawImage.setEdgeColour(Color.White);
@@ -406,7 +343,7 @@ namespace TwoStageHoughTransform
             //DrawSinesImage drawSinesOverCanny = new DrawSinesImage(afterCannyImage, sines);
             //drawSinesOverCanny.DrawnImage.Save("Sines over Canny - " + stage + ".bmp");
 
-            DrawSinesImage drawSinesOverOriginal = new DrawSinesImage(originalImage, sines);
+            DrawSinesImage drawSinesOverOriginal = new DrawSinesImage(originalImage, Sines);
             drawSinesOverOriginal.DrawnImage.Save("Sines over original - " + stage + ".bmp");
         }
 
