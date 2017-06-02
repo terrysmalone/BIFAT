@@ -24,3 +24,4 @@ C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\DrawEdges\
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\DrawEdges\bin\Debug\ALGLIB.pdb
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\DrawEdges\obj\Debug\DrawEdges.dll
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\DrawEdges\obj\Debug\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\obj\Debug\DrawEdges.csprojResolveAssemblyReference.cache

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 using FeatureAnnotationTool.DialogBoxes;
-using System.ComponentModel;
-using System.Diagnostics;
 using FeatureAnnotationTool.Interfaces;
 using BoreholeFeatures;
 using ImageTiler;

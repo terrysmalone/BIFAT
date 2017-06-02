@@ -73,3 +73,28 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\AutomaticFea
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\AutomaticFeatureDetection\obj\Release\AutomaticFeatureDetection.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\AutomaticFeatureDetection\obj\Release\AutomaticFeatureDetection.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\AutomaticFeatureDetection\obj\Release\AutomaticFeatureDetection.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\AutomaticFeatureDetection.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\AutomaticFeatureDetection.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\ActiveContour.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\DrawEdges.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\EdgeDetector.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\Edges.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\LayerDetection.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\PerformEdgeOperations.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\TwoStageHoughTransform.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\ALGLIB.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\ActiveContour.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\EdgeDetector.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\Edges.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\LayerDetection.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\PerformEdgeOperations.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\TwoStageHoughTransform.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\ALGLIB.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\obj\Release\AutomaticFeatureDetection.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\obj\Release\AutomaticFeatureDetection.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\obj\Release\AutomaticFeatureDetection.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\bin\Release\SineFitting.pdb

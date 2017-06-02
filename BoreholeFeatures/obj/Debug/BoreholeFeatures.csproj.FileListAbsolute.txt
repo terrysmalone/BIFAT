@@ -8,3 +8,7 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\bin\Debug\Boreh
 E:\Programming\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\obj\Debug\BoreholeFeatures.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\obj\Debug\BoreholeFeatures.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\obj\Debug\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\bin\Debug\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\bin\Debug\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\obj\Debug\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\obj\Debug\BoreholeFeatures.pdb

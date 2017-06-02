@@ -20,3 +20,14 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\ImageTiler\bin\Debug\Diagnostic.
 E:\Programming\C#\BoreholeFeatureAnnotationTool\ImageTiler\obj\Debug\ImageTiler.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\ImageTiler\obj\Debug\ImageTiler.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\ImageTiler\obj\Debug\ImageTiler.pdb
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\ImageTiler.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\ImageTiler.pdb
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\LogDataSet.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\PreProcessedData.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\RawData.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\ReferencedData.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\Header.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Debug\Diagnostic.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\obj\Debug\ImageTiler.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\ImageTiler\obj\Debug\ImageTiler.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\obj\Debug\ImageTiler.pdb

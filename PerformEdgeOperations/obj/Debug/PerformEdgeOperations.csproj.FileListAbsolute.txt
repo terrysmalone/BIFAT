@@ -30,3 +30,4 @@ C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\PerformEdg
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\PerformEdgeOperations\bin\Debug\ALGLIB.pdb
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\PerformEdgeOperations\obj\Debug\PerformEdgeOperations.dll
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\PerformEdgeOperations\obj\Debug\PerformEdgeOperations.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\obj\Debug\PerformEdgeOperations.csprojResolveAssemblyReference.cache

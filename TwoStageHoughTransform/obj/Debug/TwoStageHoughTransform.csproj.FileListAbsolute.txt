@@ -13,3 +13,5 @@ C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\TwoStageHo
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\TwoStageHoughTransform\obj\Debug\TwoStageHoughTransform.csprojResolveAssemblyReference.cache
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\TwoStageHoughTransform\obj\Debug\TwoStageHoughTransform.dll
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\TwoStageHoughTransform\obj\Debug\TwoStageHoughTransform.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\obj\Debug\TwoStageHoughTransform.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\obj\Debug\TwoStageHoughTransform.csproj.ResolveComReference.cache

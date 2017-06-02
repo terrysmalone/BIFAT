@@ -45,3 +45,18 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\PerformEdgeO
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\PerformEdgeOperations\obj\Release\PerformEdgeOperations.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\PerformEdgeOperations\obj\Release\PerformEdgeOperations.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\PerformEdgeOperations\obj\Release\PerformEdgeOperations.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\PerformEdgeOperations.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\PerformEdgeOperations.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\DrawEdges.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\Edges.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\ALGLIB.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\Edges.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\ALGLIB.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\obj\Release\PerformEdgeOperations.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\obj\Release\PerformEdgeOperations.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\obj\Release\PerformEdgeOperations.pdb
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\PerformEdgeOperations\bin\Release\SineFitting.pdb

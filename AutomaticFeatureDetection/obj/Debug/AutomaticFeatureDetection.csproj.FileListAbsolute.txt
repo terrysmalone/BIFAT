@@ -46,3 +46,4 @@ C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\AutomaticF
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\AutomaticFeatureDetection\bin\Debug\ALGLIB.pdb
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\AutomaticFeatureDetection\obj\Debug\AutomaticFeatureDetection.dll
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\AutomaticFeatureDetection\obj\Debug\AutomaticFeatureDetection.pdb
+C:\Development\BIFAT\BIFAT\AutomaticFeatureDetection\obj\Debug\AutomaticFeatureDetection.csprojResolveAssemblyReference.cache

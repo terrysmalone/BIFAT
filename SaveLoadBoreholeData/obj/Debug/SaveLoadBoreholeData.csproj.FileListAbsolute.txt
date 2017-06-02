@@ -24,3 +24,15 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\bin\Debug\I
 E:\Programming\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\obj\Debug\SaveLoadBoreholeData.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\obj\Debug\SaveLoadBoreholeData.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\obj\Debug\SaveLoadBoreholeData.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\SaveLoadBoreholeData.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\SaveLoadBoreholeData.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\ImageTiler.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\LogDataSet.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\Diagnostic.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\Header.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Debug\ImageTiler.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\obj\Debug\SaveLoadBoreholeData.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\obj\Debug\SaveLoadBoreholeData.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\obj\Debug\SaveLoadBoreholeData.pdb

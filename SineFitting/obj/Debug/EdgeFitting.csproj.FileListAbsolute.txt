@@ -16,3 +16,4 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\SineFitting\bin\Debug\ALGLIB.pdb
 E:\Programming\C#\BoreholeFeatureAnnotationTool\SineFitting\obj\Debug\EdgeFitting.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\SineFitting\obj\Debug\SineFitting.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\SineFitting\obj\Debug\SineFitting.pdb
+C:\Development\BIFAT\BIFAT\SineFitting\obj\Debug\EdgeFitting.csprojResolveAssemblyReference.cache

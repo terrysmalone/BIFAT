@@ -36,19 +36,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LogDataSet, Version=1.0.4323.30188, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Programming\DLLS\LogDataSet.dll</HintPath>
+    <Reference Include="Diagnostic">
+      <HintPath>..\Libraries\Diagnostic.dll</HintPath>
+    </Reference>
+    <Reference Include="Header">
+      <HintPath>..\Libraries\Header.dll</HintPath>
+    </Reference>
+    <Reference Include="LasIO">
+      <HintPath>..\Libraries\LasIO.dll</HintPath>
+    </Reference>
+    <Reference Include="LogDataSet">
+      <HintPath>..\Libraries\LogDataSet.dll</HintPath>
     </Reference>
     <Reference Include="PreProcessedData">
-      <HintPath>..\..\..\..\Programming\DLLS\PreProcessedData.dll</HintPath>
+      <HintPath>..\Libraries\PreProcessedData.dll</HintPath>
     </Reference>
     <Reference Include="RawData">
-      <HintPath>..\..\..\..\Programming\DLLS\RawData.dll</HintPath>
+      <HintPath>..\Libraries\RawData.dll</HintPath>
     </Reference>
-    <Reference Include="ReferencedData, Version=1.0.4317.14348, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Programming\DLLS\ReferencedData.dll</HintPath>
+    <Reference Include="ReferencedData">
+      <HintPath>..\Libraries\ReferencedData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

@@ -1,0 +1,4 @@
+C:\Development\BIFAT\BIFAT\ActiveContour\bin\Debug\ActiveContour.dll
+C:\Development\BIFAT\BIFAT\ActiveContour\bin\Debug\ActiveContour.pdb
+C:\Development\BIFAT\BIFAT\ActiveContour\obj\Debug\ActiveContour.dll
+C:\Development\BIFAT\BIFAT\ActiveContour\obj\Debug\ActiveContour.pdb

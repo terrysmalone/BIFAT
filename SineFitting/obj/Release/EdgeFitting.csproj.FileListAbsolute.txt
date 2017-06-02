@@ -30,3 +30,11 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SineFitting\
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SineFitting\obj\Release\EdgeFitting.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SineFitting\obj\Release\SineFitting.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SineFitting\obj\Release\SineFitting.pdb
+C:\Development\BIFAT\BIFAT\SineFitting\bin\Release\Edges.dll
+C:\Development\BIFAT\BIFAT\SineFitting\bin\Release\Edges.pdb
+C:\Development\BIFAT\BIFAT\SineFitting\bin\Release\ALGLIB.pdb
+C:\Development\BIFAT\BIFAT\SineFitting\obj\Release\EdgeFitting.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\SineFitting\bin\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\SineFitting\bin\Release\SineFitting.pdb
+C:\Development\BIFAT\BIFAT\SineFitting\obj\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\SineFitting\obj\Release\SineFitting.pdb

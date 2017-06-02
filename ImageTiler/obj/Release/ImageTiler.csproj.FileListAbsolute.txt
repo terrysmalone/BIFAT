@@ -41,3 +41,14 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ImageTiler\b
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ImageTiler\bin\Release\Diagnostic.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ImageTiler\obj\Release\ImageTiler.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\ImageTiler\obj\Release\ImageTiler.pdb
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\ImageTiler.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\ImageTiler.pdb
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\LogDataSet.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\PreProcessedData.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\RawData.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\ReferencedData.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\Header.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\bin\Release\Diagnostic.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\obj\Release\ImageTiler.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\ImageTiler\obj\Release\ImageTiler.dll
+C:\Development\BIFAT\BIFAT\ImageTiler\obj\Release\ImageTiler.pdb

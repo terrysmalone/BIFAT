@@ -8,3 +8,7 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Debug
 E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Debug\LargeBitmapFileCreator.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Debug\LargeBitmapFileCreator.pdb
 C:\Users\Terry\Documents\Programming\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Debug\LargeBitmapFileCreator.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\bin\Debug\LargeBitmapFileCreator.dll
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\bin\Debug\LargeBitmapFileCreator.pdb
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\obj\Debug\LargeBitmapFileCreator.dll
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\obj\Debug\LargeBitmapFileCreator.pdb

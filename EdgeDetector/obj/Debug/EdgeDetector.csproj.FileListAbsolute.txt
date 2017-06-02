@@ -8,3 +8,8 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\EdgeDetector\bin\Debug\EdgeDetec
 E:\Programming\C#\BoreholeFeatureAnnotationTool\EdgeDetector\obj\Debug\EdgeDetector.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\EdgeDetector\obj\Debug\EdgeDetector.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\EdgeDetector\obj\Debug\EdgeDetector.pdb
+C:\Development\BIFAT\BIFAT\EdgeDetector\bin\Debug\EdgeDetector.dll
+C:\Development\BIFAT\BIFAT\EdgeDetector\bin\Debug\EdgeDetector.pdb
+C:\Development\BIFAT\BIFAT\EdgeDetector\obj\Debug\EdgeDetector.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\EdgeDetector\obj\Debug\EdgeDetector.dll
+C:\Development\BIFAT\BIFAT\EdgeDetector\obj\Debug\EdgeDetector.pdb

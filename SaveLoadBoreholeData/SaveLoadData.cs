@@ -51,7 +51,7 @@ namespace SaveLoadBoreholeData
 
             System.IO.Directory.CreateDirectory(projectLocation);
 
-            string newPath = System.IO.Path.Combine(projectLocation, "data");
+            var newPath = System.IO.Path.Combine(projectLocation, "data");
             System.IO.Directory.CreateDirectory(newPath);
 
             newPath = System.IO.Path.Combine(projectLocation, "source");
@@ -69,7 +69,7 @@ namespace SaveLoadBoreholeData
         {
             GC.Collect();
 
-            string fileName = extractFileName(sourceFilePath);
+            var fileName = extractFileName(sourceFilePath);
 
             File.Copy(sourceFilePath, projectLocation + "\\source\\" + fileName, true);
         }
@@ -82,7 +82,7 @@ namespace SaveLoadBoreholeData
         private string extractFileName(string sourceFilePath)
         {
             string name;
-            int startPos = sourceFilePath.LastIndexOf('\\');
+            var startPos = sourceFilePath.LastIndexOf('\\');
 
             name = sourceFilePath.Substring(startPos);
 
@@ -98,7 +98,7 @@ namespace SaveLoadBoreholeData
         /// </summary>
         public void CreateImageDataFromBitmap()
         {
-            ImageData imageData = new ImageData(projectLocation, "Bitmap");
+            var imageData = new ImageData(projectLocation, "Bitmap");
 
             imageData.Write();
         }
@@ -108,7 +108,7 @@ namespace SaveLoadBoreholeData
         /// </summary>
         public void CreateFullLengthImagePreviewData()
         {
-            FullLengthScrollerData scrollerData = new FullLengthScrollerData(projectLocation);
+            var scrollerData = new FullLengthScrollerData(projectLocation);
 
             scrollerData.Write();
         }
@@ -126,7 +126,7 @@ namespace SaveLoadBoreholeData
         /// </summary>
         public void createImageDataFromOTV()
         {
-            ImageData imageData = new ImageData(projectLocation, "OTV");
+            var imageData = new ImageData(projectLocation, "OTV");
 
             imageData.Write();
         }
@@ -137,7 +137,7 @@ namespace SaveLoadBoreholeData
         /// <param name="optvChannel"></param>
         public void createImageDataFromChannel(ReferencedChannel optvChannel)
         {
-            ImageData imageData = new ImageData(projectLocation, "Channel");
+            var imageData = new ImageData(projectLocation, "Channel");
 
             imageData.Write();
         }
@@ -152,9 +152,9 @@ namespace SaveLoadBoreholeData
         /// <param name="boreholeDetails">The string representation of the borehole details</param>
         public void saveBoreholeDetails(string boreholeDetails)
         {
-            string path = projectLocation + "\\" + projectName + ".features";
+            var path = projectLocation + "\\" + projectName + ".features";
 
-            using (StreamWriter sw = new StreamWriter(path))
+            using (var sw = new StreamWriter(path))
             {
                 sw.Write(boreholeDetails);
             }
@@ -166,11 +166,11 @@ namespace SaveLoadBoreholeData
         /// <param name="layers">A List of Layers to save</param>
         public void saveLayers(List<Layer> layers)
         {
-            string path = projectLocation + "\\features\\layers";
+            var path = projectLocation + "\\features\\layers";
 
-            using (StreamWriter sw = new StreamWriter(path))
+            using (var sw = new StreamWriter(path))
             {
-                for (int i = 0; i < layers.Count; i++)
+                for (var i = 0; i < layers.Count; i++)
                 {
                     sw.WriteLine(layers[i].GetDetails());
                 }
@@ -183,11 +183,11 @@ namespace SaveLoadBoreholeData
         /// <param name="clusters">A List of Clusters to save</param>
         public void saveClusters(List<Cluster> clusters)
         {
-            string path = projectLocation + "\\features\\clusters";
+            var path = projectLocation + "\\features\\clusters";
 
-            using (StreamWriter sw = new StreamWriter(path))
+            using (var sw = new StreamWriter(path))
             {
-                for (int i = 0; i < clusters.Count; i++)
+                for (var i = 0; i < clusters.Count; i++)
                 {
                     sw.WriteLine(clusters[i].GetDetails());
                 }
@@ -200,11 +200,11 @@ namespace SaveLoadBoreholeData
         /// <param name="inclusions">A List of Inclusions to save</param>
         public void saveInclusions(List<Inclusion> inclusions)
         {
-            string path = projectLocation + "\\features\\inclusions";
+            var path = projectLocation + "\\features\\inclusions";
 
-            using (StreamWriter sw = new StreamWriter(path))
+            using (var sw = new StreamWriter(path))
             {
-                for (int i = 0; i < inclusions.Count; i++)
+                for (var i = 0; i < inclusions.Count; i++)
                 {
                     sw.WriteLine(inclusions[i].getDetails());
                 }
@@ -217,9 +217,9 @@ namespace SaveLoadBoreholeData
         /// <param name="fluidLevel">The fluid level</param>
         public void saveFluidLevel(int fluidLevel)
         {
-            string path = projectLocation + "\\features\\fluidLevel";
+            var path = projectLocation + "\\features\\fluidLevel";
 
-            using (StreamWriter sw = new StreamWriter(path))
+            using (var sw = new StreamWriter(path))
             {
                 sw.WriteLine(fluidLevel);
             }
@@ -231,9 +231,9 @@ namespace SaveLoadBoreholeData
 
         public void SaveLayerGroups(List<Tuple<string, Color>> layerGroupsToSave)
         {
-            using (StreamWriter sw = new StreamWriter(layerGroupsPath))
+            using (var sw = new StreamWriter(layerGroupsPath))
             {
-                for (int i = 0; i < layerGroupsToSave.Count; i++)
+                for (var i = 0; i < layerGroupsToSave.Count; i++)
                 {
                     sw.WriteLine(layerGroupsToSave[i].Item1);
                     sw.WriteLine(layerGroupsToSave[i].Item2.ToArgb());
@@ -243,9 +243,9 @@ namespace SaveLoadBoreholeData
 
         public void SaveClusterGroups(List<Tuple<string, Color>> clusterGroupsToSave)
         {
-            using (StreamWriter sw = new StreamWriter(clusterGroupsPath))
+            using (var sw = new StreamWriter(clusterGroupsPath))
             {
-                for (int i = 0; i < clusterGroupsToSave.Count; i++)
+                for (var i = 0; i < clusterGroupsToSave.Count; i++)
                 {
                     sw.WriteLine(clusterGroupsToSave[i].Item1);
                     sw.WriteLine(clusterGroupsToSave[i].Item2.ToArgb());
@@ -255,9 +255,9 @@ namespace SaveLoadBoreholeData
 
         public void SaveInclusionGroups(List<Tuple<string, Color>> inclusionGroupsToSave)
         {
-            using (StreamWriter sw = new StreamWriter(inclusionGroupsPath))
+            using (var sw = new StreamWriter(inclusionGroupsPath))
             {
-                for (int i = 0; i < inclusionGroupsToSave.Count; i++)
+                for (var i = 0; i < inclusionGroupsToSave.Count; i++)
                 {
                     sw.WriteLine(inclusionGroupsToSave[i].Item1);
                     sw.WriteLine(inclusionGroupsToSave[i].Item2.ToArgb());
@@ -267,11 +267,11 @@ namespace SaveLoadBoreholeData
 
         public List<Tuple<string, Color>> GetLayerGroupsList()
         {
-            List<Tuple<string, Color>> groups = new List<Tuple<string, Color>>();
+            var groups = new List<Tuple<string, Color>>();
 
             if (File.Exists(layerGroupsPath))
             {
-                using (StreamReader reader = new StreamReader(layerGroupsPath))
+                using (var reader = new StreamReader(layerGroupsPath))
                 {
                     string line;
 
@@ -293,11 +293,11 @@ namespace SaveLoadBoreholeData
 
         public List<Tuple<string, Color>> GetClusterGroupsList()
         {
-            List<Tuple<string, Color>> groups = new List<Tuple<string, Color>>();
+            var groups = new List<Tuple<string, Color>>();
 
             if (File.Exists(clusterGroupsPath))
             {
-                using (StreamReader reader = new StreamReader(clusterGroupsPath))
+                using (var reader = new StreamReader(clusterGroupsPath))
                 {
                     string line;
 
@@ -319,11 +319,11 @@ namespace SaveLoadBoreholeData
 
         public List<Tuple<string, Color>> GetInclusionGroupsList()
         {
-            List<Tuple<string, Color>> groups = new List<Tuple<string, Color>>();
+            var groups = new List<Tuple<string, Color>>();
 
             if (File.Exists(inclusionGroupsPath))
             {
-                using (StreamReader reader = new StreamReader(inclusionGroupsPath))
+                using (var reader = new StreamReader(inclusionGroupsPath))
                 {
                     string line;
 
@@ -345,7 +345,7 @@ namespace SaveLoadBoreholeData
 
         private Color ColorFrom(string colourAsString)
         {
-            Color colour = Color.FromArgb(System.Convert.ToInt32(colourAsString));
+            var colour = Color.FromArgb(System.Convert.ToInt32(colourAsString));
 
             return colour;
         }
@@ -354,7 +354,7 @@ namespace SaveLoadBoreholeData
 
         public void RemoveFluidLevel()
         {
-            string fluidLevelPath = projectLocation + "\\features\\fluidLevel";
+            var fluidLevelPath = projectLocation + "\\features\\fluidLevel";
 
             if (File.Exists(fluidLevelPath))
                 File.Delete(fluidLevelPath);
@@ -383,8 +383,8 @@ namespace SaveLoadBoreholeData
 
         public Bitmap GetFullPreviewImage()
         {            
-            FullLengthScrollerData scrollerData = new FullLengthScrollerData(projectLocation);
-            Bitmap fullPreviewImage = scrollerData.GetFullPreviewImage();
+            var scrollerData = new FullLengthScrollerData(projectLocation);
+            var fullPreviewImage = scrollerData.GetFullPreviewImage();
 
             return fullPreviewImage;
         }
@@ -399,7 +399,7 @@ namespace SaveLoadBoreholeData
         {
             string boreholeName;
 
-            using (StreamReader reader = new StreamReader(featuresFilePath))
+            using (var reader = new StreamReader(featuresFilePath))
             {
                 boreholeName = reader.ReadLine();
             }
@@ -415,10 +415,10 @@ namespace SaveLoadBoreholeData
         {
             int boreholeWidth;
 
-            using (StreamReader reader = new StreamReader(featuresFilePath))
+            using (var reader = new StreamReader(featuresFilePath))
             {
                 reader.ReadLine();
-                boreholeWidth = Int32.Parse(reader.ReadLine());
+                boreholeWidth = int.Parse(reader.ReadLine());
             }
 
             return boreholeWidth;
@@ -432,12 +432,12 @@ namespace SaveLoadBoreholeData
         {
             int boreholeHeight;
 
-            using (StreamReader reader = new StreamReader(featuresFilePath))
+            using (var reader = new StreamReader(featuresFilePath))
             {
                 reader.ReadLine();
                 reader.ReadLine();
 
-                boreholeHeight = Int32.Parse(reader.ReadLine());
+                boreholeHeight = int.Parse(reader.ReadLine());
             }
 
             return boreholeHeight;
@@ -451,13 +451,13 @@ namespace SaveLoadBoreholeData
         {
             int boreholeStartDepth;
 
-            using (StreamReader reader = new StreamReader(featuresFilePath))
+            using (var reader = new StreamReader(featuresFilePath))
             {
                 reader.ReadLine();
                 reader.ReadLine();
                 reader.ReadLine();
 
-                boreholeStartDepth = Int32.Parse(reader.ReadLine());
+                boreholeStartDepth = int.Parse(reader.ReadLine());
             }
 
             return boreholeStartDepth;
@@ -471,14 +471,14 @@ namespace SaveLoadBoreholeData
         {
             int boreholeEndDepth;
 
-            using (StreamReader reader = new StreamReader(featuresFilePath))
+            using (var reader = new StreamReader(featuresFilePath))
             {
                 reader.ReadLine();
                 reader.ReadLine();
                 reader.ReadLine();
                 reader.ReadLine();
 
-                boreholeEndDepth = Int32.Parse(reader.ReadLine());
+                boreholeEndDepth = int.Parse(reader.ReadLine());
             }
 
             return boreholeEndDepth;
@@ -492,7 +492,7 @@ namespace SaveLoadBoreholeData
         {
             int depthResolution;
 
-            using (StreamReader reader = new StreamReader(featuresFilePath))
+            using (var reader = new StreamReader(featuresFilePath))
             {
                 reader.ReadLine();
                 reader.ReadLine();
@@ -500,7 +500,7 @@ namespace SaveLoadBoreholeData
                 reader.ReadLine();
                 reader.ReadLine();
 
-                depthResolution = Int32.Parse(reader.ReadLine());
+                depthResolution = int.Parse(reader.ReadLine());
             }
 
             return depthResolution;
@@ -508,11 +508,11 @@ namespace SaveLoadBoreholeData
 
         public string GetType()
         {
-            string type = "";
+            var type = "";
 
             try
             {
-                StreamReader reader = new StreamReader(featuresFilePath);
+                var reader = new StreamReader(featuresFilePath);
                 
                 reader.ReadLine();
                 reader.ReadLine();
@@ -543,9 +543,9 @@ namespace SaveLoadBoreholeData
 
         private void AddTypeToFile(string type)
         {
-            string path = projectLocation + "\\" + projectName + ".features";
+            var path = projectLocation + "\\" + projectName + ".features";
 
-            using (StreamWriter sw = new StreamWriter(path, true))
+            using (var sw = new StreamWriter(path, true))
             {
                 sw.WriteLine(type);
             }
@@ -562,12 +562,12 @@ namespace SaveLoadBoreholeData
         /// <returns></returns>
         public bool getIsFluidLevelSet()
         {
-            string fluidLevelPath = projectLocation + "\\features\\fluidLevel";
-            bool isFluidLevelSet = false;
+            var fluidLevelPath = projectLocation + "\\features\\fluidLevel";
+            var isFluidLevelSet = false;
 
             if (File.Exists(fluidLevelPath))
             {
-                using (StreamReader reader = new StreamReader(fluidLevelPath))
+                using (var reader = new StreamReader(fluidLevelPath))
                 {
                     if (reader.ReadLine() != null)
                     {
@@ -585,15 +585,15 @@ namespace SaveLoadBoreholeData
         /// <returns>The fluid level</returns>
         public int getFluidLevel()
         {
-            int fluidLevel = -1;
+            var fluidLevel = -1;
 
-            string fluidLevelPath = projectLocation + "\\features\\fluidLevel";
+            var fluidLevelPath = projectLocation + "\\features\\fluidLevel";
 
             if (File.Exists(fluidLevelPath))
             {
-                using (StreamReader reader = new StreamReader(fluidLevelPath))
+                using (var reader = new StreamReader(fluidLevelPath))
                 {
-                    fluidLevel = Int32.Parse(reader.ReadLine());
+                    fluidLevel = int.Parse(reader.ReadLine());
                 }
             }
 
@@ -608,21 +608,21 @@ namespace SaveLoadBoreholeData
         {
             layerTypeSelector = new LayerTypeSelector(type);
             
-            List<Layer> layers = new List<Layer>();
+            var layers = new List<Layer>();
 
-            string layersPath = projectLocation + "\\features\\layers";
+            var layersPath = projectLocation + "\\features\\layers";
 
             if (File.Exists(layersPath))
             {
-                int azimuthResolution = GetBoreholeWidth();
-                int depthResolution = GetDepthResolution();
-                int boreholeStartDepth = GetBoreholeStartDepth();
+                var azimuthResolution = GetBoreholeWidth();
+                var depthResolution = GetDepthResolution();
+                var boreholeStartDepth = GetBoreholeStartDepth();
 
-                using (StreamReader reader = new StreamReader(layersPath))
+                using (var reader = new StreamReader(layersPath))
                 {
                     string currentLayerText;
 
-                    int layerNum = 0;
+                    var layerNum = 0;
 
                     while ((currentLayerText = reader.ReadLine()) != null)
                     {
@@ -652,28 +652,28 @@ namespace SaveLoadBoreholeData
         {
             Layer layer = null;
 
-            String[] details = null;
+            string[] details = null;
 
             if (layerText != null || !layerText.Equals(""))
             {
                 details = layerText.Split(',');
             }
 
-            String type = "";
-            String desc = "";
-            int quality = 0;
+            var type = "";
+            var desc = "";
+            var quality = 0;
 
-            DateTime added = new DateTime();
-            DateTime lastModified = new DateTime();
+            var added = new DateTime();
+            var lastModified = new DateTime();
             
             if (imageType == "Borehole")
             {
-                int firstDepth = System.Convert.ToInt32(details[2]);
-                int firstAz = System.Convert.ToInt32(details[3]);
-                int firstAmp = System.Convert.ToInt32(details[4]);
-                int secondDepth = System.Convert.ToInt32(details[5]);
-                int secondAz = System.Convert.ToInt32(details[6]);
-                int secondAmp = System.Convert.ToInt32(details[7]);
+                var firstDepth = System.Convert.ToInt32(details[2]);
+                var firstAz = System.Convert.ToInt32(details[3]);
+                var firstAmp = System.Convert.ToInt32(details[4]);
+                var secondDepth = System.Convert.ToInt32(details[5]);
+                var secondAz = System.Convert.ToInt32(details[6]);
+                var secondAmp = System.Convert.ToInt32(details[7]);
                 type = details[8];
                 desc = details[9];
                 quality = System.Convert.ToInt32(details[10]);
@@ -691,10 +691,10 @@ namespace SaveLoadBoreholeData
             }
             else if (imageType == "Core")
             {
-                double firstSlope = System.Convert.ToDouble(details[3]);
-                int firstIntercept = System.Convert.ToInt32(details[2]);
-                double secondSlope = System.Convert.ToDouble(details[5]);
-                int secondIntercept = System.Convert.ToInt32(details[4]);
+                var firstSlope = System.Convert.ToDouble(details[3]);
+                var firstIntercept = System.Convert.ToInt32(details[2]);
+                var secondSlope = System.Convert.ToDouble(details[5]);
+                var secondIntercept = System.Convert.ToInt32(details[4]);
                                 
                 type = details[6];
                 desc = details[7];
@@ -764,17 +764,17 @@ namespace SaveLoadBoreholeData
         /// <returns>The List of Clusters</returns>
         public List<Cluster> GetClusters()
         {
-            List<Cluster> clusters = new List<Cluster>();
+            var clusters = new List<Cluster>();
 
-            string clustersPath = projectLocation + "\\features\\clusters";
+            var clustersPath = projectLocation + "\\features\\clusters";
 
             if (File.Exists(clustersPath))
             {
-                int azimuthResolution = GetBoreholeWidth();
-                int depthResolution = GetDepthResolution();
-                int boreholeStartDepth = GetBoreholeStartDepth();
+                var azimuthResolution = GetBoreholeWidth();
+                var depthResolution = GetDepthResolution();
+                var boreholeStartDepth = GetBoreholeStartDepth();
 
-                using (StreamReader reader = new StreamReader(clustersPath))
+                using (var reader = new StreamReader(clustersPath))
                 {
                     string currentClusterText;
 
@@ -798,7 +798,7 @@ namespace SaveLoadBoreholeData
         /// <returns></returns>
         private Cluster createCluster(string currentClusterText, int azimuthResolution, int depthResolution, int boreholeStartDepth)
         {
-            String[] details = null;
+            string[] details = null;
             Cluster cluster;
 
             if (currentClusterText != null || !currentClusterText.Equals(""))
@@ -806,15 +806,15 @@ namespace SaveLoadBoreholeData
                 details = currentClusterText.Split(',');
             }
 
-            int startY = System.Convert.ToInt32(details[0]);
-            int endY = System.Convert.ToInt32(details[1]);
-            int startX = System.Convert.ToInt32(details[2]);
-            int endX = System.Convert.ToInt32(details[3]);
-            string points = details[4];
-            String type = details[5];
-            String desc = details[6];
-            DateTime added = System.Convert.ToDateTime(details[7]);
-            DateTime lastModified = System.Convert.ToDateTime(details[8]);
+            var startY = System.Convert.ToInt32(details[0]);
+            var endY = System.Convert.ToInt32(details[1]);
+            var startX = System.Convert.ToInt32(details[2]);
+            var endX = System.Convert.ToInt32(details[3]);
+            var points = details[4];
+            var type = details[5];
+            var desc = details[6];
+            var added = System.Convert.ToDateTime(details[7]);
+            var lastModified = System.Convert.ToDateTime(details[8]);
 
             cluster = new Cluster(azimuthResolution, depthResolution);
 
@@ -824,9 +824,9 @@ namespace SaveLoadBoreholeData
 
             cluster.Description = desc;
 
-            List<Point> clusterPoints = pointsFromString(points);
+            var clusterPoints = pointsFromString(points);
 
-            for (int i = 0; i < clusterPoints.Count; i++)
+            for (var i = 0; i < clusterPoints.Count; i++)
                 cluster.AddPoint(clusterPoints[i]);
 
             cluster.LeftXBoundary = startX;
@@ -880,19 +880,19 @@ namespace SaveLoadBoreholeData
         private List<Point> pointsFromString(string stringToConvert)
         {
             stringToConvert = stringToConvert.TrimEnd();
-            String[] points = null;
+            string[] points = null;
 
             if (stringToConvert != null || !stringToConvert.Equals(""))
             {
                 points = stringToConvert.Split(' ');
             }
 
-            List<Point> pointsInString = new List<Point>();
+            var pointsInString = new List<Point>();
 
-            int currentPoint = 0;
+            var currentPoint = 0;
             int first, second;
 
-            for (int i = 0; i < points.Length; i += 2)
+            for (var i = 0; i < points.Length; i += 2)
             {
                 first = System.Convert.ToInt32(points[i]);
                 second = System.Convert.ToInt32(points[i + 1]);
@@ -910,17 +910,17 @@ namespace SaveLoadBoreholeData
         /// <returns>The List of Inclusions</returns>
         public List<Inclusion> GetInclusions()
         {
-            List<Inclusion> inclusions = new List<Inclusion>();
+            var inclusions = new List<Inclusion>();
 
-            string inclusionsPath = projectLocation + "\\features\\inclusions";
+            var inclusionsPath = projectLocation + "\\features\\inclusions";
 
             if (File.Exists(inclusionsPath))
             {
-                int azimuthResolution = GetBoreholeWidth();
-                int depthResolution = GetDepthResolution();
-                int boreholeStartDepth = GetBoreholeStartDepth();
+                var azimuthResolution = GetBoreholeWidth();
+                var depthResolution = GetDepthResolution();
+                var boreholeStartDepth = GetBoreholeStartDepth();
 
-                using (StreamReader reader = new StreamReader(inclusionsPath))
+                using (var reader = new StreamReader(inclusionsPath))
                 {
                     string currentInclusionText;
 
@@ -944,7 +944,7 @@ namespace SaveLoadBoreholeData
         /// <returns></returns>
         private Inclusion createInclusion(string currentInclusionText, int azimuthResolution, int depthResolution, int boreholeStartDepth)
         {
-            String[] details = null;
+            string[] details = null;
             Inclusion inclusion;
 
             if (currentInclusionText != null || !currentInclusionText.Equals(""))
@@ -952,15 +952,15 @@ namespace SaveLoadBoreholeData
                 details = currentInclusionText.Split(',');
             }
 
-            int startY = System.Convert.ToInt32(details[0]);
-            int endY = System.Convert.ToInt32(details[1]);
-            int startX = System.Convert.ToInt32(details[2]);
-            int endX = System.Convert.ToInt32(details[3]);
-            string points = details[4];
-            String type = details[5];
-            String desc = details[6];
-            DateTime added = System.Convert.ToDateTime(details[7]);
-            DateTime lastModified = System.Convert.ToDateTime(details[8]);
+            var startY = System.Convert.ToInt32(details[0]);
+            var endY = System.Convert.ToInt32(details[1]);
+            var startX = System.Convert.ToInt32(details[2]);
+            var endX = System.Convert.ToInt32(details[3]);
+            var points = details[4];
+            var type = details[5];
+            var desc = details[6];
+            var added = System.Convert.ToDateTime(details[7]);
+            var lastModified = System.Convert.ToDateTime(details[8]);
 
             inclusion = new Inclusion(azimuthResolution, depthResolution);
 
@@ -970,9 +970,9 @@ namespace SaveLoadBoreholeData
 
             inclusion.InclusionType = type;
 
-            List<Point> inclusionPoints = pointsFromString(points);
+            var inclusionPoints = pointsFromString(points);
 
-            for (int i = 0; i < inclusionPoints.Count; i++)
+            for (var i = 0; i < inclusionPoints.Count; i++)
                 inclusion.AddPoint(inclusionPoints[i]);
 
             inclusion.LeftXBoundary = startX;

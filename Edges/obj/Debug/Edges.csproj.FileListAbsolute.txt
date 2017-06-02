@@ -8,3 +8,8 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\bin\Debug\Edges.pdb
 E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Debug\Edges.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Debug\Edges.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\Edges\obj\Debug\Edges.pdb
+C:\Development\BIFAT\BIFAT\Edges\bin\Debug\Edges.dll
+C:\Development\BIFAT\BIFAT\Edges\bin\Debug\Edges.pdb
+C:\Development\BIFAT\BIFAT\Edges\obj\Debug\Edges.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\Edges\obj\Debug\Edges.dll
+C:\Development\BIFAT\BIFAT\Edges\obj\Debug\Edges.pdb

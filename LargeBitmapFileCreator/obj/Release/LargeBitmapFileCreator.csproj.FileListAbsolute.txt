@@ -11,3 +11,7 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapF
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.pdb
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.pdb
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.dll
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\bin\Release\LargeBitmapFileCreator.pdb
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.dll
+C:\Development\BIFAT\BIFAT\LargeBitmapFileCreator\obj\Release\LargeBitmapFileCreator.pdb

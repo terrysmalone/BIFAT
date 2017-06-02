@@ -12,3 +12,11 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\BrightnessAnalysis\bin\Debug\Bor
 E:\Programming\C#\BoreholeFeatureAnnotationTool\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.pdb
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\bin\Debug\BrightnessAnalysis.dll
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\bin\Debug\BrightnessAnalysis.pdb
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\bin\Debug\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\bin\Debug\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.csproj.ResolveComReference.cache
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.dll
+C:\Development\BIFAT\BIFAT\BrightnessAnalysis\obj\Debug\BrightnessAnalysis.pdb

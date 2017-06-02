@@ -28,3 +28,19 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\TwoStageHoug
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\obj\Release\TwoStageHoughTransform.csproj.ResolveComReference.cache
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\TwoStageHoughTransform.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\TwoStageHoughTransform.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\DrawEdges.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\Edges.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\ALGLIB.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\Edges.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\ALGLIB.pdb
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\TwoStageHoughTransform\bin\Release\SineFitting.pdb

@@ -24,3 +24,4 @@ E:\Programming\C#\BoreholeFeatureAnnotationTool\LayerDetection\bin\Debug\ALGLIB.
 E:\Programming\C#\BoreholeFeatureAnnotationTool\LayerDetection\obj\Debug\LayerDetection.csprojResolveAssemblyReference.cache
 E:\Programming\C#\BoreholeFeatureAnnotationTool\LayerDetection\obj\Debug\LayerDetection.dll
 E:\Programming\C#\BoreholeFeatureAnnotationTool\LayerDetection\obj\Debug\LayerDetection.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\obj\Debug\LayerDetection.csprojResolveAssemblyReference.cache

@@ -11,3 +11,8 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\BoreholeFeat
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\bin\Release\BoreholeFeatures.pdb
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\obj\Release\BoreholeFeatures.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\BoreholeFeatures\obj\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\obj\Release\BoreholeFeatures.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\obj\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\BoreholeFeatures\obj\Release\BoreholeFeatures.pdb

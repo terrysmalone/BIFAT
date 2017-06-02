@@ -37,3 +37,16 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LayerDetecti
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LayerDetection\obj\Release\LayerDetection.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LayerDetection\obj\Release\LayerDetection.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\LayerDetection\obj\Release\LayerDetection.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\LayerDetection.dll
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\LayerDetection.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\Edges.dll
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\ALGLIB.dll
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\Edges.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\ALGLIB.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\obj\Release\LayerDetection.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\LayerDetection\obj\Release\LayerDetection.dll
+C:\Development\BIFAT\BIFAT\LayerDetection\obj\Release\LayerDetection.pdb
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\LayerDetection\bin\Release\SineFitting.pdb

@@ -28,7 +28,6 @@ namespace TwoStageHoughTransform
 
         private DepthFinder depthCheck;
 
-        private List<int> depthPeaks;
         private List<Sine> sines = new List<Sine>();
 
         private int numOfEdges;

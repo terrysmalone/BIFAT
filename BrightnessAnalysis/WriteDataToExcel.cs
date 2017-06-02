@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Office.Interop.Excel;
 
 namespace BrightnessAnalysis
 {
@@ -22,11 +23,11 @@ namespace BrightnessAnalysis
         private List<int> rData;
         private List<int> gData;
         private List<int> bData;
-
-        private Microsoft.Office.Interop.Excel.Application app = null;
-        private Microsoft.Office.Interop.Excel.Workbook workbook = null;
-        private Microsoft.Office.Interop.Excel.Worksheet worksheet = null;
-        private Microsoft.Office.Interop.Excel.Worksheet splitWorksheet = null;
+        
+        private Application app = null;
+        private Workbook workbook = null;
+        private Worksheet worksheet = null;
+        private Worksheet splitWorksheet = null;
 
         public WriteDataToExcel(string fileName, List<int> data)
         {

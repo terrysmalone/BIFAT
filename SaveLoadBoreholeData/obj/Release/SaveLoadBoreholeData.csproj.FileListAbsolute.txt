@@ -49,3 +49,15 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SaveLoadBore
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\obj\Release\SaveLoadBoreholeData.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\obj\Release\SaveLoadBoreholeData.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\SaveLoadBoreholeData\obj\Release\SaveLoadBoreholeData.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\SaveLoadBoreholeData.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\SaveLoadBoreholeData.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\ImageTiler.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\LogDataSet.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\Diagnostic.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\Header.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\bin\Release\ImageTiler.pdb
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\obj\Release\SaveLoadBoreholeData.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\obj\Release\SaveLoadBoreholeData.dll
+C:\Development\BIFAT\BIFAT\SaveLoadBoreholeData\obj\Release\SaveLoadBoreholeData.pdb

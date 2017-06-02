@@ -45,21 +45,16 @@ namespace SaveLoadBoreholeData
             Bitmap fullScrollPreviewImage = new Bitmap(targetWidth, targetHeight);
 
             int counter = 0;
-
             
-            int boreholeHeight = tiler.BoreholeHeight;
-
-
             int smallSectionCurrentPos = 0;
-            int currentTop;
 
             do
             {
                 Bitmap sectionImage = tiler.GetCurrentSectionAsBitmap();
 
-                //int smallSectionCurrentPos = (Int32)((double)tiler.SectionStartHeight * ((double)targetHeight / (double)tiler.BoreholeHeight));
-
-                int smallSecHeight = Convert.ToInt32((double)tiler.CurrentSectionHeight * ((double)targetHeight / (double)tiler.BoreholeHeight));
+                int smallSecHeight = Convert.ToInt32((double)tiler.CurrentSectionHeight 
+                                                     * ((double)targetHeight 
+                                                     / (double)tiler.BoreholeHeight));
 
                 if (smallSecHeight < 1)
                     smallSecHeight = 1;
@@ -71,7 +66,7 @@ namespace SaveLoadBoreholeData
                 g.DrawImage(smallSectionImage, 0, smallSectionCurrentPos);
 
                 smallSectionCurrentPos += smallSecHeight;
-                //smallSectionImage.Save("sec" + counter + ".bmp");
+
                 counter++;
 
             } while (tiler.GoToNextSection());

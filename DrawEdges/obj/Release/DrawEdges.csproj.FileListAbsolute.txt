@@ -37,3 +37,16 @@ C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\DrawEdges\bi
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\DrawEdges\obj\Release\DrawEdges.csprojResolveAssemblyReference.cache
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\DrawEdges\obj\Release\DrawEdges.dll
 C:\Users\trm8\Documents\Uni backup\C#\BoreholeFeatureAnnotationTool\DrawEdges\obj\Release\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\DrawEdges.dll
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\BoreholeFeatures.dll
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\Edges.dll
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\ALGLIB.dll
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\Edges.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\BoreholeFeatures.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\ALGLIB.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\obj\Release\DrawEdges.csprojResolveAssemblyReference.cache
+C:\Development\BIFAT\BIFAT\DrawEdges\obj\Release\DrawEdges.dll
+C:\Development\BIFAT\BIFAT\DrawEdges\obj\Release\DrawEdges.pdb
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\SineFitting.dll
+C:\Development\BIFAT\BIFAT\DrawEdges\bin\Release\SineFitting.pdb
