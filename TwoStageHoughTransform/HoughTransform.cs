@@ -123,7 +123,6 @@ namespace TwoStageHoughTransform
                 int currentEdge = edgeSetsOnSine[i];
 
                 RemoveVotesFromAccumulatorSpace(currentEdge);
-                RemoveFromVoteTracker(currentEdge); //May be unnecessary
             }
         }
 
@@ -162,15 +161,6 @@ namespace TwoStageHoughTransform
         private void RemoveVotesFromAccumulatorSpace(int currentEdge)
         {
             depthCheck.RemoveVotesFromAccumulatorSpace(currentEdge);
-        }
-
-        /// <summary>
-        /// Removes votes from this edge in the voteTracker
-        /// </summary>
-        /// <param name="currentEdge"></param>
-        private void RemoveFromVoteTracker(int currentEdge)
-        {
-            //throw new NotImplementedException();
         }
 
         # endregion

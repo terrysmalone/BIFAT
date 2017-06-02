@@ -1,3 +1,0 @@
-C:\Development\BIFAT\BIFAT\BoreholeFeautreAnnotationToolTests\obj\Debug\BoreholeFeautreAnnotationToolTests.csprojResolveAssemblyReference.cache
-C:\Development\BIFAT\BIFAT\BoreholeFeautreAnnotationToolTests\obj\Debug\BoreholeFeautreAnnotationToolTests.Properties.Resources.resources
-C:\Development\BIFAT\BIFAT\BoreholeFeautreAnnotationToolTests\obj\Debug\BoreholeFeautreAnnotationToolTests.csproj.GenerateResource.Cache
