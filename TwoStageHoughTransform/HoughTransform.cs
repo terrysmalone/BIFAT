@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DrawEdges;
 using DrawEdges.DrawEdgesFactory;
 using EdgeFitting;
@@ -18,11 +15,11 @@ namespace TwoStageHoughTransform
 
         private EdgePointData m_EdgePointData;
 
-        private DepthFinder depthCheck;
+        private DepthFinder m_DepthCheck;
 
-        private int numOfEdges;
+        private int m_NumOfEdges;
 
-        private Bitmap afterCannyImage, originalImage; //For testing
+        private Bitmap m_OriginalImage; //For testing
 
         # region properties
 
@@ -42,9 +39,9 @@ namespace TwoStageHoughTransform
 
         public HoughTransform(bool[] edgeData, int imageWidth, int imageHeight)
         {
-            this.m_EdgeData = edgeData;
-            this.m_ImageWidth = imageWidth;
-            this.m_ImageHeight = imageHeight;
+            m_EdgeData = edgeData;
+            m_ImageWidth = imageWidth;
+            m_ImageHeight = imageHeight;
 
             BuildEdgePointsList();
         }
@@ -58,7 +55,7 @@ namespace TwoStageHoughTransform
             edgePointsFinder.RunFinder();
 
             m_EdgePointData = edgePointsFinder.EdgePointData;
-            numOfEdges = edgePointsFinder.NumOfEdges;
+            m_NumOfEdges = edgePointsFinder.NumOfEdges;
         }
 
         public void RunHoughTransform()
@@ -72,7 +69,7 @@ namespace TwoStageHoughTransform
 
             while (!allPeaksFound)
             {
-                var depthOfSine = depthCheck.GetTopPeak(PeakThreshold);
+                var depthOfSine = m_DepthCheck.GetTopPeak(PeakThreshold);
 
                 if (depthOfSine < m_ImageHeight)
                 {
@@ -160,23 +157,23 @@ namespace TwoStageHoughTransform
         /// <param name="currentEdge"></param>
         private void RemoveVotesFromAccumulatorSpace(int currentEdge)
         {
-            depthCheck.RemoveVotesFromAccumulatorSpace(currentEdge);
+            m_DepthCheck.RemoveVotesFromAccumulatorSpace(currentEdge);
         }
 
         # endregion
 
         private void RunDepthChecker()
         {
-            depthCheck = new DepthFinder(m_EdgeData, m_EdgePointData, numOfEdges, m_ImageWidth, m_ImageHeight);
+            m_DepthCheck = new DepthFinder(m_EdgeData, m_EdgePointData, m_NumOfEdges, m_ImageWidth, m_ImageHeight);
 
-            depthCheck.MaxSineAmplitude = MaxSineAmplitude;
+            m_DepthCheck.MaxSineAmplitude = MaxSineAmplitude;
 
-            depthCheck.EdgeJoinBonus = EdgeJoinBonus;
-            depthCheck.EdgeLengthBonus = EdgeLengthBonus;
+            m_DepthCheck.EdgeJoinBonus = EdgeJoinBonus;
+            m_DepthCheck.EdgeLengthBonus = EdgeLengthBonus;
 
-            depthCheck.Testing = Testing;
+            m_DepthCheck.Testing = Testing;
 
-            depthCheck.Run();
+            m_DepthCheck.Run();
         }
 
         # region Test methods
@@ -185,7 +182,7 @@ namespace TwoStageHoughTransform
         {
             List<Point> points = new List<Point>();
 
-            List<double> accSpace = depthCheck.GetAccumulatorSpace();
+            List<double> accSpace = m_DepthCheck.GetAccumulatorSpace();
 
             int accSize = accSpace.Count;
 
@@ -254,8 +251,8 @@ namespace TwoStageHoughTransform
             drawImage.SetDrawMultiColouredEdges(false);
 
             drawImage.setEdgeColour(Color.Red);
-            //drawImage.drawEdgesOverBackgroundImage(afterCannyImage);
-            drawImage.drawEdgesOverBackgroundImage(originalImage);
+            
+            drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
 
             drawImage.getDrawnEdges().Save("AccumulatorSpace- " + stage.ToString() + ".bmp");
         }
@@ -287,59 +284,24 @@ namespace TwoStageHoughTransform
             drawImage.SetDrawMultiColouredEdges(false);
 
             drawImage.setEdgeColour(Color.White);
-            //drawImage.drawEdgesOverBackgroundImage(afterCannyImage);
+
             drawImage.drawEdgesImage();
             drawImage.getDrawnEdges().Save("EdgePoints- " + stage.ToString() + ".bmp");
         }
-
-        /*public void SetCannyTestImage(Bitmap afterCannyImage)
-        {
-            this.afterCannyImage = afterCannyImage;
-        }
-
-        private void DrawPeaksToImage()
-        {
-            List<Point> points = new List<Point>();
-
-            for (int i = 0; i < depthPeaks.Count; i++)
-            {
-                int depth = depthPeaks[i];
-
-                for (int j = 0; j < imageWidth; j++)
-                {
-                    points.Add(new Point(j, depth));
-                }
-            }
-
-            DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Point");
-            DrawEdgesImage drawImage = factory.setUpDrawEdges(points, imageWidth, imageHeight);
-
-            drawImage.setBackgroundColour(Color.White);
-            drawImage.setEdgeColour(Color.Red);
-            drawImage.SetDrawMultiColouredEdges(false);
-
-            drawImage.setEdgeColour(Color.Red);
-            drawImage.drawEdgesOverBackgroundImage(afterCannyImage);
-            drawImage.getDrawnEdges().Save("Found peaks.bmp");
-        }*/
-
         public void SetOriginalTestImage(Bitmap originalImage)
         {
-            this.originalImage = originalImage;
+            this.m_OriginalImage = originalImage;
         }
 
         private void DrawSinesToImage(int stage)
         {
-            //DrawSinesImage drawSinesOverCanny = new DrawSinesImage(afterCannyImage, sines);
-            //drawSinesOverCanny.DrawnImage.Save("Sines over Canny - " + stage + ".bmp");
-
-            DrawSinesImage drawSinesOverOriginal = new DrawSinesImage(originalImage, Sines);
+            var drawSinesOverOriginal = new DrawSinesImage(m_OriginalImage, Sines);
             drawSinesOverOriginal.DrawnImage.Save("Sines over original - " + stage + ".bmp");
         }
 
-        private void writeSpace()
+        private void WriteSpace()
         {
-            List<double> depthSpace = depthCheck.GetAccumulatorSpace();
+            List<double> depthSpace = m_DepthCheck.GetAccumulatorSpace();
 
             //for (int i = 0; i < depthSpace.Count; i++)
             //{
@@ -358,7 +320,7 @@ namespace TwoStageHoughTransform
 
             depthWorksheet.Cells[1, 2] = "Test";
 
-            for (int i = 0; i < depthSpace.Count; i++)
+            for (var i = 0; i < depthSpace.Count; i++)
             {
                 depthWorksheet.Cells[1, i + 1] = depthSpace[i];
             }
