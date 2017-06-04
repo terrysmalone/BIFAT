@@ -23,6 +23,7 @@ namespace BoreholeFeautreAnnotationToolTests
         private int BOREHOLE_WIDTH = 720;
 
 
+        [Ignore]
         [TestMethod]
         public void TestBoreholeWidth()
         {
@@ -32,6 +33,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.BoreholeWidth == BOREHOLE_WIDTH, "Borehole width should be 720.  It is " + tiler.BoreholeWidth);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestBoreholeHeight()
         {
@@ -41,6 +43,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.BoreholeHeight == BOREHOLE_HEIGHT, "Borehole height should be 17917.  It is " + tiler.BoreholeHeight);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestSectionStartHeight()
         {
@@ -64,6 +67,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.SectionStartHeight == 0, "Borehole width should be 0.  It is " + tiler.SectionStartHeight);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestSectionEndHeight()
         {
@@ -87,6 +91,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGoToFirstSection()
         {
@@ -103,6 +108,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.CurrentSectionNumber == 0, "Current section should be 0.  It is " + tiler.CurrentSectionNumber);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestNext()
         {
@@ -126,6 +132,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGoToPreviousSection()
         {
@@ -148,6 +155,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
+        [Ignore]
         [TestMethod]
         public void TestCurrentSectionHeight()
         {
@@ -165,6 +173,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGoToSection()
         {
@@ -179,6 +188,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.CurrentSectionNumber == 0, "CurrentSectionNumber should return 0. It returned " + tiler.CurrentSectionNumber);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGetCurrentSectionAsBitmap()
         {
@@ -198,6 +208,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(compareImages(currentBitmap, idealBitmap) == true, "The two bitmaps should be the same");
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGetCurrentSectionAsBytes()
         {
@@ -217,6 +228,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(compareImages(currentBytes, idealBytes) == true, "The two bitmaps should be the same");
         }
 
+        [Ignore]
         [TestMethod]
         public void TestGetWholeBoreholeImage()
         {
