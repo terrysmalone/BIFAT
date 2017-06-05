@@ -289,7 +289,6 @@ namespace EdgeFitting
             double[] lowerBound = new double[] { 0, -imageWidth, 0 };
             double[] upperBound = new double[] { 100, imageWidth, imageHeight };
 
-            double epsf = 0;
             double epsx = 0.1;
             int maxits = 100;
             int info;
@@ -302,7 +301,7 @@ namespace EdgeFitting
             // Fitting without weights
             //
             alglib.lsfitcreatef(x, y, c, diffstep, out state);
-            alglib.lsfitsetcond(state, epsf, epsx, maxits);
+            alglib.lsfitsetcond(state, epsx, maxits);
 
             alglib.lsfitsetbc(state, lowerBound, upperBound);
             alglib.lsfitsetscale(state, s);
