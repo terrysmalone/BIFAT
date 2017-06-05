@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReferencedData">
-      <HintPath>..\..\..\DLLS\ReferencedData.dll</HintPath>
+      <HintPath>..\Libraries\ReferencedData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

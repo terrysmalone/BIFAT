@@ -34,10 +34,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DrawEdges, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DrawEdges\bin\Release\DrawEdges.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -52,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DrawEdges\DrawEdges.csproj">
+      <Project>{30361b28-32ee-46cb-9e90-2db6fa2c1e41}</Project>
+      <Name>DrawEdges</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edges\Edges.csproj">
       <Project>{7ECBAB21-48CF-4C33-A698-53BCAA8510A7}</Project>
       <Name>Edges</Name>
