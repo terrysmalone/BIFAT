@@ -7,63 +7,66 @@ using System.Drawing;
 namespace ActiveContour
 {
     /// <summary>
-    /// Extracts a line as a List<Point> from a two-dimensional boolean array
+    /// Extracts a line as a List of Points from a two-dimensional boolean array
     /// </summary>
-    class ExtractLine
+    internal class ExtractLine
     {
-        private bool[,] pointsArray;
+        private readonly bool[,] m_PointsArray;
 
-        private bool[,] addedPoints;
+        private readonly bool[,] m_AddedPoints;
 
-        private List<Point> line;
+        private readonly List<Point> m_Line;
 
-        private Point startPoint;
+        private Point m_StartPoint;
 
-        private Point[] neighbours;
+        private readonly Point[] m_Neighbours;
 
-        private int xLength, yLength;
+        private readonly int m_XLength;
+        private readonly int m_YLength;
 
         public ExtractLine(bool[,] pointsArray)
         {
-            this.pointsArray = pointsArray;
+            m_PointsArray = pointsArray;
 
-            xLength = pointsArray.GetLength(0);
-            yLength = pointsArray.GetLength(1);
+            m_XLength = pointsArray.GetLength(0);
+            m_YLength = pointsArray.GetLength(1);
 
-            addedPoints = new bool[xLength, yLength];
+            m_AddedPoints = new bool[m_XLength, m_YLength];
 
-            line = new List<Point>();
+            m_Line = new List<Point>();
 
-            neighbours = new Point[8];
-            neighbours[0] = new Point(0, -1);       //North
-            neighbours[1] = new Point(1, -1);        //North East
-            neighbours[2] = new Point(1, 0);         //East
-            neighbours[3] = new Point(1, 1);         //South East
-            neighbours[4] = new Point(0, 1);         //South
-            neighbours[5] = new Point(-1, 1);        //South west
-            neighbours[6] = new Point(-1, 0);        //West
-            neighbours[7] = new Point(-1, -1);       //North West          
+            m_Neighbours = new Point[8];
+            m_Neighbours[0] = new Point(0, -1);       //North
+            m_Neighbours[1] = new Point(1, -1);        //North East
+            m_Neighbours[2] = new Point(1, 0);         //East
+            m_Neighbours[3] = new Point(1, 1);         //South East
+            m_Neighbours[4] = new Point(0, 1);         //South
+            m_Neighbours[5] = new Point(-1, 1);        //South west
+            m_Neighbours[6] = new Point(-1, 0);        //West
+            m_Neighbours[7] = new Point(-1, -1);       //North West          
         }
 
         # region process line methods
 
         /// <summary>
         /// Checks if any points should be removed and if so removes them.
-        /// Points are removed if they touch maore than 2 other points and removing them won't break a line
+        /// Points are removed if they touch maore than 2 other points and 
+        /// removing them won't break a line
         /// </summary>
         private void ProcessPoints()
         {
-            for (int yPos = 0; yPos < yLength; yPos++)
+            for (var yPos = 0; yPos < m_YLength; yPos++)
             {
-                for (int xPos = 0; xPos < xLength; xPos++)
+                for (var xPos = 0; xPos < m_XLength; xPos++)
                 {
-                    if (pointsArray[xPos, yPos] == true)
+                    // ReSharper disable once InvertIf
+                    if (m_PointsArray[xPos, yPos])
                     {
-                        Point[] connectedPoints = GetConnectedPoints(new Point(xPos, yPos));
+                        var connectedPoints = GetConnectedPoints(new Point(xPos, yPos));
 
                         if (ArePointsConnected(connectedPoints))
                         {
-                            pointsArray[xPos, yPos] = false;
+                            m_PointsArray[xPos, yPos] = false;
                         }
                     }
                 }
@@ -71,31 +74,25 @@ namespace ActiveContour
 
             ReomveOutliers();
         }
-
-        /// <summary>
-        /// Iteratively checks if points are outliers and if so removes them
-        /// </summary>
-        private void ReomveOutliers()
+        
+        private Point[] GetConnectedPoints(Point startPoint)
         {
-            bool cleanRun = false;
+            var touchingPoints = new List<Point>();
 
-            while (cleanRun == false)
+            foreach (var neighbour in m_Neighbours)
             {
-                cleanRun = true;
+                var neighbourX = startPoint.X + neighbour.X;
+                var neighbourY = startPoint.Y + neighbour.Y;
 
-                for (int yPos = 0; yPos < yLength; yPos++)
+                if (neighbourX >= 0 && neighbourX < m_XLength && neighbourY >= 0 && neighbourY < m_YLength)
                 {
-                    for (int xPos = 0; xPos < xLength; xPos++)
-                    {
-                        if (pointsArray[xPos, yPos] == true && GetConnectedPoints(new Point(xPos, yPos)).Length < 2)
-                        {
-                            pointsArray[xPos, yPos] = false;
-                            cleanRun = false;
-                        }
-                    }
-
+                    if (m_PointsArray[neighbourX, neighbourY] == true && m_AddedPoints[neighbourX, neighbourY] == false)
+                        touchingPoints.Add(new Point(neighbourX, neighbourY));
                 }
             }
+
+            return touchingPoints.ToArray();
+
         }
 
         /// <summary>
@@ -103,17 +100,17 @@ namespace ActiveContour
         /// </summary>
         /// <param name="connectedPoints"></param>
         /// <returns></returns>
-        private bool ArePointsConnected(Point[] connectedPoints)
+        private bool ArePointsConnected(IList<Point> connectedPoints)
         {
-            for (int i = 0; i < connectedPoints.Length; i++)
+            for (var i = 0; i < connectedPoints.Count; i++)
             {
-                bool connected = false;
+                var connected = false;
 
-                for (int j = 0; j < connectedPoints.Length; j++)
+                for (var j = 0; j < connectedPoints.Count; j++)
                 {
                     if (i != j)
                     {
-                        if (IsConnected(connectedPoints[i], connectedPoints[j]) == true)
+                        if (IsConnected(connectedPoints[i], connectedPoints[j]))
                             connected = true;
                     }
                 }
@@ -125,7 +122,33 @@ namespace ActiveContour
             return true;
         }
 
-        private bool IsConnected(Point firstPoint, Point secondPoint)
+        /// <summary>
+        /// Iteratively checks if points are outliers and if so removes them
+        /// </summary>
+        private void ReomveOutliers()
+        {
+            var cleanRun = false;
+
+            while (cleanRun == false)
+            {
+                cleanRun = true;
+
+                for (var yPos = 0; yPos < m_YLength; yPos++)
+                {
+                    for (var xPos = 0; xPos < m_XLength; xPos++)
+                    {
+                        if (m_PointsArray[xPos, yPos] == true && GetConnectedPoints(new Point(xPos, yPos)).Length < 2)
+                        {
+                            m_PointsArray[xPos, yPos] = false;
+                            cleanRun = false;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private static bool IsConnected(Point firstPoint, Point secondPoint)
         {
             if (Math.Max(firstPoint.X, secondPoint.X) - Math.Min(firstPoint.X, secondPoint.X) > 1)
                 return false;
@@ -137,32 +160,28 @@ namespace ActiveContour
 
         }
 
-        # endregion
+        # endregion process line methods
 
         public void Extract()
         {
             ProcessPoints();
 
-            //DrawPoints();
+            m_StartPoint = FindStartPoint();
 
-            startPoint = FindStartPoint();
-
-            if(startPoint != new Point(-1, -1))
+            if(m_StartPoint != new Point(-1, -1))
             {
-                 AddToLine(startPoint);
+                 AddToLine(m_StartPoint);
 
-                Point nextPoint = GetConnectedPoints(startPoint)[0];
-                Point lastPoint = GetConnectedPoints(startPoint)[1];
+                var nextPoint = GetConnectedPoints(m_StartPoint)[0];
+                var lastPoint = GetConnectedPoints(m_StartPoint)[1];
 
                 AddToLine(nextPoint);
 
-                bool pointsLeft = true;
-
-                Point currentPoint;
+                var pointsLeft = true;
 
                 while (pointsLeft)
                 {
-                    currentPoint = nextPoint;
+                    var currentPoint = nextPoint;
 
                     nextPoint = GetNextPoint(currentPoint);
 
@@ -177,63 +196,27 @@ namespace ActiveContour
 
         private Point GetNextPoint(Point currentPoint)
         {
-            Point[] touchingPoints = GetConnectedPoints(currentPoint);
-
-            //if (touchingPoints.Length > 1)
-            //{
-            //    for (int i = 1; i < touchingPoints.Length; i++)
-            //    {
-            //        addedPoints[touchingPoints[i].X, touchingPoints[i].Y] = true;
-            //    }
-            //}
+            var touchingPoints = GetConnectedPoints(currentPoint);
 
             return touchingPoints[0];
         }
 
         private void AddToLine(Point startPoint)
         {
-            line.Add(startPoint);
-            addedPoints[startPoint.X, startPoint.Y] = true;
-        }
-
-        private Point[] GetConnectedPoints(Point startPoint)
-        {
-            List<Point> touchingPoints = new List<Point>();
-
-            for (int i = 0; i < neighbours.Length; i++)
-            {
-                int neighbourX = startPoint.X + neighbours[i].X;
-                int neighbourY = startPoint.Y + neighbours[i].Y;
-
-                if (neighbourX >= 0 && neighbourX < xLength && neighbourY >= 0 && neighbourY < yLength)
-                {
-                    if (pointsArray[neighbourX, neighbourY] == true && addedPoints[neighbourX, neighbourY] == false)
-                        touchingPoints.Add(new Point(neighbourX, neighbourY));
-                }
-            }
-
-            return touchingPoints.ToArray();
-
+            m_Line.Add(startPoint);
+            m_AddedPoints[startPoint.X, startPoint.Y] = true;
         }
 
         private Point FindStartPoint()
         {
-            bool startFound = false;
-            int xStart = 0;
-            int yStart = 0;
-
-            for (int yPos = 0; yPos < yLength; yPos++)
+            for (var yPos = 0; yPos < m_YLength; yPos++)
             {
-                for (int xPos = 0; xPos < xLength; xPos++)
+                for (var xPos = 0; xPos < m_XLength; xPos++)
                 {
-                    //checkedPoints[xPos, yPos] = true;
-
-                    if (pointsArray[xPos, yPos] == true && GetConnectedPoints(new Point(xPos, yPos)).Length == 2)
+                    if (m_PointsArray[xPos, yPos] == true && GetConnectedPoints(new Point(xPos, yPos)).Length == 2)
                     {
-                        startFound = true;
-
-                        xStart = xPos;
-                        yStart = yPos;
+                        var xStart = xPos;
+                        var yStart = yPos;
 
                         return new Point(xStart, yStart);
                     }
@@ -251,16 +234,16 @@ namespace ActiveContour
         /// <returns></returns>
         private int PointsTouching(int xPos, int yPos)
         {
-            int connectedNeighbours = 0;
+            var connectedNeighbours = 0;
 
-            for (int i = 0; i < neighbours.Length; i++)
+            for (int i = 0; i < m_Neighbours.Length; i++)
             {
-                int neighbourX = xPos + neighbours[i].X;
-                int neighbourY = yPos + neighbours[i].Y;
+                var neighbourX = xPos + m_Neighbours[i].X;
+                var neighbourY = yPos + m_Neighbours[i].Y;
 
-                if (neighbourX >= 0 && neighbourX < xLength && neighbourY >= 0 && neighbourY < yLength)
+                if (neighbourX >= 0 && neighbourX < m_XLength && neighbourY >= 0 && neighbourY < m_YLength)
                 {
-                    if (pointsArray[neighbourX, neighbourY] == true)
+                    if (m_PointsArray[neighbourX, neighbourY] == true)
                         connectedNeighbours++;
                 }
             }
@@ -268,35 +251,30 @@ namespace ActiveContour
             return connectedNeighbours;
         }
 
-        # region Get methods
-
-        public List<Point> GetLine()
-        {
-            return line;
-        }
-
-        # endregion
-
         private void DrawPoints()
         {
-            Bitmap image = new Bitmap(xLength, yLength);
-
-            //Graphics g = Graphics.FromImage(image);
-
-            for (int yPos = 0; yPos < yLength; yPos++)
+            var image = new Bitmap(m_XLength, m_YLength);
+            
+            for (var yPos = 0; yPos < m_YLength; yPos++)
             {
-                for (int xPos = 0; xPos < xLength; xPos++)
+                for (var xPos = 0; xPos < m_XLength; xPos++)
                 {
-                    if (pointsArray[xPos, yPos])
-                    {
-                        image.SetPixel(xPos, yPos, Color.LawnGreen);
-                    }
-                    else
-                        image.SetPixel(xPos, yPos, Color.Black);
+                    image.SetPixel(xPos, yPos, m_PointsArray[xPos, yPos] 
+                                    ? Color.LawnGreen 
+                                    : Color.Black);
                 }
             }
 
             image.Save("Snake - ProcessedCurve.bmp");
         }
+
+        # region Get methods
+
+        public List<Point> GetLine()
+        {
+            return m_Line;
+        }
+
+        # endregion  Get methods
     }
 }

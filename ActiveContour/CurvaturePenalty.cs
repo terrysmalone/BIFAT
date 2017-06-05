@@ -9,7 +9,7 @@ namespace ActiveContour
     /// </summary>
     public class CurvaturePenalty
     {
-        private readonly double[,] _curvaturePenalty;
+        private readonly double[,] m_CurvaturePenalty;
 
         /// <summary>
         /// Constructor
@@ -21,7 +21,7 @@ namespace ActiveContour
             var width = sdf.GetLength(0);
             var height = sdf.GetLength(1);
 
-            _curvaturePenalty = new double[width, height];
+            m_CurvaturePenalty = new double[width, height];
 
             foreach (Point point in narrowBand)
             {
@@ -69,7 +69,7 @@ namespace ActiveContour
                 var sdfX2 = Math.Pow(sdfX, 2);
                 var sdfY2 = Math.Pow(sdfY, 2);
 
-                _curvaturePenalty[x, y] = (((sdfX2 * sdfYy) + (sdfY2 * sdfXx) - (2 * sdfX * sdfY * sdfXy)) 
+                m_CurvaturePenalty[x, y] = (((sdfX2 * sdfYy) + (sdfY2 * sdfXx) - (2 * sdfX * sdfY * sdfXy)) 
                                             / Math.Pow((sdfX2 + sdfY2 + double.Epsilon), 2)) 
                                           * Math.Pow((sdfX2 + sdfY2), 0.5);
             }
@@ -77,7 +77,7 @@ namespace ActiveContour
 
         public double[,] GetCurvaturePenalty()
         {
-            return _curvaturePenalty;
+            return m_CurvaturePenalty;
         }
     }
 }
