@@ -98,7 +98,7 @@ namespace ActiveContour
                 setUpStart = DateTime.Now;
             }
 
-            SignedDistanceMap signedDistanceMap = new SignedDistanceMap(initialPoints, imageWidth, imageHeight, narrowBandSize);
+            SignedDistanceMap signedDistanceMap = new SignedDistanceMap(initialPoints, imageWidth, imageHeight);
 
             sdf = signedDistanceMap.GetSignedDistanceMap();
 
