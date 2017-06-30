@@ -10,11 +10,11 @@ namespace ActiveContour
     /// </summary>
     public class Snake
     {
-        private readonly bool m_TimeTest = false;
-        private readonly int m_DrawingTestCounter = 10;
-        private readonly bool m_DrawingTest = false;
+        private const bool TimeTest = false;
+        private const int DrawingTestCounter = 10;
+        private const bool DrawingTest = false;
 
-        private int m_NumOfIterationsWithoutChange = 0;
+        private int m_NumOfIterationsWithoutChange;
 
         private DateTime m_StartTime;
         private DateTime m_EndTime;
@@ -27,9 +27,9 @@ namespace ActiveContour
         private readonly int m_ImageHeight;
         private readonly int m_ImageWidth;
 
-        private int counter = 0;
+        private int m_Counter;
 
-        private readonly double m_AlphaValue = 0.0;
+        private readonly double m_AlphaValue;
 
         private double m_NarrowBandSize = 1.2;
 
@@ -64,8 +64,8 @@ namespace ActiveContour
 
         public Snake(Bitmap image, List<Point> initialPoints, double alphaValue)
         {
-            this.m_OriginalImage = image;
-            this.m_AlphaValue = alphaValue;
+            m_OriginalImage = image;
+            m_AlphaValue = alphaValue;
 
             m_ImageWidth = m_OriginalImage.Width;
             m_ImageHeight = m_OriginalImage.Height;
@@ -77,8 +77,7 @@ namespace ActiveContour
 
         public Snake(Bitmap image, List<Point> initialPoints)
         {
-            this.m_OriginalImage = image;
-            //alphaValue = 0.0;
+            m_OriginalImage = image;
 
             m_ImageWidth = m_OriginalImage.Width;
             m_ImageHeight = m_OriginalImage.Height;
@@ -89,15 +88,16 @@ namespace ActiveContour
         }
 
         /// <summary>
-        /// Creates a 2 dimensional boolean array from a list of points. Points appear as 1 and non-points appear as 0
+        /// Creates a 2 dimensional boolean array from a list of points. 
+        /// Points appear as 1 and non-points appear as 0
         /// </summary>
         /// <param name="initialPoints">The initial points</param>
         private void CalculateSignedDistanceMap(List<Point> initialPoints)
         {
-            DateTime setUpStart = DateTime.Now;
+            DateTime setUpStart;
             DateTime setUpEnd;
 
-            if (m_TimeTest == true)
+            if (TimeTest == true)
             {
                 setUpStart = DateTime.Now;
             }
@@ -106,14 +106,14 @@ namespace ActiveContour
 
             m_Sdf = signedDistanceMap.GetSignedDistanceMap();
 
-            if (m_TimeTest == true)
+            if (TimeTest == true)
             {
                 setUpEnd = DateTime.Now;
 
-                TimeSpan timeSpan = setUpEnd.Subtract(setUpStart);
-                int timeDifferenceMilliseconds = timeSpan.Milliseconds;
-                int timeDifferenceSeconds = timeSpan.Seconds;
-                int timeDifferenceMinutes = timeSpan.Minutes;
+                var timeSpan = setUpEnd.Subtract(setUpStart);
+                var timeDifferenceMilliseconds = timeSpan.Milliseconds;
+                var timeDifferenceSeconds = timeSpan.Seconds;
+                var timeDifferenceMinutes = timeSpan.Minutes;
 
                 string iterationText = "Setup time(mm:ss:mm): " + timeDifferenceMinutes + ":" + timeDifferenceSeconds + ":" + timeDifferenceMilliseconds;
 
@@ -128,9 +128,9 @@ namespace ActiveContour
 
         public void RunActiveContour()
         {
-            if (m_TimeTest == true)
+            if (TimeTest == true)
             {
-                string iterationText = "Iteration - " + counter;
+                string iterationText = "Iteration - " + m_Counter;
                 //System.IO.File.WriteAllText(@"FitnessTimes.txt", generationText);
 
                 using (StreamWriter sw = File.AppendText(@"Times.txt"))
@@ -145,9 +145,9 @@ namespace ActiveContour
 
             while (!m_SolutionFound)
             {
-                counter++;
+                m_Counter++;
 
-                if (m_TimeTest == true)
+                if (TimeTest == true)
                 {
                     m_StartTime = DateTime.Now;
                 }
@@ -168,7 +168,7 @@ namespace ActiveContour
 
                 m_CheckStart = DateTime.Now;
 
-                if (counter == 1)
+                if (m_Counter == 1)
                     m_SdfOld = (double[,])m_Sdf.Clone();
                 else
                 {
@@ -178,7 +178,7 @@ namespace ActiveContour
 
                 m_CheckEnd = DateTime.Now;
 
-                if (m_DrawingTest && (counter % m_DrawingTestCounter == 0 || counter == 1))
+                if (DrawingTest && (m_Counter % DrawingTestCounter == 0 || m_Counter == 1))
                 {
                     DrawCurve();
 
@@ -187,29 +187,29 @@ namespace ActiveContour
                     DrawThinnedCurve();
                 }
 
-                if (m_TimeTest == true)
+                if (TimeTest == true)
                 {
                     m_EndTime = DateTime.Now;
 
-                    WriteTimes(counter);
+                    WriteTimes(m_Counter);
                 }
             }
 
-            if (m_DrawingTest)
+            if (DrawingTest)
             {
                 DrawCurve();
             }
 
             ThinCurve();
 
-            if (m_DrawingTest)
+            if (DrawingTest)
             {
                 DrawThinnedCurve();
             }
             //Calculate points
             CalculateCurvePoints();
 
-            if (m_DrawingTest)
+            if (DrawingTest)
             {
                 DrawFinalPoints();
             }
@@ -619,7 +619,7 @@ namespace ActiveContour
                 m_NumOfIterationsWithoutChange = 0;
             }
 
-            if (m_TimeTest)
+            if (TimeTest)
             {
                 using (StreamWriter sw = File.AppendText(@"Times.txt"))
                 {
@@ -773,7 +773,7 @@ namespace ActiveContour
 
             allPoints = extractLine.GetLine();
 
-            if(m_DrawingTest)
+            if(DrawingTest)
                 DrawPoints(allPoints);
 
             if (allPoints.Count > 0)
@@ -973,7 +973,7 @@ namespace ActiveContour
 
         private void DrawCurvesNarrowBand()
         {
-            if (counter % 10 == 0)
+            if (m_Counter % 10 == 0)
             {
                 Bitmap image = new Bitmap(m_OriginalImage);
 
@@ -982,7 +982,7 @@ namespace ActiveContour
                     image.SetPixel(point.X, point.Y, Color.LawnGreen);
                 }
 
-                image.Save("Snake - NarrowBand - " + counter + ".bmp");
+                image.Save("Snake - NarrowBand - " + m_Counter + ".bmp");
             }
         }
 
@@ -1043,7 +1043,7 @@ namespace ActiveContour
                 }
             }
 
-            image.Save("Snake - curve - " + counter + ".bmp");
+            image.Save("Snake - curve - " + m_Counter + ".bmp");
         }
 
         private void DrawThinnedCurve()
@@ -1063,7 +1063,7 @@ namespace ActiveContour
                 }
             }
 
-            image.Save("Snake - Thinned curve - " + counter + ".bmp");
+            image.Save("Snake - Thinned curve - " + m_Counter + ".bmp");
         }
 
         private void DrawPoints(List<Point> allPoints)
