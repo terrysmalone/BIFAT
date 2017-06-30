@@ -46,7 +46,6 @@ namespace ActiveContour
         private double m_InteriorMean;
 
         private bool m_SolutionFound;
-        private bool m_NextFound;
 
         private double m_MaxGradientDescentValue;
 
@@ -794,57 +793,39 @@ namespace ActiveContour
 
         private Point FindNextPoint(Point currentPoint)
         {
-            m_NextFound = false;
-
-            int xPoint = currentPoint.X;
-            int yPoint = currentPoint.Y;
+            var xPoint = currentPoint.X;
+            var yPoint = currentPoint.Y;
 
             if (CheckIfPointIsNorth(xPoint, yPoint) == true)
             {
-                //checkedPoints[xPoint, yPoint - 1] = true;
-                m_NextFound = true;
                 return (new Point(xPoint, yPoint - 1));
             }
             else if (CheckIfPointIsNorthEast(xPoint, yPoint))
             {
-                //checkedPoints[xPoint + 1, yPoint - 1] = true;
-                m_NextFound = true;
                 return (new Point(xPoint + 1, yPoint - 1));
             }
             else if (CheckIfPointIsEast(xPoint, yPoint))
             {
-                //checkedPoints[xPoint + 1, yPoint] = true;
-                m_NextFound = true;
                 return (new Point(xPoint + 1, yPoint));
             }
             else if (CheckIfPointIsSouthEast(xPoint, yPoint))
             {
-                //checkedPoints[xPoint + 1, yPoint + 1] = true;
-                m_NextFound = true;
                 return (new Point(xPoint + 1, yPoint + 1));
             }
             else if (CheckIfPointIsSouth(xPoint, yPoint))
             {
-                //checkedPoints[xPoint, yPoint + 1] = true;
-                m_NextFound = true;
                 return (new Point(xPoint, yPoint + 1));
             }
             else if (CheckIfPointIsSouthWest(xPoint, yPoint))
             {
-                //checkedPoints[xPoint - 1, yPoint + 1] = true;
-                m_NextFound = true;
                 return (new Point(xPoint - 1, yPoint + 1));
             }
             else if (CheckIfPointIsWest(xPoint, yPoint))
             {
-                //checkedPoints[xPoint - 1, yPoint] = true;
-                m_NextFound = true;
                 return (new Point(xPoint - 1, yPoint));
             }
             else if (CheckIfPointIsNorthWest(xPoint, yPoint))
             {
-                //checkedPoints[xPoint - 1, yPoint - 1] = true;
-                m_NextFound = true;
                 return (new Point(xPoint - 1, yPoint - 1));
             }
 
