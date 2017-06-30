@@ -10,16 +10,22 @@ namespace ActiveContour
     /// </summary>
     public class Snake
     {
-        private bool timeTest = false;
-        private int drawingTestCounter = 10;
-        private bool drawingTest = false;
+        private readonly bool m_TimeTest = false;
+        private readonly int m_DrawingTestCounter = 10;
+        private readonly bool m_DrawingTest = false;
 
-        private int numOfIterationsWithoutChange = 0;
+        private int m_NumOfIterationsWithoutChange = 0;
 
-        private DateTime startTime, endTime, totalStart, totalEnd, checkStart, checkEnd;
+        private DateTime m_StartTime;
+        private DateTime m_EndTime;
+        private DateTime m_TotalStart;
+        private DateTime m_TotalEnd;
+        private DateTime m_CheckStart;
+        private DateTime m_CheckEnd;
 
-        private Bitmap originalImage;
-        private int imageHeight, imageWidth;
+        private readonly Bitmap m_OriginalImage;
+        private readonly int m_ImageHeight;
+        private readonly int m_ImageWidth;
 
         private int counter = 0;
 
@@ -58,26 +64,26 @@ namespace ActiveContour
 
         public Snake(Bitmap image, List<Point> initialPoints, double alphaValue)
         {
-            this.originalImage = image;
+            this.m_OriginalImage = image;
             this.alphaValue = alphaValue;
 
-            imageWidth = originalImage.Width;
-            imageHeight = originalImage.Height;
+            m_ImageWidth = m_OriginalImage.Width;
+            m_ImageHeight = m_OriginalImage.Height;
 
-            checkedPoints = new bool[imageWidth, imageHeight];
+            checkedPoints = new bool[m_ImageWidth, m_ImageHeight];
 
             CalculateSignedDistanceMap(initialPoints);
         }
 
         public Snake(Bitmap image, List<Point> initialPoints)
         {
-            this.originalImage = image;
+            this.m_OriginalImage = image;
             //alphaValue = 0.0;
 
-            imageWidth = originalImage.Width;
-            imageHeight = originalImage.Height;
+            m_ImageWidth = m_OriginalImage.Width;
+            m_ImageHeight = m_OriginalImage.Height;
 
-            checkedPoints = new bool[imageWidth, imageHeight];
+            checkedPoints = new bool[m_ImageWidth, m_ImageHeight];
 
             CalculateSignedDistanceMap(initialPoints);
         }
@@ -91,16 +97,16 @@ namespace ActiveContour
             DateTime setUpStart = DateTime.Now;
             DateTime setUpEnd;
 
-            if (timeTest == true)
+            if (m_TimeTest == true)
             {
                 setUpStart = DateTime.Now;
             }
 
-            SignedDistanceMap signedDistanceMap = new SignedDistanceMap(initialPoints, imageWidth, imageHeight);
+            SignedDistanceMap signedDistanceMap = new SignedDistanceMap(initialPoints, m_ImageWidth, m_ImageHeight);
 
             sdf = signedDistanceMap.GetSignedDistanceMap();
 
-            if (timeTest == true)
+            if (m_TimeTest == true)
             {
                 setUpEnd = DateTime.Now;
 
@@ -122,7 +128,7 @@ namespace ActiveContour
 
         public void RunActiveContour()
         {
-            if (timeTest == true)
+            if (m_TimeTest == true)
             {
                 string iterationText = "Iteration - " + counter;
                 //System.IO.File.WriteAllText(@"FitnessTimes.txt", generationText);
@@ -133,7 +139,7 @@ namespace ActiveContour
                     sw.WriteLine(iterationText);
                     sw.WriteLine();
 
-                    totalStart = DateTime.Now;
+                    m_TotalStart = DateTime.Now;
                 }
             }
 
@@ -141,9 +147,9 @@ namespace ActiveContour
             {
                 counter++;
 
-                if (timeTest == true)
+                if (m_TimeTest == true)
                 {
-                    startTime = DateTime.Now;
+                    m_StartTime = DateTime.Now;
                 }
 
                 CalculateMeanImageBrightness();
@@ -160,7 +166,7 @@ namespace ActiveContour
 
                 sdf = SmoothSDF();
 
-                checkStart = DateTime.Now;
+                m_CheckStart = DateTime.Now;
 
                 if (counter == 1)
                     sdfOld = (double[,])sdf.Clone();
@@ -170,9 +176,9 @@ namespace ActiveContour
                     sdfOld = (double[,])sdf.Clone();
                 }
 
-                checkEnd = DateTime.Now;
+                m_CheckEnd = DateTime.Now;
 
-                if (drawingTest && (counter % drawingTestCounter == 0 || counter == 1))
+                if (m_DrawingTest && (counter % m_DrawingTestCounter == 0 || counter == 1))
                 {
                     DrawCurve();
 
@@ -181,29 +187,29 @@ namespace ActiveContour
                     DrawThinnedCurve();
                 }
 
-                if (timeTest == true)
+                if (m_TimeTest == true)
                 {
-                    endTime = DateTime.Now;
+                    m_EndTime = DateTime.Now;
 
                     WriteTimes(counter);
                 }
             }
 
-            if (drawingTest)
+            if (m_DrawingTest)
             {
                 DrawCurve();
             }
 
             ThinCurve();
 
-            if (drawingTest)
+            if (m_DrawingTest)
             {
                 DrawThinnedCurve();
             }
             //Calculate points
             CalculateCurvePoints();
 
-            if (drawingTest)
+            if (m_DrawingTest)
             {
                 DrawFinalPoints();
             }
@@ -227,9 +233,9 @@ namespace ActiveContour
 
             int sampleRate = 4;
 
-            for (int yPos = 0; yPos < imageHeight; yPos += sampleRate)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos += sampleRate)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos += sampleRate)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos += sampleRate)
                 {
                     if (sdf[xPos, yPos] < 0)         //Exterior
                     {
@@ -260,7 +266,7 @@ namespace ActiveContour
         {
             int brightness;
 
-            int pixelValue = originalImage.GetPixel(xPos, yPos).ToArgb();
+            int pixelValue = m_OriginalImage.GetPixel(xPos, yPos).ToArgb();
 
             double r = (pixelValue & 0xff0000) >> 16;
             double g = (pixelValue & 0xff00) >> 8;
@@ -299,9 +305,9 @@ namespace ActiveContour
 
             narrowBand = new List<Point>();
 
-            for (int yPos = 0; yPos < imageHeight; yPos++)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos++)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
                     double sdfValue = sdf[xPos, yPos];
 
@@ -318,7 +324,7 @@ namespace ActiveContour
         /// </summary>
         private void CalculateImageForce()
         {
-            imageForce = new double[imageWidth, imageHeight];
+            imageForce = new double[m_ImageWidth, m_ImageHeight];
 
             foreach (Point point in narrowBand)
             {
@@ -344,7 +350,7 @@ namespace ActiveContour
 
         private void CalculateGradientDescent()
         {
-            gradientDescentValues = new double[imageWidth, imageHeight];
+            gradientDescentValues = new double[m_ImageWidth, m_ImageHeight];
 
             double maximumForce = GetMaximumForce();
 
@@ -409,13 +415,13 @@ namespace ActiveContour
 
         private double[,] SmoothSDF()
         {
-            double[,] smootheSdf = new double[imageWidth, imageHeight];
+            double[,] smootheSdf = new double[m_ImageWidth, m_ImageHeight];
 
             //foreach (Point point in narrowBand)
             //{
-            for (int yPos = 0; yPos < imageHeight; yPos++)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos++)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
                     //int xPos = point.X;
                     //int yPos = point.Y;
@@ -443,7 +449,7 @@ namespace ActiveContour
 
             double shiftLeftValue;
 
-            if (xPos + 1 > imageWidth - 1)
+            if (xPos + 1 > m_ImageWidth - 1)
                 shiftLeftValue = 0;
             else
                 shiftLeftValue = ShiftLeft(xPos, yPos) - startValue;
@@ -458,7 +464,7 @@ namespace ActiveContour
 
             double shiftUpValue;
 
-            if (yPos + 1 > imageHeight - 1)
+            if (yPos + 1 > m_ImageHeight - 1)
                 shiftUpValue = 0;
             else
                 shiftUpValue = ShiftUp(xPos, yPos) - startValue;
@@ -580,9 +586,9 @@ namespace ActiveContour
         {
             int diffCount = 0;
 
-            for (int yPos = 0; yPos < imageHeight; yPos++)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos++)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
                     if (sdfOld[xPos, yPos] < 0 && sdf[xPos, yPos] > 0 || sdfOld[xPos, yPos] > 0 && sdf[xPos, yPos] < 0)
                     {
@@ -599,7 +605,7 @@ namespace ActiveContour
             {
                 numOfSimilarIterations = 0;
 
-                numOfIterationsWithoutChange++;
+                m_NumOfIterationsWithoutChange++;
             }
 
             if (numOfSimilarIterations >= differenceCountThreshold)
@@ -607,13 +613,13 @@ namespace ActiveContour
                 solutionFound = true;
             }
 
-            if (numOfIterationsWithoutChange > 50)
+            if (m_NumOfIterationsWithoutChange > 50)
             {
                 differenceThreshold++;
-                numOfIterationsWithoutChange = 0;
+                m_NumOfIterationsWithoutChange = 0;
             }
 
-            if (timeTest)
+            if (m_TimeTest)
             {
                 using (StreamWriter sw = File.AppendText(@"Times.txt"))
                 {
@@ -627,11 +633,11 @@ namespace ActiveContour
         /// </summary>
         private void ThinCurve()
         {
-            finalCurve = new bool[imageWidth, imageHeight];
+            finalCurve = new bool[m_ImageWidth, m_ImageHeight];
 
-            for (int yPos = 0; yPos < imageHeight; yPos++)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos++)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
                     if (sdf[xPos, yPos] > 0)
                     {
@@ -697,7 +703,7 @@ namespace ActiveContour
 
         private double CheckNorthEast(int xPos, int yPos)
         {
-            if (yPos > 0 && xPos < imageWidth - 1)
+            if (yPos > 0 && xPos < m_ImageWidth - 1)
                 return sdf[xPos + 1, yPos - 1];
             else
                 return 1;
@@ -705,7 +711,7 @@ namespace ActiveContour
 
         private double CheckEast(int xPos, int yPos)
         {
-            if (xPos < imageWidth - 1)
+            if (xPos < m_ImageWidth - 1)
                 return sdf[xPos + 1, yPos];
             else
                 return 1;
@@ -713,7 +719,7 @@ namespace ActiveContour
 
         private double CheckSouthEast(int xPos, int yPos)
         {
-            if (xPos < imageWidth - 1 && yPos < imageHeight - 1)
+            if (xPos < m_ImageWidth - 1 && yPos < m_ImageHeight - 1)
                 return sdf[xPos + 1, yPos + 1];
             else
                 return 1;
@@ -721,7 +727,7 @@ namespace ActiveContour
 
         private double CheckSouth(int xPos, int yPos)
         {
-            if (yPos < imageHeight - 1)
+            if (yPos < m_ImageHeight - 1)
                 return sdf[xPos, yPos + 1];
             else
                 return 1;
@@ -729,7 +735,7 @@ namespace ActiveContour
 
         private double CheckSouthWest(int xPos, int yPos)
         {
-            if (yPos < imageHeight - 1 && xPos > 0)
+            if (yPos < m_ImageHeight - 1 && xPos > 0)
                 return sdf[xPos - 1, yPos + 1];
             else
                 return 1;
@@ -767,7 +773,7 @@ namespace ActiveContour
 
             allPoints = extractLine.GetLine();
 
-            if(drawingTest)
+            if(m_DrawingTest)
                 DrawPoints(allPoints);
 
             if (allPoints.Count > 0)
@@ -857,7 +863,7 @@ namespace ActiveContour
 
         private bool CheckIfPointIsNorthEast(int xPoint, int yPoint)
         {
-            if (yPoint > 0 && xPoint < imageWidth - 1)
+            if (yPoint > 0 && xPoint < m_ImageWidth - 1)
             {
                 if (finalCurve[xPoint + 1, yPoint - 1] == true && checkedPoints[xPoint + 1, yPoint - 1] == false)
                     return true;
@@ -868,7 +874,7 @@ namespace ActiveContour
 
         private bool CheckIfPointIsEast(int xPoint, int yPoint)
         {
-            if (xPoint < imageWidth - 1)
+            if (xPoint < m_ImageWidth - 1)
             {
                 if (finalCurve[xPoint + 1, yPoint] == true && checkedPoints[xPoint + 1, yPoint] == false)
                     return true;
@@ -879,7 +885,7 @@ namespace ActiveContour
 
         private bool CheckIfPointIsSouthEast(int xPoint, int yPoint)
         {
-            if (xPoint < imageWidth - 1 && yPoint < imageHeight - 1)
+            if (xPoint < m_ImageWidth - 1 && yPoint < m_ImageHeight - 1)
             {
                 if (finalCurve[xPoint + 1, yPoint + 1] == true && checkedPoints[xPoint + 1, yPoint + 1] == false)
                     return true;
@@ -890,7 +896,7 @@ namespace ActiveContour
 
         private bool CheckIfPointIsSouth(int xPoint, int yPoint)
         {
-            if (yPoint < imageHeight - 1)
+            if (yPoint < m_ImageHeight - 1)
             {
                 if (finalCurve[xPoint, yPoint + 1] == true && checkedPoints[xPoint, yPoint + 1] == false)
                     return true;
@@ -901,7 +907,7 @@ namespace ActiveContour
 
         private bool CheckIfPointIsSouthWest(int xPoint, int yPoint)
         {
-            if (xPoint > 0 && yPoint < imageHeight - 1)
+            if (xPoint > 0 && yPoint < m_ImageHeight - 1)
             {
                 if (finalCurve[xPoint - 1, yPoint + 1] == true && checkedPoints[xPoint - 1, yPoint + 1] == false)
                     return true;
@@ -987,7 +993,7 @@ namespace ActiveContour
         {
             if (counter % 10 == 0)
             {
-                Bitmap image = new Bitmap(originalImage);
+                Bitmap image = new Bitmap(m_OriginalImage);
 
                 foreach (Point point in narrowBand)
                 {
@@ -1000,13 +1006,13 @@ namespace ActiveContour
 
         private void WriteTimes(int counter)
         {
-            TimeSpan timeSpan = endTime.Subtract(startTime);
+            TimeSpan timeSpan = m_EndTime.Subtract(m_StartTime);
             int timeDifferenceMilliseconds = timeSpan.Milliseconds;
             int timeDifferenceSeconds = timeSpan.Seconds;
             int timeDifferenceMinutes = timeSpan.Minutes;
 
 
-            TimeSpan stopCheckTimeSpan = checkEnd.Subtract(checkStart);
+            TimeSpan stopCheckTimeSpan = m_CheckEnd.Subtract(m_CheckStart);
             int stopCheckTimeDifferenceMilliseconds = stopCheckTimeSpan.Milliseconds;
             int stopCheckTimeDifferenceSeconds = stopCheckTimeSpan.Seconds;
             int stopChecTimeDifferenceMinutes = stopCheckTimeSpan.Minutes;
@@ -1022,9 +1028,9 @@ namespace ActiveContour
 
                 if (solutionFound)
                 {
-                    totalEnd = DateTime.Now;
+                    m_TotalEnd = DateTime.Now;
 
-                    TimeSpan totalTimeSpan = totalEnd.Subtract(totalStart);
+                    TimeSpan totalTimeSpan = m_TotalEnd.Subtract(m_TotalStart);
                     int totalTimeMinutes = totalTimeSpan.Minutes;
                     int totalTimeSeconds = totalTimeSpan.Seconds;
 
@@ -1040,13 +1046,13 @@ namespace ActiveContour
         /// </summary>
         private void DrawCurve()
         {
-            Bitmap image = new Bitmap(originalImage);
+            Bitmap image = new Bitmap(m_OriginalImage);
 
             //Graphics g = Graphics.FromImage(image);
 
-            for (int yPos = 0; yPos < imageHeight; yPos++)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos++)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
                     if (sdf[xPos, yPos] < 0)
                     {
@@ -1060,13 +1066,13 @@ namespace ActiveContour
 
         private void DrawThinnedCurve()
         {
-            Bitmap image = new Bitmap(originalImage);
+            Bitmap image = new Bitmap(m_OriginalImage);
 
             //Graphics g = Graphics.FromImage(image);
 
-            for (int yPos = 0; yPos < imageHeight; yPos++)
+            for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
-                for (int xPos = 0; xPos < imageWidth; xPos++)
+                for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
                     if (finalCurve[xPos, yPos])
                     {
@@ -1080,7 +1086,7 @@ namespace ActiveContour
 
         private void DrawPoints(List<Point> allPoints)
         {
-            Bitmap image = new Bitmap(originalImage);
+            Bitmap image = new Bitmap(m_OriginalImage);
 
             for (int i = 0; i < allPoints.Count; i++)
             {
@@ -1092,7 +1098,7 @@ namespace ActiveContour
 
         private void DrawFinalPoints()
         {
-            Bitmap image = new Bitmap(originalImage);
+            Bitmap image = new Bitmap(m_OriginalImage);
 
             Graphics g = Graphics.FromImage(image);
             Pen pen = new Pen(Color.LawnGreen);
