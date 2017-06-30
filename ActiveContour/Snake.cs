@@ -29,48 +29,49 @@ namespace ActiveContour
 
         private int counter = 0;
 
-        private double alphaValue = 0.0;
+        private readonly double m_AlphaValue = 0.0;
 
-        private double narrowBandSize = 1.2;
+        private double m_NarrowBandSize = 1.2;
 
-        private double[,] sdf;
-        private double[,] sdfOld;
-        private List<Point> narrowBand;
-        private double[,] imageForce;
-        private double[,] curvaturePenalty;
-        private double[,] gradientDescentValues;
+        private double[,] m_Sdf;
+        private double[,] m_SdfOld;
+        private List<Point> m_NarrowBand;
+        private double[,] m_ImageForce;
+        private double[,] m_CurvaturePenalty;
+        private double[,] m_GradientDescentValues;
 
-        private bool[,] finalCurve;
+        private bool[,] m_FinalCurve;
 
-        private double exteriorMean, interiorMean;
+        private double m_ExteriorMean;
+        private double m_InteriorMean;
 
-        private bool solutionFound = false;
-        private bool nextFound;
+        private bool m_SolutionFound;
+        private bool m_NextFound;
 
-        private double maxGradientDescentValue;
+        private double m_MaxGradientDescentValue;
 
-        private List<Point> curvePoints = new List<Point>();
-        bool[,] checkedPoints;
+        private List<Point> m_CurvePoints = new List<Point>();
+        private readonly bool[,] m_CheckedPoints;
 
-        private int simplifyTolerance = 5;
+        private int m_SimplifyTolerance = 5;
 
         # region check stopping condition variables
 
-        private int numOfSimilarIterations = 0;
-        int differenceThreshold = 5;
-        int differenceCountThreshold = 10;
+        private int m_NumOfSimilarIterations;
+        private int m_DifferenceThreshold = 5;
+        private int m_DifferenceCountThreshold = 10;
 
         # endregion
 
         public Snake(Bitmap image, List<Point> initialPoints, double alphaValue)
         {
             this.m_OriginalImage = image;
-            this.alphaValue = alphaValue;
+            this.m_AlphaValue = alphaValue;
 
             m_ImageWidth = m_OriginalImage.Width;
             m_ImageHeight = m_OriginalImage.Height;
 
-            checkedPoints = new bool[m_ImageWidth, m_ImageHeight];
+            m_CheckedPoints = new bool[m_ImageWidth, m_ImageHeight];
 
             CalculateSignedDistanceMap(initialPoints);
         }
@@ -83,7 +84,7 @@ namespace ActiveContour
             m_ImageWidth = m_OriginalImage.Width;
             m_ImageHeight = m_OriginalImage.Height;
 
-            checkedPoints = new bool[m_ImageWidth, m_ImageHeight];
+            m_CheckedPoints = new bool[m_ImageWidth, m_ImageHeight];
 
             CalculateSignedDistanceMap(initialPoints);
         }
@@ -104,7 +105,7 @@ namespace ActiveContour
 
             SignedDistanceMap signedDistanceMap = new SignedDistanceMap(initialPoints, m_ImageWidth, m_ImageHeight);
 
-            sdf = signedDistanceMap.GetSignedDistanceMap();
+            m_Sdf = signedDistanceMap.GetSignedDistanceMap();
 
             if (m_TimeTest == true)
             {
@@ -143,7 +144,7 @@ namespace ActiveContour
                 }
             }
 
-            while (!solutionFound)
+            while (!m_SolutionFound)
             {
                 counter++;
 
@@ -164,16 +165,16 @@ namespace ActiveContour
 
                 EvolveCurve();
 
-                sdf = SmoothSDF();
+                m_Sdf = SmoothSDF();
 
                 m_CheckStart = DateTime.Now;
 
                 if (counter == 1)
-                    sdfOld = (double[,])sdf.Clone();
+                    m_SdfOld = (double[,])m_Sdf.Clone();
                 else
                 {
                     CheckIfSnakeHasConverged();
-                    sdfOld = (double[,])sdf.Clone();
+                    m_SdfOld = (double[,])m_Sdf.Clone();
                 }
 
                 m_CheckEnd = DateTime.Now;
@@ -228,8 +229,8 @@ namespace ActiveContour
             int interiorNumber = 0;
             int exteriorNumber = 0;
 
-            interiorMean = 0;
-            exteriorMean = 0;
+            m_InteriorMean = 0;
+            m_ExteriorMean = 0;
 
             int sampleRate = 4;
 
@@ -237,7 +238,7 @@ namespace ActiveContour
             {
                 for (int xPos = 0; xPos < m_ImageWidth; xPos += sampleRate)
                 {
-                    if (sdf[xPos, yPos] < 0)         //Exterior
+                    if (m_Sdf[xPos, yPos] < 0)         //Exterior
                     {
                         exteriorTotal += GetBrightnessAt(xPos, yPos);
 
@@ -252,8 +253,8 @@ namespace ActiveContour
                 }
             }
 
-            interiorMean = interiorTotal / (double)interiorNumber;
-            exteriorMean = exteriorTotal / (double)exteriorNumber;
+            m_InteriorMean = interiorTotal / (double)interiorNumber;
+            m_ExteriorMean = exteriorTotal / (double)exteriorNumber;
         }
 
         /// <summary>
@@ -303,16 +304,16 @@ namespace ActiveContour
         {
             //narrowBand.Clear();
 
-            narrowBand = new List<Point>();
+            m_NarrowBand = new List<Point>();
 
             for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
                 for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
-                    double sdfValue = sdf[xPos, yPos];
+                    double sdfValue = m_Sdf[xPos, yPos];
 
-                    if (sdfValue <= narrowBandSize && sdfValue >= (0 - narrowBandSize))
-                        narrowBand.Add(new Point(xPos, yPos));
+                    if (sdfValue <= m_NarrowBandSize && sdfValue >= (0 - m_NarrowBandSize))
+                        m_NarrowBand.Add(new Point(xPos, yPos));
                 }
             }
 
@@ -324,16 +325,16 @@ namespace ActiveContour
         /// </summary>
         private void CalculateImageForce()
         {
-            imageForce = new double[m_ImageWidth, m_ImageHeight];
+            m_ImageForce = new double[m_ImageWidth, m_ImageHeight];
 
-            foreach (Point point in narrowBand)
+            foreach (Point point in m_NarrowBand)
             {
                 int xPoint = point.X;
                 int yPoint = point.Y;
 
                 int pointBrightness = GetBrightnessAt(xPoint, yPoint);
 
-                imageForce[xPoint, yPoint] = Math.Pow((pointBrightness - exteriorMean), 2) - Math.Pow((pointBrightness - interiorMean), 2);
+                m_ImageForce[xPoint, yPoint] = Math.Pow((pointBrightness - m_ExteriorMean), 2) - Math.Pow((pointBrightness - m_InteriorMean), 2);
             }
         }
 
@@ -343,34 +344,34 @@ namespace ActiveContour
         /// <returns></returns>
         private void CalculateCurvaturePenalty()
         {
-            CurvaturePenalty calcCurvaturePenalty = new CurvaturePenalty(sdf, narrowBand);
+            CurvaturePenalty calcCurvaturePenalty = new CurvaturePenalty(m_Sdf, m_NarrowBand);
 
-            curvaturePenalty = calcCurvaturePenalty.GetCurvaturePenalty();
+            m_CurvaturePenalty = calcCurvaturePenalty.GetCurvaturePenalty();
         }
 
         private void CalculateGradientDescent()
         {
-            gradientDescentValues = new double[m_ImageWidth, m_ImageHeight];
+            m_GradientDescentValues = new double[m_ImageWidth, m_ImageHeight];
 
             double maximumForce = GetMaximumForce();
 
-            maxGradientDescentValue = 0;
+            m_MaxGradientDescentValue = 0;
 
             double currentGradientDescentValue = 0;
 
-            foreach (Point point in narrowBand)
+            foreach (Point point in m_NarrowBand)
             {
                 int xPos = point.X;
                 int yPos = point.Y;
 
-                double force = imageForce[xPos, yPos];
+                double force = m_ImageForce[xPos, yPos];
 
-                currentGradientDescentValue = (force / maximumForce) + alphaValue + curvaturePenalty[xPos, yPos];
+                currentGradientDescentValue = (force / maximumForce) + m_AlphaValue + m_CurvaturePenalty[xPos, yPos];
 
-                gradientDescentValues[xPos, yPos] = currentGradientDescentValue;
+                m_GradientDescentValues[xPos, yPos] = currentGradientDescentValue;
 
-                if (maxGradientDescentValue < currentGradientDescentValue)
-                    maxGradientDescentValue = currentGradientDescentValue;
+                if (m_MaxGradientDescentValue < currentGradientDescentValue)
+                    m_MaxGradientDescentValue = currentGradientDescentValue;
             }
         }
 
@@ -378,12 +379,12 @@ namespace ActiveContour
         {
             double maximumForce = 0;
 
-            foreach (Point point in narrowBand)
+            foreach (Point point in m_NarrowBand)
             {
                 int xPos = point.X;
                 int yPos = point.Y;
 
-                double currentForce = Math.Abs(imageForce[xPos, yPos]);
+                double currentForce = Math.Abs(m_ImageForce[xPos, yPos]);
 
                 if (currentForce > maximumForce)
                     maximumForce = currentForce;
@@ -402,14 +403,14 @@ namespace ActiveContour
             //        maxValue = value;
             //}
 
-            double dt = 0.45 / (maxGradientDescentValue + double.Epsilon);
+            double dt = 0.45 / (m_MaxGradientDescentValue + double.Epsilon);
 
-            foreach (Point point in narrowBand)
+            foreach (Point point in m_NarrowBand)
             {
                 int xPos = point.X;
                 int yPos = point.Y;
 
-                sdf[xPos, yPos] = sdf[xPos, yPos] + (dt * gradientDescentValues[xPos, yPos]);
+                m_Sdf[xPos, yPos] = m_Sdf[xPos, yPos] + (dt * m_GradientDescentValues[xPos, yPos]);
             }
         }
 
@@ -437,7 +438,7 @@ namespace ActiveContour
 
         private double Sussman(int xPos, int yPos, double timeStep)
         {
-            double startValue = sdf[xPos, yPos];
+            double startValue = m_Sdf[xPos, yPos];
             double endValue;
 
             double shiftRightValue;
@@ -529,7 +530,7 @@ namespace ActiveContour
             //if (shiftX < 0)
             //    rightValue = 0;
             //else
-            rightValue = sdf[shiftX, shiftY];
+            rightValue = m_Sdf[shiftX, shiftY];
 
             return rightValue;
         }
@@ -544,7 +545,7 @@ namespace ActiveContour
             //if (shiftX > imageWidth-1)
             //    leftValue = 0;
             //else
-            leftValue = sdf[shiftX, shiftY];
+            leftValue = m_Sdf[shiftX, shiftY];
 
             return leftValue;
         }
@@ -556,7 +557,7 @@ namespace ActiveContour
 
             double downValue;
 
-            downValue = sdf[shiftX, shiftY];
+            downValue = m_Sdf[shiftX, shiftY];
 
             return downValue;
         }
@@ -568,7 +569,7 @@ namespace ActiveContour
 
             double upValue;
 
-            upValue = sdf[shiftX, shiftY];
+            upValue = m_Sdf[shiftX, shiftY];
 
             return upValue;
         }
@@ -590,32 +591,32 @@ namespace ActiveContour
             {
                 for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
-                    if (sdfOld[xPos, yPos] < 0 && sdf[xPos, yPos] > 0 || sdfOld[xPos, yPos] > 0 && sdf[xPos, yPos] < 0)
+                    if (m_SdfOld[xPos, yPos] < 0 && m_Sdf[xPos, yPos] > 0 || m_SdfOld[xPos, yPos] > 0 && m_Sdf[xPos, yPos] < 0)
                     {
                         diffCount++;
                     }
                 }
             }
 
-            if (diffCount < differenceThreshold)
+            if (diffCount < m_DifferenceThreshold)
             {
-                numOfSimilarIterations++;
+                m_NumOfSimilarIterations++;
             }
             else
             {
-                numOfSimilarIterations = 0;
+                m_NumOfSimilarIterations = 0;
 
                 m_NumOfIterationsWithoutChange++;
             }
 
-            if (numOfSimilarIterations >= differenceCountThreshold)
+            if (m_NumOfSimilarIterations >= m_DifferenceCountThreshold)
             {
-                solutionFound = true;
+                m_SolutionFound = true;
             }
 
             if (m_NumOfIterationsWithoutChange > 50)
             {
-                differenceThreshold++;
+                m_DifferenceThreshold++;
                 m_NumOfIterationsWithoutChange = 0;
             }
 
@@ -633,23 +634,23 @@ namespace ActiveContour
         /// </summary>
         private void ThinCurve()
         {
-            finalCurve = new bool[m_ImageWidth, m_ImageHeight];
+            m_FinalCurve = new bool[m_ImageWidth, m_ImageHeight];
 
             for (int yPos = 0; yPos < m_ImageHeight; yPos++)
             {
                 for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
-                    if (sdf[xPos, yPos] > 0)
+                    if (m_Sdf[xPos, yPos] > 0)
                     {
-                        finalCurve[xPos, yPos] = false;
+                        m_FinalCurve[xPos, yPos] = false;
                     }
                     else if (IsPointAtBoundary(xPos, yPos))
                     {
-                        finalCurve[xPos, yPos] = true;
+                        m_FinalCurve[xPos, yPos] = true;
                     }
                     else
                     {
-                        finalCurve[xPos, yPos] = false;
+                        m_FinalCurve[xPos, yPos] = false;
                     }
                 }
             }
@@ -696,7 +697,7 @@ namespace ActiveContour
         private double CheckNorth(int xPos, int yPos)
         {
             if (yPos > 0)
-                return sdf[xPos, yPos - 1];
+                return m_Sdf[xPos, yPos - 1];
             else
                 return 1;
         }
@@ -704,7 +705,7 @@ namespace ActiveContour
         private double CheckNorthEast(int xPos, int yPos)
         {
             if (yPos > 0 && xPos < m_ImageWidth - 1)
-                return sdf[xPos + 1, yPos - 1];
+                return m_Sdf[xPos + 1, yPos - 1];
             else
                 return 1;
         }
@@ -712,7 +713,7 @@ namespace ActiveContour
         private double CheckEast(int xPos, int yPos)
         {
             if (xPos < m_ImageWidth - 1)
-                return sdf[xPos + 1, yPos];
+                return m_Sdf[xPos + 1, yPos];
             else
                 return 1;
         }
@@ -720,7 +721,7 @@ namespace ActiveContour
         private double CheckSouthEast(int xPos, int yPos)
         {
             if (xPos < m_ImageWidth - 1 && yPos < m_ImageHeight - 1)
-                return sdf[xPos + 1, yPos + 1];
+                return m_Sdf[xPos + 1, yPos + 1];
             else
                 return 1;
         }
@@ -728,7 +729,7 @@ namespace ActiveContour
         private double CheckSouth(int xPos, int yPos)
         {
             if (yPos < m_ImageHeight - 1)
-                return sdf[xPos, yPos + 1];
+                return m_Sdf[xPos, yPos + 1];
             else
                 return 1;
         }
@@ -736,7 +737,7 @@ namespace ActiveContour
         private double CheckSouthWest(int xPos, int yPos)
         {
             if (yPos < m_ImageHeight - 1 && xPos > 0)
-                return sdf[xPos - 1, yPos + 1];
+                return m_Sdf[xPos - 1, yPos + 1];
             else
                 return 1;
         }
@@ -744,7 +745,7 @@ namespace ActiveContour
         private double CheckWest(int xPos, int yPos)
         {
             if (xPos > 0)
-                return sdf[xPos - 1, yPos];
+                return m_Sdf[xPos - 1, yPos];
             else
                 return 1;
         }
@@ -752,7 +753,7 @@ namespace ActiveContour
         private double CheckNorthWest(int xPos, int yPos)
         {
             if (xPos > 0 && yPos > 0)
-                return sdf[xPos - 1, yPos - 1];
+                return m_Sdf[xPos - 1, yPos - 1];
             else
                 return 1;
         }
@@ -768,7 +769,7 @@ namespace ActiveContour
         {
             List<Point> allPoints = new List<Point>();
 
-            ExtractLine extractLine = new ExtractLine(finalCurve);
+            ExtractLine extractLine = new ExtractLine(m_FinalCurve);
             extractLine.Extract();
 
             allPoints = extractLine.GetLine();
@@ -778,11 +779,11 @@ namespace ActiveContour
 
             if (allPoints.Count > 0)
             {
-                SimplifyShape simplifyShape = new SimplifyShape(allPoints, simplifyTolerance);
+                SimplifyShape simplifyShape = new SimplifyShape(allPoints, m_SimplifyTolerance);
 
                 simplifyShape.Simplify();
 
-                curvePoints = simplifyShape.GetSimplifiedPoints();
+                m_CurvePoints = simplifyShape.GetSimplifiedPoints();
             }
             
         }
@@ -793,7 +794,7 @@ namespace ActiveContour
 
         private Point FindNextPoint(Point currentPoint)
         {
-            nextFound = false;
+            m_NextFound = false;
 
             int xPoint = currentPoint.X;
             int yPoint = currentPoint.Y;
@@ -801,49 +802,49 @@ namespace ActiveContour
             if (CheckIfPointIsNorth(xPoint, yPoint) == true)
             {
                 //checkedPoints[xPoint, yPoint - 1] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint, yPoint - 1));
             }
             else if (CheckIfPointIsNorthEast(xPoint, yPoint))
             {
                 //checkedPoints[xPoint + 1, yPoint - 1] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint + 1, yPoint - 1));
             }
             else if (CheckIfPointIsEast(xPoint, yPoint))
             {
                 //checkedPoints[xPoint + 1, yPoint] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint + 1, yPoint));
             }
             else if (CheckIfPointIsSouthEast(xPoint, yPoint))
             {
                 //checkedPoints[xPoint + 1, yPoint + 1] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint + 1, yPoint + 1));
             }
             else if (CheckIfPointIsSouth(xPoint, yPoint))
             {
                 //checkedPoints[xPoint, yPoint + 1] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint, yPoint + 1));
             }
             else if (CheckIfPointIsSouthWest(xPoint, yPoint))
             {
                 //checkedPoints[xPoint - 1, yPoint + 1] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint - 1, yPoint + 1));
             }
             else if (CheckIfPointIsWest(xPoint, yPoint))
             {
                 //checkedPoints[xPoint - 1, yPoint] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint - 1, yPoint));
             }
             else if (CheckIfPointIsNorthWest(xPoint, yPoint))
             {
                 //checkedPoints[xPoint - 1, yPoint - 1] = true;
-                nextFound = true;
+                m_NextFound = true;
                 return (new Point(xPoint - 1, yPoint - 1));
             }
 
@@ -854,7 +855,7 @@ namespace ActiveContour
         {
             if (yPoint > 0)
             {
-                if (finalCurve[xPoint, yPoint - 1] == true && checkedPoints[xPoint, yPoint - 1] == false)
+                if (m_FinalCurve[xPoint, yPoint - 1] == true && m_CheckedPoints[xPoint, yPoint - 1] == false)
                     return true;
             }
 
@@ -865,7 +866,7 @@ namespace ActiveContour
         {
             if (yPoint > 0 && xPoint < m_ImageWidth - 1)
             {
-                if (finalCurve[xPoint + 1, yPoint - 1] == true && checkedPoints[xPoint + 1, yPoint - 1] == false)
+                if (m_FinalCurve[xPoint + 1, yPoint - 1] == true && m_CheckedPoints[xPoint + 1, yPoint - 1] == false)
                     return true;
             }
 
@@ -876,7 +877,7 @@ namespace ActiveContour
         {
             if (xPoint < m_ImageWidth - 1)
             {
-                if (finalCurve[xPoint + 1, yPoint] == true && checkedPoints[xPoint + 1, yPoint] == false)
+                if (m_FinalCurve[xPoint + 1, yPoint] == true && m_CheckedPoints[xPoint + 1, yPoint] == false)
                     return true;
             }
 
@@ -887,7 +888,7 @@ namespace ActiveContour
         {
             if (xPoint < m_ImageWidth - 1 && yPoint < m_ImageHeight - 1)
             {
-                if (finalCurve[xPoint + 1, yPoint + 1] == true && checkedPoints[xPoint + 1, yPoint + 1] == false)
+                if (m_FinalCurve[xPoint + 1, yPoint + 1] == true && m_CheckedPoints[xPoint + 1, yPoint + 1] == false)
                     return true;
             }
 
@@ -898,7 +899,7 @@ namespace ActiveContour
         {
             if (yPoint < m_ImageHeight - 1)
             {
-                if (finalCurve[xPoint, yPoint + 1] == true && checkedPoints[xPoint, yPoint + 1] == false)
+                if (m_FinalCurve[xPoint, yPoint + 1] == true && m_CheckedPoints[xPoint, yPoint + 1] == false)
                     return true;
             }
 
@@ -909,7 +910,7 @@ namespace ActiveContour
         {
             if (xPoint > 0 && yPoint < m_ImageHeight - 1)
             {
-                if (finalCurve[xPoint - 1, yPoint + 1] == true && checkedPoints[xPoint - 1, yPoint + 1] == false)
+                if (m_FinalCurve[xPoint - 1, yPoint + 1] == true && m_CheckedPoints[xPoint - 1, yPoint + 1] == false)
                     return true;
             }
 
@@ -920,7 +921,7 @@ namespace ActiveContour
         {
             if (xPoint > 0)
             {
-                if (finalCurve[xPoint - 1, yPoint] == true && checkedPoints[xPoint - 1, yPoint] == false)
+                if (m_FinalCurve[xPoint - 1, yPoint] == true && m_CheckedPoints[xPoint - 1, yPoint] == false)
                     return true;
             }
 
@@ -931,7 +932,7 @@ namespace ActiveContour
         {
             if (xPoint > 0 && yPoint > 0)
             {
-                if (finalCurve[xPoint - 1, yPoint - 1] == true && checkedPoints[xPoint - 1, yPoint - 1] == false)
+                if (m_FinalCurve[xPoint - 1, yPoint - 1] == true && m_CheckedPoints[xPoint - 1, yPoint - 1] == false)
                     return true;
             }
 
@@ -944,7 +945,7 @@ namespace ActiveContour
 
         public List<Point> GetCurvePoints()
         {
-            return curvePoints;
+            return m_CurvePoints;
         }
 
         //public Point[,] GetCurvePoints()
@@ -958,12 +959,12 @@ namespace ActiveContour
 
         public void SetNarrowBandSize(int narrowBandSize)
         {
-            this.narrowBandSize = narrowBandSize;
+            this.m_NarrowBandSize = narrowBandSize;
         }
 
         public void SetSimplifyTolerance(int simplifyTolerance)
         {
-            this.simplifyTolerance = simplifyTolerance;
+            this.m_SimplifyTolerance = simplifyTolerance;
         }
 
         /// <summary>
@@ -973,7 +974,7 @@ namespace ActiveContour
         /// <param name="differenceThreshold"></param>
         public void SetStopCheckDifferenceThreshold(int differenceThreshold)
         {
-            this.differenceThreshold = differenceThreshold;
+            this.m_DifferenceThreshold = differenceThreshold;
         }
 
         /// <summary>
@@ -982,7 +983,7 @@ namespace ActiveContour
         /// <param name="differenceCountThreshold"></param>
         public void SetStopCheckDifferenceCounter(int differenceCountThreshold)
         {
-            this.differenceCountThreshold = differenceCountThreshold;
+            this.m_DifferenceCountThreshold = differenceCountThreshold;
         }
 
         # endregion
@@ -995,7 +996,7 @@ namespace ActiveContour
             {
                 Bitmap image = new Bitmap(m_OriginalImage);
 
-                foreach (Point point in narrowBand)
+                foreach (Point point in m_NarrowBand)
                 {
                     image.SetPixel(point.X, point.Y, Color.LawnGreen);
                 }
@@ -1026,7 +1027,7 @@ namespace ActiveContour
             {
                 sw.WriteLine(time);
 
-                if (solutionFound)
+                if (m_SolutionFound)
                 {
                     m_TotalEnd = DateTime.Now;
 
@@ -1054,7 +1055,7 @@ namespace ActiveContour
             {
                 for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
-                    if (sdf[xPos, yPos] < 0)
+                    if (m_Sdf[xPos, yPos] < 0)
                     {
                         image.SetPixel(xPos, yPos, Color.LawnGreen);
                     }
@@ -1074,7 +1075,7 @@ namespace ActiveContour
             {
                 for (int xPos = 0; xPos < m_ImageWidth; xPos++)
                 {
-                    if (finalCurve[xPos, yPos])
+                    if (m_FinalCurve[xPos, yPos])
                     {
                         image.SetPixel(xPos, yPos, Color.LawnGreen);
                     }
@@ -1102,9 +1103,9 @@ namespace ActiveContour
 
             Graphics g = Graphics.FromImage(image);
             Pen pen = new Pen(Color.LawnGreen);
-            g.DrawPolygon(pen, curvePoints.ToArray());
+            g.DrawPolygon(pen, m_CurvePoints.ToArray());
 
-            image.Save("Snake - Final Points (tolerance=" + simplifyTolerance + ").bmp");
+            image.Save("Snake - Final Points (tolerance=" + m_SimplifyTolerance + ").bmp");
         }
 
         # endregion
