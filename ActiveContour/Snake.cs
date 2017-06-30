@@ -53,14 +53,12 @@ namespace ActiveContour
         private readonly bool[,] m_CheckedPoints;
 
         private int m_SimplifyTolerance = 5;
-
-        # region check stopping condition variables
-
+        
         private int m_NumOfSimilarIterations;
         private int m_DifferenceThreshold = 5;
         private int m_DifferenceCountThreshold = 10;
-
-        # endregion
+        
+        #region Constructors
 
         public Snake(Bitmap image, List<Point> initialPoints, double alphaValue)
         {
@@ -87,6 +85,8 @@ namespace ActiveContour
             CalculateSignedDistanceMap(initialPoints);
         }
 
+        #endregion Constructors
+
         /// <summary>
         /// Creates a 2 dimensional boolean array from a list of points. 
         /// Points appear as 1 and non-points appear as 0
@@ -102,7 +102,7 @@ namespace ActiveContour
                 setUpStart = DateTime.Now;
             }
 
-            SignedDistanceMap signedDistanceMap = new SignedDistanceMap(initialPoints, m_ImageWidth, m_ImageHeight);
+            var signedDistanceMap = new SignedDistanceMap(initialPoints, m_ImageWidth, m_ImageHeight);
 
             m_Sdf = signedDistanceMap.GetSignedDistanceMap();
 
@@ -225,8 +225,8 @@ namespace ActiveContour
             double interiorTotal = 0;
             double exteriorTotal = 0;
 
-            int interiorNumber = 0;
-            int exteriorNumber = 0;
+            var interiorNumber = 0;
+            var exteriorNumber = 0;
 
             m_InteriorMean = 0;
             m_ExteriorMean = 0;
