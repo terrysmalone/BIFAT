@@ -1,57 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 
 namespace ActiveContour
 {
     /// <summary>
-    /// Simplifies the points of a closed shape using a given tolerance using the Douglas-Peucker Algorithm 
+    /// Simplifies the points of a closed shape using a given 
+    /// tolerance using the Douglas-Peucker Algorithm 
     /// </summary>
     class SimplifyShape
     {
-        private List<Point> originalPoints;
-        private int tolerance;
+        private readonly List<Point> m_OriginalPoints;
+        private readonly int m_Tolerance;
 
-        private List<Point> simplifiedPoints;
+        private readonly List<Point> m_SimplifiedPoints;
 
-        private int numberOfPoints;
+        private readonly int m_NumberOfPoints;
 
-        private double furthestPointDistance;
+        private double m_FurthestPointDistance;
+
+        #region constructor
 
         public SimplifyShape(List<Point> originalPoints, int tolerance)
         {
-            this.originalPoints = originalPoints;
-            this.tolerance = tolerance;
+            m_OriginalPoints = originalPoints;
+            m_Tolerance = tolerance;
 
-            simplifiedPoints = new List<Point>();
+            m_SimplifiedPoints = new List<Point>();
 
-            numberOfPoints = originalPoints.Count;
+            m_NumberOfPoints = originalPoints.Count;
 
-            simplifiedPoints.Add(originalPoints[0]);
+            m_SimplifiedPoints.Add(originalPoints[0]);
         }
+
+        #endregion constructor
 
         public void Simplify()
         {
-            SimplifyLine(0, numberOfPoints - 1);
+            SimplifyLine(0, m_NumberOfPoints - 1);
         }
 
         public void SimplifyLine(int startPos, int endPos)
         {
-            int furthestPointPosition = CalculateFurthestPoint(startPos, endPos);
+            var furthestPointPosition = CalculateFurthestPoint(startPos, endPos);
 
-            if (furthestPointDistance < tolerance)
+            if (m_FurthestPointDistance < m_Tolerance)
             {
-                if (!simplifiedPoints.Contains(new Point(originalPoints[furthestPointPosition].X, originalPoints[furthestPointPosition].Y)))
-                    simplifiedPoints.Add(originalPoints[furthestPointPosition]);
+                if (!m_SimplifiedPoints.Contains(new Point(m_OriginalPoints[furthestPointPosition].X,
+                                                           m_OriginalPoints[furthestPointPosition].Y)))
+                {
+                    m_SimplifiedPoints.Add(m_OriginalPoints[furthestPointPosition]);
+                }
             }
             else
             {
                 SimplifyLine(startPos, furthestPointPosition);
 
-                if (!simplifiedPoints.Contains(new Point(originalPoints[furthestPointPosition].X, originalPoints[furthestPointPosition].Y)))
-                    simplifiedPoints.Add(originalPoints[furthestPointPosition]);
+                if (!m_SimplifiedPoints.Contains(new Point(m_OriginalPoints[furthestPointPosition].X,
+                                                           m_OriginalPoints[furthestPointPosition].Y)))
+                {
+                    m_SimplifiedPoints.Add(m_OriginalPoints[furthestPointPosition]);
+                }
 
                 SimplifyLine(furthestPointPosition, endPos);
             }
@@ -77,7 +86,7 @@ namespace ActiveContour
                 }
             }
 
-            furthestPointDistance = maxDistance;
+            m_FurthestPointDistance = maxDistance;
 
             return furthestPoint;
         }
@@ -91,33 +100,32 @@ namespace ActiveContour
         /// <returns></returns>
         private double CalculateDistance(int startPos, int endPos, int distancePos)
         {
-            double distance;
+            var startX = m_OriginalPoints[startPos].X;
+            var startY = m_OriginalPoints[startPos].Y;
 
-            int startX = originalPoints[startPos].X;
-            int startY = originalPoints[startPos].Y;
+            var endX = m_OriginalPoints[endPos].X;
+            var endY = m_OriginalPoints[endPos].Y;
 
-            int endX = originalPoints[endPos].X;
-            int endY = originalPoints[endPos].Y;
+            var distX = m_OriginalPoints[distancePos].X;
+            var distY = m_OriginalPoints[distancePos].Y;
 
-            int distX = originalPoints[distancePos].X;
-            int distY = originalPoints[distancePos].Y;
+            var top = ((endX - startX) * (startY - distY)) - ((startX - distX) * (endY - startY));
+            var bottom = Math.Sqrt(Math.Pow(endX - startX, 2) + Math.Pow(endY - startY, 2));
 
-            double top = ((endX - startX) * (startY - distY)) - ((startX - distX) * (endY - startY));
-            double bottom = Math.Sqrt(Math.Pow(endX - startX, 2) + Math.Pow(endY - startY, 2));
-
-            distance = top / bottom;
+            var distance = top / bottom;
 
 
             if (distance < 0)
+            {
                 distance = 0 - distance;
+            }
 
             return distance;
-
         }
 
         public List<Point> GetSimplifiedPoints()
         {
-            return simplifiedPoints;
+            return m_SimplifiedPoints;
         }
     }
 }
