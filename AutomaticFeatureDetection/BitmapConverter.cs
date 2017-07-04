@@ -31,7 +31,8 @@ namespace AutomaticFeatureDetection
 
             var rgbArray = new int[image.Width * image.Height];
 
-            var data = image.LockBits(new Rectangle(startX, startY, image.Width, image.Height), ImageLockMode.ReadOnly, PixelFormat);
+            var data = image.LockBits(new Rectangle(startX, startY, image.Width, image.Height), 
+                                      ImageLockMode.ReadOnly, PixelFormat);
 
             try
             {
