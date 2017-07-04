@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace EdgeDetector
 {
@@ -10,48 +7,35 @@ namespace EdgeDetector
     /// </summary>
     internal class GaussianBlur
     {
-       private int realKernelWidth;
-        private int kernelWidth;
-        private float kernelSigma;
-
-        private float[] kernel, diffKernel;
-
-        #region Properties
-
+        private readonly float[] m_Kernel;
+        private readonly float[] m_DiffKernel;
+        
         /// <summary>
         /// Rounded kernel width
         /// </summary>
-        public int RealKernelWidth
-        {
-            get
-            {
-                return realKernelWidth;
-            }
-        }
-
-        #endregion properties
-
+        public int RealKernelWidth { get; }
+        
         #region Constructor
 
         public GaussianBlur(int kernelWidth, float kernelSigma)
         {
-            this.kernelWidth = kernelWidth;
-            this.kernelSigma = kernelSigma;
+            m_Kernel = new float[kernelWidth];
+            m_DiffKernel = new float[kernelWidth];
 
-            kernel = new float[kernelWidth];
-            diffKernel = new float[kernelWidth];
-
-            for (realKernelWidth = 0; realKernelWidth < kernelWidth; realKernelWidth++)
+            for (RealKernelWidth = 0; RealKernelWidth < kernelWidth; RealKernelWidth++)
             {
-                float g1 = Gaussian(realKernelWidth, kernelSigma);
+                var g1 = Gaussian(RealKernelWidth, kernelSigma);
 
-                if (g1 <= 0.005 && realKernelWidth >= 2) break;
+                if (g1 <= 0.005 && RealKernelWidth >= 2) break;
 
-                float g2 = Gaussian(realKernelWidth - 0.5f, kernelSigma);
-                float g3 = Gaussian(realKernelWidth + 0.5f, kernelSigma);
+                var g2 = Gaussian(RealKernelWidth - 0.5f, kernelSigma);
+                var g3 = Gaussian(RealKernelWidth + 0.5f, kernelSigma);
 
-                kernel[realKernelWidth] = (g1 + g2 + g3) / 3f / (2f * (float)Math.PI * kernelSigma * kernelSigma);
-                diffKernel[realKernelWidth] = g3 - g2;
+                m_Kernel[RealKernelWidth] = (g1 + g2 + g3) 
+                                            / 3f 
+                                            / (2f * (float)Math.PI * kernelSigma * kernelSigma);
+
+                m_DiffKernel[RealKernelWidth] = g3 - g2;
             }
         }
 
@@ -63,9 +47,9 @@ namespace EdgeDetector
         /// <param name="position">The position in the kernel</param>
         /// <param name="sigma">The sigma value of the kernel</param>
         /// <returns>The value at the given position</returns>
-        private float Gaussian(float position, float sigma)
+        private static float Gaussian(float position, float sigma)
         {
-            float gaussianValue = (float)Math.Exp(-(position * position) / (2f * sigma * sigma));
+            var gaussianValue = (float)Math.Exp(-(position * position) / (2f * sigma * sigma));
 
             return gaussianValue;
         }
@@ -74,12 +58,12 @@ namespace EdgeDetector
 
         public float[] GetGaussianKernel()
         {
-            return kernel;
+            return m_Kernel;
         }
 
         public float[] GetGaussianDiffKernel()
         {
-            return diffKernel;
+            return m_DiffKernel;
         }
 
         #endregion Get methods
