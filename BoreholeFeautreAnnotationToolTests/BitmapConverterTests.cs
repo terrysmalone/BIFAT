@@ -20,7 +20,7 @@ namespace BoreholeFeautreAnnotationToolTests
         {
             Bitmap testImage = Resources.bitmapConverterTestImage;
             
-            int[] bitmapData = BitmapConverter.getRGBFromBitmap(testImage);
+            int[] bitmapData = BitmapConverter.GetRgbFromBitmap(testImage);
 
             Assert.IsTrue(bitmapData.Length == 100, "bitmapData should contain 100 values. It contains " + bitmapData.Length);
 

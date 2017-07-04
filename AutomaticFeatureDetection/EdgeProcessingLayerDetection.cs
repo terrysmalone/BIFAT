@@ -362,7 +362,7 @@ namespace AutomaticFeatureDetection
         /// </summary>
         private void SetUpImageData()
         {
-            imageData = BitmapConverter.getRGBFromBitmap(originalImage);
+            imageData = BitmapConverter.GetRgbFromBitmap(originalImage);
 
             imageHeight = originalImage.Height;
             imageWidth = originalImage.Width;
