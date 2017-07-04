@@ -10,9 +10,9 @@ namespace ActiveContour
     /// </summary>
     public class Snake
     {
-        private const bool TimeTest = false;
-        private const int DrawingTestCounter = 10;
-        private const bool DrawingTest = false;
+        public static bool TimeTest { get; set; } = false;
+        private static int DrawingTestCounter { get; set;} = 10;
+        private static bool DrawingTest { get; set;} = false;
 
         private int m_NumOfIterationsWithoutChange;
 
@@ -94,30 +94,29 @@ namespace ActiveContour
         /// <param name="initialPoints">The initial points</param>
         private void CalculateSignedDistanceMap(List<Point> initialPoints)
         {
-            DateTime setUpStart;
-            DateTime setUpEnd;
-
-            if (TimeTest == true)
-            {
-                setUpStart = DateTime.Now;
-            }
+            var setUpStart = DateTime.Now;
 
             var signedDistanceMap = new SignedDistanceMap(initialPoints, m_ImageWidth, m_ImageHeight);
 
             m_Sdf = signedDistanceMap.GetSignedDistanceMap();
 
-            if (TimeTest == true)
+            if (TimeTest)
             {
-                setUpEnd = DateTime.Now;
+                var setUpEnd = DateTime.Now;
 
                 var timeSpan = setUpEnd.Subtract(setUpStart);
                 var timeDifferenceMilliseconds = timeSpan.Milliseconds;
                 var timeDifferenceSeconds = timeSpan.Seconds;
                 var timeDifferenceMinutes = timeSpan.Minutes;
 
-                string iterationText = "Setup time(mm:ss:mm): " + timeDifferenceMinutes + ":" + timeDifferenceSeconds + ":" + timeDifferenceMilliseconds;
+                var iterationText = "Setup time(mm:ss:mm): " 
+                                    + timeDifferenceMinutes 
+                                    + ":" 
+                                    + timeDifferenceSeconds 
+                                    + ":" 
+                                    + timeDifferenceMilliseconds;
 
-                using (StreamWriter sw = File.AppendText(@"Times.txt"))
+                using (var sw = File.AppendText(@"Times.txt"))
                 {
                     sw.WriteLine();
                     sw.WriteLine(iterationText);
@@ -128,7 +127,7 @@ namespace ActiveContour
 
         public void RunActiveContour()
         {
-            if (TimeTest == true)
+            if (TimeTest)
             {
                 string iterationText = "Iteration - " + m_Counter;
                 //System.IO.File.WriteAllText(@"FitnessTimes.txt", generationText);
@@ -147,7 +146,7 @@ namespace ActiveContour
             {
                 m_Counter++;
 
-                if (TimeTest == true)
+                if (TimeTest)
                 {
                     m_StartTime = DateTime.Now;
                 }
@@ -164,7 +163,7 @@ namespace ActiveContour
 
                 EvolveCurve();
 
-                m_Sdf = SmoothSDF();
+                m_Sdf = SmoothSdf();
 
                 m_CheckStart = DateTime.Now;
 
@@ -187,7 +186,7 @@ namespace ActiveContour
                     DrawThinnedCurve();
                 }
 
-                if (TimeTest == true)
+                if (TimeTest)
                 {
                     m_EndTime = DateTime.Now;
 
@@ -264,15 +263,13 @@ namespace ActiveContour
         /// <returns></returns>
         private int GetBrightnessAt(int xPos, int yPos)
         {
-            int brightness;
-
-            int pixelValue = m_OriginalImage.GetPixel(xPos, yPos).ToArgb();
+            var pixelValue = m_OriginalImage.GetPixel(xPos, yPos).ToArgb();
 
             double r = (pixelValue & 0xff0000) >> 16;
             double g = (pixelValue & 0xff00) >> 8;
             double b = pixelValue & 0xff;
 
-            brightness = CalculateBrightness(r, g, b);
+            var brightness = CalculateBrightness(r, g, b);
 
             return brightness;
         }
@@ -352,20 +349,19 @@ namespace ActiveContour
         {
             m_GradientDescentValues = new double[m_ImageWidth, m_ImageHeight];
 
-            double maximumForce = GetMaximumForce();
+            var maximumForce = GetMaximumForce();
 
             m_MaxGradientDescentValue = 0;
 
-            double currentGradientDescentValue = 0;
-
-            foreach (Point point in m_NarrowBand)
+            
+            foreach (var point in m_NarrowBand)
             {
-                int xPos = point.X;
-                int yPos = point.Y;
+                var xPos = point.X;
+                var yPos = point.Y;
 
-                double force = m_ImageForce[xPos, yPos];
+                var force = m_ImageForce[xPos, yPos];
 
-                currentGradientDescentValue = (force / maximumForce) + m_AlphaValue + m_CurvaturePenalty[xPos, yPos];
+                var currentGradientDescentValue = (force / maximumForce) + m_AlphaValue + m_CurvaturePenalty[xPos, yPos];
 
                 m_GradientDescentValues[xPos, yPos] = currentGradientDescentValue;
 
@@ -413,7 +409,7 @@ namespace ActiveContour
             }
         }
 
-        private double[,] SmoothSDF()
+        private double[,] SmoothSdf()
         {
             double[,] smootheSdf = new double[m_ImageWidth, m_ImageHeight];
 
@@ -766,19 +762,17 @@ namespace ActiveContour
         /// </summary>
         private void CalculateCurvePoints()
         {
-            List<Point> allPoints = new List<Point>();
-
-            ExtractLine extractLine = new ExtractLine(m_FinalCurve);
+            var extractLine = new ExtractLine(m_FinalCurve);
             extractLine.Extract();
 
-            allPoints = extractLine.GetLine();
+            var allPoints = extractLine.GetLine();
 
             if(DrawingTest)
                 DrawPoints(allPoints);
 
             if (allPoints.Count > 0)
             {
-                SimplifyShape simplifyShape = new SimplifyShape(allPoints, m_SimplifyTolerance);
+                var simplifyShape = new SimplifyShape(allPoints, m_SimplifyTolerance);
 
                 simplifyShape.Simplify();
 
@@ -834,11 +828,10 @@ namespace ActiveContour
 
         private bool CheckIfPointIsNorth(int xPoint, int yPoint)
         {
-            if (yPoint > 0)
-            {
-                if (m_FinalCurve[xPoint, yPoint - 1] == true && m_CheckedPoints[xPoint, yPoint - 1] == false)
-                    return true;
-            }
+            if (yPoint <= 0) return false;
+
+            if (m_FinalCurve[xPoint, yPoint - 1] == true && m_CheckedPoints[xPoint, yPoint - 1] == false)
+                return true;
 
             return false;
         }
@@ -940,12 +933,12 @@ namespace ActiveContour
 
         public void SetNarrowBandSize(int narrowBandSize)
         {
-            this.m_NarrowBandSize = narrowBandSize;
+            m_NarrowBandSize = narrowBandSize;
         }
 
         public void SetSimplifyTolerance(int simplifyTolerance)
         {
-            this.m_SimplifyTolerance = simplifyTolerance;
+            m_SimplifyTolerance = simplifyTolerance;
         }
 
         /// <summary>
@@ -975,9 +968,9 @@ namespace ActiveContour
         {
             if (m_Counter % 10 == 0)
             {
-                Bitmap image = new Bitmap(m_OriginalImage);
+                var image = new Bitmap(m_OriginalImage);
 
-                foreach (Point point in m_NarrowBand)
+                foreach (var point in m_NarrowBand)
                 {
                     image.SetPixel(point.X, point.Y, Color.LawnGreen);
                 }
