@@ -49,8 +49,6 @@ namespace Edges
             {
                 m_TriangleNotPossible = true;
             }
-
-            
         }
 
         private Point CalculateThirdPoint(Point point1, 
@@ -58,8 +56,6 @@ namespace Edges
                                           Point point2, 
                                           int point2Direction)
         {
-            m_PointOfIntersection = new Point(1,1);
-
             var calculateLine1 = new CalculateLineEquation(point1, point1Direction);
 
             var line1Slope = calculateLine1.Slope;
