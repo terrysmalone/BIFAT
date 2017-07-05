@@ -1,94 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
-    public class TriangleAreaTest
+    internal sealed class TriangleAreaTest
     {
-        private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
+        private string m_TestRootFolder = AppDomain.CurrentDomain.BaseDirectory;
 
-        [TestMethod]
-        public void TestTriangleArea()
+        public double Tolerance = 0.00000000000000001;
+
+        [TestCase(15, 20, 0, 45, 10, 135, 200)]     //Vertical
+        [TestCase(5, 5, 45, 35, 5, 135, 225)]       //Horizontal
+        public void TestTriangleArea(int x1, int y1, int direction1, 
+                                     int x2, int y2, int direction2,
+                                     int expectedArea)
         {
-            Point point1 = new Point(5, 5);
-            Point point2 = new Point(35, 5);
+            var point1 = new Point(x1, y1);
+            var point2 = new Point(x2, y2);
 
-            int point1Direction = 45;
-            int point2Direction = 135;
+            var point1Direction = direction1;
+            var point2Direction = direction2;
 
-            TriangleArea triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
+            var triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
             triangleArea.CalculateArea();
 
-            Assert.IsTrue(triangleArea.GetArea() == 225, "The area of the triangle should be 225. It is " + triangleArea.GetArea());
+            Assert.That(triangleArea.GetArea(), Is.EqualTo(expectedArea));
         }
 
-        [TestMethod]
-        public void TestVerticalLineTriangleArea()
+        [TestCase(15, 20, 45, 45, 10, 225)]
+        [TestCase(15, 20, 45, 45, 10, 45)]  //Matching slopes
+        public void TestTriangleNotPossible(int x1, int y1, int direction1, 
+                                            int x2, int y2, int direction2)
         {
-            Point point1 = new Point(5, 5);
-            Point point2 = new Point(35, 5);
+            var point1 = new Point(x1, y1);
+            var point2 = new Point(x2, y2);
 
-            int point1Direction = 45;
-            int point2Direction = 135;
+            var point1Direction = direction1;
+            var point2Direction = direction2;
 
-            TriangleArea triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
+            var triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
             triangleArea.CalculateArea();
 
-            Assert.IsTrue(triangleArea.GetArea() == 225, "The area of the triangle should be 225. It is " + triangleArea.GetArea());
-        }
-
-        [TestMethod]
-        public void TestHorizontalLineTriangleArea()
-        {
-            Point point1 = new Point(15, 20);
-            Point point2 = new Point(45, 10);
-
-            int point1Direction = 0;
-            int point2Direction = 135;
-
-            TriangleArea triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
-            triangleArea.CalculateArea();
-
-            Assert.IsTrue(triangleArea.GetArea() == 200, "The area of the triangle should be 200. It is " + triangleArea.GetArea());
-        }
-
-        [TestMethod]
-        public void TestTriangleNotPossible()
-        {
-            Point point1 = new Point(15, 20);
-            Point point2 = new Point(45, 10);
-
-            int point1Direction = 45;
-            int point2Direction = 225;
-
-            TriangleArea triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
-            triangleArea.CalculateArea();
-
-            Assert.IsTrue(triangleArea.GetTriangleNotPossible() == true, "Triangle should not be possible.");
-        }
-
-        [TestMethod]
-        public void TestTriangleNotPossibleWithMatchingSlopes()
-        {
-            Point point1 = new Point(15, 20);
-            Point point2 = new Point(45, 10);
-
-            int point1Direction = 45;
-            int point2Direction = 45;
-
-            TriangleArea triangleArea = new TriangleArea(point1, point1Direction, point2, point2Direction);
-            triangleArea.CalculateArea();
-
-            Assert.IsTrue(triangleArea.GetTriangleNotPossible() == true, "Triangle should not be possible.");
-        }       
+            Assert.IsTrue(triangleArea.GetTriangleNotPossible());
+        }   
     }
 }
 
