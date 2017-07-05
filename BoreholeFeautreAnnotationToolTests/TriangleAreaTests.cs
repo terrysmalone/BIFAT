@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using Edges;
 using NUnit.Framework;
 
@@ -7,8 +6,6 @@ namespace BoreholeFeautreAnnotationToolTests
 {
     internal sealed class TriangleAreaTest
     {
-        private string m_TestRootFolder = AppDomain.CurrentDomain.BaseDirectory;
-
         public double Tolerance = 0.00000000000000001;
 
         [TestCase(15, 20, 0, 45, 10, 135, 200)]     //Vertical
