@@ -55,7 +55,7 @@
     <Compile Include="Layer.cs" />
     <Compile Include="LayerLine.cs" />
     <Compile Include="LayerTypeSelector.cs" />
-    <Compile Include="MeasurementTranslator.cs" />
+    <Compile Include="DepthMeasurementHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QualityConverter.cs" />
     <Compile Include="SineWave.cs" />
