@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using EdgeFitting;
 
 namespace AutomaticFeatureDetection
@@ -16,12 +14,22 @@ namespace AutomaticFeatureDetection
     {
         public int Compare(Sine one, Sine two)
         {
+            if (one == null) { throw new ArgumentNullException(nameof(one)); }
+
+            if (two == null) { throw new ArgumentNullException(nameof(one)); }
+
             if (one.Depth < two.Depth)
+            {
                 return -1;
+            }
             else if (one.Depth > two.Depth)
+            {
                 return 1;
+            }
             else
+            {
                 return 0;
+            }
         }
     }
 }
