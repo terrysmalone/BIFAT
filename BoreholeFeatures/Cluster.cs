@@ -297,7 +297,7 @@ namespace BoreholeFeatures
             CalculateStartDepthInMm();
             CalculateEndDepthInMm();
 
-            for (int i = 1; i < Points.Count; i++)
+            for (var i = 1; i < Points.Count; i++)
             {
                 if (Points[i].Y > BottomYBoundary)
                 {
