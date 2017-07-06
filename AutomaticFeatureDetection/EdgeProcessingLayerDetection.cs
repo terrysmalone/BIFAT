@@ -145,26 +145,30 @@ namespace AutomaticFeatureDetection
                 //Layer detection
                 if (DisableLayerDetection == false)
                 {
-                    DetectLayers detectLayers = new DetectLayers(m_DetectedFitSines, m_OriginalImage, DepthResolution);
-
-                    detectLayers.LayerBrightnessSensitivity = LayerSensitivity;
+                    var detectLayers = 
+                        new DetectLayers(m_DetectedFitSines, m_OriginalImage, DepthResolution)
+                        {
+                            LayerBrightnessSensitivity = LayerSensitivity
+                        };
 
                     detectLayers.Run();
 
                     DetectedLayers = detectLayers.DetectedLayers;
-
-                    //detectedLayers.Sort(new LayerDepthComparer());
                 }
                 else
                 {
-                    Layer currentLayerToAdd;
-                    Sine currentSineToAdd;
-
-                    for (int sinePlace = 0; sinePlace < m_DetectedFitSines.Count; sinePlace++)
+                    foreach (var detectedFitSines in m_DetectedFitSines)
                     {
-                        currentSineToAdd = m_DetectedFitSines[sinePlace];
-
-                        currentLayerToAdd = m_LayerTypeSelector.setUpLayer(currentSineToAdd.Depth + StartHeight, currentSineToAdd.Amplitude, currentSineToAdd.Azimuth, currentSineToAdd.Depth + StartHeight, currentSineToAdd.Amplitude, currentSineToAdd.Azimuth, m_AzimuthResolution, DepthResolution);
+                        var currentLayerToAdd = m_LayerTypeSelector.setUpLayer(detectedFitSines.Depth 
+                                                                               + StartHeight, 
+                                                                               detectedFitSines.Amplitude, 
+                                                                               detectedFitSines.Azimuth, 
+                                                                               detectedFitSines.Depth 
+                                                                               + StartHeight, 
+                                                                               detectedFitSines.Amplitude, 
+                                                                               detectedFitSines.Azimuth, 
+                                                                               m_AzimuthResolution, 
+                                                                               DepthResolution);
 
                         DetectedLayers.Add(currentLayerToAdd);
                     }
@@ -183,24 +187,28 @@ namespace AutomaticFeatureDetection
                 //Layer detection
                 if (DisableLayerDetection == false)
                 {
-                    DetectLayers detectLayers = new DetectLayers(m_DetectedFitLines, m_OriginalImage, DepthResolution);
-
-                    detectLayers.LayerBrightnessSensitivity = LayerSensitivity;
-
+                    DetectLayers detectLayers =
+                        new DetectLayers(m_DetectedFitLines, m_OriginalImage, DepthResolution)
+                        {
+                            LayerBrightnessSensitivity = LayerSensitivity
+                        };
+                    
                     detectLayers.Run();
 
                     DetectedLayers = detectLayers.DetectedLayers;
                 }
                 else
                 {
-                    Layer currentLayerToAdd;
-                    EdgeLine currentLineToAdd;
-
-                    for (int linePlace = 0; linePlace < m_DetectedFitLines.Count; linePlace++)
+                    foreach (var detectedFitLines in m_DetectedFitLines)
                     {
-                        currentLineToAdd = m_DetectedFitLines[linePlace];
-
-                        currentLayerToAdd = m_LayerTypeSelector.setUpLayer(currentLineToAdd.Slope, currentLineToAdd.Intercept + StartHeight, currentLineToAdd.Slope, currentLineToAdd.Intercept + StartHeight, m_AzimuthResolution, DepthResolution);
+                        var currentLayerToAdd = m_LayerTypeSelector.setUpLayer(detectedFitLines.Slope, 
+                                                                               detectedFitLines.Intercept 
+                                                                                  + StartHeight, 
+                                                                               detectedFitLines.Slope, 
+                                                                               detectedFitLines.Intercept 
+                                                                                  + StartHeight, 
+                                                                               m_AzimuthResolution, 
+                                                                               DepthResolution);
 
                         DetectedLayers.Add(currentLayerToAdd);
                     }
@@ -210,38 +218,44 @@ namespace AutomaticFeatureDetection
 
         private bool[] PerformCannyEdgeDetection()
         {
-            CannyDetector detector = new CannyDetector(m_ImageData, m_ImageWidth, m_ImageHeight);
-
-            detector.WrapHorizontally = true;
-            detector.WrapVertically = true;
-
-            detector.LowThreshold = CannyLow;
-            detector.HighThreshold = CannyHigh;
-            detector.GaussianWidth = GaussianWidth;
-            detector.GaussianSigma = GaussianAngle;
-
-            detector.HorizontalWeight = HorizontalWeight;
-            detector.VerticalWeight = VerticalWeight;
+            CannyDetector detector =
+                new CannyDetector(m_ImageData, m_ImageWidth, m_ImageHeight)
+                {
+                    WrapHorizontally = true,
+                    WrapVertically = true,
+                    LowThreshold = CannyLow,
+                    HighThreshold = CannyHigh,
+                    GaussianWidth = GaussianWidth,
+                    GaussianSigma = GaussianAngle,
+                    HorizontalWeight = HorizontalWeight,
+                    VerticalWeight = VerticalWeight
+                };
 
             detector.DetectEdges();
 
-            bool[] edgeData = detector.GetEdgeData();
+            var edgeData = detector.GetEdgeData();
 
             if (DrawTestImages)
             {
-                DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Bool");
-                DrawEdgesImage drawImage = factory.setUpDrawEdges(edgeData, m_ImageWidth, m_ImageHeight);
+                var factory = new DrawEdgesImageFactory("Bool");
+                var drawImage = factory.setUpDrawEdges(edgeData, m_ImageWidth, m_ImageHeight);
 
                 drawImage.setBackgroundColour(TestDrawingBackgroundColour);
                 drawImage.setEdgeColour(TestDrawingEdgeColour);
                 drawImage.SetDrawMultiColouredEdges(TestDrawMultiColouredEdges);
 
                 drawImage.drawEdgesImage();
-                drawImage.getDrawnEdges().Save("01a - Canny(" + detector.LowThreshold + "," + detector.HighThreshold + "," + detector.GaussianWidth + ", " + (int)detector.GaussianSigma + ").bmp");
+                drawImage.getDrawnEdges().Save($"01a - Canny({detector.LowThreshold}" +
+                                               $",{detector.HighThreshold}" +
+                                               $",{detector.GaussianWidth}" +
+                                               $",{(int)detector.GaussianSigma}.bmp");
 
                 drawImage.setEdgeColour(TestDrawingOverBackgroundColour);
                 drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
-                drawImage.getDrawnEdges().Save("01b - Canny over original(" + detector.LowThreshold + "," + detector.HighThreshold + "," + detector.GaussianWidth + ", " + (int)detector.GaussianSigma + ").bmp");
+                drawImage.getDrawnEdges().Save($"01b - Canny over original({detector.LowThreshold}" +
+                                               $",{detector.HighThreshold}" +
+                                               $",{detector.GaussianWidth}" +
+                                               $",{(int)detector.GaussianSigma}.bmp");
             }
 
             return edgeData;
@@ -249,7 +263,7 @@ namespace AutomaticFeatureDetection
 
         private List<Edge> PerformEdgeOperations(bool[] cannyData)
         {
-            EdgeOperations performEdgeOperations =
+            var performEdgeOperations =
                 new EdgeOperations(cannyData, m_ImageWidth, m_ImageHeight)
                 {
                     DrawTestImages = DrawTestImages,
@@ -277,13 +291,16 @@ namespace AutomaticFeatureDetection
 
         private List<Sine> PerformSineFitting()
         {
-            EdgeFit edgeFitting = new EdgeFit(m_FoundEdges, m_ImageWidth, m_ImageHeight);
-            edgeFitting.ImageType = "Borehole";
+            var edgeFitting = 
+                new EdgeFit(m_FoundEdges, m_ImageWidth, m_ImageHeight)
+                {
+                    ImageType = "Borehole"
+                };
 
             //edgeFitting.MaxAmplitude = maxSineAmplitude;
             edgeFitting.FitEdges();
 
-            List<Sine> sines = edgeFitting.FitSines;
+            var sines = edgeFitting.FitSines;
 
             sines.Sort(new SineDepthComparer());
 
@@ -292,13 +309,15 @@ namespace AutomaticFeatureDetection
 
         private List<EdgeLine> PerformLineFitting()
         {
-            EdgeFit edgeFitting = new EdgeFit(m_FoundEdges, m_ImageWidth, m_ImageHeight);
-            edgeFitting.ImageType = "Core";
-
-            edgeFitting.MaxAmplitude = MaxSineAmplitude;
+            var edgeFitting = new EdgeFit(m_FoundEdges, m_ImageWidth, m_ImageHeight)
+            {
+                ImageType = "Core",
+                MaxAmplitude = MaxSineAmplitude
+            };
+            
             edgeFitting.FitEdges();
 
-            List<EdgeLine> lines = edgeFitting.FitLines;
+            var lines = edgeFitting.FitLines;
 
             lines.Sort(new LineDepthComparer());
 
