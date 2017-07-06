@@ -18,21 +18,6 @@ namespace AutomaticFeatureDetection
     public class EdgeProcessingLayerDetection
     {
         //parameters
-        private float m_CannyLowThreshold = 0.01f;
-        private float m_CannyHighThreshold = 0.016f;
-        private int m_GaussianWidth = 20;
-        private int m_GaussianAngle = 6;
-
-        private float m_VerticalWeight, m_HorizontalWeight;
-
-        private int m_EdgeLinkingThreshold = 320;
-        private int m_EdgeLinkingMaxNeighbourDistance = 5;
-        private int m_EdgeRemovalThreshold = 320;
-        private int m_EdgeJoiningThreshold = 20;
-
-        private int m_LayerSensitivity = 1;
-
-        private int m_MaxSineAmplitude = 100;
 
         //Data
         private int m_ImageWidth;
@@ -40,302 +25,69 @@ namespace AutomaticFeatureDetection
 
         private int[] m_ImageData;
 
-        private int m_DepthResolution;
-
         private readonly int m_AzimuthResolution;
         
         private readonly Bitmap m_OriginalImage;
         private List<Edge> m_FoundEdges = new List<Edge>();
-        private List<Edge> m_EdgesBeforeOperations = new List<Edge>();
-        private readonly List<Edge> m_EdgesAfterSineFitting = new List<Edge>();
+        //private List<Edge> m_EdgesBeforeOperations = new List<Edge>();
+        //private readonly List<Edge> m_EdgesAfterSineFitting = new List<Edge>();
 
         private List<Sine> m_DetectedFitSines = new List<Sine>();
         private List<EdgeLine> m_DetectedFitLines = new List<EdgeLine>();
         
         //Detected features
-        private List<Layer> m_DetectedLayers = new List<Layer>();
-
-        private readonly int m_StartHeight;
-
-        private bool m_DrawTestImages;
-
-        private Color m_TestDrawingBackgroundColour;
-        private Color m_TestDrawingEdgeColour;
-        private Color m_TestDrawingOverBackgroundColour;
 
         private readonly LayerTypeSelector m_LayerTypeSelector = new LayerTypeSelector("Borehole");
-        
-        private bool m_DisableLayerDetection;
 
-        private string m_ImageType = "Borehole";
-
-
-        private bool m_DrawMultiColouredEdges;
 
         # region properties
-
-        public List<Layer> DetectedLayers
-        {
-            get
-            {
-                return m_DetectedLayers;
-            }
-        }
-
-        # region Edge detection parameters
-
-        public int StartHeight
-        {
-            get
-            {
-                return m_StartHeight;
-            }
-        }
-
-        public float CannyLow
-        {
-            get
-            {
-                return m_CannyLowThreshold;
-            }
-            set
-            {
-                m_CannyLowThreshold = value;
-            }
-        }
-
-        public float CannyHigh
-        {
-            get
-            {
-                return m_CannyHighThreshold;
-            }
-            set
-            {
-                m_CannyHighThreshold = value;
-            }
-        }
-
-        public int GaussianWidth
-        {
-            get
-            {
-                return m_GaussianWidth;
-            }
-            set
-            {
-                m_GaussianWidth = value;
-            }
-        }
-
-        public int GaussianAngle
-        {
-            get
-            {
-                return m_GaussianAngle;
-            }
-            set
-            {
-                m_GaussianAngle = value;
-            }
-        }
-
-        public float VerticalWeight
-        {
-            get
-            {
-                return m_VerticalWeight;
-            }
-            set
-            {
-                m_VerticalWeight = value;
-            }
-        }
-
-        public float HorizontalWeight
-        {
-            get
-            {
-                return m_HorizontalWeight;
-            }
-            set
-            {
-                m_HorizontalWeight = value;
-            }
-        }
-
-        public int EdgeLinkingThreshold
-        {
-            get
-            {
-                return m_EdgeLinkingThreshold;
-            }
-            set
-            {
-                m_EdgeLinkingThreshold = value;
-            }
-        }
-
-        public int EdgeLinkingDistance
-        {
-            get
-            {
-                return m_EdgeLinkingMaxNeighbourDistance;
-            }
-            set
-            {
-                m_EdgeLinkingMaxNeighbourDistance = value;
-            }
-        }
-
-        public int RemoveEdgeThreshold
-        {
-            get
-            {
-                return m_EdgeRemovalThreshold;
-            }
-            set
-            {
-                m_EdgeRemovalThreshold = value;
-            }
-        }
-
-        public int JoinEdgeThreshold
-        {
-            get
-            {
-                return m_EdgeJoiningThreshold;
-            }
-            set
-            {
-                m_EdgeJoiningThreshold = value;
-            }
-        }
-
-        public int LayerSensitivity
-        {
-            get
-            {
-                return m_LayerSensitivity;
-            }
-            set
-            {
-                m_LayerSensitivity = value;
-            }
-        }
-
-        public bool DisableLayerDetection
-        {
-            get
-            {
-                return m_DisableLayerDetection;
-            }
-            set
-            {
-                m_DisableLayerDetection = value;
-            }
-        }
-
-        public int MaxSineAmplitude
-        {
-            get
-            {
-                return m_MaxSineAmplitude;
-            }
-            set
-            {
-                m_MaxSineAmplitude = value;
-            }
-        }
         
-        # endregion
+        public List<Layer> DetectedLayers { get; private set; } = new List<Layer>();
+        
+        public int StartHeight { get; }
 
-        public string ImageType
-        {
-            get
-            {
-                return m_ImageType;
-            }
-            set
-            {
-                m_ImageType = value;
-            }
-        }
+        public float CannyLow { get; set; } = 0.01f;
 
-        public int DepthResolution
-        {
-            get
-            {
-                return m_DepthResolution;
-            }
-            set
-            {
-                m_DepthResolution = value;
-            }
-        }
+        public float CannyHigh { get; set; } = 0.016f;
+
+        public int GaussianWidth { get; set; } = 20;
+
+        public int GaussianAngle { get; set; } = 6;
+
+        public float VerticalWeight { get; set; }
+
+        public float HorizontalWeight { get; set; }
+
+        public int EdgeLinkingThreshold { get; set; } = 320;
+
+        public int EdgeLinkingDistance { get; set; } = 5;
+
+        public int RemoveEdgeThreshold { get; set; } = 320;
+
+        public int JoinEdgeThreshold { get; set; } = 20;
+
+        public int LayerSensitivity { get; set; } = 1;
+
+        public bool DisableLayerDetection { get; set; }
+
+        public int MaxSineAmplitude { get; set; } = 100;
+        
+        public string ImageType { get; set; } = "Borehole";
+
+        public int DepthResolution { get; set; }
 
         # region Test properties
 
-        public bool DrawTestImages
-        {
-            get
-            {
-                return m_DrawTestImages;
-            }
-            set
-            {
-                m_DrawTestImages = value;
-            }
-        }
+        public bool DrawTestImages { get; set; }
 
-        public Color TestDrawingBackgroundColour
-        {
-            get
-            {
-                return m_TestDrawingBackgroundColour;
-            }
-            set
-            {
-                m_TestDrawingBackgroundColour = value;
-            }
-        }
+        public Color TestDrawingBackgroundColour { get; set; }
 
-        public Color TestDrawingEdgeColour
-        {
-            get
-            {
-                return m_TestDrawingEdgeColour;
-            }
-            set
-            {
-                m_TestDrawingEdgeColour = value;
-            }
-        }
+        public Color TestDrawingEdgeColour { get; set; }
 
-        public Color TestDrawingOverBackgroundColour
-        {
-            get
-            {
-                return m_TestDrawingOverBackgroundColour;
-            }
-            set
-            {
-                m_TestDrawingOverBackgroundColour = value;
-            }
-        }
+        public Color TestDrawingOverBackgroundColour { get; set; }
 
-        public bool TestDrawMultiColouredEdges
-        {
-            get
-            {
-                return m_DrawMultiColouredEdges;
-            }
-            set
-            {
-                m_DrawMultiColouredEdges = value;
-            }
-        }
-        
+        public bool TestDrawMultiColouredEdges { get; set; }
+
         # endregion
 
         # endregion
@@ -348,11 +100,11 @@ namespace AutomaticFeatureDetection
             var initializeTime = DateTime.Now;
             Console.WriteLine("Initialising at: " + initializeTime);
 
-            this.m_OriginalImage = originalImage;
-            this.m_StartHeight = startHeight;
+            m_OriginalImage = originalImage;
+            StartHeight = startHeight;
 
             m_AzimuthResolution = originalImage.Width;
-            m_DepthResolution = 1;
+            DepthResolution = 1;
 
             SetUpImageData();
 
@@ -380,26 +132,26 @@ namespace AutomaticFeatureDetection
 
             m_FoundEdges = PerformEdgeOperations(cannyData);
 
-            if (m_ImageType == "Borehole")
+            if (ImageType == "Borehole")
             {
                 m_DetectedFitSines = PerformSineFitting();
 
-                if (m_DrawTestImages)
+                if (DrawTestImages)
                 {
                     DrawSinesImage drawSines = new DrawSinesImage(m_OriginalImage, m_DetectedFitSines);
                     drawSines.DrawnImage.Save("06 - Image with fit sines.bmp");
                 }
 
                 //Layer detection
-                if (m_DisableLayerDetection == false)
+                if (DisableLayerDetection == false)
                 {
-                    DetectLayers detectLayers = new DetectLayers(m_DetectedFitSines, m_OriginalImage, m_DepthResolution);
+                    DetectLayers detectLayers = new DetectLayers(m_DetectedFitSines, m_OriginalImage, DepthResolution);
 
-                    detectLayers.LayerBrightnessSensitivity = m_LayerSensitivity;
+                    detectLayers.LayerBrightnessSensitivity = LayerSensitivity;
 
                     detectLayers.Run();
 
-                    m_DetectedLayers = detectLayers.DetectedLayers;
+                    DetectedLayers = detectLayers.DetectedLayers;
 
                     //detectedLayers.Sort(new LayerDepthComparer());
                 }
@@ -412,9 +164,9 @@ namespace AutomaticFeatureDetection
                     {
                         currentSineToAdd = m_DetectedFitSines[sinePlace];
 
-                        currentLayerToAdd = m_LayerTypeSelector.setUpLayer(currentSineToAdd.Depth + m_StartHeight, currentSineToAdd.Amplitude, currentSineToAdd.Azimuth, currentSineToAdd.Depth + m_StartHeight, currentSineToAdd.Amplitude, currentSineToAdd.Azimuth, m_AzimuthResolution, m_DepthResolution);
+                        currentLayerToAdd = m_LayerTypeSelector.setUpLayer(currentSineToAdd.Depth + StartHeight, currentSineToAdd.Amplitude, currentSineToAdd.Azimuth, currentSineToAdd.Depth + StartHeight, currentSineToAdd.Amplitude, currentSineToAdd.Azimuth, m_AzimuthResolution, DepthResolution);
 
-                        m_DetectedLayers.Add(currentLayerToAdd);
+                        DetectedLayers.Add(currentLayerToAdd);
                     }
                 }
             }
@@ -422,22 +174,22 @@ namespace AutomaticFeatureDetection
             {
                 m_DetectedFitLines = PerformLineFitting();
 
-                if (m_DrawTestImages)
+                if (DrawTestImages)
                 {
                     DrawSinesImage drawSines = new DrawSinesImage(m_OriginalImage, m_DetectedFitSines);
                     drawSines.DrawnImage.Save("06 - Image with fit sines.bmp");
                 }
 
                 //Layer detection
-                if (m_DisableLayerDetection == false)
+                if (DisableLayerDetection == false)
                 {
-                    DetectLayers detectLayers = new DetectLayers(m_DetectedFitLines, m_OriginalImage, m_DepthResolution);
+                    DetectLayers detectLayers = new DetectLayers(m_DetectedFitLines, m_OriginalImage, DepthResolution);
 
-                    detectLayers.LayerBrightnessSensitivity = m_LayerSensitivity;
+                    detectLayers.LayerBrightnessSensitivity = LayerSensitivity;
 
                     detectLayers.Run();
 
-                    m_DetectedLayers = detectLayers.DetectedLayers;
+                    DetectedLayers = detectLayers.DetectedLayers;
                 }
                 else
                 {
@@ -448,9 +200,9 @@ namespace AutomaticFeatureDetection
                     {
                         currentLineToAdd = m_DetectedFitLines[linePlace];
 
-                        currentLayerToAdd = m_LayerTypeSelector.setUpLayer(currentLineToAdd.Slope, currentLineToAdd.Intercept + m_StartHeight, currentLineToAdd.Slope, currentLineToAdd.Intercept + m_StartHeight, m_AzimuthResolution, m_DepthResolution);
+                        currentLayerToAdd = m_LayerTypeSelector.setUpLayer(currentLineToAdd.Slope, currentLineToAdd.Intercept + StartHeight, currentLineToAdd.Slope, currentLineToAdd.Intercept + StartHeight, m_AzimuthResolution, DepthResolution);
 
-                        m_DetectedLayers.Add(currentLayerToAdd);
+                        DetectedLayers.Add(currentLayerToAdd);
                     }
                 }
             }
@@ -463,31 +215,31 @@ namespace AutomaticFeatureDetection
             detector.WrapHorizontally = true;
             detector.WrapVertically = true;
 
-            detector.LowThreshold = m_CannyLowThreshold;
-            detector.HighThreshold = m_CannyHighThreshold;
-            detector.GaussianWidth = m_GaussianWidth;
-            detector.GaussianSigma = m_GaussianAngle;
+            detector.LowThreshold = CannyLow;
+            detector.HighThreshold = CannyHigh;
+            detector.GaussianWidth = GaussianWidth;
+            detector.GaussianSigma = GaussianAngle;
 
-            detector.HorizontalWeight = m_HorizontalWeight;
-            detector.VerticalWeight = m_VerticalWeight;
+            detector.HorizontalWeight = HorizontalWeight;
+            detector.VerticalWeight = VerticalWeight;
 
             detector.DetectEdges();
 
             bool[] edgeData = detector.GetEdgeData();
 
-            if (m_DrawTestImages)
+            if (DrawTestImages)
             {
                 DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Bool");
                 DrawEdgesImage drawImage = factory.setUpDrawEdges(edgeData, m_ImageWidth, m_ImageHeight);
 
-                drawImage.setBackgroundColour(m_TestDrawingBackgroundColour);
-                drawImage.setEdgeColour(m_TestDrawingEdgeColour);
-                drawImage.SetDrawMultiColouredEdges(m_DrawMultiColouredEdges);
+                drawImage.setBackgroundColour(TestDrawingBackgroundColour);
+                drawImage.setEdgeColour(TestDrawingEdgeColour);
+                drawImage.SetDrawMultiColouredEdges(TestDrawMultiColouredEdges);
 
                 drawImage.drawEdgesImage();
                 drawImage.getDrawnEdges().Save("01a - Canny(" + detector.LowThreshold + "," + detector.HighThreshold + "," + detector.GaussianWidth + ", " + (int)detector.GaussianSigma + ").bmp");
 
-                drawImage.setEdgeColour(m_TestDrawingOverBackgroundColour);
+                drawImage.setEdgeColour(TestDrawingOverBackgroundColour);
                 drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
                 drawImage.getDrawnEdges().Save("01b - Canny over original(" + detector.LowThreshold + "," + detector.HighThreshold + "," + detector.GaussianWidth + ", " + (int)detector.GaussianSigma + ").bmp");
             }
@@ -497,29 +249,28 @@ namespace AutomaticFeatureDetection
 
         private List<Edge> PerformEdgeOperations(bool[] cannyData)
         {
-            List<Edge> foundEdges = new List<Edge>();
+            EdgeOperations performEdgeOperations =
+                new EdgeOperations(cannyData, m_ImageWidth, m_ImageHeight)
+                {
+                    DrawTestImages = DrawTestImages,
+                    EdgeLinkingThreshold = EdgeLinkingThreshold,
+                    EdgeLinkingDistance = EdgeLinkingDistance,
+                    EdgeRemovalThreshold = RemoveEdgeThreshold,
+                    EdgeJoiningThreshold = JoinEdgeThreshold,
+                    TestDrawingBackgroundColour = TestDrawingBackgroundColour,
+                    TestDrawingEdgeColour = TestDrawingEdgeColour,
+                    TestDrawingOverBackgroundColour = TestDrawingOverBackgroundColour,
+                    TestDrawMultiColouredEdges = TestDrawMultiColouredEdges
+                };
 
-            EdgeOperations performEdgeOperations = new EdgeOperations(cannyData, m_ImageWidth, m_ImageHeight);
-            performEdgeOperations.DrawTestImages = m_DrawTestImages;
-
-            if (m_DrawTestImages)
+            if (DrawTestImages)
                 performEdgeOperations.SetTestImage(m_OriginalImage);
             
-            performEdgeOperations.EdgeLinkingThreshold = m_EdgeLinkingThreshold;
-            performEdgeOperations.EdgeLinkingDistance = m_EdgeLinkingMaxNeighbourDistance;
-
-            performEdgeOperations.EdgeRemovalThreshold = m_EdgeRemovalThreshold;
-            performEdgeOperations.EdgeJoiningThreshold = m_EdgeJoiningThreshold;
-
-            performEdgeOperations.TestDrawingBackgroundColour = m_TestDrawingBackgroundColour;
-            performEdgeOperations.TestDrawingEdgeColour = m_TestDrawingEdgeColour;
-            performEdgeOperations.TestDrawingOverBackgroundColour = m_TestDrawingOverBackgroundColour;
-            performEdgeOperations.TestDrawMultiColouredEdges = m_DrawMultiColouredEdges;
-
             performEdgeOperations.Run();
 
-            foundEdges = performEdgeOperations.FoundEdges;
-            m_EdgesBeforeOperations = performEdgeOperations.EdgesBeforeOperations;
+            var foundEdges = performEdgeOperations.FoundEdges;
+
+            //m_EdgesBeforeOperations = performEdgeOperations.EdgesBeforeOperations;
 
             return foundEdges;
         }
@@ -544,7 +295,7 @@ namespace AutomaticFeatureDetection
             EdgeFit edgeFitting = new EdgeFit(m_FoundEdges, m_ImageWidth, m_ImageHeight);
             edgeFitting.ImageType = "Core";
 
-            edgeFitting.MaxAmplitude = m_MaxSineAmplitude;
+            edgeFitting.MaxAmplitude = MaxSineAmplitude;
             edgeFitting.FitEdges();
 
             List<EdgeLine> lines = edgeFitting.FitLines;
@@ -554,63 +305,63 @@ namespace AutomaticFeatureDetection
             return lines;
         }
 
-        private void deleteSinesFromEdgeData()
-        {
-            if (m_DrawTestImages)
-            {
-                DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Edge");
-                DrawEdgesImage drawImage = factory.setUpDrawEdges(m_EdgesBeforeOperations, m_ImageWidth, m_ImageHeight);
+        //private void DeleteSinesFromEdgeData()
+        //{
+        //    if (m_DrawTestImages)
+        //    {
+        //        var factory = new DrawEdgesImageFactory("Edge");
+        //        var drawImage = factory.setUpDrawEdges(m_EdgesBeforeOperations, m_ImageWidth, m_ImageHeight);
 
-                drawImage.setBackgroundColour(m_TestDrawingBackgroundColour);
-                drawImage.setEdgeColour(m_TestDrawingEdgeColour);
-                drawImage.SetDrawMultiColouredEdges(m_DrawMultiColouredEdges);
+        //        drawImage.setBackgroundColour(m_TestDrawingBackgroundColour);
+        //        drawImage.setEdgeColour(m_TestDrawingEdgeColour);
+        //        drawImage.SetDrawMultiColouredEdges(m_DrawMultiColouredEdges);
 
-                drawImage.drawEdgesImage();
-                drawImage.getDrawnEdges().Save("07a - All edges before operations.bmp");
+        //        drawImage.drawEdgesImage();
+        //        drawImage.getDrawnEdges().Save("07a - All edges before operations.bmp");
 
-                drawImage.setEdgeColour(m_TestDrawingOverBackgroundColour);
-                drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
-                drawImage.getDrawnEdges().Save("07b - All edges before operations.bmp");
-            }
+        //        drawImage.setEdgeColour(m_TestDrawingOverBackgroundColour);
+        //        drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
+        //        drawImage.getDrawnEdges().Save("07b - All edges before operations.bmp");
+        //    }
+        //    foreach (var edge in m_EdgesBeforeOperations)
+        //    {
+        //        RemoveIfAlreadyUsed(edge);
+        //    }
 
-            for (int i = 0; i < m_EdgesBeforeOperations.Count; i++)
-            {
-                removeIfAlreadyUsed(m_EdgesBeforeOperations[i]);
-            }
+        //    if (m_DrawTestImages)
+        //    {
+        //        var factory = new DrawEdgesImageFactory("Edge");
+        //        var drawImage = factory.setUpDrawEdges(m_EdgesAfterSineFitting, m_ImageWidth, m_ImageHeight);
 
-            if (m_DrawTestImages)
-            {
-                DrawEdgesImageFactory factory = new DrawEdgesImageFactory("Edge");
-                DrawEdgesImage drawImage = factory.setUpDrawEdges(m_EdgesAfterSineFitting, m_ImageWidth, m_ImageHeight);
+        //        drawImage.setBackgroundColour(m_TestDrawingBackgroundColour);
+        //        drawImage.setEdgeColour(m_TestDrawingEdgeColour);
+        //        drawImage.drawEdgesImage();
+        //        drawImage.getDrawnEdges().Save("08a - Remaining edges after sine removal.bmp");
 
-                drawImage.setBackgroundColour(m_TestDrawingBackgroundColour);
-                drawImage.setEdgeColour(m_TestDrawingEdgeColour);
-                drawImage.drawEdgesImage();
-                drawImage.getDrawnEdges().Save("08a - Remaining edges after sine removal.bmp");
+        //        drawImage.setEdgeColour(m_TestDrawingOverBackgroundColour);
+        //        drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
+        //        drawImage.getDrawnEdges().Save("08b - Remaining edges after sine removal.bmp");
+        //    }
+        //}
 
-                drawImage.setEdgeColour(m_TestDrawingOverBackgroundColour);
-                drawImage.drawEdgesOverBackgroundImage(m_OriginalImage);
-                drawImage.getDrawnEdges().Save("08b - Remaining edges after sine removal.bmp");
-            }
-        }
+        // Checks if this edge is part of any of the Edges used for sinefitting.  If not it keeps the edge
+        //private void RemoveIfAlreadyUsed(Edge edge)
+        //{
+        //    var point = edge.EdgeEnd1;
+        //    var edgeUsed = false;
 
-        /// <summary>
-        /// Checks if this edge is part of any of the Edges used for sinefitting.  If not it keeps the edge
-        /// </summary>
-        /// <param name="point"></param>
-        private void removeIfAlreadyUsed(Edge edge)
-        {
-            Point point = edge.EdgeEnd1;
-            bool edgeUsed = false;
+        //    foreach (var foundEdge in m_FoundEdges)
+        //    {
+        //        if (foundEdge.Points.Contains(point))
+        //        {
+        //            edgeUsed = true;
+        //        }
+        //    }
 
-            for (int i = 0; i < m_FoundEdges.Count; i++)
-            {
-                if (m_FoundEdges[i].Points.Contains(point))
-                    edgeUsed = true;
-            }
-
-            if (edgeUsed == false)
-                m_EdgesAfterSineFitting.Add(edge);
-        }
+        //    if (edgeUsed == false)
+        //    {
+        //        m_EdgesAfterSineFitting.Add(edge);
+        //    }
+        //}
     }
 }
