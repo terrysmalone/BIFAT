@@ -389,7 +389,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top edge intercept (mm)"))
                     {
-                        stream.Write(layers[i].TopEdgeInterceptMM);
+                        stream.Write(layers[i].TopEdgeInterceptMm);
 
                         if (lastItem != "Top edge intercept (mm)")
                             stream.Write(", ");
@@ -405,7 +405,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom edge intercept (mm)"))
                     {
-                        stream.Write(layers[i].BottomEdgeInterceptMM);
+                        stream.Write(layers[i].BottomEdgeInterceptMm);
 
                         if (lastItem != "Bottom edge intercept (mm)")
                             stream.Write(", ");
@@ -728,7 +728,7 @@ namespace FeatureAnnotationTool.Model
         {
             azimuth = (int)((float)azimuth / ((float)azimuthResolution / 360.0f));
 
-            //layers.Add(new Layer(depth, amplitude, azimuth, depth, amplitude, azimuth, azimuthResolution, depthResolution));
+            //layers.Add(new Layer(depth, amplitude, azimuth, depth, amplitude, azimuth, sourceAzimuthResolution, depthResolution));
 
             int insertPosition = CalculateLayerInsertPosition(depth);
 

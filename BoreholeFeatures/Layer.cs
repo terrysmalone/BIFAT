@@ -16,7 +16,7 @@ namespace BoreholeFeatures
     [DefaultPropertyAttribute("Description")]
     public abstract class Layer
     {
-        protected int azimuthResolution, depthResolution;
+        protected int sourceAzimuthResolution, depthResolution;
 
         protected int layerStartY, layerEndY;
         protected int sourceStartDepth, sourceEndDepth;
@@ -50,8 +50,7 @@ namespace BoreholeFeatures
         protected bool layerVoid, clean, smallBubbles, largeBubbles, fineDebris, coarseDebris, diamicton;
 
         protected DateTime timeAdded, timeLastModified;
-
-        protected string group;
+        
         protected string[] allGroupNames;
 
         //private IModel _model;
@@ -64,35 +63,18 @@ namespace BoreholeFeatures
 
         [CategoryAttribute("\t\t\tDepth"), DescriptionAttribute("The layers start depth in millimetres")]
         [DisplayName("\tStart Depth (mm)")]
-        public int StartDepth
-        {
-            get 
-            { 
-                return (int)(((double)layerStartY * (double)depthResolution) + (double)sourceStartDepth); 
-            }
-        }
+        public int StartDepth => (int)(layerStartY * (double)depthResolution + sourceStartDepth);
 
         [CategoryAttribute("\t\t\tDepth"), DescriptionAttribute("The layers end depth in millimetres")]
         [DisplayName("End Depth (mm)")]
-        public int EndDepth
-        {
-            get { return (int)(((double)layerEndY * (double)depthResolution) + (double)sourceStartDepth); }
-
-        }
+        public int EndDepth => (int)((layerEndY * (double)depthResolution) + sourceStartDepth);
 
         [Browsable(true)]
         [DefaultValue("entry1")]
         [CategoryAttribute("\t\t\t\t\tDescription"), DescriptionAttribute("The group this layer belongs to (To change group display colours go to 'Features>Layers>Groups'")]
         [TypeConverter(typeof(LayerGroupConverter))]
-        public string Group
-        {
-            get { return group; }
-            set
-            {                
-                group = value;
-            }
-        }
-
+        public string Group { get; set; }
+        
         [Browsable(true)]
         [DefaultValue("entry1")]
         [CategoryAttribute("\t\t\t\t\tDescription"), DescriptionAttribute("The quality of the layer (1-very poor, 2-poor, 3-good, 4-very good)")]
@@ -337,40 +319,23 @@ namespace BoreholeFeatures
             set { timeLastModified = value; }
         }
 
-        /// <summary>
-        /// The depth resolution (mm per pixel) of the borehole image
-        /// </summary>
+        // The depth resolution (mm per pixel) of the borehole image
         public int SourceDepthResolution
         {
             get { return depthResolution; }
         }
 
-        /// <summary>
-        ///  The azimuth resolution (number of pixels horizontally) of the borehole image
-        /// </summary>
-        public int SourceAzimuthResolution
-        {
-            get { return azimuthResolution; }
-        }
+        //  The azimuth resolution (number of pixels horizontally) of the borehole image
+        public int SourceAzimuthResolution => sourceAzimuthResolution;
 
-        public string GetGroup
-        {
-            get { return group; }
-        }
+        public int TopEdgeInterceptMm => Convert.ToInt32(((double)topEdgeIntercept * (double)depthResolution) + (double)sourceStartDepth);
 
-        public int TopEdgeInterceptMM
-        {
-            get { return System.Convert.ToInt32(((double)topEdgeIntercept * (double)depthResolution) + (double)sourceStartDepth); }
-        }
-
-        public int BottomEdgeInterceptMM
-        {
-            get { return System.Convert.ToInt32(((double)bottomEdgeIntercept * (double)depthResolution) + (double)sourceStartDepth); }
-        }
+        public int BottomEdgeInterceptMm => Convert.ToInt32(((double)bottomEdgeIntercept * (double)depthResolution) + (double)sourceStartDepth);
 
         public int DepthResolution
         {
-            get { return depthResolution; }
+            get => depthResolution;
+
             set
             {
                 depthResolution = value;

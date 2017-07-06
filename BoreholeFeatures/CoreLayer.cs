@@ -8,7 +8,7 @@ using System.ComponentModel;
 namespace BoreholeFeatures
 {
     [DefaultPropertyAttribute("Description")]
-    public class CoreLayer : Layer
+    public sealed class CoreLayer : Layer
     {
         # region Property grid methods
 
@@ -18,7 +18,7 @@ namespace BoreholeFeatures
         {
             get
             {
-                return TopEdgeInterceptMM;
+                return TopEdgeInterceptMm;
             }
 
         }
@@ -40,7 +40,7 @@ namespace BoreholeFeatures
         {
             get
             {
-                return BottomEdgeInterceptMM;
+                return BottomEdgeInterceptMm;
             }
 
         }
@@ -66,16 +66,16 @@ namespace BoreholeFeatures
         //private List<Point> topLinePoints;
         //private List<Point> bottomLinePoints;
         
-        public CoreLayer(double firstSlope, int firstIntercept, double secondSlope, int secondIntercept, int azimuthResolution, int depthResolution)
+        public CoreLayer(double firstSlope, int firstIntercept, double secondSlope, int secondIntercept, int sourceAzimuthResolution, int depthResolution)
         {
             this.topDepthPixels = firstIntercept;
             this.bottomDepthPixels = secondIntercept;
 
             this.depthResolution = depthResolution;
-            this.azimuthResolution = azimuthResolution;
+            this.sourceAzimuthResolution = sourceAzimuthResolution;
 
-            topLine = new LayerLine(firstSlope, firstIntercept, azimuthResolution);
-            bottomLine = new LayerLine(secondSlope, secondIntercept, azimuthResolution);
+            topLine = new LayerLine(firstSlope, firstIntercept, sourceAzimuthResolution);
+            bottomLine = new LayerLine(secondSlope, secondIntercept, sourceAzimuthResolution);
 
             topEdgeIntercept = topLine.Intercept;
             topEdgeSlope = topLine.Slope;
@@ -320,7 +320,7 @@ namespace BoreholeFeatures
             //Get the layer type
             WriteLayerType();
 
-            details = layerStartY + "," + layerEndY + "," + topEdgeIntercept + "," + topEdgeSlope + "," + bottomEdgeIntercept + "," + bottomEdgeSlope + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + group;
+            details = layerStartY + "," + layerEndY + "," + topEdgeIntercept + "," + topEdgeSlope + "," + bottomEdgeIntercept + "," + bottomEdgeSlope + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
 
             return details;
         }

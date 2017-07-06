@@ -8,7 +8,7 @@ using System.ComponentModel;
 namespace BoreholeFeatures
 {
     [DefaultPropertyAttribute("Description")]
-    public class BoreholeLayer : Layer
+    public sealed class BoreholeLayer : Layer
     {
         # region property grid methods
 
@@ -97,9 +97,9 @@ namespace BoreholeFeatures
         /// <param name="secondDepth">The depth of the second SineWave</param>
         /// <param name="secondAmplitude">The amplitude of the second SineWave</param>
         /// <param name="secondAzimuth">The azimuth of the second SineWave</param>
-        /// <param name="azimuthResolution">The azimuth resolution of the borehole</param>
+        /// <param name="sourceAzimuthResolution">The azimuth resolution of the borehole</param>
         /// <param name="depthResolution">The depth resolution of the borehole</param>
-        public BoreholeLayer(int firstDepth, int firstAmplitude, int firstAzimuth, int secondDepth, int secondAmplitude, int secondAzimuth, int azimuthResolution, int depthResolution)
+        public BoreholeLayer(int firstDepth, int firstAmplitude, int firstAzimuth, int secondDepth, int secondAmplitude, int secondAzimuth, int sourceAzimuthResolution, int depthResolution)
         {
             this.topDepthPixels = firstDepth;
             this.topAmplitude = firstAmplitude;
@@ -107,11 +107,11 @@ namespace BoreholeFeatures
             this.bottomDepthPixels = secondDepth;
             this.bottomAmplitude = secondAmplitude;
             this.bottomAzimuth = secondAzimuth;
-            this.azimuthResolution = azimuthResolution;
+            this.sourceAzimuthResolution = sourceAzimuthResolution;
             this.depthResolution = depthResolution;
 
-            topSine = new SineWave(firstDepth, firstAzimuth, firstAmplitude, azimuthResolution);
-            bottomSine = new SineWave(secondDepth, secondAzimuth, secondAmplitude, azimuthResolution);
+            topSine = new SineWave(firstDepth, firstAzimuth, firstAmplitude, sourceAzimuthResolution);
+            bottomSine = new SineWave(secondDepth, secondAzimuth, secondAmplitude, sourceAzimuthResolution);
             
             timeAdded = DateTime.Now;
             timeLastModified = DateTime.Now;
@@ -202,7 +202,7 @@ namespace BoreholeFeatures
         private void moveFirstSine(int xMoveBy, int yMoveBy)
         {
             topDepthPixels = topDepthPixels + yMoveBy;
-            topAzimuth = topAzimuth + (int)((double)xMoveBy / ((double)azimuthResolution / 360.0));
+            topAzimuth = topAzimuth + (int)((double)xMoveBy / ((double)sourceAzimuthResolution / 360.0));
 
             if (topAzimuth > 360)
                 topAzimuth -= 360;
@@ -220,7 +220,7 @@ namespace BoreholeFeatures
         private void moveSecondSine(int xMoveBy, int yMoveBy)
         {
             bottomDepthPixels = bottomDepthPixels + yMoveBy;
-            bottomAzimuth = bottomAzimuth + (int)((double)xMoveBy / ((double)azimuthResolution / (double)360));
+            bottomAzimuth = bottomAzimuth + (int)((double)xMoveBy / ((double)sourceAzimuthResolution / (double)360));
 
             if (bottomAzimuth > 360)
                 bottomAzimuth -= 360;
@@ -281,7 +281,7 @@ namespace BoreholeFeatures
             //Get the layer type
             WriteLayerType();
 
-            details = layerStartY + "," + layerEndY + "," + topDepthPixels + "," + topAzimuth + "," + topAmplitude + "," + bottomDepthPixels + "," + bottomAzimuth + "," + bottomAmplitude + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + group;
+            details = layerStartY + "," + layerEndY + "," + topDepthPixels + "," + topAzimuth + "," + topAmplitude + "," + bottomDepthPixels + "," + bottomAzimuth + "," + bottomAmplitude + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
 
             return details;
         }

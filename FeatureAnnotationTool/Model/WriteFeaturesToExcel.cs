@@ -252,7 +252,7 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Top edge intercept (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopEdgeInterceptMM));
+                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopEdgeInterceptMm));
                     currentColumn++;
                 }
 
@@ -264,7 +264,7 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Bottom edge intercept (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeInterceptMM));
+                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeInterceptMm));
                     currentColumn++;
                 }
 
