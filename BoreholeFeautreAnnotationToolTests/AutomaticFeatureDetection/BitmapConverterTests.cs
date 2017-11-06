@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using System.Drawing;
+﻿using NUnit.Framework;
 using AutomaticFeatureDetection;
 using BoreholeFeautreAnnotationToolTests.Properties;
 
@@ -13,7 +8,7 @@ namespace BoreholeFeautreAnnotationToolTests.AutomaticFeatureDetection
     internal sealed class BitmapConverterTests
     {
         [Test]
-        public void TestBitmapConverter()
+        public void Bitmap_converter_works()
         {
             var testImage = Resources.bitmapConverterTestImage;
 
