@@ -14,7 +14,7 @@ namespace BoreholeFeatures
         
         internal int SourceStartDepthInMillimetres
         {
-            get => m_SourceStartDepthInMillimetres;
+            get { return m_SourceStartDepthInMillimetres; }
 
             set
             {
@@ -26,7 +26,7 @@ namespace BoreholeFeatures
 
         internal int DepthResolution
         {
-            get => m_DepthResolution;
+            get { return m_DepthResolution; }
 
             set
             {
@@ -38,7 +38,7 @@ namespace BoreholeFeatures
 
         internal int StartDepthInPixels
         {
-            get => m_StartDepthInPixels;
+            get { return m_StartDepthInPixels; }
 
             set
             {
@@ -50,7 +50,7 @@ namespace BoreholeFeatures
 
         internal int EndDepthInPixels
         {
-            get => m_EndDepthInPixels;
+            get { return m_EndDepthInPixels; }
 
             set
             {

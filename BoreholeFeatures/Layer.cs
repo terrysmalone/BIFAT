@@ -334,7 +334,7 @@ namespace BoreholeFeatures
 
         public int DepthResolution
         {
-            get => depthResolution;
+            get { return depthResolution; }
 
             set
             {

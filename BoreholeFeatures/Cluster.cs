@@ -57,7 +57,7 @@ namespace BoreholeFeatures
         [CategoryAttribute("\t\tDescription"), DescriptionAttribute("Additional information")]
         public string Description
         {
-            get => m_Description;
+            get { return m_Description; }
             set 
             { 
                 m_Description = value;
@@ -134,7 +134,7 @@ namespace BoreholeFeatures
 
         public int SourceStartDepth
         {
-            get => m_SourceStartDepth;
+            get { return m_SourceStartDepth; }
             set
             {
                 m_SourceStartDepth = value;
