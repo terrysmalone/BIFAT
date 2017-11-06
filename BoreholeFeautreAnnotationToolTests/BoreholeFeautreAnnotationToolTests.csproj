@@ -79,6 +79,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AutomaticFeatureDetection\BitmapConverterTests.cs" />
     <Compile Include="AverageBrightnessTests.cs" />
     <Compile Include="BestFitSineTests.cs" />
     <Compile Include="BitmapConverterTests.cs" />
@@ -197,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ExcludeLayersTestImage.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActiveContour\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
