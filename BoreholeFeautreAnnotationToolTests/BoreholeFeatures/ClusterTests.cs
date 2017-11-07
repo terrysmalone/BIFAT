@@ -219,7 +219,7 @@ namespace BoreholeFeautreAnnotationToolTests.BoreholeFeatures
         }
 
         [Test]
-        public void TestMoveCluster()
+        public void Cluster_can_be_moved_x()
         {
             var testCluster = new Cluster(720, 2);
 
@@ -227,158 +227,192 @@ namespace BoreholeFeautreAnnotationToolTests.BoreholeFeatures
             testCluster.AddPoint(new Point(32, 1));
             testCluster.AddPoint(new Point(100, 10));
 
-            Assert.IsTrue(testCluster.Points[0] == new Point(12, 8), "First point should be 12,8. It is " + testCluster.Points[0]);
-            Assert.IsTrue(testCluster.Points[1] == new Point(32, 1), "Second point should be 32,1. It is " + testCluster.Points[1]);
-            Assert.IsTrue(testCluster.Points[2] == new Point(100, 10), "Second point should be 100,10. It is " + testCluster.Points[2]);
+            Assert.That(testCluster.Points[0], Is.EqualTo(new Point(12, 8)));
+            Assert.That(testCluster.Points[1], Is.EqualTo(new Point(32, 1)));
+            Assert.That(testCluster.Points[2], Is.EqualTo(new Point(100, 10)));
 
             testCluster.MoveCluster(10, 0);
 
-            Assert.IsTrue(testCluster.Points[0] == new Point(22, 8), "First point should be 22,8. It is " + testCluster.Points[0]);
-            Assert.IsTrue(testCluster.Points[1] == new Point(42, 1), "Second point should be 42,1. It is " + testCluster.Points[1]);
-            Assert.IsTrue(testCluster.Points[2] == new Point(110, 10), "Second point should be 110,10. It is " + testCluster.Points[2]);
-
-            testCluster.MoveCluster(20, -10);
-
-            Assert.IsTrue(testCluster.Points[0] == new Point(42, -2), "First point should be 42, -2. It is " + testCluster.Points[0]);
-            Assert.IsTrue(testCluster.Points[1] == new Point(62, -9), "Second point should be 62, -9. It is " + testCluster.Points[1]);
-            Assert.IsTrue(testCluster.Points[2] == new Point(130, 0), "Second point should be 130, 0. It is " + testCluster.Points[2]);
+            Assert.That(testCluster.Points[0], Is.EqualTo(new Point(22, 8)));
+            Assert.That(testCluster.Points[1], Is.EqualTo(new Point(42, 1)));
+            Assert.That(testCluster.Points[2], Is.EqualTo(new Point(110, 10)));
         }
 
         [Test]
-        public void TestStartDepth1()
-        {
-            var testCluster = new Cluster(720, 1);
-
-            testCluster.AddPoint(new Point(12, 8));
-            Assert.IsTrue(testCluster.StartDepth == 8, "Start depth should be 8mm.  It is " + testCluster.StartDepth);
-            testCluster.AddPoint(new Point(32, 2));
-            Assert.IsTrue(testCluster.StartDepth == 2, "Start depth should be 2mm.  It is " + testCluster.StartDepth);
-            testCluster.AddPoint(new Point(100, 10));
-            Assert.IsTrue(testCluster.StartDepth == 2, "Start depth should be 2mm.  It is " + testCluster.StartDepth);
-
-            testCluster.SourceStartDepth = 100;
-            Assert.IsTrue(testCluster.StartDepth == 102, "Start depth should be 102mm.  It is " + testCluster.StartDepth);
-
-            testCluster.AddPoint(new Point(43, 1));
-
-            Assert.IsTrue(testCluster.StartDepth == 101, "Start depth should be 101mm.  It is " + testCluster.StartDepth);
-        }
-
-        [Test]
-        public void TestStartDepth2()
+        public void Cluster_can_be_moved_y()
         {
             var testCluster = new Cluster(720, 2);
 
             testCluster.AddPoint(new Point(12, 8));
-
-            Assert.IsTrue(testCluster.StartDepth == 16, "Start depth should be 16mm.  It is " + testCluster.StartDepth);
-            testCluster.AddPoint(new Point(32, 2));
-            Assert.IsTrue(testCluster.StartDepth == 4, "Start depth should be 4mm.  It is " + testCluster.StartDepth);
+            testCluster.AddPoint(new Point(32, -13));
             testCluster.AddPoint(new Point(100, 10));
-            Assert.IsTrue(testCluster.StartDepth == 4, "Start depth should be 4mm.  It is " + testCluster.StartDepth);
 
-            testCluster.SourceStartDepth = 100;
-            Assert.IsTrue(testCluster.StartDepth == 104, "Start depth should be 104mm.  It is " + testCluster.StartDepth);
+            Assert.That(testCluster.Points[0], Is.EqualTo(new Point(12, 8)));
+            Assert.That(testCluster.Points[1], Is.EqualTo(new Point(32, -13)));
+            Assert.That(testCluster.Points[2], Is.EqualTo(new Point(100, 10)));
+            
+            testCluster.MoveCluster(0, -10);
 
-            testCluster.AddPoint(new Point(43, 1));
-
-            Assert.IsTrue(testCluster.StartDepth == 102, "Start depth should be 102mm.  It is " + testCluster.StartDepth);
+            Assert.That(testCluster.Points[0], Is.EqualTo(new Point(12, -2)));
+            Assert.That(testCluster.Points[1], Is.EqualTo(new Point(32, -23)));
+            Assert.That(testCluster.Points[2], Is.EqualTo(new Point(100, 0)));
         }
 
         [Test]
-        public void TestEndDepth1()
+        public void Cluster_can_be_moved_by_both_points()
+        {
+            var testCluster = new Cluster(720, 2);
+
+            testCluster.AddPoint(new Point(23, 8));
+            testCluster.AddPoint(new Point(198, -13));
+            testCluster.AddPoint(new Point(-54, 54));
+
+            Assert.That(testCluster.Points[0], Is.EqualTo(new Point(23, 8)));
+            Assert.That(testCluster.Points[1], Is.EqualTo(new Point(198, -13)));
+            Assert.That(testCluster.Points[2], Is.EqualTo(new Point(-54, 54)));
+
+            testCluster.MoveCluster(340, 143);
+
+            Assert.That(testCluster.Points[0], Is.EqualTo(new Point(363, 151)));
+            Assert.That(testCluster.Points[1], Is.EqualTo(new Point(538, 130)));
+            Assert.That(testCluster.Points[2], Is.EqualTo(new Point(286, 197)));
+        }
+
+        [Test]
+        public void Start_depth_is_correct_for_resolution_of_1()
         {
             var testCluster = new Cluster(720, 1);
 
             testCluster.AddPoint(new Point(12, 8));
+            Assert.That(testCluster.StartDepth, Is.EqualTo(8));
 
-            Assert.IsTrue(testCluster.EndDepth == 8, "End depth should be 8mm.  It is " + testCluster.EndDepth);
             testCluster.AddPoint(new Point(32, 2));
-            Assert.IsTrue(testCluster.EndDepth == 8, "End depth should be 8mm.  It is " + testCluster.EndDepth);
+            Assert.That(testCluster.StartDepth, Is.EqualTo(2));
+
             testCluster.AddPoint(new Point(100, 10));
-            Assert.IsTrue(testCluster.EndDepth == 10, "End depth should be 10mm.  It is " + testCluster.EndDepth);
+            Assert.That(testCluster.StartDepth, Is.EqualTo(2));
 
             testCluster.SourceStartDepth = 100;
-            Assert.IsTrue(testCluster.EndDepth == 110, "End depth should be 110mm.  It is " + testCluster.EndDepth);
+            Assert.That(testCluster.StartDepth, Is.EqualTo(102));
 
-            testCluster.AddPoint(new Point(43, 100));
-
-            Assert.IsTrue(testCluster.EndDepth == 200, "End depth should be 200mm.  It is " + testCluster.EndDepth);
+            testCluster.AddPoint(new Point(43, 1));
+            Assert.That(testCluster.StartDepth, Is.EqualTo(101));
         }
 
         [Test]
-        public void TestEndDepth2()
+        public void Start_depth_is_correct_for_resolution_of_2()
         {
             var testCluster = new Cluster(720, 2);
 
             testCluster.AddPoint(new Point(12, 8));
+            Assert.That(testCluster.StartDepth, Is.EqualTo(16));
 
-            Assert.IsTrue(testCluster.EndDepth == 16, "End depth should be 16mm.  It is " + testCluster.EndDepth);
             testCluster.AddPoint(new Point(32, 2));
-            Assert.IsTrue(testCluster.EndDepth == 16, "End depth should be 16mm.  It is " + testCluster.EndDepth);
+            Assert.That(testCluster.StartDepth, Is.EqualTo(4));
+
             testCluster.AddPoint(new Point(100, 10));
-            Assert.IsTrue(testCluster.EndDepth == 20, "End depth should be 20mm.  It is " + testCluster.EndDepth);
+            Assert.That(testCluster.StartDepth, Is.EqualTo(4));
 
             testCluster.SourceStartDepth = 100;
-            Assert.IsTrue(testCluster.EndDepth == 120, "End depth should be 120mm.  It is " + testCluster.EndDepth);
+            Assert.That(testCluster.StartDepth, Is.EqualTo(104));
+
+            testCluster.AddPoint(new Point(43, 1));
+            Assert.That(testCluster.StartDepth, Is.EqualTo(102));
+        }
+
+        [Test]
+        public void EndDepth_is_correct_for_resolution_of_1()
+        {
+            var testCluster = new Cluster(720, 1);
+
+            testCluster.AddPoint(new Point(12, 8));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(8));
+
+            testCluster.AddPoint(new Point(32, 2));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(8));
+
+            testCluster.AddPoint(new Point(100, 10));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(10));
+
+            testCluster.SourceStartDepth = 100;
+            Assert.That(testCluster.EndDepth, Is.EqualTo(110));
 
             testCluster.AddPoint(new Point(43, 100));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(200));
+        }
 
-            Assert.IsTrue(testCluster.EndDepth == 300, "End depth should be 300mm.  It is " + testCluster.EndDepth);
+        [Test]
+        public void EndDepth_is_correct_for_resolution_of_2()
+        {
+            var testCluster = new Cluster(720, 2);
+
+            testCluster.AddPoint(new Point(12, 8));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(16));
+
+            testCluster.AddPoint(new Point(32, 2));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(16));
+
+            testCluster.AddPoint(new Point(100, 10));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(20));
+
+            testCluster.SourceStartDepth = 100;
+            Assert.That(testCluster.EndDepth, Is.EqualTo(120));
+
+            testCluster.AddPoint(new Point(43, 100));
+            Assert.That(testCluster.EndDepth, Is.EqualTo(300));
         }
 
         [Test]
         public void TestType()
         {
-            var testCluster = new Cluster(720, 2);
+            var testCluster = new Cluster(720, 2)
+            {
+                LargeBubbles = true,
+                FineDebris = true
+            };
 
-            testCluster.LargeBubbles = true;
-            testCluster.FineDebris = true;
-
-            Assert.IsTrue(testCluster.ClusterType.Contains("largeBubbles"), "Cluster should contain 'largeBubbles'. It is " + testCluster.ClusterType);
-            Assert.IsTrue(testCluster.ClusterType.Contains("fineDebris"), "Cluster should contain 'fineDebris'. It is " + testCluster.ClusterType);
+            Assert.That(testCluster.ClusterType.Contains("largeBubbles"), Is.True);
+            Assert.That(testCluster.ClusterType.Contains("fineDebris"), Is.True);
 
             testCluster.FineDebris = false;
             testCluster.Diamicton = true;
 
-            Assert.IsTrue(testCluster.ClusterType.Contains("largeBubbles"), "Cluster should contain 'largeBubbles'. It is " + testCluster.ClusterType);
-            Assert.IsFalse(testCluster.ClusterType.Contains("fineDebris"), "Cluster should not contain 'fineDebris'. It is " + testCluster.ClusterType);
-            Assert.IsTrue(testCluster.ClusterType.Contains("diamicton"), "Cluster should contain 'diamicton'. It is " + testCluster.ClusterType);
+            Assert.That(testCluster.ClusterType.Contains("largeBubbles"), Is.True);
+            Assert.That(testCluster.ClusterType.Contains("fineDebris"), Is.False);
+            Assert.That(testCluster.ClusterType.Contains("diamicton"), Is.True);
         }
 
         [Test]
-        public void TestDetails()
+        public void Details_are_correct()
         {
             var time = DateTime.Now;
 
-            var testCluster = new Cluster(720, 2);
-
-            testCluster.LargeBubbles = true;
-            testCluster.FineDebris = true;
+            var testCluster = new Cluster(720, 2)
+            {
+                LargeBubbles = true,
+                FineDebris = true,
+                Description = "Cluster, description",
+                Group = "group1",
+                TimeAdded = time,
+                TimeLastModified = time
+            };
 
             testCluster.AddPoint(new Point(10, 20));
             testCluster.AddPoint(new Point(11, 15));
 
-            testCluster.Description = "Cluster, description";
-            testCluster.Group = "group1";
-            testCluster.TimeAdded = time;
-            testCluster.TimeLastModified = time;
-
-
-            Assert.IsTrue(testCluster.GetDetails().Equals("15,20,10,11,10 20 11 15 ,largeBubbles fineDebris ,Cluster  description," + time + "," + time + ",group1"), "Details is wrong." + testCluster.GetDetails());
+            Assert.That(testCluster.GetDetails(), Is.EqualTo("15,20,10,11,10 20 11 15 ,largeBubbles fineDebris ,Cluster  description," + time + "," + time + ",group1"));
         }
 
         [Test]
-        public void TestDescription()
+        public void Dexcription_is_correct()
         {
-            var testCluster = new Cluster(720, 2);
+            var testCluster = new Cluster(720, 2) {Description = "A cluster"};
 
-            testCluster.Description = "A cluster";
-            Assert.IsTrue(testCluster.Description.Equals("A cluster"), "Description should be 'A cluster'.  It is " + testCluster.Description);
+            Assert.That(testCluster.Description, Is.EqualTo("A cluster"));
         }
 
         [Test]
-        public void TestTimeAdded()
+        public void TimeAdded_is_correct()
         {
             var dtfi = new DateTimeFormatInfo
             {
@@ -388,21 +422,20 @@ namespace BoreholeFeautreAnnotationToolTests.BoreholeFeatures
 
             var testCluster = new Cluster(720, 1);
 
-            DateTime timeAdded = Convert.ToDateTime(testCluster.TimeAdded, dtfi);
-
+            var timeAdded = Convert.ToDateTime(testCluster.TimeAdded, dtfi);
             timeAdded = timeAdded.AddDays(4.0);
 
             var addedCluster = new Cluster(720, 1);
 
-            Assert.IsFalse(addedCluster.TimeAdded.Equals(timeAdded), "Clusters times should not match. They are " + addedCluster.TimeAdded.ToString() + " and " + timeAdded.ToString());
+            Assert.That(addedCluster.TimeAdded.Equals(timeAdded), Is.False);
 
             addedCluster.TimeAdded = timeAdded;
 
-            Assert.IsTrue(addedCluster.TimeAdded.Equals(timeAdded), "Clusters times should match. They are " + addedCluster.TimeAdded.ToString() + " and " + timeAdded.ToString());
-        }
+            Assert.That(addedCluster.TimeAdded, Is.EqualTo(timeAdded));
+}
 
         [Test]
-        public void TestTimeLastModified()
+        public void TimeLastModified_is_correct()
         {
             var dtfi = new DateTimeFormatInfo
             {
@@ -413,20 +446,19 @@ namespace BoreholeFeautreAnnotationToolTests.BoreholeFeatures
             var testCluster = new Cluster(720, 1);
 
             var timeModified = Convert.ToDateTime(testCluster.TimeAdded, dtfi);
-
             timeModified = timeModified.AddDays(4.0);
 
             var addedCluster = new Cluster(720, 1);
-
-            Assert.IsFalse(addedCluster.TimeLastModified.Equals(timeModified), "Cluster times should not match. They are " + addedCluster.TimeLastModified.ToString() + " and " + timeModified.ToString());
+            
+            Assert.That(addedCluster.TimeLastModified, Is.Not.EqualTo(timeModified));
 
             addedCluster.TimeLastModified = timeModified;
 
-            Assert.IsTrue(addedCluster.TimeLastModified.Equals(timeModified), "Cluster times should match. They are " + addedCluster.TimeLastModified.ToString() + " and " + timeModified.ToString());
+            Assert.That(addedCluster.TimeLastModified, Is.EqualTo(timeModified));
 
             addedCluster.AddPoint(new Point(10, 10));
 
-            Assert.IsFalse(addedCluster.TimeLastModified.Equals(timeModified), "Cluster times should not match. They are " + addedCluster.TimeLastModified.ToString() + " and " + timeModified.ToString());
+            Assert.That(addedCluster.TimeLastModified.Equals(timeModified), Is.False);
         }
     }
 }
