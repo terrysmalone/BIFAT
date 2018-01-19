@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class EdgesLengthComparerTest
     {
-        [TestMethod]
+        [Test]
         public void TestEdgesLengthComparer()
         {
             Edge biggestEdge = new Edge(360);

@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using EdgeFitting;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class SineFitTests
     {
         /// <summary>
         /// Tests sinefitting when all points are present and accurate
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestFullSineFitting()
         {
             int DEPTH = 86;
@@ -67,7 +67,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// <summary>
         /// Tests sinefitting when some points are present and accurate
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestPartialSineFitting()
         {
             int DEPTH = 106;

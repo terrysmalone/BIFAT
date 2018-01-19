@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoreholeFeatures;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class SineWaveTests
     {
         SineWave sineWave;
@@ -18,7 +18,7 @@ namespace BoreholeFeautreAnnotationToolTests
         int depth = 303;
         int sourceAzimuthResolution = 720;
 
-        [TestMethod]
+        [Test]
         public void TestProperties()
         {
             sineWave = new SineWave(depth, azimuth, amplitude, sourceAzimuthResolution);
@@ -28,7 +28,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.AreEqual(sineWave.getAmplitude(), amplitude, "Amplitude is not returning correct value");
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetSinePoint()
         {
             sineWave = new SineWave(depth, azimuth, amplitude, sourceAzimuthResolution);
@@ -46,7 +46,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.AreEqual(expectedYPoint, sineWave.getSinepoint(500).Y, "Ypoint at x=500 is wrong");
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetY()
         {
             sineWave = new SineWave(depth, azimuth, amplitude, sourceAzimuthResolution);
@@ -64,7 +64,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.AreEqual(expectedYPoint, sineWave.getY(500), "Ypoint at x=500 should be " + expectedYPoint + ". It is " + sineWave.getY(500));
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetSinePoints()
         {
             sineWave = new SineWave(depth, azimuth, amplitude, sourceAzimuthResolution);
@@ -84,7 +84,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.AreEqual(expectedYPoint, results[500].Y, "Ypoint at x=500 should be " + expectedYPoint + ". It is " + results[500].Y);
         }
 
-        [TestMethod]
+        [Test]
         public void TestChange()
         {
             sineWave = new SineWave(145, 87, 12, sourceAzimuthResolution);

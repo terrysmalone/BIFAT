@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class RemoveEdgesTests
     {
-        [TestMethod]
+        [Test]
         public void TestRemoveEdges()
         {
             List<Edge> edges = new List<Edge>();
@@ -52,7 +52,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(remove.getEdges()[2].Equals(edge4), "Edge[2] should be the same as edge4.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestMinimumLength()
         {
             List<Edge> edges = new List<Edge>();

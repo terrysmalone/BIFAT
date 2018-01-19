@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DrawEdges.DrawEdgesFactory;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
@@ -20,13 +20,13 @@ namespace BoreholeFeautreAnnotationToolTests
     /// 0100011000
     /// 0010000000
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class DrawEdgesTests
     {
         private int BLACK = -16777216;
         private int WHITE = -1;
 
-        [TestMethod]
+        [Test]
         public void TestBoolConstructor()
         {
             bool[] edgeData = createBoolEdgeData();

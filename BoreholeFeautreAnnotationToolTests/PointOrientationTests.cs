@@ -4,11 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using EdgeFitting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class PointOrientationTests
     {
         /// <summary>
@@ -16,7 +16,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |X|X|X|  
         /// |-|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation1()
         {
             Point beforePoint = new Point(34, 100);
@@ -35,7 +35,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|X|  
         /// |-|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation2a()
         {
             Point beforePoint = new Point(34, 99);
@@ -54,7 +54,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |X|X|-|  
         /// |-|-|X| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation2b()
         {
             Point beforePoint = new Point(34, 100);
@@ -73,7 +73,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|-|X| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation3()
         {
             Point beforePoint = new Point(34, 99);
@@ -92,7 +92,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|X|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation4a()
         {
             Point beforePoint = new Point(34, 99);
@@ -111,7 +111,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|-|X| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation4b()
         {
             Point beforePoint = new Point(35, 99);
@@ -130,7 +130,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|X|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation5()
         {
             Point beforePoint = new Point(35, 99);
@@ -149,7 +149,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|x|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation6a()
         {
             Point beforePoint = new Point(35, 101);
@@ -168,7 +168,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |X|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation6b()
         {
             Point beforePoint = new Point(35, 101);
@@ -187,7 +187,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |X|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation7()
         {
             Point beforePoint = new Point(35, 101);
@@ -206,7 +206,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |X|X|-|  
         /// |-|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation8a()
         {
             Point beforePoint = new Point(35, 101);
@@ -225,7 +225,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|X|  
         /// |X|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestOrientation8b()
         {
             Point beforePoint = new Point(35, 101);
@@ -245,7 +245,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |X|-|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestPointAtLeftEdge()
         {
             Point beforePoint = new Point(359, 101);
@@ -265,7 +265,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|-|X|
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestPointAtLeftEdgeButNotWrapping()
         {
             Point beforePoint = new Point(0, 99);
@@ -285,7 +285,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|-|X| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestPointAtRightEdge()
         {
             Point beforePoint = new Point(358, 99);
@@ -305,7 +305,7 @@ namespace BoreholeFeautreAnnotationToolTests
         /// |-|X|-|  
         /// |-|X|-| 
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestPointAtRightEdgeButNotWrapping()
         {
             Point beforePoint = new Point(359, 99);

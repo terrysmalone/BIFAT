@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class CalculateLineEquationTest
     {
-        [TestMethod]
+        [Test]
         public void TestCalculateSlope0()
         {
             Point point = new Point(1, 4);
@@ -25,7 +22,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(slope.CompareTo((decimal)0.0) == 0, "slope of 0 should be 0. It is " + slope);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlope180()
         {
             Point point = new Point(1, 4);
@@ -38,7 +35,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(slope.CompareTo((decimal)0.0) == 0, "slope of 180 should be 0. It is " + slope);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlope45()
         {
             Point point = new Point(1, 4);
@@ -51,7 +48,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(slope.CompareTo((decimal)-1.0) == 0, "slope of 45 should be -1. It is " + slope);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlope225()
         {
             Point point = new Point(1, 4);
@@ -64,7 +61,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(slope.CompareTo((decimal)-1.0) == 0, "slope of 225 should be -1. It is " + slope);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlope135()
         {
             Point point = new Point(1, 4);
@@ -77,7 +74,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(slope.CompareTo((decimal)1.0) == 0, "slope of 135 should be 1. It is " + slope);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlope344()
         {
             Point point = new Point(1, 4);
@@ -90,7 +87,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(slope.CompareTo((decimal)0.29) == 0, "slope of 135 should be 0.29. It is " + slope);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateHorizontalIntercept()
         {
             Point point = new Point(1, 6);
@@ -103,7 +100,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(intercept == 6, "Intercept should be 6. It is " + intercept);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateHorizontalIntercept2()
         {
             Point point = new Point(1, 4);
@@ -116,7 +113,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(intercept == 4, "Intercept should be 4. It is " + intercept);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlopingIntercept()
         {
             Point point = new Point(1, 4);
@@ -129,7 +126,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(intercept == 3, "Intercept should be 3. It is " + intercept);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateSlopingIntercept2()
         {
             Point point = new Point(2, 4);

@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class LineDirectionTests
     {
-        [TestMethod]
+        [Test]
         public void TestAngledLine()
         {
             Point startPoint = new Point(10, 20);
@@ -26,7 +26,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(direction == 22, "Line direction should be 22. It is " + direction);
         }
 
-        [TestMethod]
+        [Test]
         public void TestNorthEastDirection()
         {
             Point startNEPoint = new Point(10, 20);
@@ -40,7 +40,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(NEDirection == 45, "NEDirection should be 45. It is " + NEDirection);
         }
 
-         [TestMethod]
+         [Test]
         public void TestEastEdgeDirection()
         {
             Point startEastPoint = new Point(43, 111);
@@ -54,7 +54,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(eastDirection == 0, "eastDirection should be 0. It is " + eastDirection);
         }
 
-         [TestMethod]
+         [Test]
         public void TestNorthEdgeDirection()
         {
             Point startPoint = new Point(43, 111);
@@ -68,7 +68,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(direction == 90, "North direction should be 90. It is " + direction);
         }
 
-         [TestMethod]
+         [Test]
         public void TestNorthWestEdgeDirection()
         {
             Point startPoint = new Point(15, 25);
@@ -82,7 +82,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(direction == 135, "North west should be 135. It is " + direction);
         }
 
-         [TestMethod]
+         [Test]
         public void TestWestEdgeDirection()
         {
             Point startPoint = new Point(48, 111);
@@ -96,7 +96,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(direction == 180, "West direction should be 180. It is " + direction);
         }
 
-         [TestMethod]
+         [Test]
         public void TestSouthWestEdgeDirection()
         {
             Point startPoint = new Point(14, 16);
@@ -110,7 +110,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(direction == 225, "SouthWest direction should be 225. It is " + direction);
         }
 
-         [TestMethod]
+         [Test]
         public void TestSouthEdgeDirection()
         {
             Point startPoint = new Point(43, 107);
@@ -124,7 +124,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(direction == 270, "South direction should be 270. It is " + direction);
         }
 
-         [TestMethod]
+         [Test]
         public void TestSouthEastEdgeDirection()
         {
             Point startPoint = new Point(10, 20);
