@@ -79,33 +79,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AutomaticFeatureDetection\BitmapConverterTests.cs" />
-    <Compile Include="AverageBrightnessTests.cs" />
-    <Compile Include="BestFitSineTests.cs" />
-    <Compile Include="BitmapTilerTests.cs" />
-    <Compile Include="CalculateIntersectingPointTests.cs" />
-    <Compile Include="CalculateLineEquationTests.cs" />
-    <Compile Include="CannyDetectorTests.cs" />
-    <Compile Include="EdgeLengthComparerTests.cs" />
-    <Compile Include="EdgeLinkingTests.cs" />
-    <Compile Include="EdgeTests.cs" />
-    <Compile Include="FeaturesTilerTests.cs" />
-    <Compile Include="BoreholeFeatures\ClusterTests.cs" />
-    <Compile Include="DrawEdgesTests.cs" />
-    <Compile Include="DrawSinesTests.cs" />
-    <Compile Include="FindEdgesOverlapTests.cs" />
-    <Compile Include="FindEdgesTests.cs" />
     <Compile Include="InclusionTests.cs" />
-    <Compile Include="JoinEdgesTests.cs" />
     <Compile Include="LayerTests.cs" />
     <Compile Include="LineDirectionTests.cs" />
     <Compile Include="PointOrientationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="RemoveEdgesTests.cs" />
     <Compile Include="SaveLoadBoreholeDataTests.cs" />
     <Compile Include="SineFitTests.cs" />
@@ -176,31 +154,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\TestOverlappingEdges.bmp" />
-    <None Include="Resources\TestOverlap.bmp" />
-    <None Include="Resources\LinkToCorrectEdgeImage.bmp" />
-    <None Include="Resources\1a.bmp" />
-    <Content Include="Resources\bitmapConverterTestImage.bmp" />
-    <None Include="Resources\Edge1Test.bmp" />
-    <None Include="Resources\Edge2Test.bmp" />
-    <None Include="Resources\EdgeJoiningTestImage.bmp" />
-    <None Include="Resources\EdgeLinkingTestImage.bmp" />
-    <None Include="Resources\EndToEndTestImage.bmp" />
-    <Content Include="Resources\ExcludeInclusionsTestImage.bmp" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\ExcludeLayersTestImage.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ActiveContour\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

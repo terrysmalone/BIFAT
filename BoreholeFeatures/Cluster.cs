@@ -26,7 +26,7 @@ namespace BoreholeFeatures
 
         private int m_SourceStartDepth;
 
-        # region Properties
+        #region Properties
 
         #region property grid properties
 
