@@ -8,16 +8,16 @@ using System.Text;
 using BoreholeFeautreAnnotationToolTests.Properties;
 using EdgeFitting;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class FindEdgesOverlapTests
     {
         private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
 
-        [TestMethod]
+        [Test]
         public void TestOverlap()
         {
             bool[] edgeData = getImageData(Resources.TestOverlap);
@@ -51,7 +51,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sinesAfterOverlap.Count == 2, "There should now be 2 sines. There are " + sinesAfterOverlap.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithOverlappingEdges()
         {
             bool[] edgeData = getImageData(Resources.TestOverlappingEdges);
@@ -86,7 +86,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestImageDimensions()
         {
             bool[] edgeData = getImageData(Resources.TestOverlap);

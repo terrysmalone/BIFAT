@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class EdgeTests
     {
-        [TestMethod]
+        [Test]
         public void TestConstructor()
         {
             Edge edge = new Edge(720);
@@ -22,7 +22,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edge.EdgeLength == 0, "Edge size should be 0");
         }
 
-        [TestMethod]
+        [Test]
         public void TestAddPoint()
         {
             Edge testEdge = new Edge(100);
@@ -36,7 +36,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testEdge.Points[1].Y == 54, "Second y point should be 54");
         }
 
-        [TestMethod]
+        [Test]
         public void TestAddPoint2()
         {
             Edge testEdge = new Edge(100);
@@ -50,7 +50,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testEdge.Points[1].Y == 54, "Second y point should be 54");
         }
 
-        [TestMethod]
+        [Test]
         public void TestRemovePoint()
         {
             Edge testEdge = new Edge(100);
@@ -82,7 +82,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testEdge.EdgeLength == 2, "Edge Length should be 2. It is " + testEdge.EdgeLength);
         }
 
-        [TestMethod]
+        [Test]
         public void testAddEdge()
         {
             Edge testEdge = new Edge(100);
@@ -113,7 +113,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testEdge.Points[2].X == 20, "Third x point should be 20");
         }
 
-        [TestMethod]
+        [Test]
         public void testPoints()
         {
             Edge testEdge = new Edge(100);
@@ -128,7 +128,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testArrayList[2].Equals(new Point(22, 16)), "testArrayList 2");
         }
 
-        [TestMethod]
+        [Test]
         public void testEdgeEnd()
         {
             Edge testEdge = new Edge(100);
@@ -161,7 +161,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testEdge.EdgeEnd2 == new Point(20, 10), "EdgeEnd2 should be (20, 10). It is " + testEdge.EdgeEnd2);
         }
 
-        [TestMethod]
+        [Test]
         public void testEdgeEndInt()
         {
             Edge testEdge = new Edge(100);
@@ -185,7 +185,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testEdge.GetEdgeEnd(2) == new Point(24, 16), "EdgeEnd2 should be (24, 16). It is " + testEdge.GetEdgeEnd(2));
         }
 
-        [TestMethod]
+        [Test]
         public void TestLowestXPoint()
         {
             Edge testEdge = new Edge(100);
@@ -204,7 +204,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeToAdd.LowestXPoint == 20, "edgeToAdd lowestXPoint should be 20");
         }
 
-        [TestMethod]
+        [Test]
         public void testHighestXPoint()
         {
             Edge testEdge = new Edge(100);
@@ -223,7 +223,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeToAdd.HighestXPoint == 25, "edgeToAdd highestXPoint should be 25");
         }
 
-        [TestMethod]
+        [Test]
         public void testLowestYPoint()
         {
             Edge testEdge = new Edge(100);
@@ -245,7 +245,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeToAdd.LowestYPoint == 5, "edgeToAdd lowestPoint should be 5");
         }
 
-        [TestMethod]
+        [Test]
         public void testHighestYPoint()
         {
             Edge testEdge = new Edge(100);
@@ -267,7 +267,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeToAdd.HighestYPoint == 25, "edgeToAdd highestPoint should be 25");
         }
 
-        [TestMethod]
+        [Test]
         public void testSortEdge()
         {
             Edge testEdge = new Edge(100);
@@ -309,7 +309,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(points[11] == new Point(9, 10), "points[11] should be (9,10).  It is " + points[11].X + "," + points[11].Y + ")");
         }
 
-        [TestMethod]
+        [Test]
         public void testSortEdge2()
         {
             Edge testEdge = new Edge(100);

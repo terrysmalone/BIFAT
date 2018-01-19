@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BoreholeFeautreAnnotationToolTests.Properties;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class JoinEdgesTest
     {
         private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
 
-        [TestMethod]
+        [Test]
         public void TestConstructor()
         {
             bool[] data = getImageData(Resources.EdgeJoiningTestImage);
@@ -33,7 +33,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(joinEdges.getJoinedEdges().Count == 3, "3 edges should have been found. " + joinEdges.getJoinedEdges().Count + " were found.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetDistanceToBridge()
         {
             bool[] data = getImageData(Resources.EdgeJoiningTestImage);
@@ -50,7 +50,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(joinEdges.getJoinedEdges().Count == 2, "2 edges should have been found. " + joinEdges.getJoinedEdges().Count + " were found.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestLinkToCorrectEdge()
         {
             bool[] data = getImageData(Resources.LinkToCorrectEdgeImage);

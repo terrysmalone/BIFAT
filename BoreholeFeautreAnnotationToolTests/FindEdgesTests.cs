@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BoreholeFeautreAnnotationToolTests.Properties;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class FindEdgesTest
     {
         private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
 
-        [TestMethod]
+        [Test]
         public void TestConstructor()
         {
             bool[] test = new bool[100];
@@ -29,7 +29,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edges.getEdges().Count == 0, "No edges should have been found");
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetEdges()
         {
             bool[] data = getImageData(Resources.Edge1Test);
@@ -80,7 +80,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetNumberOfEdges()
         {
             bool[] data = getImageData(Resources.Edge1Test);
@@ -92,7 +92,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestEdgeEnds()
         {
             bool[] data = getImageData(Resources.Edge1Test);
@@ -125,7 +125,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestEndToEndEdge()
         {
             bool[] data = getImageData(Resources.EndToEndTestImage);
@@ -148,7 +148,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestWrappedEdge()
         {
             bool[] data = getImageData(Resources.Edge2Test);

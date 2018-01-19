@@ -79,9 +79,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AutomaticFeatureDetection\BitmapConverterTests.cs" />
     <Compile Include="AverageBrightnessTests.cs" />
     <Compile Include="BestFitSineTests.cs" />
-    <Compile Include="BitmapConverterTests.cs" />
     <Compile Include="BitmapTilerTests.cs" />
     <Compile Include="CalculateIntersectingPointTests.cs" />
     <Compile Include="CalculateLineEquationTests.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="EdgeLinkingTests.cs" />
     <Compile Include="EdgeTests.cs" />
     <Compile Include="FeaturesTilerTests.cs" />
-    <Compile Include="ClusterTests.cs" />
+    <Compile Include="BoreholeFeatures\ClusterTests.cs" />
     <Compile Include="DrawEdgesTests.cs" />
     <Compile Include="DrawSinesTests.cs" />
     <Compile Include="FindEdgesOverlapTests.cs" />
@@ -197,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ExcludeLayersTestImage.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActiveContour\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

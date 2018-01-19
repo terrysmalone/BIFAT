@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using BoreholeFeautreAnnotationToolTests.Properties;
 using EdgeDetector;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class CannyDetectorTests
     {       
-        [TestMethod]
+        [Test]
         public void TestIntCross()
         {
             int imageWidth = 90;
@@ -57,7 +57,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeData[74 + (105 * imageWidth)] == false, "(74,105) should be false");
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetMagnitude()
         {
             int imageWidth = 90;
@@ -97,7 +97,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestGoToLeftEdge()
         {
             Bitmap originalImage = Resources._1a;
@@ -126,7 +126,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(afterEdgeDetectImage.GetPixel(0, 569).R == 255, "Pixel (0,569) should be white. It is " + afterEdgeDetectImage.GetPixel(0, 569).R);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGoToRightEdge()
         {
             Bitmap originalImage = Resources._1a;

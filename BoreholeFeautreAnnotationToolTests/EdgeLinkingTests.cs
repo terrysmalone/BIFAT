@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 using BoreholeFeautreAnnotationToolTests.Properties;
 using DrawEdges.DrawEdgesFactory;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class EdgeLinkingTest
     {
         private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
 
-        [TestMethod]
+        [Test]
         public void TestEdgeLinking()
         {            
             bool[] data = getImageData(Resources.EdgeLinkingTestImage);
@@ -37,7 +37,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(linkedEdges.Count == 2, "2 linked edge should have been found. " + linkedEdges.Count + " were found.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestMaxNeighbourDistance()
         {
             bool[] data = getImageData(Resources.EdgeLinkingTestImage);
@@ -55,7 +55,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeLinking.LinkedEdges.Count == 2, "2 linked edges should have been found. " + edgeLinking.LinkedEdges.Count + " were found.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestMinimumLength()
         {
             bool[] data = getImageData(Resources.EdgeLinkingTestImage);
@@ -99,7 +99,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(edgeLinking4.LinkedEdges.Count == 0, "0 linked edge should have been found. " + edgeLinking4.LinkedEdges.Count + " were found.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestLinkToCorrectEdge()
         {
             bool[] data = getImageData(Resources.LinkToCorrectEdgeImage);

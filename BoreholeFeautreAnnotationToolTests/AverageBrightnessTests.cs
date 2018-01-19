@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BoreholeFeatures;
 using BoreholeFeautreAnnotationToolTests.Properties;
 using BrightnessAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class AverageBrightnessTest
     {
-        [TestMethod]
+        [Test]
         public void TestWithoutExcludePoints()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -22,13 +18,13 @@ namespace BoreholeFeautreAnnotationToolTests
             AverageBrightness averageBrightness = new AverageBrightness();
 
             averageBrightness.ProcessSection(image, 0);
-
+            
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(100) == 193, "Line 100 should have a brightness of 193. It is " + averageBrightness.GetBrightnessOfLine(100));
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(300) == 116, "Line 300 should have a brightness of 116. It is " + averageBrightness.GetBrightnessOfLine(300));
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(600) == 189, "Line 600 should have a brightness of 189. It is " + averageBrightness.GetBrightnessOfLine(600));
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithLayersExcluded()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -52,7 +48,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(600) == 189, "Line 600 should have a brightness of 189. It is " + averageBrightness.GetBrightnessOfLine(600));
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithLayersIncluded()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -80,7 +76,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithOneLayerIncluded()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -107,7 +103,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(600) == 189, "Line 600 should have a brightness of 189. It is " + averageBrightness.GetBrightnessOfLine(600));
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithClustersExcluded()
         {
             Bitmap image = Resources.ExcludeInclusionsTestImage;
@@ -172,7 +168,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(651) == 204, "Line 651 should have a brightness of 204. It is " + averageBrightness.GetBrightnessOfLine(651));
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithClustersIncluded()
         {
             //throw new NotImplementedException();
@@ -241,7 +237,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(651) == 204, "Line 651 should have a brightness of 204. It is " + averageBrightness.GetBrightnessOfLine(651));
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithInclusionsExcluded()
         {
             Bitmap image = Resources.ExcludeInclusionsTestImage;
@@ -305,7 +301,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(651) == 204, "Line 651 should have a brightness of 204. It is " + averageBrightness.GetBrightnessOfLine(651));
         }
 
-        [TestMethod]
+        [Test]
         public void TestWithInclusionsIncluded()
         {
             Bitmap image = Resources.ExcludeInclusionsTestImage;
@@ -370,7 +366,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(651) == 204, "Line 651 should have a brightness of 204. It is " + averageBrightness.GetBrightnessOfLine(651));
         }
 
-        [TestMethod]
+        [Test]
         public void TestHeight()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -382,7 +378,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBoreholeHeight() == image.Height, "Borehole height should be " + image.Height + ". It is " + averageBrightness.GetBoreholeHeight());
         }
 
-        [TestMethod]
+        [Test]
         public void TestWidth()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -393,7 +389,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBoreholeWidth() == image.Width, "Borehole width should be " + image.Width + ". It is " + averageBrightness.GetBoreholeWidth());
         }
 
-        [TestMethod]
+        [Test]
         public void TestSamplingRate()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -417,7 +413,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestDepthResolution()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;
@@ -432,7 +428,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(rowsProcessed == image.Height / (20 / 2), "Rows processed should be " + image.Height / (20 / 2) + ". It is " + rowsProcessed);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSectionStart()
         {
             Bitmap image = Resources.ExcludeInclusionsTestImage;
@@ -496,7 +492,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(averageBrightness.GetBrightnessOfLine(651) == 204, "Line 651 should have a brightness of 204. It is " + averageBrightness.GetBrightnessOfLine(651));
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetBrightnessOfLayer()
         {
             Bitmap image = Resources.ExcludeLayersTestImage;

@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImageTiler;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class FeaturesTilerTest
     {
         private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
@@ -21,10 +21,9 @@ namespace BoreholeFeautreAnnotationToolTests
 
         private int BOREHOLE_HEIGHT = 17917;
         private int BOREHOLE_WIDTH = 720;
-
-
-        [Ignore]
-        [TestMethod]
+        
+        [Test]
+        [Ignore("Need to find a better way to test")]
         public void TestBoreholeWidth()
         {
             throw new NotImplementedException();
@@ -33,9 +32,9 @@ namespace BoreholeFeautreAnnotationToolTests
 
             Assert.IsTrue(tiler.BoreholeWidth == BOREHOLE_WIDTH, "Borehole width should be 720.  It is " + tiler.BoreholeWidth);
         }
-
-        [Ignore]
-        [TestMethod]
+        
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestBoreholeHeight()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -43,9 +42,9 @@ namespace BoreholeFeautreAnnotationToolTests
 
             Assert.IsTrue(tiler.BoreholeHeight == BOREHOLE_HEIGHT, "Borehole height should be 17917.  It is " + tiler.BoreholeHeight);
         }
-
-        [Ignore]
-        [TestMethod]
+        
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestSectionStartHeight()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -65,8 +64,8 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.SectionStartHeight == 10000, "SectionStartHeight should be 10000.  It is " + tiler.SectionStartHeight);
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestSectionEndHeight()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -89,8 +88,8 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestGoToFirstSection()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -106,8 +105,8 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.CurrentSectionNumber == 0, "Current section should be 0.  It is " + tiler.CurrentSectionNumber);
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestNext()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -130,8 +129,8 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestGoToPreviousSection()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -153,8 +152,8 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestCurrentSectionHeight()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -171,8 +170,8 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestGoToSection()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -186,8 +185,8 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(tiler.CurrentSectionNumber == 0, "CurrentSectionNumber should return 0. It returned " + tiler.CurrentSectionNumber);
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestGetCurrentSectionAsBitmap()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -206,8 +205,8 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(compareImages(currentBitmap, idealBitmap) == true, "The two bitmaps should be the same");
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestGetCurrentSectionAsBytes()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";
@@ -226,8 +225,8 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(compareImages(currentBytes, idealBytes) == true, "The two bitmaps should be the same");
         }
 
-        [Ignore]
-        [TestMethod]
+        [Ignore("Need to find a better way to test")]
+        [Test]
         public void TestGetWholeBoreholeImage()
         {
             string imageFile = testRootFolder + "\\idealImages\\TsanBH1R1c";

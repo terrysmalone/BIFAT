@@ -6,17 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using DrawEdges;
 using EdgeFitting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class DrawSinesTests
     {
         private int BLANK = 0;
         private int SINE = -65536;
 
-        [TestMethod]
+        [Test]
         public void TestDrawSines()
         {
             Bitmap originalBitmap = new Bitmap(360, 100);

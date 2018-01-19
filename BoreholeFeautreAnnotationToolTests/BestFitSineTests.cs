@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using EdgeFitting;
 using Edges;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class BestFitTest
     {
-        [TestMethod]
+        [Test]
         public void TestFullBestFit()
         {
             int DEPTH = 86;
@@ -31,7 +29,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFullBestFit1()
         {
             int DEPTH = 20;
@@ -50,7 +48,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFullBestFit2()
         {
             int DEPTH = 86;
@@ -69,7 +67,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFullBestFit3()
         {
             int DEPTH = 36;
@@ -88,7 +86,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFullBestFit4()
         {
             int DEPTH = 400;
@@ -107,7 +105,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFullBestFit5()
         {
             int DEPTH = 154;
@@ -126,7 +124,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPartialBestFit()
         {
             int DEPTH = 100;
@@ -145,7 +143,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPartialBestFit2()
         {
             int DEPTH = 54;
@@ -164,7 +162,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPartialBestFit3()
         {
             int DEPTH = 143;
@@ -183,7 +181,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPartialBestFit4()
         {
             int DEPTH = 500;
@@ -202,7 +200,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Azimuth > AZIMUTH - 5 && sine.Azimuth < AZIMUTH + 5, "Azimuth should be " + AZIMUTH + ". It is " + sine.Azimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestQuality()
         {
             int DEPTH = 86;

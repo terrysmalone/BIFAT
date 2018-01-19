@@ -5,19 +5,19 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using BoreholeFeatures;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SaveLoadBoreholeData;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class SaveLoadDataTests
     {
         private string testRootFolder = AppDomain.CurrentDomain.BaseDirectory;
 
         private SaveLoadData saveLoadData;
 
-        [TestMethod]
+        [Test]
         public void TestCreateDirectories()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -41,7 +41,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestCopySourceFile()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -66,7 +66,7 @@ namespace BoreholeFeautreAnnotationToolTests
             File.Delete(AppDomain.CurrentDomain.BaseDirectory + "\\testSourceFile");
         }
 
-        [TestMethod]
+        [Test]
         public void TestSaveBoreholeDetails()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -108,7 +108,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestSaveLayers()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -183,7 +183,7 @@ namespace BoreholeFeautreAnnotationToolTests
             return testLayers;
         }
 
-        [TestMethod]
+        [Test]
         public void TestSaveClusters()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -236,7 +236,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestSaveInclusions()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -312,7 +312,7 @@ namespace BoreholeFeautreAnnotationToolTests
             return testInclusions;
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetImageDataFilePath()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -327,7 +327,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestBoreholeName()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -344,7 +344,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetBoreholeWidth()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -361,7 +361,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetBoreholeHeight()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -378,7 +378,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestBoreholeStartDepth()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -395,7 +395,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestBoreholeEndDepth()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -412,7 +412,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetResolution()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -429,7 +429,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetFluidLevel()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -448,7 +448,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetLayers()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -492,7 +492,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetClusters()
         {
             string projectLocation = testRootFolder + "\\projectLocation";
@@ -527,7 +527,7 @@ namespace BoreholeFeautreAnnotationToolTests
             deleteDirectory();
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetInclusions()
         {
             string projectLocation = testRootFolder + "\\projectLocation";

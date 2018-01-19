@@ -6,16 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoreholeFeatures;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class InclusionTests
     {
         Inclusion testInclusion;
 
-        [TestMethod]
+        [Test]
         public void TestConstructor()
         {
             testInclusion = new Inclusion(720, 2);
@@ -37,7 +37,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.InclusionType == "", "Type should be ''. It is " + testInclusion.InclusionType);
         }
 
-        [TestMethod]
+        [Test]
         public void TestLeftXBoundary()
         {
             testInclusion = new Inclusion(720, 2);
@@ -55,7 +55,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestRightXBoundary()
         {
             testInclusion = new Inclusion(720, 2);
@@ -72,7 +72,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.RightXBoundary == 45, "Right X boundary should be 45. It is " + testInclusion.RightXBoundary);
         }
 
-        [TestMethod]
+        [Test]
         public void TestTopYBoundary()
         {
             testInclusion = new Inclusion(720, 2);
@@ -92,7 +92,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.TopYBoundary == 2, "Top Y boundary should be 2. It is " + testInclusion.TopYBoundary);
         }
 
-        [TestMethod]
+        [Test]
         public void TestBottomYBoundary()
         {
             testInclusion = new Inclusion(720, 2);
@@ -112,7 +112,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.BottomYBoundary == 76, "Bottom Y boundary should be 76. It is " + testInclusion.BottomYBoundary);
         }
 
-        [TestMethod]
+        [Test]
         public void TestIsComplete()
         {
             testInclusion = new Inclusion(720, 2);
@@ -126,7 +126,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.IsComplete == false, "isComplete should be false. It is " + testInclusion.IsComplete);
         }
 
-        [TestMethod]
+        [Test]
         public void TestAddPoint()
         {
             testInclusion = new Inclusion(720, 2);
@@ -146,7 +146,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.Points[2] == new Point(4, 12), "Second point should be 4,12. It is " + testInclusion.Points[2]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPointsString()
         {
             testInclusion = new Inclusion(720, 2);
@@ -160,7 +160,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.PointsString.Equals("(12, 8) (32, 1) (100, 11) "), "Points string should be '(12, 8) (32, 1) (100, 11)'.  It is " + testInclusion.PointsString);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMovePoint()
         {
             testInclusion = new Inclusion(720, 2);
@@ -184,7 +184,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.Points[2] == new Point(110, 7));
         }
 
-        [TestMethod]
+        [Test]
         public void TestRemovePoint()
         {
             Point deletePoint = new Point(12, 8);
@@ -206,7 +206,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.Points[0] == new Point(32, 1), "Second point should be 32,1. It is " + testInclusion.Points[0]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestRemoveAddPoint()
         {
             Point deletePoint = new Point(12, 8);
@@ -240,7 +240,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.Points.Count == 0, "points list count should be 0. It is " + testInclusion.Points.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMoveInclusion()
         {
             testInclusion = new Inclusion(720, 2);
@@ -266,7 +266,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.Points[2] == new Point(130, 0), "Second point should be 130, 0. It is " + testInclusion.Points[2]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStartDepth()
         {
             testInclusion = new Inclusion(720, 1);
@@ -286,7 +286,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.StartDepth == 101, "Start depth should be 101mm.  It is " + testInclusion.StartDepth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStartDepth2MM()
         {
             testInclusion = new Inclusion(720, 2);
@@ -307,7 +307,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.StartDepth == 102, "Start depth should be 102mm.  It is " + testInclusion.StartDepth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestEndDepth1()
         {
             testInclusion = new Inclusion(720, 1);
@@ -328,7 +328,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.EndDepth == 200, "End depth should be 200mm.  It is " + testInclusion.EndDepth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestEndDepth2()
         {
             testInclusion = new Inclusion(720, 2);
@@ -349,7 +349,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.EndDepth == 300, "End depth should be 300mm.  It is " + testInclusion.EndDepth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestType()
         {
             testInclusion = new Inclusion(720, 2);
@@ -359,7 +359,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.InclusionType.Equals("Clast"), "Type should be 'Clast'. It is " + testInclusion.InclusionType);
         }
 
-        [TestMethod]
+        [Test]
         public void TestDetails()
         {
             DateTime time = DateTime.Now;
@@ -380,7 +380,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestDescription()
         {
             testInclusion = new Inclusion(720, 2);
@@ -389,7 +389,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testInclusion.Description.Equals("An inclusion"), "Description should be 'An inclusion'.  It is " + testInclusion.Description);
         }
 
-        [TestMethod]
+        [Test]
         public void TestTimeAdded()
         {
             DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
@@ -411,7 +411,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(addedInclusion.TimeAdded.Equals(timeAdded), "Clusters times should match. They are " + addedInclusion.TimeAdded.ToString() + " and " + timeAdded.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void TestTimeLastModified()
         {
             DateTimeFormatInfo dtfi = new DateTimeFormatInfo();

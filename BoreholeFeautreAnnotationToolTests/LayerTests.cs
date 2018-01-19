@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoreholeFeatures;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class LayerTest
     {
         private Layer testLayer;
 
-        [TestMethod]
+        [Test]
         public void TestLongConstructor()
         {
             int firstDepth = 100;
@@ -55,7 +55,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.SourceDepthResolution == 1, "Source depth resolution should be 1. It is " + testLayer.SourceDepthResolution);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetStartDepth()
         {
             int firstDepth = 210;
@@ -108,7 +108,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.SourceEndDepth == 0, "Source end depth should be 0. It is " + testLayer.SourceEndDepth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetEndDepth()
         {
             int firstDepth = 210;
@@ -129,7 +129,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.SourceEndDepth == 500, "Source end depth should be 500. It is " + testLayer.SourceEndDepth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetLayerType()
         {
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
@@ -144,7 +144,7 @@ namespace BoreholeFeautreAnnotationToolTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestDescription()
         {
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
@@ -158,7 +158,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.Description.Equals("A faint debris layer"), "Description should be 'A faint debris layer'.  It is " + testLayer.Description);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetQuality()
         {
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
@@ -174,7 +174,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.Quality == 2, "Quality should be 2.  It is " + testLayer.Quality);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetAdded()
         {
             DateTime timeStamp = new DateTime(2011, 06, 12, 2, 54, 32);
@@ -188,7 +188,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.TimeAdded.Equals(timeStamp), "Time stamps should match. Time added: " + testLayer.TimeAdded + " - timeStamp: " + timeStamp);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSetTimeLastModified()
         {
             DateTime timeStamp = new DateTime(2011, 06, 12, 2, 54, 32);
@@ -207,7 +207,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.TimeLastModified.Equals(timeStamp), "Time stamps should match. Time added: " + testLayer.TimeLastModified + " - timeStamp: " + timeStamp);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateStartY()
         {
             int firstDepth = 210;
@@ -224,7 +224,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.StartY == 195, "Start Y should be 195. It is " + testLayer.StartY);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculateEndY()
         {
             int firstDepth = 210;
@@ -241,7 +241,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.EndY == 523, "End Y should be 523. It is " + testLayer.EndY);
         }
 
-        [TestMethod]
+        [Test]
         public void TestChangeAmplitude()
         {
             int firstDepth = 210;
@@ -271,7 +271,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.EndY == 542, "End Y should be 542. It is " + testLayer.EndY);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMoveSine()
         {
             int firstDepth = 210;
@@ -317,7 +317,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.BottomSineAzimuth == 230, "Second azimuth should be 230");
         }
 
-        [TestMethod]
+        [Test]
         public void Test2MMDepthResolution()
         {
             int firstDepth = 210;
@@ -363,7 +363,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(testLayer.BottomSineAzimuth == 220, "Second azimuth should be 220. It is " + testLayer.BottomSineAzimuth);
         }
 
-        [TestMethod]
+        [Test]
         public void TestTimeAdded()
         {
             DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
@@ -387,7 +387,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(addedLayer.TimeAdded.Equals(timeAdded), "Layers times should match. They are " + addedLayer.TimeAdded + " and " + timeAdded.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void TestTimeLastModified()
         {
             DateTimeFormatInfo dtfi = new DateTimeFormatInfo();

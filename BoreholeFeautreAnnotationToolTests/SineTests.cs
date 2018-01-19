@@ -4,14 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using EdgeFitting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BoreholeFeautreAnnotationToolTests
 {
-    [TestClass]
+    [TestFixture]
     public class SineTest
     {
-        [TestMethod]
+        [Test]
         public void TestConstructor()
         {
             Sine sine = new Sine(100, 340, 23, 360);
@@ -22,7 +22,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Quality == 1, "Quality should be 1. It is " + sine.Quality);
         }
 
-        [TestMethod]
+        [Test]
         public void TestConstructorWithQuality()
         {
             Sine sine = new Sine(100, 340, 23, 360, 3);
@@ -33,7 +33,7 @@ namespace BoreholeFeautreAnnotationToolTests
             Assert.IsTrue(sine.Quality == 3, "Quality should be 3. It is " + sine.Quality);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCalculatePoints()
         {
             int depth = 100;
@@ -64,7 +64,7 @@ namespace BoreholeFeautreAnnotationToolTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestChange()
         {
             int depth = 100;
@@ -117,7 +117,7 @@ namespace BoreholeFeautreAnnotationToolTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetY()
         {
             int depth = 456;
@@ -141,7 +141,7 @@ namespace BoreholeFeautreAnnotationToolTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetSinePoint()
         {
             int depth = 105;
@@ -166,7 +166,7 @@ namespace BoreholeFeautreAnnotationToolTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestSourceAzimuthResolution()
         {
             int depth = 105;
