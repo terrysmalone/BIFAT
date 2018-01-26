@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System.Drawing;
+using NUnit.Framework;
 using AutomaticFeatureDetection;
 using AutomaticFeatureDetectionTests.Properties;
 
 namespace AutomaticFeatureDetectionTests
 {
-    
     internal sealed class BitmapConverterTests
     {
         [Test]
@@ -14,8 +14,7 @@ namespace AutomaticFeatureDetectionTests
 
             var bitmapData = BitmapConverter.GetRgbFromBitmap(testImage);
 
-            Assert.IsTrue(bitmapData.Length == 100, 
-                          "bitmapData should contain 100 values. It contains " + bitmapData.Length);
+            Assert.That(bitmapData.Length, Is.EqualTo(100));
 
             //Top left square
             for (var i = 0; i < 5; i++)
