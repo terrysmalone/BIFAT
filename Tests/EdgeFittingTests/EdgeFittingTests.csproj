@@ -49,6 +49,8 @@
     <Compile Include="BestFitSineTests.cs" />
     <Compile Include="PointOrientationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SineFitTests.cs" />
+    <Compile Include="SineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

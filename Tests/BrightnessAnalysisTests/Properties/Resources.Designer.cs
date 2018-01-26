@@ -63,21 +63,19 @@ namespace BrightnessAnalysisTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExcludeLayersTestImage {
+        internal static System.Drawing.Bitmap ExcludeInclusionsTestImage {
             get {
-                object obj = ResourceManager.GetObject("ExcludeLayersTestImage", resourceCulture);
+                object obj = ResourceManager.GetObject("ExcludeInclusionsTestImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExcludeInclusionsTestImage
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("ExcludeInclusionsTestImage", resourceCulture);
+        internal static System.Drawing.Bitmap ExcludeLayersTestImage {
+            get {
+                object obj = ResourceManager.GetObject("ExcludeLayersTestImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

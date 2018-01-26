@@ -62,6 +62,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RemoveEdgesTests.cs" />
+    <Compile Include="TriangleAreaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -94,7 +95,7 @@
     <None Include="Resources\EdgeJoiningTestImage.bmp" />
     <None Include="Resources\EndToEndTestImage.bmp" />
     <None Include="Resources\Edge1Test.bmp" />
-    <Content Include="Resources\TestOverlap.bmp" />
+    <None Include="Resources\TestOverlap.bmp" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

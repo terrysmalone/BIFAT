@@ -2,7 +2,7 @@
 using Edges;
 using NUnit.Framework;
 
-namespace BoreholeFeautreAnnotationToolTests
+namespace EdgesTests
 {
     internal sealed class TriangleAreaTest
     {

@@ -63,25 +63,53 @@ namespace EdgesTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Edge1Test {
+            get {
+                object obj = ResourceManager.GetObject("Edge1Test", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edge2Test {
+            get {
+                object obj = ResourceManager.GetObject("Edge2Test", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EdgeJoiningTestImage {
+            get {
+                object obj = ResourceManager.GetObject("EdgeJoiningTestImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EdgeLinkingTestImage {
             get {
                 object obj = ResourceManager.GetObject("EdgeLinkingTestImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EdgeJoiningTestImage
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("EdgeJoiningTestImage", resourceCulture);
+        internal static System.Drawing.Bitmap EndToEndTestImage {
+            get {
+                object obj = ResourceManager.GetObject("EndToEndTestImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -91,63 +119,23 @@ namespace EdgesTests.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TestOverlap
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap TestOverlap {
+            get {
                 object obj = ResourceManager.GetObject("TestOverlap", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TestOverlappingEdges
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap TestOverlappingEdges {
+            get {
                 object obj = ResourceManager.GetObject("TestOverlappingEdges", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Edge1Test
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Edge1Test", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Edge2Test
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Edge2Test", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap EndToEndTestImage
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("EndToEndTestImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

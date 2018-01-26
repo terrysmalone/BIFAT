@@ -118,10 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Edge1Test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Edge1Test.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Edge2Test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Edge2Test.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EdgeJoiningTestImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EdgeJoiningTestImage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="EdgeLinkingTestImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EdgeLinkingTestImage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EndToEndTestImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EndToEndTestImage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LinkToCorrectEdgeImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkToCorrectEdgeImage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TestOverlap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TestOverlap.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TestOverlappingEdges" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TestOverlappingEdges.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
