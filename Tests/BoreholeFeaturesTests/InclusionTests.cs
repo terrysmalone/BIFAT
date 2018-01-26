@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BoreholeFeatures;
 using NUnit.Framework;
 
-namespace BoreholeFeautreAnnotationToolTests
+namespace BoreholeFeaturesTests
 {
     [TestFixture]
     public class InclusionTests

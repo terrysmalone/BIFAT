@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using BoreholeFeatures;
-using SaveLoadBoreholeData;
 using NUnit.Framework;
+using SaveLoadBoreholeData;
+using BoreholeFeatures;
+using System.Drawing;
 
-namespace BoreholeFeautreAnnotationToolTests
+namespace SaveLoadBoreholeDataTests
 {
     [TestFixture]
     public class SaveLoadDataTests
