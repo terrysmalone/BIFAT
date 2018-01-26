@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace BoreholeFeatures
+namespace BoreholeFeatures.Converters
 {
-    public class ClusterGroupConverter : StringConverter
+    internal class LayerGroupConverter : StringConverter
     {
-        //private IModel _model;
-
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             //true means show a combobox
@@ -27,10 +21,12 @@ namespace BoreholeFeatures
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            Cluster refCluster = context.Instance as Cluster;
-            return new StandardValuesCollection(refCluster.GetClusterGroupNames());
+            var refLayer = context.Instance as Layer;
+            
+            // ReSharper disable once PossibleNullReferenceException
+            return new StandardValuesCollection(refLayer.GetLayerGroupNames());
         }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="BestFitEdgeLine.cs" />
     <Compile Include="BestFitSine.cs" />
     <Compile Include="EdgeLine.cs" />
+    <Compile Include="Orientation.cs" />
     <Compile Include="Overlap.cs" />
     <Compile Include="PointOrientation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using AutomaticFeatureDetection;
 using AutomaticFeatureDetectionTests.Properties;
 

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace BoreholeFeatures
+namespace BoreholeFeatures.Converters
 {
     /// <summary>
-    /// Modifies the input type for the inclsuion type on the propertygrid to show a drop-down list
+    /// Modifies the input of the quality field for a feature in the property grid to show a 
+    /// drop-down box with choices 1-4
     /// </summary>
-    class InclusionTypeConverter : StringConverter
+    internal class QualityConverter : Int32Converter
     {
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
@@ -24,14 +21,13 @@ namespace BoreholeFeatures
         }
 
         /// <summary>
-        /// Overrides the standard values
+        /// Overrides the standard values 
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(
-            new string[] { "Clast", "Bubble", "Void" });
+            return new StandardValuesCollection(new[] { 1, 2, 3, 4 });
         }
     }
 

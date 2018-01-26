@@ -220,15 +220,16 @@ namespace EdgeFitting
         /// </summary>
         /// <param name="position">The position of the point to check</param>
         /// <returns>The orientation of the point</returns>
-        public int GetPointOrientation(int position)
+        public Orientation GetPointOrientation(int position)
         {
-            int pointOrientation = 0;
-
             calculatePointsPosition(position);
 
-            PointOrientation orientation = new PointOrientation(orientationBeforePoint, orientationCheckPoint, orientationAfterPoint, sourceAzimuthResolution);
+            var orientation = new PointOrientation(orientationBeforePoint, 
+                                                   orientationCheckPoint, 
+                                                   orientationAfterPoint, 
+                                                   sourceAzimuthResolution);
 
-            pointOrientation = orientation.Orientation;
+            var pointOrientation = orientation.Orientation;
 
             return pointOrientation;
         }

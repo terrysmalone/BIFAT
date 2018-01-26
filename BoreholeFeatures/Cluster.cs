@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using BoreholeFeatures.Converters;
 
 namespace BoreholeFeatures
 {
@@ -12,7 +13,7 @@ namespace BoreholeFeatures
     /// Author - Terry Malone
     /// Version 1.1 Refactored
     /// </summary>
-    [DefaultPropertyAttribute("Description")]
+    [DefaultProperty("Description")]
     public class Cluster
     {
         private readonly int m_AzimuthResolution;
@@ -30,21 +31,26 @@ namespace BoreholeFeatures
 
         #region property grid properties
 
-        [CategoryAttribute("Depth"), DescriptionAttribute("The clusters start depth in millimetres")]
-        [DisplayName("Start Depth (mm)")]
+        [Category("Depth"), 
+         Description("The clusters start depth in millimetres"), 
+         DisplayName("Start Depth (mm)")]
         public int StartDepth { get; private set; }
 
-        [CategoryAttribute("Depth"), DescriptionAttribute("The clusters end depth in millimetres")]
-        [DisplayName("End Depth (mm)")]
+        [Category("Depth"), 
+         Description("The clusters end depth in millimetres"), 
+         DisplayName("End Depth (mm)")]
         public int EndDepth { get; private set; }
 
-        [Browsable(true)]
-        [DefaultValue("entry1")]
-        [CategoryAttribute("\tDescription"), DescriptionAttribute("The group this cluster belongs to (To change group display colours go to 'Features>Clusters>Groups'")]
-        [TypeConverter(typeof(ClusterGroupConverter))]
+        [Browsable(true), 
+         DefaultValue("entry1"), 
+         Category("\tDescription"), 
+         Description("The group this cluster belongs to (To " +
+                     "change group display colours go to 'Features>Clusters>Groups'"),
+         TypeConverter(typeof(ClusterGroupConverter))]
         public string Group { get; set; }
 
-        [CategoryAttribute("Points"), DescriptionAttribute("The clusters points")]
+        [Category("Points"), 
+         Description("The clusters points")]
         public string PointsString
         {
             get
@@ -54,10 +60,12 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\tDescription"), DescriptionAttribute("Additional information")]
+        [Category("\t\tDescription"), 
+         Description("Additional information")]
         public string Description
         {
-            get { return m_Description; }
+            get => m_Description;
+
             set 
             { 
                 m_Description = value;
@@ -65,23 +73,28 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\tCluster Type"), DescriptionAttribute("Does the cluster contain small bubbles?")]
-        [DisplayName("Small Bubbles")]
+        [Category("\tCluster Type"), 
+         Description("Does the cluster contain small bubbles?"),
+         DisplayName("Small Bubbles")]
         public bool SmallBubbles { get; set; }
 
-        [CategoryAttribute("\tCluster Type"), DescriptionAttribute("Does the cluster contain large bubbles?")]
-        [DisplayName("Large Bubbles")]
+        [Category("\tCluster Type"), 
+         Description("Does the cluster contain large bubbles?"),
+         DisplayName("Large Bubbles")]
         public bool LargeBubbles { get; set; }
 
-        [CategoryAttribute("\tCluster Type"), DescriptionAttribute("Does the cluster contain fine debris?")]
-        [DisplayName("Fine Debris")]
+        [Category("\tCluster Type"), 
+         Description("Does the cluster contain fine debris?"), 
+         DisplayName("Fine Debris")]
         public bool FineDebris { get; set; }
 
-        [CategoryAttribute("\tCluster Type"), DescriptionAttribute("Does the cluster contain coarse debris?")]
-        [DisplayName("Coarse Debris")]
+        [Category("\tCluster Type"), 
+         Description("Does the cluster contain coarse debris?"),
+         DisplayName("Coarse Debris")]
         public bool CoarseDebris { get; set; }
 
-        [CategoryAttribute("\tCluster Type"), DescriptionAttribute("Does the cluster contain debris of varying grain size?")]
+        [Category("\tCluster Type"), 
+         Description("Does the cluster contain debris of varying grain size?")]
         public bool Diamicton { get; set; }
 
         #endregion property grid properties
@@ -134,7 +147,7 @@ namespace BoreholeFeatures
 
         public int SourceStartDepth
         {
-            get { return m_SourceStartDepth; }
+            get => m_SourceStartDepth;
             set
             {
                 m_SourceStartDepth = value;
@@ -246,18 +259,6 @@ namespace BoreholeFeatures
             CalculateYBounds();
 
             CalculatePointsString();
-        }
-
-        private void ShiftAllXPoints(int amountToShift)
-        {
-            for (int i = 0; i < Points.Count; i++)
-            {
-                Point currentPoint = Points[i];
-                Points[i] = new Point(currentPoint.X + amountToShift, currentPoint.Y);
-            }
-
-            LeftXBoundary += amountToShift;
-            RightXBoundary += amountToShift;
         }
 
         # endregion Point operation methods
@@ -498,6 +499,19 @@ namespace BoreholeFeatures
             {
                 ShiftAllXPoints(-m_AzimuthResolution);
             }
+        }
+
+        private void ShiftAllXPoints(int amountToShift)
+        {
+            for (var i = 0; i < Points.Count; i++)
+            {
+                var currentPoint = Points[i];
+                Points[i] = new Point(currentPoint.X + amountToShift, 
+                                      currentPoint.Y);
+            }
+
+            LeftXBoundary += amountToShift;
+            RightXBoundary += amountToShift;
         }
     } 
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace BoreholeFeatures
+namespace BoreholeFeatures.Converters
 {
-    public class InclusionGroupConverter : StringConverter
+    internal class InclusionGroupConverter : StringConverter
     {
         //private IModel _model;
 
@@ -27,9 +23,11 @@ namespace BoreholeFeatures
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            Inclusion refInclusion = context.Instance as Inclusion;
+            var refInclusion = context.Instance as Inclusion;
+
+            // ReSharper disable once PossibleNullReferenceException
             return new StandardValuesCollection(refInclusion.GetInclusionGroupNames());
         }
     }
