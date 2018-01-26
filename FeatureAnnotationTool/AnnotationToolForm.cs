@@ -5313,7 +5313,7 @@ namespace FeatureAnnotationTool
 
         # endregion
 
-        # region Right-clcik on feature methods
+        # region Right-click on feature methods
 
         private void rightClickOnLayerContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
