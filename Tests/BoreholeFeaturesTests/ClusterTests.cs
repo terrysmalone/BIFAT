@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace BoreholeFeaturesTests
 {
-    public class ClusterTests
+    internal sealed class ClusterTests
     {
         [Test]
         public void Constructor_properties_are_correct()

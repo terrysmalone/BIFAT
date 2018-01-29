@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BoreholeFeatures">
-      <HintPath>..\BoreholeFeatures\bin\Release\BoreholeFeatures.dll</HintPath>
+      <HintPath>..\BoreholeFeatures\bin\Debug\BoreholeFeatures.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

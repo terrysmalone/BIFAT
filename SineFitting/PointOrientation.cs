@@ -1,24 +1,34 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace EdgeFitting
 {
     /// <summary>
-    /// Class which calculates the orientation of a point from the two points surrounding it.  Possible orientations are:
-    /// 1:       2:                3:       4:                5:       6:                7:       8:
-    /// |-|-|-|  |X|-|-|  |-|-|-|  |X|-|-|  |X|-|-|  |-|X|-|  |-|X|-|  |-|-|X|  |-|X|-|  |-|-|X|  |-|-|X|  |-|-|-|
-    /// |X|X|X|  |-|X|X|  |X|X|-|  |-|X|-|  |-|X|-|  |-|X|-|  |-|X|-|  |-|X|-|  |-|X|-|  |-|X|-|  |X|X|-|  |-|X|X|
-    /// |-|-|-|  |-|-|-|  |-|-|X|  |-|-|X|  |-|X|-|  |-|-|X|  |-|X|-|  |-|X|-|  |X|-|-|  |X|-|-|  |-|-|-|  |X|-|-|
+    /// Class which calculates the orientation of a point from the two points surrounding it.  
+    /// Possible orientations are:
     /// 
-    /// Author - Terry Malone (trm8@aber.ac.uk)
-    /// Version 1.1
+    /// Horizontal   HorizontalLeadingOffset   LeadingDiagonal   VerticalLeadingOffset 
+    ///  |-|-|-|        |X|-|-|  |-|-|-|          |X|-|-|          |X|-|-|  |-|X|-|   
+    ///  |X|X|X|        |-|X|X|  |X|X|-|          |-|X|-|          |-|X|-|  |-|X|-|   
+    ///  |-|-|-|        |-|-|-|  |-|-|X|          |-|-|X|          |-|X|-|  |-|-|X|   
+    /// 
+    /// Vertical     VerticalCounterOffset    CounterDiagonal    HorizontalCounterOffset
+    ///  |-|X|-|        |-|-|X|   |-|X|-|         |-|-|X|          |-|-|X|   |-|-|-|
+    ///  |-|X|-|        |-|X|-|   |-|X|-|         |-|X|-|          |X|X|-|   |-|X|X|
+    ///  |-|X|-|        |-|X|-|   |X|-|-|         |X|-|-|          |-|-|-|   |X|-|-|
+    /// 
+    ///  Author - Terry Malone (terrysmalone@hotmail.com)
     /// </summary>
     public class PointOrientation
     {
-        Point beforePoint, checkPoint, afterPoint;
-        private int imageWidth;
-        private int orientation;
+        private readonly int m_ImageWidth;
 
-        private int beforeX, beforeY, checkX, checkY, afterX, afterY;
+        private int m_BeforeX, m_AfterX;
+
+        private readonly int m_BeforeY;
+        private readonly int m_CheckX;
+        private readonly int m_CheckY;
+        private readonly int m_AfterY;
 
         #region properties
 
@@ -26,126 +36,125 @@ namespace EdgeFitting
         /// Returns the orientation of the given point
         /// </summary>
         /// <returns></returns>
-        public int Orientation
-        {
-            get { return orientation; }
-        }
+        public Orientation Orientation { get; private set; }
 
         #endregion properties
-
-        /// <summary>
-        /// Constructor method
-        /// </summary>
-        /// <param name="leftPoint">Point before the  point to check</param>
-        /// <param name="midPoint">The point to check</param>
-        /// <param name="rightPoint">Point after the  point to check</param>
+        
         public PointOrientation(Point beforePoint, Point checkPoint, Point afterPoint, int imageWidth)
         {
-            this.beforePoint = beforePoint;
-            this.checkPoint = checkPoint;
-            this.afterPoint = afterPoint;
+            m_BeforeX = beforePoint.X;
+            m_BeforeY = beforePoint.Y;
 
-            this.imageWidth = imageWidth;
+            m_CheckX = checkPoint.X;
+            m_CheckY = checkPoint.Y;
 
-            calculatePointOrientation();
+            m_AfterX = afterPoint.X;
+            m_AfterY = afterPoint.Y;
+            
+            this.m_ImageWidth = imageWidth;
+
+            CheckForEdgeValues();
+
+            CalculatePointOrientation();
         }
 
-        private void calculatePointOrientation()
+        /// <summary>
+        /// If the edges are at the edge of the image wrap them
+        /// </summary>
+        private void CheckForEdgeValues()
         {
-            initialiseValues();
+            CheckIfPointIsAtLeftBoundary();
 
-            if (doPointsSpan1Column())                                                //orientation 1
-                orientation = 1;
-            else if (doPointsSpan3Columns())                       //orientation 2,3,7 or 8
+            CheckIfPointIsAtRightBoundary();
+        }
+
+        /// <summary>
+        /// If point to check is at left boundary beforeX is set to minus 1.  
+        /// </summary>
+        private void CheckIfPointIsAtLeftBoundary()
+        {
+            if (m_CheckX == 0 && m_BeforeX != 0)
             {
-                if (beforeY == checkY - 1 && afterY == checkY + 1)                  //orientation 3
-                    orientation = 3;
-                else if (beforeY == checkY + 1 && afterY == checkY - 1)             //orientation 7
-                    orientation = 7;
-                else if (beforeY == afterY - 1)                                     //orientation 2
-                    orientation = 2;
-                else                                                                //orientation 8
-                    orientation = 8;
+                m_BeforeX = -1;
             }
-            else                                                                //Orientation 4, 5 or 6
+        }
+
+        /// <summary>
+        /// If point to check is at left boundary afterX is set to image width.  
+        /// </summary>
+        private void CheckIfPointIsAtRightBoundary()
+        {
+            if (m_CheckX == m_ImageWidth - 1 && m_AfterX != m_ImageWidth - 1)
             {
-                if (beforeX == afterX)                                            //orientation 5
-                    orientation = 5;
-                else if (beforeX == afterX - 1 && beforeY < afterY)               //orientation 4  
-                    orientation = 4;
+                m_AfterX = m_ImageWidth;
+            }
+        }
+
+        private void CalculatePointOrientation()
+        {
+            var columnCount = Convert.ToInt32(Math.Abs(m_BeforeX - m_AfterX) + 1);
+            var rowCount = Convert.ToInt32(Math.Abs(m_BeforeY - m_AfterY) + 1);
+
+            if(columnCount == 1)
+            {
+                Orientation = Orientation.Vertical;
+            }
+            else if(rowCount == 1)
+            {
+                Orientation = Orientation.Horizontal;
+            }
+            else if(columnCount == 2)
+            {
+                if(m_BeforeX == m_AfterX - 1 && m_BeforeY < m_AfterY)
+                {
+                    Orientation = Orientation.VerticalLeadingOffset;
+                }
                 else
-                    orientation = 6;                                            //orientation 6  
+                {
+                    Orientation = Orientation.VerticalCounterOffset;
+                }
+
             }
+            else if(rowCount == 2)
+            {
+                Orientation = m_BeforeY == m_AfterY - 1 ? Orientation.HorizontalLeadingOffset 
+                                                             : Orientation.HorizontalCounterOffset;
+            }
+            else if(columnCount == 3 && rowCount == 3)
+            {
+                Orientation = m_BeforeY < m_AfterY ? Orientation.LeadingDiagonal 
+                                                        : Orientation.CounterDiagonal;
+            }
+        }
+
+        /// <summary>
+        /// Checks if points span one row
+        /// </summary>
+        /// <returns>True if all points are in same row</returns>
+        private bool DoPointsSpan1Column()
+        {
+            return m_BeforeX == m_AfterX 
+                   && m_BeforeX == m_CheckX;
         }
 
         /// <summary>
         /// Checks if points span one column
         /// </summary>
         /// <returns>True if all points are in same column</returns>
-        private bool doPointsSpan1Column()
+        private bool DoPointsSpan1Row()
         {
-            if (beforeY == afterY && beforeY == checkY)
-                return true;
-            else
-                return false;
+            return m_BeforeY == m_AfterY
+                   && m_BeforeY == m_CheckY;
         }
 
         /// <summary>
         /// Checks if points span 3 columns
         /// </summary>
         /// <returns>True if points span 3 columns</returns>
-        private bool doPointsSpan3Columns()
+        private bool DoPointsSpan3Columns()
         {
-            if (beforeX < checkX && afterX > checkX)
-                return true;
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// Initialises the three Point's values and checks if any wrap over the image
-        /// </summary>
-        private void initialiseValues()
-        {
-            checkX = checkPoint.X;
-            checkY = checkPoint.Y;
-
-            beforeY = beforePoint.Y;
-            afterY = afterPoint.Y;
-
-            checkIfPointIsAtLeftBoundary();
-
-            checkIfPointIsAtRightBoundary();
-        }
-
-        /// <summary>
-        /// If point to check is at left boundary beforeX is set to minus 1.  
-        /// </summary>
-        private void checkIfPointIsAtLeftBoundary()
-        {
-            if (checkX == 0 && beforePoint.X != 0)
-            {
-                beforeX = -1;
-            }
-            else
-            {
-                beforeX = beforePoint.X;
-            }
-        }
-
-        /// <summary>
-        /// If point to check is at left boundary afterXX is set to image width.  
-        /// </summary>
-        private void checkIfPointIsAtRightBoundary()
-        {
-            if (checkX == imageWidth - 1 && afterPoint.X != imageWidth - 1)
-            {
-                afterX = imageWidth;
-            }
-            else
-            {
-                afterX = afterPoint.X;
-            }
+            return m_BeforeX < m_CheckX 
+                   && m_AfterX > m_CheckX;
         }
     }
 

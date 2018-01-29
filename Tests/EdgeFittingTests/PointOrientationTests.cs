@@ -13,17 +13,17 @@ namespace EdgeFittingTests
         /// |-|-|-| 
         /// </summary>
         [Test]
-        public void TestOrientation1()
+        public void Horizontal_is_identified()
         {
-            Point beforePoint = new Point(34, 100);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(36, 100);
+            var beforePoint = new Point(34, 100);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(36, 100);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 1, "Orientation should be 1.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.Horizontal));
         }
 
         /// <summary>
@@ -32,17 +32,17 @@ namespace EdgeFittingTests
         /// |-|-|-| 
         /// </summary>
         [Test]
-        public void TestOrientation2a()
+        public void HorizontalLeadingOffset_is_identified_a()
         {
-            Point beforePoint = new Point(34, 99);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(36, 100);
+            var beforePoint = new Point(34, 99);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(36, 100);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 2, "Orientation should be 2.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.HorizontalLeadingOffset));
         }
 
         /// <summary>
@@ -51,17 +51,17 @@ namespace EdgeFittingTests
         /// |-|-|X| 
         /// </summary>
         [Test]
-        public void TestOrientation2b()
+        public void HorizontalLeadingOffset_is_identified_b()
         {
-            Point beforePoint = new Point(34, 100);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(36, 101);
+            var beforePoint = new Point(34, 100);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(36, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 2, "Orientation should be 2.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.HorizontalLeadingOffset));
         }
 
         /// <summary>
@@ -70,17 +70,17 @@ namespace EdgeFittingTests
         /// |-|-|X| 
         /// </summary>
         [Test]
-        public void TestOrientation3()
+        public void LeadingDiagonal_is_identified()
         {
-            Point beforePoint = new Point(34, 99);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(36, 101);
+            var beforePoint = new Point(34, 99);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(36, 101);
+            
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            
+            var orientation = pointOrientation.Orientation;
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
-
-            int orientation = pointOrientation.Orientation;
-
-            Assert.IsTrue(orientation == 3, "Orientation should be 3.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.LeadingDiagonal));
         }
 
         /// <summary>
@@ -89,17 +89,17 @@ namespace EdgeFittingTests
         /// |-|X|-| 
         /// </summary>
         [Test]
-        public void TestOrientation4a()
+        public void VerticalLeadingOffset_is_identified_a()
         {
-            Point beforePoint = new Point(34, 99);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(35, 101);
+            var beforePoint = new Point(34, 99);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(35, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 4, "Orientation should be 4.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.VerticalLeadingOffset));
         }
 
         /// <summary>
@@ -108,17 +108,17 @@ namespace EdgeFittingTests
         /// |-|-|X| 
         /// </summary>
         [Test]
-        public void TestOrientation4b()
+        public void VerticalLeadingOffset_is_identified_b()
         {
-            Point beforePoint = new Point(35, 99);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(36, 101);
+            var beforePoint = new Point(35, 99);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(36, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 4, "Orientation should be 4.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.VerticalLeadingOffset));
         }
 
         /// <summary>
@@ -127,17 +127,17 @@ namespace EdgeFittingTests
         /// |-|X|-| 
         /// </summary>
         [Test]
-        public void TestOrientation5()
+        public void Vertical_is_identified()
         {
-            Point beforePoint = new Point(35, 99);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(35, 101);
+            var beforePoint = new Point(35, 99);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(35, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 5, "Orientation should be 5.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.Vertical));
         }
 
         /// <summary>
@@ -146,17 +146,17 @@ namespace EdgeFittingTests
         /// |-|x|-| 
         /// </summary>
         [Test]
-        public void TestOrientation6a()
+        public void VerticalCounterOffset_is_identified_a()
         {
-            Point beforePoint = new Point(35, 101);
-            Point checkPoint = new Point(35, 100);
-            Point afterPoint = new Point(36, 99);
+            var beforePoint = new Point(35, 101);
+            var checkPoint = new Point(35, 100);
+            var afterPoint = new Point(36, 99);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 6, "Orientation should be 6.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.VerticalCounterOffset));
         }
 
         /// <summary>
@@ -165,17 +165,17 @@ namespace EdgeFittingTests
         /// |X|-|-| 
         /// </summary>
         [Test]
-        public void TestOrientation6b()
+        public void VerticalCounterOffset_is_identified_b()
         {
-            Point beforePoint = new Point(35, 101);
-            Point checkPoint = new Point(36, 100);
-            Point afterPoint = new Point(36, 99);
+            var beforePoint = new Point(35, 101);
+            var checkPoint = new Point(36, 100);
+            var afterPoint = new Point(36, 99);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 6, "Orientation should be 6.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.VerticalCounterOffset));
         }
 
         /// <summary>
@@ -184,17 +184,17 @@ namespace EdgeFittingTests
         /// |X|-|-| 
         /// </summary>
         [Test]
-        public void TestOrientation7()
+        public void CounterDiagonal_is_identified()
         {
-            Point beforePoint = new Point(35, 101);
-            Point checkPoint = new Point(36, 100);
-            Point afterPoint = new Point(37, 99);
+            var beforePoint = new Point(35, 101);
+            var checkPoint = new Point(36, 100);
+            var afterPoint = new Point(37, 99);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 7, "Orientation should be 7.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.CounterDiagonal));
         }
 
         /// <summary>
@@ -203,17 +203,17 @@ namespace EdgeFittingTests
         /// |-|-|-| 
         /// </summary>
         [Test]
-        public void TestOrientation8a()
+        public void HorizontalCounterOffset_is_identified_a()
         {
-            Point beforePoint = new Point(35, 101);
-            Point checkPoint = new Point(36, 101);
-            Point afterPoint = new Point(37, 99);
+            var beforePoint = new Point(35, 101);
+            var checkPoint = new Point(36, 101);
+            var afterPoint = new Point(37, 100);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 8, "Orientation should be 8.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.HorizontalCounterOffset));
         }
 
         /// <summary>
@@ -222,17 +222,17 @@ namespace EdgeFittingTests
         /// |X|-|-| 
         /// </summary>
         [Test]
-        public void TestOrientation8b()
+        public void HorizontalCounterOffset_is_identified_b()
         {
-            Point beforePoint = new Point(35, 101);
-            Point checkPoint = new Point(36, 100);
-            Point afterPoint = new Point(37, 100);
+            var beforePoint = new Point(35, 101);
+            var checkPoint = new Point(36, 100);
+            var afterPoint = new Point(37, 100);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 8, "Orientation should be 8.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.HorizontalCounterOffset));
         }
 
         /// <summary>
@@ -242,17 +242,17 @@ namespace EdgeFittingTests
         /// |X|-|-| 
         /// </summary>
         [Test]
-        public void TestPointAtLeftEdge()
+        public void CounterDiagonal_at_left_edge_is_identified()
         {
-            Point beforePoint = new Point(359, 101);
-            Point checkPoint = new Point(0, 100);
-            Point afterPoint = new Point(1, 99);
+            var beforePoint = new Point(359, 101);
+            var checkPoint = new Point(0, 100);
+            var afterPoint = new Point(1, 99);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 7, "Orientation should be 7.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.CounterDiagonal));
         }
 
         /// <summary>
@@ -262,17 +262,17 @@ namespace EdgeFittingTests
         /// |-|-|X|
         /// </summary>
         [Test]
-        public void TestPointAtLeftEdgeButNotWrapping()
+        public void VerticalLeadingOffset_at_left_edge_but_not_wrapping_is_identified()
         {
-            Point beforePoint = new Point(0, 99);
-            Point checkPoint = new Point(0, 100);
-            Point afterPoint = new Point(1, 101);
+            var beforePoint = new Point(0, 99);
+            var checkPoint = new Point(0, 100);
+            var afterPoint = new Point(1, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 4, "Orientation should be 4.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.VerticalLeadingOffset));
         }
 
         /// <summary>
@@ -282,17 +282,17 @@ namespace EdgeFittingTests
         /// |-|-|X| 
         /// </summary>
         [Test]
-        public void TestPointAtRightEdge()
+        public void LeadingDiagonal_at_right_edge_is_identified()
         {
-            Point beforePoint = new Point(358, 99);
-            Point checkPoint = new Point(359, 100);
-            Point afterPoint = new Point(0, 101);
+            var beforePoint = new Point(358, 99);
+            var checkPoint = new Point(359, 100);
+            var afterPoint = new Point(0, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 3, "Orientation should be 3.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.LeadingDiagonal));
         }
 
         /// <summary>
@@ -302,17 +302,17 @@ namespace EdgeFittingTests
         /// |-|X|-| 
         /// </summary>
         [Test]
-        public void TestPointAtRightEdgeButNotWrapping()
+        public void Vertical_at_right_edge_but_not_wrapping_is_identified()
         {
-            Point beforePoint = new Point(359, 99);
-            Point checkPoint = new Point(359, 100);
-            Point afterPoint = new Point(359, 101);
+            var beforePoint = new Point(359, 99);
+            var checkPoint = new Point(359, 100);
+            var afterPoint = new Point(359, 101);
 
-            PointOrientation pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
+            var pointOrientation = new PointOrientation(beforePoint, checkPoint, afterPoint, 360);
 
-            int orientation = pointOrientation.Orientation;
+            var orientation = pointOrientation.Orientation;
 
-            Assert.IsTrue(orientation == 5, "Orientation should be 5.  It is " + orientation);
+            Assert.That(orientation, Is.EqualTo(Orientation.Vertical));
         }
 
     }

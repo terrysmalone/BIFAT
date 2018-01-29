@@ -1,15 +1,13 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace AutomaticFeatureDetection
 {
     /// <summary>
-    /// Converts a bitmap image to an RGB int[] array
+    /// Converts a bitmap image to a one dimensional RGB int[] array
     /// 
-    /// Author - Terry Malone (trm8@aber.ac.uk)
-    /// Version 1.1 Refactored
+    /// Author - Terry Malone (terrysmalone@hotmail.com)
     /// </summary>
     public static class BitmapConverter
     {
@@ -17,37 +15,33 @@ namespace AutomaticFeatureDetection
         private const PixelFormat PixelFormat = System.Drawing.Imaging.PixelFormat.Format24bppRgb;
 
         /// <summary>
-        /// Returns an int[] array representing the RGB values of alkl pixels in the image
+        /// Returns an int[] array representing the RGB values of all pixels in the image
         /// </summary>
         /// <param name="image">The image</param>
         /// <returns>The int[] array of RGB values</returns>
         public static int[] GetRgbFromBitmap(Bitmap image)
         {
-            const int startX = 0;
-            const int startY = 0;
-            const int offset = 0;
-
-            var scansize = image.Width;
+            var scanSize = image.Width;
 
             var rgbArray = new int[image.Width * image.Height];
 
-            var data = image.LockBits(new Rectangle(startX, startY, image.Width, image.Height), 
+            var data = image.LockBits(new Rectangle( 0, 0, image.Width, image.Height), 
                                       ImageLockMode.ReadOnly, PixelFormat);
 
             try
             {
-                var pixelData = new Byte[data.Stride];
+                var pixelData = new byte[data.Stride];
 
                 for (var row = 0; row < data.Height; row++)
                 {
                     Marshal.Copy(data.Scan0 + (row * data.Stride), pixelData, 0, data.Stride);
 
-                    for (var pixeloffset = 0; pixeloffset < data.Width; pixeloffset++)
+                    for (var pixelOffset = 0; pixelOffset < data.Width; pixelOffset++)
                     {
-                        rgbArray[offset + (row * scansize) + pixeloffset] =
-                            (pixelData[pixeloffset * PixelWidth + 2] << 16) +   // R 
-                            (pixelData[pixeloffset * PixelWidth + 1] << 8) +    // G
-                            pixelData[pixeloffset * PixelWidth];                // B
+                        rgbArray[(row * scanSize) + pixelOffset] =
+                            (pixelData[pixelOffset * PixelWidth + 2] << 16) +   // R 
+                            (pixelData[pixelOffset * PixelWidth + 1] << 8) +    // G
+                             pixelData[pixelOffset * PixelWidth];               // B
                     }
                 }
             }

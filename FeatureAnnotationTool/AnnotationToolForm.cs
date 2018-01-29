@@ -1810,11 +1810,16 @@ namespace FeatureAnnotationTool
 
             int boreholePosition = (int)((((double)previewPosition - ((double)scrollSize / 2.0)) / (double)boreholePreviewPictureBox.Height) * (double)boreholeSectionHeight);
 
-            if (boreholePosition < 0)
-                boreholePosition = 0;
-
+            
             if (boreholePosition > boreholeSectionHeight - boreholeImagePanel.Height)
+            {
                 boreholePosition = boreholeSectionHeight - boreholeImagePanel.Height;
+            }
+
+            if (boreholePosition < 0)
+            {
+                boreholePosition = 0;
+            }
 
             boreholeImagePanel.VerticalScroll.Value = boreholePosition;
             boreholeImagePanel.Update();
@@ -5308,7 +5313,7 @@ namespace FeatureAnnotationTool
 
         # endregion
 
-        # region Right-clcik on feature methods
+        # region Right-click on feature methods
 
         private void rightClickOnLayerContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
