@@ -27,7 +27,6 @@ namespace EdgeFitting
 
         private readonly int m_BeforeY;
         private readonly int m_CheckX;
-        private readonly int m_CheckY;
         private readonly int m_AfterY;
 
         #region properties
@@ -46,12 +45,11 @@ namespace EdgeFitting
             m_BeforeY = beforePoint.Y;
 
             m_CheckX = checkPoint.X;
-            m_CheckY = checkPoint.Y;
 
             m_AfterX = afterPoint.X;
             m_AfterY = afterPoint.Y;
             
-            this.m_ImageWidth = imageWidth;
+            m_ImageWidth = imageWidth;
 
             CheckForEdgeValues();
 
@@ -125,36 +123,6 @@ namespace EdgeFitting
                 Orientation = m_BeforeY < m_AfterY ? Orientation.LeadingDiagonal 
                                                         : Orientation.CounterDiagonal;
             }
-        }
-
-        /// <summary>
-        /// Checks if points span one row
-        /// </summary>
-        /// <returns>True if all points are in same row</returns>
-        private bool DoPointsSpan1Column()
-        {
-            return m_BeforeX == m_AfterX 
-                   && m_BeforeX == m_CheckX;
-        }
-
-        /// <summary>
-        /// Checks if points span one column
-        /// </summary>
-        /// <returns>True if all points are in same column</returns>
-        private bool DoPointsSpan1Row()
-        {
-            return m_BeforeY == m_AfterY
-                   && m_BeforeY == m_CheckY;
-        }
-
-        /// <summary>
-        /// Checks if points span 3 columns
-        /// </summary>
-        /// <returns>True if points span 3 columns</returns>
-        private bool DoPointsSpan3Columns()
-        {
-            return m_BeforeX < m_CheckX 
-                   && m_AfterX > m_CheckX;
         }
     }
 
