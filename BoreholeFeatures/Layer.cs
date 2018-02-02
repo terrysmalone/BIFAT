@@ -95,7 +95,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Is the layer a void?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Is the layer a void?")]
         [DisplayName("Void")]
         public bool LayerVoid
         {
@@ -107,7 +107,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Is the layer bubble/debris free?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Is the layer bubble/debris free?")]
         public bool Clean
         {
             get => m_LayerProperties.HasFlag(LayerProperties.Clean);
@@ -118,7 +118,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain small bubbles?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Does the layer contain small bubbles?")]
         [DisplayName("Small Bubbles")]
         public bool SmallBubbles
         {
@@ -130,7 +130,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain large bubbles?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Does the layer contain large bubbles?")]
         [DisplayName("Large Bubbles")]
         public bool LargeBubbles
         {
@@ -142,7 +142,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain fine debris?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Does the layer contain fine debris?")]
         [DisplayName("Fine Debris")]
         public bool FineDebris
         {
@@ -154,7 +154,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain coarse debris?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Does the layer contain coarse debris?")]
         [DisplayName("Coarse Debris")]
         public bool CoarseDebris
         {
@@ -166,7 +166,7 @@ namespace BoreholeFeatures
             }
         }
 
-        [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain debris of varying grain size?")]
+        [CategoryAttribute("\t\t\t\tLayer Properties"), DescriptionAttribute("Does the layer contain debris of varying grain size?")]
         public bool Diamicton
         {
             get => m_LayerProperties.HasFlag(LayerProperties.Diamicton);
