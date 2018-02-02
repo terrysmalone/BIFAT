@@ -54,6 +54,7 @@
     <Compile Include="Converters\InclusionTypeConverter.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="LayerLine.cs" />
+    <Compile Include="LayerProperties.cs" />
     <Compile Include="LayerTypeSelector.cs" />
     <Compile Include="DepthMeasurementHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -318,7 +318,7 @@ namespace BoreholeFeatures
             description = description.Replace(',', ' ');
 
             //Get the layer type
-            WriteLayerType();
+            WriteLayerProperties();
 
             details = layerStartY + "," + layerEndY + "," + topEdgeIntercept + "," + topEdgeSlope + "," + bottomEdgeIntercept + "," + bottomEdgeSlope + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
 

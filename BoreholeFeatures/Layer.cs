@@ -45,8 +45,8 @@ namespace BoreholeFeatures
         protected int SECOND_EDGE = 2;
         protected int BOTH_EDGES = 3;
         
-        //Layer type properties
-        protected bool layerVoid, clean, smallBubbles, largeBubbles, fineDebris, coarseDebris, diamicton;
+        //Layer properties
+        private LayerProperties m_LayerProperties;
 
         protected DateTime timeAdded, timeLastModified;
         
@@ -99,54 +99,82 @@ namespace BoreholeFeatures
         [DisplayName("Void")]
         public bool LayerVoid
         {
-            get { return layerVoid; }
-            set { layerVoid = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.LayerVoid);
+            set
+            {
+                if(value) m_LayerProperties |= LayerProperties.LayerVoid; 
+                else m_LayerProperties &= ~LayerProperties.LayerVoid;
+            }
         }
 
         [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Is the layer bubble/debris free?")]
         public bool Clean
         {
-            get { return clean; }
-            set { clean = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.Clean);
+            set
+            {
+                if (value) m_LayerProperties |= LayerProperties.Clean;
+                else m_LayerProperties &= ~LayerProperties.Clean;
+            }
         }
 
         [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain small bubbles?")]
         [DisplayName("Small Bubbles")]
         public bool SmallBubbles
         {
-            get { return smallBubbles; }
-            set { smallBubbles = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.SmallBubbles);
+            set
+            {
+                if (value) m_LayerProperties |= LayerProperties.SmallBubbles;
+                else m_LayerProperties &= ~LayerProperties.SmallBubbles;
+            }
         }
 
         [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain large bubbles?")]
         [DisplayName("Large Bubbles")]
         public bool LargeBubbles
         {
-            get { return largeBubbles; }
-            set { largeBubbles = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.LargeBubbles);
+            set
+            {
+                if (value) m_LayerProperties |= LayerProperties.LargeBubbles;
+                else m_LayerProperties &= ~LayerProperties.LargeBubbles;
+            }
         }
 
         [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain fine debris?")]
         [DisplayName("Fine Debris")]
         public bool FineDebris
         {
-            get { return fineDebris; }
-            set { fineDebris = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.FineDebris);
+            set
+            {
+                if (value) m_LayerProperties |= LayerProperties.FineDebris;
+                else m_LayerProperties &= ~LayerProperties.FineDebris;
+            }
         }
 
         [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain coarse debris?")]
         [DisplayName("Coarse Debris")]
         public bool CoarseDebris
         {
-            get { return coarseDebris; }
-            set { coarseDebris = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.CoarseDebris);
+            set
+            {
+                if (value) m_LayerProperties |= LayerProperties.CoarseDebris;
+                else m_LayerProperties &= ~LayerProperties.CoarseDebris;
+            }
         }
 
         [CategoryAttribute("\t\t\t\tLayer Type"), DescriptionAttribute("Does the layer contain debris of varying grain size?")]
         public bool Diamicton
         {
-            get { return diamicton; }
-            set { diamicton = value; }
+            get => m_LayerProperties.HasFlag(LayerProperties.Diamicton);
+            set
+            {
+                if (value) m_LayerProperties |= LayerProperties.Diamicton;
+                else m_LayerProperties &= ~LayerProperties.Diamicton;
+            }
         }
 
         # endregion property grid properties
@@ -295,7 +323,7 @@ namespace BoreholeFeatures
         {
             get
             {
-                WriteLayerType();
+                WriteLayerProperties();
                 return layerType;
             }
         }
@@ -394,30 +422,44 @@ namespace BoreholeFeatures
         /// <summary>
         /// Method which turns the layer type into a string from the selected bool variables
         /// </summary>
-        internal void WriteLayerType()
+        internal void WriteLayerProperties()
         {
             layerType = "";
 
-            if (layerVoid == true)
-                layerType = String.Concat(layerType, "void ");
+            if(m_LayerProperties.HasFlag(LayerProperties.LayerVoid))
+            {
+                layerType = string.Concat(layerType, "void ");
+            }
 
-            if (clean == true)
-                layerType = String.Concat(layerType, "clean ");
+            if (m_LayerProperties.HasFlag(LayerProperties.Clean))
+            {
+                layerType = string.Concat(layerType, "clean ");
+            }
 
-            if (smallBubbles == true)
-                layerType = String.Concat(layerType, "smallBubbles ");
+            if(m_LayerProperties.HasFlag(LayerProperties.SmallBubbles))
+            {
+                layerType = string.Concat(layerType, "smallBubbles ");
+            }
 
-            if (largeBubbles == true)
-                layerType = String.Concat(layerType, "largeBubbles ");
+            if (m_LayerProperties.HasFlag(LayerProperties.LargeBubbles))
+            {
+                layerType = string.Concat(layerType, "largeBubbles ");
+            }
 
-            if (fineDebris == true)
-                layerType = String.Concat(layerType, "fineDebris ");
+            if (m_LayerProperties.HasFlag(LayerProperties.FineDebris))
+            {
+                layerType = string.Concat(layerType, "fineDebris ");
+            }
 
-            if (coarseDebris == true)
-                layerType = String.Concat(layerType, "coarseDebris ");
+            if (m_LayerProperties.HasFlag(LayerProperties.CoarseDebris))
+            {
+                layerType = string.Concat(layerType, "coarseDebris ");
+            }
 
-            if (diamicton == true)
-                layerType = String.Concat(layerType, "diamicton ");
+            if (m_LayerProperties.HasFlag(LayerProperties.Diamicton))
+            {
+                layerType = string.Concat(layerType, "diamicton ");
+            }
         }
 
         # region get methods
