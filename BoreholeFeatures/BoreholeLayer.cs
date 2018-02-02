@@ -263,7 +263,7 @@ namespace BoreholeFeatures
         /// Second edge depth in pixels - Depth of second edge in pixels
         /// Second edge azimuth         - azimuth of second edge (0-360)
         /// Second edge amplitude       - amplitude of second edge in pixels 
-        /// Layer Type                  - Contents of layer (space separated list)
+        /// Layer Properties            - Contents of layer (space separated list)
         /// Layer description           - Description of layer
         /// Layer quality               - Quality of the layer (1-4)
         /// Time added                  - Time the layer was first added
@@ -278,8 +278,8 @@ namespace BoreholeFeatures
             //Remove commas from the description
             description = description.Replace(',', ' ');
 
-            //Get the layer type
-            WriteLayerType();
+            //Get the layer properties
+            WriteLayerProperties();
 
             details = layerStartY + "," + layerEndY + "," + topDepthPixels + "," + topAzimuth + "," + topAmplitude + "," + bottomDepthPixels + "," + bottomAzimuth + "," + bottomAmplitude + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
 

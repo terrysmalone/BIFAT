@@ -300,9 +300,9 @@ namespace BoreholeFeatures
         /// End Y                       - End Y boundary in pixels
         /// First edge intercept        - Intercept of first edge in pixels
         /// First edge slope            - slope of first edge
-        /// Second edge intercept        - Intercept of second edge in pixels
-        /// Second edge slope            - slope of second edge        
-        /// Layer Type                  - Contents of layer (space separated list)
+        /// Second edge intercept       - Intercept of second edge in pixels
+        /// Second edge slope           - slope of second edge        
+        /// Layer Properties            - Contents of layer (space separated list)
         /// Layer description           - Description of layer
         /// Layer quality               - Quality of the layer (1-4)
         /// Time added                  - Time the layer was first added
@@ -317,8 +317,8 @@ namespace BoreholeFeatures
             //Remove commas from the description
             description = description.Replace(',', ' ');
 
-            //Get the layer type
-            WriteLayerType();
+            //Get the layer properties
+            WriteLayerProperties();
 
             details = layerStartY + "," + layerEndY + "," + topEdgeIntercept + "," + topEdgeSlope + "," + bottomEdgeIntercept + "," + bottomEdgeSlope + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
 
