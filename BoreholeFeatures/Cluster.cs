@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using BoreholeFeatures.Converters;
 
 namespace BoreholeFeatures
 {
@@ -13,91 +11,110 @@ namespace BoreholeFeatures
     /// Author - Terry Malone
     /// Version 1.1 Refactored
     /// </summary>
-    [DefaultProperty("Description")]
-    public class Cluster
+    public sealed class Cluster
     {
-        private readonly int m_AzimuthResolution;
-        private readonly int m_DepthResolution;
+        private readonly int m_azimuthResolution;
+        private readonly int m_depthResolution;
 
-        private string m_Description = "";
-        private string m_ClusterType = "";
-        private string m_PointsString = "";
+        private string m_description = "";
 
-        private string[] m_AllGroupNames;
+        private string m_clusterType = "";
 
-        private int m_SourceStartDepth;
+        private string m_pointsString = "";
+
+        private string[] m_allGroupNames;
+
+        private int m_sourceStartDepth;
+
+        private  ClusterProperties m_clusterProperties;
 
         #region Properties
-
-        #region property grid properties
-
-        [Category("Depth"), 
-         Description("The clusters start depth in millimetres"), 
-         DisplayName("Start Depth (mm)")]
+        
         public int StartDepth { get; private set; }
-
-        [Category("Depth"), 
-         Description("The clusters end depth in millimetres"), 
-         DisplayName("End Depth (mm)")]
+        
         public int EndDepth { get; private set; }
-
-        [Browsable(true), 
-         DefaultValue("entry1"), 
-         Category("\tDescription"), 
-         Description("The group this cluster belongs to (To " +
-                     "change group display colours go to 'Features>Clusters>Groups'"),
-         TypeConverter(typeof(ClusterGroupConverter))]
+        
         public string Group { get; set; }
-
-        [Category("Points"), 
-         Description("The clusters points")]
+        
         public string PointsString
         {
             get
             {
                 CalculatePointsString();
-                return m_PointsString;
+                return m_pointsString;
             }
         }
 
-        [Category("\t\tDescription"), 
-         Description("Additional information")]
         public string Description
         {
-            get => m_Description;
+            get => m_description;
 
             set 
             { 
-                m_Description = value;
+                m_description = value;
                 TimeLastModified = DateTime.Now;
             }
         }
 
-        [Category("\tCluster Type"), 
-         Description("Does the cluster contain small bubbles?"),
-         DisplayName("Small Bubbles")]
-        public bool SmallBubbles { get; set; }
+        #region cluster properties
 
-        [Category("\tCluster Type"), 
-         Description("Does the cluster contain large bubbles?"),
-         DisplayName("Large Bubbles")]
-        public bool LargeBubbles { get; set; }
+        public bool SmallBubbles
+        {
+            get => m_clusterProperties.HasFlag(ClusterProperties.SmallBubbles);
 
-        [Category("\tCluster Type"), 
-         Description("Does the cluster contain fine debris?"), 
-         DisplayName("Fine Debris")]
-        public bool FineDebris { get; set; }
+            set
+            {
+                if (value) m_clusterProperties |= ClusterProperties.SmallBubbles;
+                else m_clusterProperties &= ~ClusterProperties.SmallBubbles;
+            }
+        }
 
-        [Category("\tCluster Type"), 
-         Description("Does the cluster contain coarse debris?"),
-         DisplayName("Coarse Debris")]
-        public bool CoarseDebris { get; set; }
+        public bool LargeBubbles
+        {
+            get => m_clusterProperties.HasFlag(ClusterProperties.LargeBubbles);
 
-        [Category("\tCluster Type"), 
-         Description("Does the cluster contain debris of varying grain size?")]
-        public bool Diamicton { get; set; }
+            set
+            {
+                if (value) m_clusterProperties |= ClusterProperties.LargeBubbles;
+                else m_clusterProperties &= ~ClusterProperties.LargeBubbles;
+            }
+        }
 
-        #endregion property grid properties
+        
+        public bool FineDebris
+        {
+            get => m_clusterProperties.HasFlag(ClusterProperties.FineDebris);
+
+            set
+            {
+                if (value) m_clusterProperties |= ClusterProperties.FineDebris;
+                else m_clusterProperties &= ~ClusterProperties.FineDebris;
+            }
+        }
+
+        public bool CoarseDebris
+        {
+            get => m_clusterProperties.HasFlag(ClusterProperties.CoarseDebris);
+
+            set
+            {
+                if (value) m_clusterProperties |= ClusterProperties.CoarseDebris;
+                else m_clusterProperties &= ~ClusterProperties.CoarseDebris;
+            }
+        }
+
+        public bool Diamicton
+        {
+            get => m_clusterProperties.HasFlag(ClusterProperties.Diamicton);
+
+            set
+            {
+                if (value) m_clusterProperties |= ClusterProperties.Diamicton;
+                else m_clusterProperties &= ~ClusterProperties.Diamicton;
+            }
+        }
+
+        #endregion cluster properties
 
         public List<Point> Points { get; }
 
@@ -131,7 +148,7 @@ namespace BoreholeFeatures
             get
             {
                 WriteClusterType();
-                return m_ClusterType;
+                return m_clusterType;
             }
         }
 
@@ -147,10 +164,11 @@ namespace BoreholeFeatures
 
         public int SourceStartDepth
         {
-            get => m_SourceStartDepth;
+            get => m_sourceStartDepth;
+
             set
             {
-                m_SourceStartDepth = value;
+                m_sourceStartDepth = value;
 
                 CalculateStartDepthInMm();
                 CalculateEndDepthInMm();
@@ -171,8 +189,8 @@ namespace BoreholeFeatures
         /// <param name="depthResolution">The depth resolution of the borehole image</param>
         public Cluster(int azimuthResolution, int depthResolution)
         {
-            m_AzimuthResolution = azimuthResolution;
-            m_DepthResolution = depthResolution;
+            m_azimuthResolution = azimuthResolution;
+            m_depthResolution = depthResolution;
 
             Points = new List<Point>();
 
@@ -222,18 +240,17 @@ namespace BoreholeFeatures
         /// <param name="deletePoint">The point to delete</param>
         public void RemovePoint(Point deletePoint)
         {
-            if (Points.Contains(deletePoint))
-            {
-                Points.Remove(deletePoint);
+            if (!Points.Contains(deletePoint)) return;
 
-                CheckFeatureIsWithinImageBounds();
+            Points.Remove(deletePoint);
 
-                CalculateXBounds();
-                CalculateYBounds();
+            CheckFeatureIsWithinImageBounds();
 
-                CalculatePointsString();
-                TimeLastModified = DateTime.Now;
-            }
+            CalculateXBounds();
+            CalculateYBounds();
+
+            CalculatePointsString();
+            TimeLastModified = DateTime.Now;
         }
 
         /// <summary>
@@ -298,7 +315,7 @@ namespace BoreholeFeatures
             CalculateStartDepthInMm();
             CalculateEndDepthInMm();
 
-            for (int i = 1; i < Points.Count; i++)
+            for (var i = 1; i < Points.Count; i++)
             {
                 if (Points[i].Y > BottomYBoundary)
                 {
@@ -307,12 +324,11 @@ namespace BoreholeFeatures
                     CalculateEndDepthInMm();
                 }
 
-                if (Points[i].Y < TopYBoundary)
-                {
-                    TopYBoundary = Points[i].Y;
+                if (Points[i].Y >= TopYBoundary) continue;
 
-                    CalculateStartDepthInMm();
-                }
+                TopYBoundary = Points[i].Y;
+
+                CalculateStartDepthInMm();
             }
         }
 
@@ -321,38 +337,37 @@ namespace BoreholeFeatures
         /// </summary>
         private void CalculateXBounds()
         {
-            if (Points.Count > 0)
+            if (Points.Count <= 0) return;
+
+            LeftXBoundary = Points[0].X;
+
+            RightXBoundary = Points[0].X;
+
+            TopYBoundary = Points[0].Y;
+
+            BottomYBoundary = Points[0].Y;
+            
+
+            for (var i = 1; i < Points.Count; i++)
             {
-                LeftXBoundary = Points[0].X;
-                RightXBoundary = Points[0].X;
-                TopYBoundary = Points[0].Y;
-                BottomYBoundary = Points[0].Y;
+                if (Points[i].X > RightXBoundary)
+                    RightXBoundary = Points[i].X;
 
-                
+                if (Points[i].X < LeftXBoundary)
+                    LeftXBoundary = Points[i].X;
 
-                for (int i = 1; i < Points.Count; i++)
+                if (Points[i].Y > BottomYBoundary)
                 {
-                    if (Points[i].X > RightXBoundary)
-                        RightXBoundary = Points[i].X;
+                    BottomYBoundary = Points[i].Y;
 
-                    if (Points[i].X < LeftXBoundary)
-                        LeftXBoundary = Points[i].X;
-
-                    if (Points[i].Y > BottomYBoundary)
-                    {
-                        BottomYBoundary = Points[i].Y;
-
-                        CalculateEndDepthInMm();
-                    }
-
-                    if (Points[i].Y < TopYBoundary)
-                    {
-                        TopYBoundary = Points[i].Y;
-
-                        CalculateStartDepthInMm();
-
-                    }
+                    CalculateEndDepthInMm();
                 }
+
+                if (Points[i].Y >= TopYBoundary) continue;
+
+                TopYBoundary = Points[i].Y;
+
+                CalculateStartDepthInMm();
             }
         }
 
@@ -361,7 +376,7 @@ namespace BoreholeFeatures
         /// </summary>
         private void CalculateStartDepthInMm()
         {
-            StartDepth = Convert.ToInt32(m_SourceStartDepth + TopYBoundary * (double)m_DepthResolution);
+            StartDepth = Convert.ToInt32(m_sourceStartDepth + TopYBoundary * (double)m_depthResolution);
         }
 
         /// <summary>
@@ -369,7 +384,7 @@ namespace BoreholeFeatures
         /// </summary>
         private void CalculateEndDepthInMm()
         {
-            EndDepth = Convert.ToInt32(m_SourceStartDepth + BottomYBoundary * (double)m_DepthResolution);
+            EndDepth = Convert.ToInt32(m_sourceStartDepth + BottomYBoundary * (double)m_depthResolution);
         }
 
         /// <summary>
@@ -379,14 +394,14 @@ namespace BoreholeFeatures
         {
             if (Points.Count > 0)
             {
-                m_PointsString = "";
+                m_pointsString = "";
 
                 foreach (var clusterPoint in Points)
                 {
                     var xPoint = clusterPoint.X;
                     var yPoint = clusterPoint.Y;
 
-                    m_PointsString = string.Concat(m_PointsString, "(", xPoint, ", ", yPoint, ") ");
+                    m_pointsString = string.Concat(m_pointsString, "(", xPoint, ", ", yPoint, ") ");
                 }
             }
         }
@@ -396,22 +411,22 @@ namespace BoreholeFeatures
         /// </summary>
         private void WriteClusterType()
         {
-            m_ClusterType = "";
+            m_clusterType = "";
 
             if (SmallBubbles)
-                m_ClusterType = string.Concat(m_ClusterType, "smallBubbles ");
+                m_clusterType = string.Concat(m_clusterType, "smallBubbles ");
 
             if (LargeBubbles)
-                m_ClusterType = string.Concat(m_ClusterType, "largeBubbles ");
+                m_clusterType = string.Concat(m_clusterType, "largeBubbles ");
 
             if (FineDebris)
-                m_ClusterType = string.Concat(m_ClusterType, "fineDebris ");
+                m_clusterType = string.Concat(m_clusterType, "fineDebris ");
 
             if (CoarseDebris)
-                m_ClusterType = string.Concat(m_ClusterType, "coarseDebris ");
+                m_clusterType = string.Concat(m_clusterType, "coarseDebris ");
 
             if (Diamicton)
-                m_ClusterType = string.Concat(m_ClusterType, "diamicton ");
+                m_clusterType = string.Concat(m_clusterType, "diamicton ");
         }
 
         # region get methods
@@ -433,7 +448,7 @@ namespace BoreholeFeatures
         {
             CalculatePointsString();
 
-            m_Description = m_Description.Replace(',', ' ');
+            m_description = m_description.Replace(',', ' ');
 
             WriteClusterType();
 
@@ -444,8 +459,8 @@ namespace BoreholeFeatures
                           + LeftXBoundary + "," 
                           + RightXBoundary + "," 
                           + points + "," 
-                          + m_ClusterType + "," 
-                          + m_Description + "," 
+                          + m_clusterType + "," 
+                          + m_description + "," 
                           + TimeAdded + "," 
                           + TimeLastModified + "," 
                           + Group;
@@ -455,7 +470,7 @@ namespace BoreholeFeatures
 
         public string[] GetClusterGroupNames()
         {
-            return m_AllGroupNames;
+            return m_allGroupNames;
         }
 
         # endregion
@@ -464,7 +479,7 @@ namespace BoreholeFeatures
 
         public void SetAllGroupNames(string[] allGroupNames)
         {
-            m_AllGroupNames = allGroupNames;
+            m_allGroupNames = allGroupNames;
         }
 
         # endregion
@@ -485,7 +500,7 @@ namespace BoreholeFeatures
                     allBelow0 = false;
                 }
 
-                if (point.X < m_AzimuthResolution)
+                if (point.X < m_azimuthResolution)
                 {
                     allAboveWidth = false;
                 }
@@ -493,11 +508,11 @@ namespace BoreholeFeatures
 
             if (allBelow0)
             {
-                ShiftAllXPoints(m_AzimuthResolution);
+                ShiftAllXPoints(m_azimuthResolution);
             }
             else if (allAboveWidth)
             {
-                ShiftAllXPoints(-m_AzimuthResolution);
+                ShiftAllXPoints(-m_azimuthResolution);
             }
         }
 

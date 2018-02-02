@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel;
+using BoreholeFeatures;
 
-namespace BoreholeFeatures.Converters
+namespace FeatureAnnotationTool.Converters
 {
-    internal class InclusionGroupConverter : StringConverter
+    internal class ClusterGroupConverter : StringConverter
     {
-        //private IModel _model;
-
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             //true means show a combobox
@@ -25,10 +24,10 @@ namespace BoreholeFeatures.Converters
         /// <returns></returns>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            var refInclusion = context.Instance as Inclusion;
+            var refCluster = context.Instance as Cluster;
 
             // ReSharper disable once PossibleNullReferenceException
-            return new StandardValuesCollection(refInclusion.GetInclusionGroupNames());
+            return new StandardValuesCollection(refCluster.GetClusterGroupNames());
         }
     }
 }

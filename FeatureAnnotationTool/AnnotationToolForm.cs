@@ -568,14 +568,27 @@ namespace FeatureAnnotationTool
 
         public void ShowFeatureDetailsPropertyGrid()
         {
-            object selectedFeature = _viewAdapter.SelectedFeature;
-
-            if (selectedFeature != null)
+            var selectedFeature = _viewAdapter.SelectedFeature;
+            
+            if (selectedFeature == null) return;
+            
+            
+            if (selectedFeature is Cluster)
+            {
+                featureDetailsPropertyGrid.SelectedObject = new ClusterPropertyContainer(selectedFeature);
+            }
+            else if (selectedFeature is Inclusion)
+            {
+                featureDetailsPropertyGrid.SelectedObject = new InclusionPropertyContainer(selectedFeature);
+            }
+            else
             {
                 featureDetailsPropertyGrid.SelectedObject = selectedFeature;
-                featureDetailsPropertyGrid.Visible = true;
-                this.Refresh();
+
             }
+            
+            featureDetailsPropertyGrid.Visible = true;
+            this.Refresh();
         }
 
         private void featureDetailsPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)

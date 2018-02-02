@@ -1,8 +1,5 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
 using System.Drawing;
 using BoreholeFeatures.Converters;
 
@@ -14,181 +11,96 @@ namespace BoreholeFeatures
     /// Author - Terry Malone
     /// Version 1.1 Refactored
     /// </summary>
-    [DefaultPropertyAttribute("Description")]
     public class Inclusion
     {
-        private int azimuthResolution, depthResolution;
+        private readonly int m_azimuthResolution;
+        private readonly int m_depthResolution;
 
-        private List<Point> m_InclusionPoints;
+        private string m_description = "";
+        private string m_pointsString = "";
+        
+        protected string[] AllGroupNames;
 
-        private int m_LeftXBoundary, m_RightXBoundary;
-        private int m_TopYBoundary, m_BottomYBoundary;
-        private int m_StartDepth, m_EndDepth;
-        private String m_Description = "";
-        private String m_InclusionType = "";
-        private string m_PointsString = "";
-
-        protected string group;
-        protected string[] allGroupNames;
-
-        private bool isComplete;
-
-        private DateTime timeAdded, timeLastModified;
-        private int sourceStartDepth;
+        private int m_sourceStartDepth;
 
         #region properties
 
-        # region Property grid methods
+        public int StartDepth { get; private set; }
 
-        [CategoryAttribute("Depth"), DescriptionAttribute("The clusters start depth in millimetres")]
-        [DisplayName("Start Depth")]
-        public int StartDepth
-        {
-            get
-            {
-                return m_StartDepth;
-            }
-        }
+        public int EndDepth { get; private set; }
+        
+        public string Group { get; set; }
 
-        [CategoryAttribute("Depth"), DescriptionAttribute("The clusters end depth in millimetres")]
-        [DisplayName("End Depth")]
-        public int EndDepth
-        {
-            get
-            {
-                return m_EndDepth;
-            }
-        }
-
-        [Browsable(true)]
-        [DefaultValue("entry1")]
-        [CategoryAttribute("\tDescription"), DescriptionAttribute("The group this inclusion belongs to (To change group display colours go to 'Features>Inclusions>Groups'")]
-        [TypeConverter(typeof(InclusionGroupConverter))]
-        public string Group
-        {
-            get { return group; }
-            set
-            {
-                //group = value;
-
-                //if(_model != null && group!=null)
-                //    _model.AddGroup(group);
-                group = value;
-            }
-        }
-
-        [CategoryAttribute("Points"), DescriptionAttribute("The clusters points")]
         public string PointsString
         {
             get
             {
                 CalculatePointsString();
-                return m_PointsString;
+                return m_pointsString;
             }
         }
 
-        [CategoryAttribute("\tDescription"), DescriptionAttribute("Additional information")]
         public string Description
         {
-            get { return m_Description; }
-            set { m_Description = value; }
-        }
+            get => m_description;
 
-        [Browsable(true)]
-        [DefaultValue("entry1")]
-        [CategoryAttribute("\tDescription"), DescriptionAttribute("The type of inclusion")]
-        [TypeConverter(typeof(InclusionTypeConverter))]
-        [DisplayName("Inclusion Type")]
-        public string InclusionType
-        {
-            get { return m_InclusionType; }
-            set { m_InclusionType = value; }
-        }
-
-        # endregion property grid methods
-
-        public List<Point> Points
-        {
-            get
+            set
             {
-                return m_InclusionPoints;
+                m_description = value;
+                TimeLastModified = DateTime.Now;
             }
         }
+        
+        public string InclusionType { get; set; } = "";
+        
+        public List<Point> Points { get; private set; }
 
         /// <summary>
         /// Has the cluster has been completely drawn or not
         /// </summary>
-        public bool IsComplete
-        {
-            get { return isComplete; }
-            set { isComplete = value; }
-        }
+        public bool IsComplete { get; set; }
 
         /// <summary>
         /// The left boundary of the cluster
         /// </summary>
-        public int LeftXBoundary
-        {
-            get { return m_LeftXBoundary; }
-            set { m_LeftXBoundary = value; }
-        }
+        public int LeftXBoundary { get; set; }
 
         /// <summary>
         /// The left boundary of the cluster
         /// </summary>
-        public int RightXBoundary
-        {
-            get { return m_RightXBoundary; }
-            set { m_RightXBoundary = value; }
-        }
+        public int RightXBoundary { get; set; }
 
         /// <summary>
         /// The y position of the top boundary of the cluster
         /// </summary>
-        public int TopYBoundary
-        {
-            get { return m_TopYBoundary; }
-            set { m_TopYBoundary = value; }
-        }
+        public int TopYBoundary { get; set; }
 
         /// <summary>
         /// The bottom boundary of the cluster
         /// </summary>
-        public int BottomYBoundary
-        {
-            get { return m_BottomYBoundary; }
-            set { m_BottomYBoundary = value; }
-        }
+        public int BottomYBoundary { get; set; }
 
         /// <summary>
         /// The time the cluster was added
         /// </summary>
-        public DateTime TimeAdded
-        {
-            get { return timeAdded; }
-            set { timeAdded = value; }
-        }
+        public DateTime TimeAdded { get; set; }
 
         /// <summary>
         /// The time the cluster was last modified
         /// </summary>
-        public DateTime TimeLastModified
-        {
-            get { return timeLastModified; }
-            set { timeLastModified = value; }
-        }
+        public DateTime TimeLastModified { get; set; }
 
         public void XStartBoundary(int startX)
         {
-            m_LeftXBoundary = startX;
+            LeftXBoundary = startX;
         }
 
         public int SourceStartDepth
         {
-            get { return sourceStartDepth; }
+            get => m_sourceStartDepth;
             set
             {
-                sourceStartDepth = value;
+                m_sourceStartDepth = value;
 
                 CalculateStartDepthInMM();
                 CalculateEndDepthInMM();
@@ -207,13 +119,13 @@ namespace BoreholeFeatures
         /// <param name="depthResolution">The depth resolution of the borehole image</param>
         public Inclusion(int azimuthResolution, int depthResolution)
         {
-            this.azimuthResolution = azimuthResolution;
-            this.depthResolution = depthResolution;
+            this.m_azimuthResolution = azimuthResolution;
+            this.m_depthResolution = depthResolution;
 
-            m_InclusionPoints = new List<Point>();
+            Points = new List<Point>();
 
-            timeAdded = DateTime.Now;
-            timeLastModified = DateTime.Now;
+            TimeAdded = DateTime.Now;
+            TimeLastModified = DateTime.Now;
         }
 
         # region Point operations
@@ -224,9 +136,9 @@ namespace BoreholeFeatures
         /// <param name="newPoint">The new point to add</param>
         public void AddPoint(Point newPoint)
         {
-            m_InclusionPoints.Add(newPoint);
+            Points.Add(newPoint);
 
-            timeLastModified = DateTime.Now;
+            TimeLastModified = DateTime.Now;
 
             calculateXBounds();
             calculateYBounds();
@@ -239,9 +151,9 @@ namespace BoreholeFeatures
         /// <param name="addAfter"></param>
         public void AddPoint(Point newPoint, int addAfter)
         {
-            m_InclusionPoints.Insert(addAfter+1, newPoint);
+            Points.Insert(addAfter+1, newPoint);
 
-            timeLastModified = DateTime.Now;
+            TimeLastModified = DateTime.Now;
 
             calculateXBounds();
             calculateYBounds();
@@ -253,15 +165,15 @@ namespace BoreholeFeatures
         /// <param name="deletePoint">The point to remove</param>
         public void RemovePoint(Point deletePoint)
         {
-            if (m_InclusionPoints.Contains(deletePoint))
+            if (Points.Contains(deletePoint))
             {
-                m_InclusionPoints.Remove(deletePoint);
+                Points.Remove(deletePoint);
 
                 CheckFeatureIsWithinImageBounds();
 
                 calculateXBounds();
                 calculateYBounds();
-                timeLastModified = DateTime.Now;
+                TimeLastModified = DateTime.Now;
             }
         }
 
@@ -274,14 +186,14 @@ namespace BoreholeFeatures
         {
             int index;
 
-            if (m_InclusionPoints.Contains(oldPosition))
+            if (Points.Contains(oldPosition))
             {
-                index = m_InclusionPoints.IndexOf(oldPosition);
+                index = Points.IndexOf(oldPosition);
 
-                m_InclusionPoints.Remove(oldPosition);
-                m_InclusionPoints.Insert(index, newPosition);
+                Points.Remove(oldPosition);
+                Points.Insert(index, newPosition);
 
-                timeLastModified = DateTime.Now;
+                TimeLastModified = DateTime.Now;
             }
 
             CheckFeatureIsWithinImageBounds();
@@ -292,14 +204,14 @@ namespace BoreholeFeatures
 
         private void ShiftAllXPoints(int amountToShift)
         {
-            for (int i = 0; i < m_InclusionPoints.Count; i++)
+            for (int i = 0; i < Points.Count; i++)
             {
-                Point currentPoint = m_InclusionPoints[i];
-                m_InclusionPoints[i] = new Point(currentPoint.X + amountToShift, currentPoint.Y);
+                Point currentPoint = Points[i];
+                Points[i] = new Point(currentPoint.X + amountToShift, currentPoint.Y);
             }
 
-            m_LeftXBoundary += amountToShift;
-            m_RightXBoundary += amountToShift;
+            LeftXBoundary += amountToShift;
+            RightXBoundary += amountToShift;
         }
 
         # endregion Point operations
@@ -313,14 +225,14 @@ namespace BoreholeFeatures
         {
             Point currentPoint;
 
-            for (int i = 0; i < m_InclusionPoints.Count; i++)
+            for (int i = 0; i < Points.Count; i++)
             {
-                currentPoint = m_InclusionPoints[i];
+                currentPoint = Points[i];
 
                 currentPoint.X += xMoveBy;
                 currentPoint.Y += yMoveBy;
 
-                m_InclusionPoints[i] = currentPoint;
+                Points[i] = currentPoint;
             }
 
             CheckFeatureIsWithinImageBounds();
@@ -329,7 +241,7 @@ namespace BoreholeFeatures
             calculateYBounds();
 
 
-            timeLastModified = DateTime.Now;
+            TimeLastModified = DateTime.Now;
         }
 
         /// <summary>
@@ -337,7 +249,7 @@ namespace BoreholeFeatures
         /// </summary>
         private void CalculateStartDepthInMM()
         {
-            m_StartDepth = (int)((double)sourceStartDepth + (double)((double)m_TopYBoundary * (double)depthResolution));
+            StartDepth = (int)((double)m_sourceStartDepth + (double)((double)TopYBoundary * (double)m_depthResolution));
         }
 
         /// <summary>
@@ -345,7 +257,7 @@ namespace BoreholeFeatures
         /// </summary>
         private void CalculateEndDepthInMM()
         {
-            m_EndDepth = (int)((double)sourceStartDepth + (double)((double)m_BottomYBoundary * (double)depthResolution));
+            EndDepth = (int)((double)m_sourceStartDepth + (double)((double)BottomYBoundary * (double)m_depthResolution));
         }
 
         /// <summary>
@@ -356,18 +268,18 @@ namespace BoreholeFeatures
             CalculateStartDepthInMM();
             CalculateEndDepthInMM();
 
-            for (int i = 1; i < m_InclusionPoints.Count; i++)
+            for (int i = 1; i < Points.Count; i++)
             {
-                if (m_InclusionPoints[i].Y > m_BottomYBoundary)
+                if (Points[i].Y > BottomYBoundary)
                 {
-                    m_BottomYBoundary = m_InclusionPoints[i].Y;
+                    BottomYBoundary = Points[i].Y;
 
                     CalculateEndDepthInMM();
                 }
 
-                if (m_InclusionPoints[i].Y < m_TopYBoundary)
+                if (Points[i].Y < TopYBoundary)
                 {
-                    m_TopYBoundary = m_InclusionPoints[i].Y;
+                    TopYBoundary = Points[i].Y;
 
                     CalculateStartDepthInMM();
                 }
@@ -379,33 +291,33 @@ namespace BoreholeFeatures
         /// </summary>
         private void calculateXBounds()
         {
-            if (m_InclusionPoints.Count > 0)
+            if (Points.Count > 0)
             {
-                m_LeftXBoundary = m_InclusionPoints[0].X;
-                m_RightXBoundary = m_InclusionPoints[0].X;
-                m_TopYBoundary = m_InclusionPoints[0].Y;
-                m_BottomYBoundary = m_InclusionPoints[0].Y;
+                LeftXBoundary = Points[0].X;
+                RightXBoundary = Points[0].X;
+                TopYBoundary = Points[0].Y;
+                BottomYBoundary = Points[0].Y;
 
 
 
-                for (int i = 1; i < m_InclusionPoints.Count; i++)
+                for (int i = 1; i < Points.Count; i++)
                 {
-                    if (m_InclusionPoints[i].X > m_RightXBoundary)
-                        m_RightXBoundary = m_InclusionPoints[i].X;
+                    if (Points[i].X > RightXBoundary)
+                        RightXBoundary = Points[i].X;
 
-                    if (m_InclusionPoints[i].X < m_LeftXBoundary)
-                        m_LeftXBoundary = m_InclusionPoints[i].X;
+                    if (Points[i].X < LeftXBoundary)
+                        LeftXBoundary = Points[i].X;
 
-                    if (m_InclusionPoints[i].Y > m_BottomYBoundary)
+                    if (Points[i].Y > BottomYBoundary)
                     {
-                        m_BottomYBoundary = m_InclusionPoints[i].Y;
+                        BottomYBoundary = Points[i].Y;
 
                         CalculateEndDepthInMM();
                     }
 
-                    if (m_InclusionPoints[i].Y < m_TopYBoundary)
+                    if (Points[i].Y < TopYBoundary)
                     {
-                        m_TopYBoundary = m_InclusionPoints[i].Y;
+                        TopYBoundary = Points[i].Y;
 
                         CalculateStartDepthInMM();
 
@@ -419,17 +331,17 @@ namespace BoreholeFeatures
         /// </summary>
         public void CalculatePointsString()
         {
-            if (m_InclusionPoints.Count > 0)
+            if (Points.Count > 0)
             {
-                m_PointsString = "";
+                m_pointsString = "";
                 int xPoint, yPoint;
 
-                for (int i = 0; i < m_InclusionPoints.Count; i++)
+                for (int i = 0; i < Points.Count; i++)
                 {
-                    xPoint = m_InclusionPoints[i].X;
-                    yPoint = m_InclusionPoints[i].Y;
+                    xPoint = Points[i].X;
+                    yPoint = Points[i].Y;
 
-                    m_PointsString = String.Concat(m_PointsString, "(", xPoint, ", ", yPoint, ") ");
+                    m_pointsString = String.Concat(m_pointsString, "(", xPoint, ", ", yPoint, ") ");
                 }
             }
         }
@@ -457,23 +369,32 @@ namespace BoreholeFeatures
 
             String details;
 
-            m_Description = m_Description.Replace(',', ' ');
+            m_description = m_description.Replace(',', ' ');
 
             String points = "";
 
-            for (int i = 0; i < m_InclusionPoints.Count; i++)
+            for (int i = 0; i < Points.Count; i++)
             {
-                points = String.Concat(points, m_InclusionPoints[i].X, " ", m_InclusionPoints[i].Y, " ");
+                points = String.Concat(points, Points[i].X, " ", Points[i].Y, " ");
             }
 
-            details = m_TopYBoundary + "," + m_BottomYBoundary + "," + m_LeftXBoundary + "," + m_RightXBoundary + "," + points + "," + m_InclusionType + "," + m_Description + "," + timeAdded + "," + timeLastModified + "," + group;
+            details = TopYBoundary + "," + 
+                      BottomYBoundary + "," + 
+                      LeftXBoundary + "," + 
+                      RightXBoundary + "," + 
+                      points + "," + 
+                      InclusionType + "," + 
+                      m_description + "," + 
+                      TimeAdded + "," + 
+                      TimeLastModified + "," + 
+                      Group;
 
             return details;
         }
 
         public string[] GetInclusionGroupNames()
         {
-            return allGroupNames;
+            return AllGroupNames;
         }
 
         # endregion
@@ -482,7 +403,7 @@ namespace BoreholeFeatures
 
         public void SetAllGroupNames(string[] allGroupNames)
         {
-            this.allGroupNames = allGroupNames;
+            this.AllGroupNames = allGroupNames;
         }
 
         # endregion Set methods
@@ -496,33 +417,32 @@ namespace BoreholeFeatures
             bool allBelow0 = true;
             bool allAboveWidth = true;
 
-            for (int i = 0; i < m_InclusionPoints.Count; i++)
+            for (int i = 0; i < Points.Count; i++)
             {
-                if (m_InclusionPoints[i].X > 0)
+                if (Points[i].X > 0)
                     allBelow0 = false;
 
-                if (m_InclusionPoints[i].X < azimuthResolution)
+                if (Points[i].X < m_azimuthResolution)
                     allAboveWidth = false;
             }
 
             if (allBelow0)
-                ShiftAllXPoints(azimuthResolution);
+                ShiftAllXPoints(m_azimuthResolution);
             else if (allAboveWidth)
-                ShiftAllXPoints(-azimuthResolution);
+                ShiftAllXPoints(-m_azimuthResolution);
         }        
 
         public void SetPoints(List<Point> points)
         {
-            m_InclusionPoints.Clear();
+            Points.Clear();
 
-            m_InclusionPoints = points;
+            Points = points;
 
-            timeLastModified = DateTime.Now;
+            TimeLastModified = DateTime.Now;
 
             calculateXBounds();
             calculateYBounds();
             CalculatePointsString();
         }
     }
-
 }

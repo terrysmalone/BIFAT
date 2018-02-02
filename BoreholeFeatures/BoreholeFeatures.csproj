@@ -46,12 +46,10 @@
   <ItemGroup>
     <Compile Include="BoreholeLayer.cs" />
     <Compile Include="Cluster.cs" />
-    <Compile Include="Converters\ClusterGroupConverter.cs" />
+    <Compile Include="ClusterProperties.cs" />
     <Compile Include="CoreLayer.cs" />
-    <Compile Include="Converters\InclusionGroupConverter.cs" />
     <Compile Include="Converters\LayerGroupConverter.cs" />
     <Compile Include="Inclusion.cs" />
-    <Compile Include="Converters\InclusionTypeConverter.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="LayerLine.cs" />
     <Compile Include="LayerProperties.cs" />

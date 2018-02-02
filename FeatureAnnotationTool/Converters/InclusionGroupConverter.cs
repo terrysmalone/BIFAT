@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
+using BoreholeFeatures;
 
-namespace BoreholeFeatures.Converters
+namespace FeatureAnnotationTool.Converters
 {
-    internal class ClusterGroupConverter : StringConverter
+    internal class InclusionGroupConverter : StringConverter
     {
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
@@ -23,10 +24,10 @@ namespace BoreholeFeatures.Converters
         /// <returns></returns>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            var refCluster = context.Instance as Cluster;
+            var refInclusion = context.Instance as Inclusion;
 
             // ReSharper disable once PossibleNullReferenceException
-            return new StandardValuesCollection(refCluster.GetClusterGroupNames());
+            return new StandardValuesCollection(refInclusion.GetInclusionGroupNames());
         }
     }
 }

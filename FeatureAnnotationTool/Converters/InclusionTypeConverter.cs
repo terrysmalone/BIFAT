@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BoreholeFeatures.Converters
+namespace FeatureAnnotationTool.Converters
 {
     /// <summary>
     /// Modifies the input type for the inclsuion type on the propertygrid to show a drop-down list

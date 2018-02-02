@@ -124,7 +124,11 @@
     <Compile Include="AutoDetect\AutomaticDetectUsingHough.cs" />
     <Compile Include="BIFAT.cs" />
     <Compile Include="AutoDetect\AutomaticDetectUsingEdgeProcessing.cs" />
+    <Compile Include="ClusterPropertyContainer.cs" />
     <Compile Include="Controller\AnnotationToolController.cs" />
+    <Compile Include="Converters\ClusterGroupConverter.cs" />
+    <Compile Include="Converters\InclusionGroupConverter.cs" />
+    <Compile Include="Converters\InclusionTypeConverter.cs" />
     <Compile Include="DialogBoxes\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +232,7 @@
       <DependentUpon>SectionSizeDialogBox.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageRotation.cs" />
+    <Compile Include="InclusionPropertyContainer.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\IModelAdapter.cs" />
     <Compile Include="Interfaces\IView.cs" />
