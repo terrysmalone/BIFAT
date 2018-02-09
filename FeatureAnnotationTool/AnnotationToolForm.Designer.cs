@@ -1274,7 +1274,7 @@ namespace FeatureAnnotationTool
             this.featureDetailsPropertyGrid.Name = "featureDetailsPropertyGrid";
             this.featureDetailsPropertyGrid.Size = new System.Drawing.Size(268, 155);
             this.featureDetailsPropertyGrid.TabIndex = 10;
-            this.featureDetailsPropertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.featureDetailsPropertyGrid_PropertyValueChanged);
+            this.featureDetailsPropertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.FeatureDetailsPropertyGrid_PropertyValueChanged);
             // 
             // showFeaturesCheckBox
             // 
@@ -1288,7 +1288,7 @@ namespace FeatureAnnotationTool
             this.showFeaturesCheckBox.Text = "Show Features";
             this.showFeaturesCheckBox.UseVisualStyleBackColor = true;
             this.showFeaturesCheckBox.Visible = false;
-            this.showFeaturesCheckBox.CheckedChanged += new System.EventHandler(this.showFeaturesCheckBox_CheckedChanged);
+            this.showFeaturesCheckBox.CheckedChanged += new System.EventHandler(this.ShowFeaturesCheckBox_CheckedChanged);
             // 
             // rightClickOnLayerContextMenuStrip
             // 

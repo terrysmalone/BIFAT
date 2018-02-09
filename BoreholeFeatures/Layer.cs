@@ -59,8 +59,9 @@ namespace BoreholeFeatures
 
         # region property grid attributes
 
-        [CategoryAttribute("\t\t\tDepth"), DescriptionAttribute("The layers start depth in millimetres")]
-        [DisplayName("\tStart Depth (mm)")]
+        [Category("\t\t\tDepth"), 
+         Description("The layers start depth in millimetres"),
+         DisplayName("\tStart Depth (mm)")]
         public int StartDepth => (int)(layerStartY * (double)depthResolution + sourceStartDepth);
 
         [CategoryAttribute("\t\t\tDepth"), DescriptionAttribute("The layers end depth in millimetres")]

@@ -2,7 +2,7 @@
 using BoreholeFeatures;
 using FeatureAnnotationTool.Converters;
 
-namespace FeatureAnnotationTool
+namespace FeatureAnnotationTool.PropertyGridWrappers
 {
     /// <summary>
     /// Contains an inclusion so that its propertiesd can be displayed, 
@@ -11,25 +11,25 @@ namespace FeatureAnnotationTool
     [DefaultProperty("Description")]
     public sealed class InclusionPropertyContainer
     {
-        private readonly Inclusion m_underlyingInclusion;
+        private readonly Inclusion m_UnderlyingInclusion;
 
         [Category("Depth"),
          Description("The inclusions start depth in millimetres"),
          DisplayName("Start Depth (mm)")]
-        public int StartDepth => m_underlyingInclusion.StartDepth;
+        public int StartDepth => m_UnderlyingInclusion.StartDepth;
 
         [Category("Depth"),
          Description("The inclusions end depth in millimetres"),
          DisplayName("End Depth (mm)")]
-        public int EndDepth => m_underlyingInclusion.EndDepth;
+        public int EndDepth => m_UnderlyingInclusion.EndDepth;
 
         [Category("\t\tDescription"),
          Description("Additional information")]
         public string Description
         {
-            get => m_underlyingInclusion.Description;
+            get => m_UnderlyingInclusion.Description;
 
-            set => m_underlyingInclusion.Description = value;
+            set => m_UnderlyingInclusion.Description = value;
         }
 
         [Browsable(true),
@@ -40,18 +40,18 @@ namespace FeatureAnnotationTool
          TypeConverter(typeof(InclusionGroupConverter))]
         public string Group
         {
-            get => m_underlyingInclusion.Group;
+            get => m_UnderlyingInclusion.Group;
 
-            set => m_underlyingInclusion.Group = value;
+            set => m_UnderlyingInclusion.Group = value;
         }
 
         [Category("Points"),
          Description("The clusters points")]
-        public string PointsString => m_underlyingInclusion.PointsString;
+        public string PointsString => m_UnderlyingInclusion.PointsString;
         
         public InclusionPropertyContainer(object underlyingInclusion)
         {
-            m_underlyingInclusion = underlyingInclusion as Inclusion;
+            m_UnderlyingInclusion = underlyingInclusion as Inclusion;
         }
     }
 }

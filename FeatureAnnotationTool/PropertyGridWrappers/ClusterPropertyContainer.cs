@@ -2,34 +2,33 @@
 using BoreholeFeatures;
 using FeatureAnnotationTool.Converters;
 
-namespace FeatureAnnotationTool
+namespace FeatureAnnotationTool.PropertyGridWrappers
 {
     /// <summary>
-    /// Contains a cluster so that its propertiesd can be displayed, 
+    /// Contains a cluster so that its properties can be displayed, 
     /// and changed, on a property grid 
     /// </summary>
-    [DefaultProperty("Description")]
     public sealed class ClusterPropertyContainer
     {
-        private readonly Cluster m_underlyingCluster;
+        private readonly Cluster m_UnderlyingCluster;
         
         [Category("Depth"),
          Description("The clusters start depth in millimetres"),
          DisplayName("Start Depth (mm)")]
-        public int StartDepth => m_underlyingCluster.StartDepth;
+        public int StartDepth => m_UnderlyingCluster.StartDepth;
 
         [Category("Depth"),
          Description("The clusters end depth in millimetres"),
          DisplayName("End Depth (mm)")]
-        public int EndDepth => m_underlyingCluster.EndDepth;
+        public int EndDepth => m_UnderlyingCluster.EndDepth;
 
         [Category("\t\tDescription"),
          Description("Additional information")]
         public string Description
         {
-            get => m_underlyingCluster.Description;
+            get => m_UnderlyingCluster.Description;
 
-            set => m_underlyingCluster.Description = value;
+            set => m_UnderlyingCluster.Description = value;
         }
 
         [Browsable(true),
@@ -40,23 +39,23 @@ namespace FeatureAnnotationTool
          TypeConverter(typeof(ClusterGroupConverter))]
         public string Group
         {
-            get => m_underlyingCluster.Group;
+            get => m_UnderlyingCluster.Group;
 
-            set => m_underlyingCluster.Group = value;
+            set => m_UnderlyingCluster.Group = value;
         }
 
         [Category("Points"),
          Description("The clusters points")]
-        public string PointsString => m_underlyingCluster.PointsString;
+        public string PointsString => m_UnderlyingCluster.PointsString;
 
         [Category("\tCluster Properties"),
          Description("Does the cluster contain small bubbles?"),
          DisplayName("Small Bubbles")]
         public bool SmallBubbles
         {
-            get => m_underlyingCluster.SmallBubbles;
+            get => m_UnderlyingCluster.SmallBubbles;
 
-            set => m_underlyingCluster.SmallBubbles = value;
+            set => m_UnderlyingCluster.SmallBubbles = value;
         }
 
         [Category("\tCluster Properties"),
@@ -64,9 +63,9 @@ namespace FeatureAnnotationTool
          DisplayName("Large Bubbles")]
         public bool LargeBubbles
         {
-            get => m_underlyingCluster.LargeBubbles;
+            get => m_UnderlyingCluster.LargeBubbles;
 
-            set => m_underlyingCluster.LargeBubbles = value;
+            set => m_UnderlyingCluster.LargeBubbles = value;
         }
 
         [Category("\tCluster Properties"),
@@ -74,9 +73,9 @@ namespace FeatureAnnotationTool
          DisplayName("Fine Debris")]
         public bool FineDebris
         {
-            get => m_underlyingCluster.FineDebris;
+            get => m_UnderlyingCluster.FineDebris;
 
-            set => m_underlyingCluster.FineDebris = value;
+            set => m_UnderlyingCluster.FineDebris = value;
         }
 
         [Category("\tCluster Properties"),
@@ -84,23 +83,23 @@ namespace FeatureAnnotationTool
          DisplayName("Coarse Debris")]
         public bool CoarseDebris
         {
-            get => m_underlyingCluster.CoarseDebris;
+            get => m_UnderlyingCluster.CoarseDebris;
 
-            set => m_underlyingCluster.CoarseDebris = value;
+            set => m_UnderlyingCluster.CoarseDebris = value;
         }
 
         [Category("\tCluster Properties"),
          Description("Does the cluster contain debris of varying grain size?")]
         public bool Diamicton
         {
-            get => m_underlyingCluster.Diamicton;
+            get => m_UnderlyingCluster.Diamicton;
 
-            set => m_underlyingCluster.Diamicton = value;
+            set => m_UnderlyingCluster.Diamicton = value;
         }
 
         public ClusterPropertyContainer(object underlyingCluster)
         {
-            m_underlyingCluster = underlyingCluster as Cluster;
+            m_UnderlyingCluster = underlyingCluster as Cluster;
         }
     }
 }
