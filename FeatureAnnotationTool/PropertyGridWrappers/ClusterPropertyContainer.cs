@@ -22,7 +22,7 @@ namespace FeatureAnnotationTool.PropertyGridWrappers
          DisplayName("End Depth (mm)")]
         public int EndDepth => m_UnderlyingCluster.EndDepth;
 
-        [Category("\t\tDescription"),
+        [Category("Description"),
          Description("Additional information")]
         public string Description
         {
@@ -33,7 +33,7 @@ namespace FeatureAnnotationTool.PropertyGridWrappers
 
         [Browsable(true),
          DefaultValue("entry1"),
-         Category("\tDescription"),
+         Category("Description"),
          Description("The group this cluster belongs to (To " +
                      "change group display colours go to 'Features>Clusters>Groups'"),
          TypeConverter(typeof(ClusterGroupConverter))]

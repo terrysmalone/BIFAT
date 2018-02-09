@@ -8,7 +8,6 @@ namespace FeatureAnnotationTool.PropertyGridWrappers
     /// Contains an inclusion so that its propertiesd can be displayed, 
     /// and changed, on a property grid 
     /// </summary>
-    [DefaultProperty("Description")]
     public sealed class InclusionPropertyContainer
     {
         private readonly Inclusion m_UnderlyingInclusion;

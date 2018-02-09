@@ -595,7 +595,16 @@ namespace FeatureAnnotationTool
             }
             else
             {
-                featureDetailsPropertyGrid.SelectedObject = selectedFeature;
+                if (selectedFeature is BoreholeLayer)
+                {
+                    featureDetailsPropertyGrid.SelectedObject 
+                        = new BoreholeLayerPropertyContainer(selectedFeature);
+                }
+                else if (selectedFeature is CoreLayer)
+                {
+                    featureDetailsPropertyGrid.SelectedObject
+                       = new CoreLayerPropertyContainer(selectedFeature);
+                }
             }
         }
 

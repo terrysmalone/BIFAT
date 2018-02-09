@@ -124,6 +124,7 @@
     <Compile Include="AutoDetect\AutomaticDetectUsingHough.cs" />
     <Compile Include="BIFAT.cs" />
     <Compile Include="AutoDetect\AutomaticDetectUsingEdgeProcessing.cs" />
+    <Compile Include="PropertyGridWrappers\BoreholeLayerPropertyContainer.cs" />
     <Compile Include="PropertyGridWrappers\ClusterPropertyContainer.cs" />
     <Compile Include="Controller\AnnotationToolController.cs" />
     <Compile Include="Converters\ClusterGroupConverter.cs" />
@@ -232,6 +233,7 @@
       <DependentUpon>SectionSizeDialogBox.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageRotation.cs" />
+    <Compile Include="PropertyGridWrappers\CoreLayerPropertyContainer.cs" />
     <Compile Include="PropertyGridWrappers\InclusionPropertyContainer.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\IModelAdapter.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="OrientationRuler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyGridWrappers\LayerPropertyContainer.cs" />
     <Compile Include="Ruler.cs" />
     <EmbeddedResource Include="AnnotationToolForm.resx">
       <DependentUpon>AnnotationToolForm.cs</DependentUpon>

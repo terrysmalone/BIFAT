@@ -1,8 +1,12 @@
 ﻿using System.ComponentModel;
 
-namespace BoreholeFeatures.Converters
+namespace FeatureAnnotationTool.Converters
 {
-    internal class LayerGroupConverter : StringConverter
+    /// <summary>
+    /// Modifies the input of the quality field for a feature in the property grid to show a 
+    /// drop-down box with choices 1-4
+    /// </summary>
+    internal class QualityConverter : Int32Converter
     {
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
@@ -13,20 +17,17 @@ namespace BoreholeFeatures.Converters
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             //true will limit to list. false will show the list, but allow free-form entry
-            return false;
+            return true;
         }
 
         /// <summary>
-        /// Overrides the standard values
+        /// Overrides the standard values 
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            var refLayer = context.Instance as Layer;
-            
-            // ReSharper disable once PossibleNullReferenceException
-            return new StandardValuesCollection(refLayer.GetLayerGroupNames());
+            return new StandardValuesCollection(new[] { 1, 2, 3, 4 });
         }
     }
 }

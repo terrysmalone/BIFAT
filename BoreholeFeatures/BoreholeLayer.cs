@@ -7,22 +7,10 @@ using System.ComponentModel;
 
 namespace BoreholeFeatures
 {
-    [DefaultPropertyAttribute("Description")]
     public sealed class BoreholeLayer : Layer
     {
         # region property grid methods
-
-        [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The amplitude of the layer's bottom edge")]
-        [DisplayName("Amplitude (mm)")]
-        public int SecondSineAmplitude
-        {
-            get
-            {
-                return BottomSineAmplitudeInMM;
-            }
-
-        }
-
+        
         [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The azimuth of the layer's bottom edge")]
         [DisplayName("Azimuth")]
         public int SecondSineAzimuth
