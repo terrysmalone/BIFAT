@@ -718,7 +718,7 @@ namespace SaveLoadBoreholeData
 
             layer.Description = desc;
 
-            layer.SetQuality(quality);
+            layer.Quality = quality;
 
             layer.TimeAdded = added;
             layer.TimeLastModified = lastModified;

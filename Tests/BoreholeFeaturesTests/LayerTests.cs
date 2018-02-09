@@ -157,10 +157,10 @@ namespace BoreholeFeaturesTests
 
             Assert.IsTrue(testLayer.Quality == 4, "Quality should be 4.  It is " + testLayer.Quality);
 
-            testLayer.SetQuality(3);
+            testLayer.Quality = 3;
             Assert.IsTrue(testLayer.Quality == 3, "Quality should be 3.  It is " + testLayer.Quality);
 
-            testLayer.SetQuality(2);
+            testLayer.Quality = 2;
             Assert.IsTrue(testLayer.Quality == 2, "Quality should be 2.  It is " + testLayer.Quality);
         }
 

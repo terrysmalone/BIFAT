@@ -172,7 +172,7 @@ namespace SaveLoadBoreholeDataTests
 
             Layer layer2 = selector.setUpLayer(300, 10, 200, 323, 2, 210, 720, 1);
             layer2.Description = "Layer 2";
-            layer2.SetQuality(3);
+            layer2.Quality = 3;
             layer2.CoarseDebris = true;
             testLayers.Add(layer2);
 

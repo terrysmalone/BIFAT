@@ -93,9 +93,16 @@ namespace LayerDetection
                         CheckAroundSineLayer();
                     else
                     {
-                        Sine onlySine = foundSines[0];
-                        Layer layer = layerTypeSelector.setUpLayer(onlySine.Depth, onlySine.Amplitude, onlySine.Azimuth, onlySine.Depth, onlySine.Amplitude, onlySine.Azimuth, image.Width, depthResolution);
-                        layer.SetQuality(onlySine.Quality);
+                        var onlySine = foundSines[0];
+                        var layer = layerTypeSelector.setUpLayer(onlySine.Depth, 
+                                                                 onlySine.Amplitude, 
+                                                                 onlySine.Azimuth, 
+                                                                 onlySine.Depth, 
+                                                                 onlySine.Amplitude, 
+                                                                 onlySine.Azimuth, 
+                                                                 image.Width, 
+                                                                 depthResolution);
+                        layer.Quality = onlySine.Quality;
 
                         detectedLayers.Add(layer);
                     }
@@ -112,7 +119,7 @@ namespace LayerDetection
                         EdgeLine onlyLine = foundLines[0];
 
                         Layer layer = layerTypeSelector.setUpLayer(onlyLine.Slope, onlyLine.Intercept, onlyLine.Slope, onlyLine.Intercept, image.Width, depthResolution);
-                        layer.SetQuality(onlyLine.Quality);
+                        layer.Quality = onlyLine.Quality;
 
                         detectedLayers.Add(layer);
                     }
@@ -217,7 +224,7 @@ namespace LayerDetection
             int layerAzimuth = sineToAdd.Azimuth;
 
             Layer layerToAdd = layerTypeSelector.setUpLayer(layerDepth, layerAmplitude, layerAzimuth, layerDepth, layerAmplitude, layerAzimuth, image.Width, depthResolution);
-            layerToAdd.SetQuality(sineToAdd.Quality);
+            layerToAdd.Quality = sineToAdd.Quality;
 
             detectedLayers.Add(layerToAdd);
         }
@@ -265,7 +272,7 @@ namespace LayerDetection
                     bottomSine = foundSines[i];
 
                     Layer layerToAdd = layerTypeSelector.setUpLayer(topSine.Depth, topSine.Amplitude, topSine.Azimuth, bottomSine.Depth, bottomSine.Amplitude, bottomSine.Azimuth, image.Width, depthResolution);
-                    layerToAdd.SetQuality(topSine.Quality);
+                    layerToAdd.Quality = topSine.Quality;
 
                     detectedLayers.Add(layerToAdd);
                     i++;
@@ -275,7 +282,7 @@ namespace LayerDetection
                     topSine = foundSines[i - 1];
 
                     Layer layerToAdd = layerTypeSelector.setUpLayer(topSine.Depth, topSine.Amplitude, topSine.Azimuth, topSine.Depth, topSine.Amplitude, topSine.Azimuth, image.Width, depthResolution);
-                    layerToAdd.SetQuality(topSine.Quality);
+                    layerToAdd.Quality = topSine.Quality;
 
                     detectedLayers.Add(layerToAdd); 
                 }
@@ -285,7 +292,7 @@ namespace LayerDetection
                     topSine = foundSines[foundSines.Count - 1];
 
                     Layer lastLayer = layerTypeSelector.setUpLayer(topSine.Depth, topSine.Amplitude, topSine.Azimuth, topSine.Depth, topSine.Amplitude, topSine.Azimuth, image.Width, depthResolution);
-                    lastLayer.SetQuality(topSine.Quality);
+                    lastLayer.Quality = topSine.Quality;
 
                     detectedLayers.Add(lastLayer);
                 }               
@@ -364,7 +371,7 @@ namespace LayerDetection
                     int layerIntercept = lineToAdd.Intercept;
 
                     Layer layerToAdd = layerTypeSelector.setUpLayer(layerSlope, layerIntercept, layerSlope, layerIntercept, image.Width, depthResolution);
-                    layerToAdd.SetQuality(layerToAdd.Quality);
+                    layerToAdd.Quality = layerToAdd.Quality;
 
                     detectedLayers.Add(layerToAdd);
 
@@ -406,7 +413,7 @@ namespace LayerDetection
                     bottomLine = foundLines[i];
 
                     Layer layerToAdd = layerTypeSelector.setUpLayer(topLine.Slope, topLine.Intercept, bottomLine.Slope, bottomLine.Intercept, image.Width, depthResolution);
-                    layerToAdd.SetQuality(topLine.Quality);
+                    layerToAdd.Quality = topLine.Quality;
 
                     detectedLayers.Add(layerToAdd);
                     i++;
@@ -416,7 +423,7 @@ namespace LayerDetection
                     topLine = foundLines[i - 1];
 
                     Layer layerToAdd = layerTypeSelector.setUpLayer(topLine.Slope, topLine.Intercept, topLine.Slope, topLine.Intercept, image.Width, depthResolution);
-                    layerToAdd.SetQuality(topLine.Quality);
+                    layerToAdd.Quality = topLine.Quality;
 
                     detectedLayers.Add(layerToAdd);
                 }
@@ -426,7 +433,7 @@ namespace LayerDetection
                     topLine = foundLines[foundLines.Count - 1];
 
                     Layer lastLayer = layerTypeSelector.setUpLayer(topLine.Slope, topLine.Intercept, topLine.Slope, topLine.Intercept, image.Width, depthResolution);
-                    lastLayer.SetQuality(topLine.Quality);
+                    lastLayer.Quality = topLine.Quality;
 
                     detectedLayers.Add(lastLayer);
                 }
