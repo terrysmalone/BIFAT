@@ -9,7 +9,7 @@ namespace FeatureAnnotationTool.PropertyGridWrappers
 
         [Category("\tBottom Edge"), Description("The amplitude of the layer's bottom edge")]
         [DisplayName("Amplitude (mm)")]
-        public int SecondSineAmplitude => m_UnderlyingLayer.BottomSineAmplitudeInMM;
+        public int SecondSineAmplitude => m_UnderlyingLayer.BottomSineAmplitudeInMm;
 
         public BoreholeLayerPropertyContainer(object underlyingLayer) : base (underlyingLayer)
         {

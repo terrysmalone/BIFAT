@@ -124,6 +124,8 @@
     <Compile Include="AutoDetect\AutomaticDetectUsingHough.cs" />
     <Compile Include="BIFAT.cs" />
     <Compile Include="AutoDetect\AutomaticDetectUsingEdgeProcessing.cs" />
+    <Compile Include="Converters\LayerGroupConverter.cs" />
+    <Compile Include="Converters\QualityConverter.cs" />
     <Compile Include="PropertyGridWrappers\BoreholeLayerPropertyContainer.cs" />
     <Compile Include="PropertyGridWrappers\ClusterPropertyContainer.cs" />
     <Compile Include="Controller\AnnotationToolController.cs" />

@@ -192,7 +192,7 @@ namespace FeatureAnnotationTool.Model
             for (int i = 0; i < layers.Count; i++)
             {
                 row++;
-                int testnum = layers[i].TopEdgeDepthMM;
+                int testnum = layers[i].TopEdgeDepthMm;
 
                 currentColumn = 0;
 
@@ -212,7 +212,7 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Top sine depth (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopEdgeDepthMM));
+                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopEdgeDepthMm));
                     currentColumn++;
                 }
 
@@ -224,13 +224,13 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Top sine amplitude (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopSineAmplitudeInMM));
+                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopSineAmplitudeInMm));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Bottom sine depth (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeDepthMM));
+                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeDepthMm));
                     currentColumn++;
                 }
 
@@ -242,7 +242,7 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Bottom sine amplitude (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomSineAmplitudeInMM));
+                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomSineAmplitudeInMm));
                     currentColumn++;
                 }
 

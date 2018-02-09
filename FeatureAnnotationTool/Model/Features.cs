@@ -339,7 +339,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top sine depth (mm)"))
                     {
-                        stream.Write(layers[i].TopEdgeDepthMM);
+                        stream.Write(layers[i].TopEdgeDepthMm);
 
                         if (lastItem != "Top sine depth (mm)") 
                             stream.Write(", ");
@@ -355,7 +355,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top sine amplitude (mm)"))
                     {
-                        stream.Write(layers[i].TopSineAmplitudeInMM);
+                        stream.Write(layers[i].TopSineAmplitudeInMm);
 
                         if (lastItem != "Top sine amplitude (mm)")
                             stream.Write(", ");
@@ -363,7 +363,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom sine depth (mm)"))
                     {
-                        stream.Write(layers[i].BottomEdgeDepthMM);
+                        stream.Write(layers[i].BottomEdgeDepthMm);
 
                         if (lastItem != "Bottom sine depth (mm)")
                             stream.Write(", ");
@@ -379,7 +379,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom sine amplitude (mm)"))
                     {
-                        stream.Write(layers[i].BottomSineAmplitudeInMM);
+                        stream.Write(layers[i].BottomSineAmplitudeInMm);
 
                         if (lastItem != "Bottom sine amplitude (mm)")
                             stream.Write(", ");
@@ -491,10 +491,10 @@ namespace FeatureAnnotationTool.Model
             double wellDip;
             double wellThickness;
                         
-            wellDepth = (double)layer.TopEdgeDepthMM / 1000.0;
+            wellDepth = (double)layer.TopEdgeDepthMm / 1000.0;
             wellAzimuth = (double)layer.TopSineAzimuth;
-            wellDip = (double)layer.TopSineAmplitudeInMM;
-            wellThickness = Math.Max((double)layer.TopEdgeDepthMM,(double)layer.BottomEdgeDepthMM) - Math.Min((double)layer.TopEdgeDepthMM, (double)layer.BottomEdgeDepthMM);
+            wellDip = (double)layer.TopSineAmplitudeInMm;
+            wellThickness = Math.Max((double)layer.TopEdgeDepthMm,(double)layer.BottomEdgeDepthMm) - Math.Min((double)layer.TopEdgeDepthMm, (double)layer.BottomEdgeDepthMm);
 
             stream.WriteLine(wellDepth + "," + wellAzimuth + "," + wellDip + "," + wellThickness);
         }

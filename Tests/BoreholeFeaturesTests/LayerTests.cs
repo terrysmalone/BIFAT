@@ -38,8 +38,8 @@ namespace BoreholeFeaturesTests
             Assert.That(testLayer.TopSineAzimuth, Is.EqualTo(firstAzimuth));
             Assert.That(testLayer.BottomSineAzimuth, Is.EqualTo(secondAzimuth));
 
-            Assert.That(testLayer.TopEdgeDepthMM, Is.EqualTo(firstDepth));
-            Assert.That(testLayer.BottomEdgeDepthMM, Is.EqualTo(secondDepth));
+            Assert.That(testLayer.TopEdgeDepthMm, Is.EqualTo(firstDepth));
+            Assert.That(testLayer.BottomEdgeDepthMm, Is.EqualTo(secondDepth));
 
             Assert.That(testLayer.GetTopEdgePoints(), Is.Not.Null);
             Assert.That(testLayer.GetBottomEdgePoints(), Is.Not.Null);
@@ -88,8 +88,8 @@ namespace BoreholeFeaturesTests
             Assert.IsTrue(testLayer.TopSineAzimuth == firstAzimuth, "First azimuth should be " + firstAzimuth + ". It is " + testLayer.TopSineAzimuth);
             Assert.IsTrue(testLayer.BottomSineAzimuth == secondAzimuth, "Second azimuth should be " + secondAzimuth + ". It is " + testLayer.BottomSineAzimuth);
 
-            Assert.IsTrue(testLayer.TopEdgeDepthMM == firstDepth + 300, "First depth should be " + (firstDepth + 300) + "mm. It is " + testLayer.TopEdgeDepthMM);
-            Assert.IsTrue(testLayer.BottomEdgeDepthMM == secondDepth + 300, "Second depth should be  " + (secondDepth + 300) + "mm. It is " + testLayer.BottomEdgeDepthMM);
+            Assert.IsTrue(testLayer.TopEdgeDepthMm == firstDepth + 300, "First depth should be " + (firstDepth + 300) + "mm. It is " + testLayer.TopEdgeDepthMm);
+            Assert.IsTrue(testLayer.BottomEdgeDepthMm == secondDepth + 300, "Second depth should be  " + (secondDepth + 300) + "mm. It is " + testLayer.BottomEdgeDepthMm);
 
             Assert.IsTrue(testLayer.StartY == firstDepth - firstAmplitude, "Start y should be " + (firstDepth - firstAmplitude).ToString() + ". It is " + testLayer.StartY);
             Assert.IsTrue(testLayer.EndY == secondDepth + secondAmplitude, "End y should be " + (secondDepth + secondAmplitude).ToString() + ". It is " + testLayer.EndY);
