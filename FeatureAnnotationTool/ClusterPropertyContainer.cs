@@ -23,7 +23,7 @@ namespace FeatureAnnotationTool
          DisplayName("End Depth (mm)")]
         public int EndDepth => m_underlyingCluster.EndDepth;
 
-        [Category("\t\tDescription"),
+        [Category("Description"),
          Description("Additional information")]
         public string Description
         {
@@ -33,8 +33,7 @@ namespace FeatureAnnotationTool
         }
 
         [Browsable(true),
-         DefaultValue("entry1"),
-         Category("\tDescription"),
+         Category("Description"),
          Description("The group this cluster belongs to (To " +
                      "change group display colours go to 'Features>Clusters>Groups'"),
          TypeConverter(typeof(ClusterGroupConverter))]
@@ -49,7 +48,7 @@ namespace FeatureAnnotationTool
          Description("The clusters points")]
         public string PointsString => m_underlyingCluster.PointsString;
 
-        [Category("\tCluster Properties"),
+        [Category("Cluster Properties"),
          Description("Does the cluster contain small bubbles?"),
          DisplayName("Small Bubbles")]
         public bool SmallBubbles
@@ -59,7 +58,7 @@ namespace FeatureAnnotationTool
             set => m_underlyingCluster.SmallBubbles = value;
         }
 
-        [Category("\tCluster Properties"),
+        [Category("Cluster Properties"),
          Description("Does the cluster contain large bubbles?"),
          DisplayName("Large Bubbles")]
         public bool LargeBubbles
@@ -69,7 +68,7 @@ namespace FeatureAnnotationTool
             set => m_underlyingCluster.LargeBubbles = value;
         }
 
-        [Category("\tCluster Properties"),
+        [Category("Cluster Properties"),
          Description("Does the cluster contain fine debris?"),
          DisplayName("Fine Debris")]
         public bool FineDebris
@@ -79,7 +78,7 @@ namespace FeatureAnnotationTool
             set => m_underlyingCluster.FineDebris = value;
         }
 
-        [Category("\tCluster Properties"),
+        [Category("Cluster Properties"),
          Description("Does the cluster contain coarse debris?"),
          DisplayName("Coarse Debris")]
         public bool CoarseDebris
@@ -89,7 +88,7 @@ namespace FeatureAnnotationTool
             set => m_underlyingCluster.CoarseDebris = value;
         }
 
-        [Category("\tCluster Properties"),
+        [Category("Cluster Properties"),
          Description("Does the cluster contain debris of varying grain size?")]
         public bool Diamicton
         {
