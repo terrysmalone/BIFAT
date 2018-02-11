@@ -7,22 +7,10 @@ using System.ComponentModel;
 
 namespace BoreholeFeatures
 {
-    [DefaultPropertyAttribute("Description")]
     public sealed class BoreholeLayer : Layer
     {
         # region property grid methods
-
-        [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The amplitude of the layer's bottom edge")]
-        [DisplayName("Amplitude (mm)")]
-        public int SecondSineAmplitude
-        {
-            get
-            {
-                return BottomSineAmplitudeInMM;
-            }
-
-        }
-
+        
         [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The azimuth of the layer's bottom edge")]
         [DisplayName("Azimuth")]
         public int SecondSineAzimuth
@@ -40,7 +28,7 @@ namespace BoreholeFeatures
         {
             get
             {
-                return TopEdgeDepthMM;
+                return TopEdgeDepthMm;
                 //return (int)((double)sourceStartDepth + (double)((double)topDepthPixels * (double)depthResolution));
                 //return (int)(((double)topDepthPixels - (double)sourceStartDepth) * (double)depthResolution) + sourceStartDepth;
             }
@@ -54,7 +42,7 @@ namespace BoreholeFeatures
             get
             {
                 //return (int)((double)topAmplitude * (double)depthResolution);
-                return TopSineAmplitudeInMM;
+                return TopSineAmplitudeInMm;
             }
 
         }
@@ -76,7 +64,7 @@ namespace BoreholeFeatures
         {
             get
             {
-                return BottomEdgeDepthMM;
+                return BottomEdgeDepthMm;
                 //return (int)((double)sourceStartDepth + (double)((double)bottomDepthPixels * (double)depthResolution));
                 //return (int)(((double)bottomDepthPixels - (double)sourceStartDepth) * (double)depthResolution) + sourceStartDepth;
             }

@@ -15,6 +15,7 @@ using ImageTiler;
 using RGReferencedData;
 using BoreholeFeatures;
 using System.IO;
+using FeatureAnnotationTool.PropertyGridWrappers;
 
 namespace FeatureAnnotationTool
 {
@@ -501,7 +502,9 @@ namespace FeatureAnnotationTool
 
         public void DrawOrientationRuler()
         {
-            OrientationRuler orientationRuler = new OrientationRuler(rulerPictureBox.Width, boreholeSectionImage.Width, rotation);
+            var orientationRuler = new OrientationRuler(rulerPictureBox.Width, 
+                                                        boreholeSectionImage.Width, 
+                                                        rotation);
 
             EnableRotationButtons();
 
@@ -524,7 +527,7 @@ namespace FeatureAnnotationTool
         /// <param name="firstPoint">The first point to compare</param>
         /// <param name="secondPoint">The second point to compare</param>
         /// <returns>True if points are close, false if not</returns>
-        private bool PointsAreClose(Point firstPoint, Point secondPoint)
+        private static bool PointsAreClose(Point firstPoint, Point secondPoint)
         {
             if (secondPoint.X >= firstPoint.X - 5 && secondPoint.X <= firstPoint.X + 5 &&
                 secondPoint.Y >= firstPoint.Y - 5 && secondPoint.Y <= firstPoint.Y + 5)
@@ -537,7 +540,7 @@ namespace FeatureAnnotationTool
 
         # region Show features methods
 
-        private void showFeaturesCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void ShowFeaturesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             boreholePictureBox.Refresh();
 
@@ -568,11 +571,20 @@ namespace FeatureAnnotationTool
 
         public void ShowFeatureDetailsPropertyGrid()
         {
-            var selectedFeature = _viewAdapter.SelectedFeature;
+            SetSelectedFeature(_viewAdapter.SelectedFeature);
             
+            featureDetailsPropertyGrid.Visible = true;
+
+            this.Refresh();
+        }
+
+        private void SetSelectedFeature(object viewAdapterSelectedFeature)
+        {
+            var selectedFeature = viewAdapterSelectedFeature;
+
             if (selectedFeature == null) return;
-            
-            
+
+
             if (selectedFeature is Cluster)
             {
                 featureDetailsPropertyGrid.SelectedObject = new ClusterPropertyContainer(selectedFeature);
@@ -583,31 +595,40 @@ namespace FeatureAnnotationTool
             }
             else
             {
-                featureDetailsPropertyGrid.SelectedObject = selectedFeature;
-
+                if (selectedFeature is BoreholeLayer)
+                {
+                    featureDetailsPropertyGrid.SelectedObject 
+                        = new BoreholeLayerPropertyContainer(selectedFeature);
+                }
+                else if (selectedFeature is CoreLayer)
+                {
+                    featureDetailsPropertyGrid.SelectedObject
+                       = new CoreLayerPropertyContainer(selectedFeature);
+                }
             }
-            
-            featureDetailsPropertyGrid.Visible = true;
-            this.Refresh();
         }
 
-        private void featureDetailsPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        private void FeatureDetailsPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             changedSinceLastSave = true;
 
-            if (e.ChangedItem.Label == "Group")
-            {
-                if (e.ChangedItem.Parent.Parent.Label == "BoreholeFeatures.BoreholeLayer" || e.ChangedItem.Parent.Parent.Label == "BoreholeFeatures.CoreLayer")
-                    _viewAdapter.AddLayerGroup(e.ChangedItem.Value.ToString());
-                else if (e.ChangedItem.Parent.Parent.Label == "BoreholeFeatures.Cluster")
-                    _viewAdapter.AddClusterGroup(e.ChangedItem.Value.ToString());
-                else if (e.ChangedItem.Parent.Parent.Label == "BoreholeFeatures.Inclusion")
-                    _viewAdapter.AddInclusionGroup(e.ChangedItem.Value.ToString());
+            if(e.ChangedItem.Label != "Group") return;
 
+            switch(e.ChangedItem.Parent.Parent.Label)
+            {
+                case "BoreholeFeatures.BoreholeLayer":
+                case "BoreholeFeatures.CoreLayer":
+                    _viewAdapter.AddLayerGroup(e.ChangedItem.Value.ToString());
+                    break;
+                case "BoreholeFeatures.Cluster":
+                    _viewAdapter.AddClusterGroup(e.ChangedItem.Value.ToString());
+                    break;
+                case "BoreholeFeatures.Inclusion":
+                    _viewAdapter.AddInclusionGroup(e.ChangedItem.Value.ToString());
+                    break;
+            }
             
-                _viewAdapter.SaveGroups();
-            } 
-            
+            _viewAdapter.SaveGroups();
         }
 
         # endregion
@@ -653,9 +674,8 @@ namespace FeatureAnnotationTool
 
                     DrawSelectedFeature(e);
                 }
-
-                featureDetailsPropertyGrid.SelectedObject = _viewAdapter.SelectedFeature;
-
+                
+                SetSelectedFeature(_viewAdapter.SelectedFeature);
             }
 
             DrawConvergingRegions(e);

@@ -29,14 +29,10 @@ namespace AutomaticFeatureDetection
         
         private readonly Bitmap m_OriginalImage;
         private List<Edge> m_FoundEdges = new List<Edge>();
-        //private List<Edge> m_EdgesBeforeOperations = new List<Edge>();
-        //private readonly List<Edge> m_EdgesAfterSineFitting = new List<Edge>();
 
         private List<Sine> m_DetectedFitSines = new List<Sine>();
         private List<EdgeLine> m_DetectedFitLines = new List<EdgeLine>();
         
-        //Detected features
-
         private readonly LayerTypeSelector m_LayerTypeSelector = new LayerTypeSelector("Borehole");
 
 
