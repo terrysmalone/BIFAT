@@ -1,77 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.ComponentModel;
 
 namespace BoreholeFeatures
 {
     public sealed class BoreholeLayer : Layer
     {
-        # region property grid methods
-        
-        [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The azimuth of the layer's bottom edge")]
-        [DisplayName("Azimuth")]
-        public int SecondSineAzimuth
-        {
-            get
-            {
-                return bottomAzimuth;
-            }
+        public int FirstSineDepth => TopEdgeDepthMm;
 
-        }
+        public int FirstSineAmplitude => TopSineAmplitudeInMm;
 
-        [CategoryAttribute("\t\tTop Edge"), DescriptionAttribute("The depth of the layer's top edge")]
-        [DisplayName("Depth (mm)")]
-        public int FirstSineDepth
-        {
-            get
-            {
-                return TopEdgeDepthMm;
-                //return (int)((double)sourceStartDepth + (double)((double)topDepthPixels * (double)depthResolution));
-                //return (int)(((double)topDepthPixels - (double)sourceStartDepth) * (double)depthResolution) + sourceStartDepth;
-            }
+        public int FirstSineAzimuth => topAzimuth;
 
-        }
+        public int SecondSineDepth => BottomEdgeDepthMm;
 
-        [CategoryAttribute("\t\tTop Edge"), DescriptionAttribute("The amplitude of the layer's top edge")]
-        [DisplayName("Amplitude (mm)")]
-        public int FirstSineAmplitude
-        {
-            get
-            {
-                //return (int)((double)topAmplitude * (double)depthResolution);
-                return TopSineAmplitudeInMm;
-            }
+        public int SecondSineAzimuth => bottomAzimuth;
 
-        }
-
-        [CategoryAttribute("\t\tTop Edge"), DescriptionAttribute("The azimuth of the layer's top edge")]
-        [DisplayName("Azimuth")]
-        public int FirstSineAzimuth
-        {
-            get
-            {
-                return topAzimuth;
-            }
-
-        }
-
-        [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The depth of the layer's bottom edge")]
-        [DisplayName("Depth (mm)")]
-        public int SecondSineDepth
-        {
-            get
-            {
-                return BottomEdgeDepthMm;
-                //return (int)((double)sourceStartDepth + (double)((double)bottomDepthPixels * (double)depthResolution));
-                //return (int)(((double)bottomDepthPixels - (double)sourceStartDepth) * (double)depthResolution) + sourceStartDepth;
-            }
-
-        }
-
-        # endregion
 
         private SineWave topSine;
         private SineWave bottomSine;
@@ -87,14 +31,21 @@ namespace BoreholeFeatures
         /// <param name="secondAzimuth">The azimuth of the second SineWave</param>
         /// <param name="sourceAzimuthResolution">The azimuth resolution of the borehole</param>
         /// <param name="depthResolution">The depth resolution of the borehole</param>
-        public BoreholeLayer(int firstDepth, int firstAmplitude, int firstAzimuth, int secondDepth, int secondAmplitude, int secondAzimuth, int sourceAzimuthResolution, int depthResolution)
+        public BoreholeLayer(int firstDepth, 
+                             int firstAmplitude, 
+                             int firstAzimuth, 
+                             int secondDepth, 
+                             int secondAmplitude, 
+                             int secondAzimuth, 
+                             int sourceAzimuthResolution, 
+                             int depthResolution)
         {
-            this.topDepthPixels = firstDepth;
-            this.topAmplitude = firstAmplitude;
-            this.topAzimuth = firstAzimuth;
-            this.bottomDepthPixels = secondDepth;
-            this.bottomAmplitude = secondAmplitude;
-            this.bottomAzimuth = secondAzimuth;
+            topDepthPixels = firstDepth;
+            topAmplitude = firstAmplitude;
+            topAzimuth = firstAzimuth;
+            bottomDepthPixels = secondDepth;
+            bottomAmplitude = secondAmplitude;
+            bottomAzimuth = secondAzimuth;
             this.sourceAzimuthResolution = sourceAzimuthResolution;
             this.depthResolution = depthResolution;
 
@@ -159,7 +110,7 @@ namespace BoreholeFeatures
                 //Will not let the layer move below the second edge
                 if (topDepthPixels + yMoveBy <= bottomDepthPixels)
                 {
-                    moveFirstSine(xMoveBy, yMoveBy);
+                    MoveFirstSine(xMoveBy, yMoveBy);
                 }
             }
             else if (sineToMove == SECOND_EDGE)
@@ -167,13 +118,13 @@ namespace BoreholeFeatures
                 //Will not let it move above the first edge
                 if (bottomDepthPixels + yMoveBy >= topDepthPixels)
                 {
-                    moveSecondSine(xMoveBy, yMoveBy);
+                    MoveSecondSine(xMoveBy, yMoveBy);
                 }
             }
             else if (sineToMove == BOTH_EDGES)
             {
-                moveFirstSine(xMoveBy, yMoveBy);
-                moveSecondSine(xMoveBy, yMoveBy);
+                MoveFirstSine(xMoveBy, yMoveBy);
+                MoveSecondSine(xMoveBy, yMoveBy);
             }
 
             CalculateStartY();
@@ -187,10 +138,10 @@ namespace BoreholeFeatures
         /// </summary>
         /// <param name="xMoveBy">Amount to move along the x-axis</param>
         /// <param name="yMoveBy">Amount to move along the y-axis</param>
-        private void moveFirstSine(int xMoveBy, int yMoveBy)
+        private void MoveFirstSine(int xMoveBy, int yMoveBy)
         {
             topDepthPixels = topDepthPixels + yMoveBy;
-            topAzimuth = topAzimuth + (int)((double)xMoveBy / ((double)sourceAzimuthResolution / 360.0));
+            topAzimuth = topAzimuth + (int)(xMoveBy / (sourceAzimuthResolution / 360.0));
 
             if (topAzimuth > 360)
                 topAzimuth -= 360;
@@ -205,10 +156,10 @@ namespace BoreholeFeatures
         /// </summary>
         /// <param name="xMoveBy">Amount to move along the x-axis</param>
         /// <param name="yMoveBy">Amount to move along the y-axis</param>
-        private void moveSecondSine(int xMoveBy, int yMoveBy)
+        private void MoveSecondSine(int xMoveBy, int yMoveBy)
         {
             bottomDepthPixels = bottomDepthPixels + yMoveBy;
-            bottomAzimuth = bottomAzimuth + (int)((double)xMoveBy / ((double)sourceAzimuthResolution / (double)360));
+            bottomAzimuth = bottomAzimuth + (int)(xMoveBy / (sourceAzimuthResolution / (double)360));
 
             if (bottomAzimuth > 360)
                 bottomAzimuth -= 360;

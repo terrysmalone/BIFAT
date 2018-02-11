@@ -1,61 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.ComponentModel;
 
 namespace BoreholeFeatures
 {
-    [DefaultPropertyAttribute("Description")]
     public sealed class CoreLayer : Layer
     {
-        # region Property grid methods
+        public int TopEdgeIntercept => TopEdgeInterceptMm;
 
-        [CategoryAttribute("\t\tTop Edge"), DescriptionAttribute("The intercept of the layer's top edge in millimetres")]
-        [DisplayName("Intercept (mm)")]
-        public int TopEdgeIntercept
-        {
-            get
-            {
-                return TopEdgeInterceptMm;
-            }
+        public double TopEdgeSlope => TopEdgeSlope;
 
-        }
-
-        [CategoryAttribute("\t\tTop Edge"), DescriptionAttribute("The slope of the layer's top edge")]
-        [DisplayName("Slope")]
-        public double TopEdgeSlope
-        {
-            get
-            {
-                return TopEdgeSlope;
-            }
-
-        }
-
-        [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The intercept of the layer's bottom edge in millimetres")]
-        [DisplayName("Intercept (mm)")]
-        public int BottomEdgeIntercept
-        {
-            get
-            {
-                return BottomEdgeInterceptMm;
-            }
-
-        }
-
-        [CategoryAttribute("\tBottom Edge"), DescriptionAttribute("The slope of the layer's bottom edge")]
-        [DisplayName("Slope")]
-        public double BottomEdgeSlope
-        {
-            get
-            {
-                return BottomEdgeSlope;
-            }
-        }
-
-        # endregion
+        public int BottomEdgeIntercept => BottomEdgeInterceptMm;
+        
+        public double BottomEdgeSlope => BottomEdgeSlope;
 
         //private int topEdgeIntercept, bottomEdgeIntercept;
         //private double topEdgeSlope, bottomEdgeSlope;
