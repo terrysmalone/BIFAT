@@ -225,7 +225,7 @@ namespace FeatureAnnotationTool
         /// </summary>
         public void openChannel()
         {
-            _viewAdapter.openChannel(optvChannel, workingPath);
+            _viewAdapter.OpenChannel(optvChannel, workingPath);
 
             boreholePictureBox.Refresh();
             changedSinceLastSave = false;
@@ -704,7 +704,7 @@ namespace FeatureAnnotationTool
             List<Point> pointsToDraw;
             List<Point> pointsToDraw2;
 
-            int numberOfLayers = _viewAdapter.getNumOfLayers();
+            int numberOfLayers = _viewAdapter.GetNumOfLayers();
 
             int layerToDraw;
 
@@ -722,14 +722,14 @@ namespace FeatureAnnotationTool
             while (stopDrawing == false && layerToDraw < numberOfLayers)
             {
                 //Draw the layers first sine
-                pointsToDraw = _viewAdapter.getLayer1(layerToDraw);
+                pointsToDraw = _viewAdapter.GetLayer1(layerToDraw);
 
                 layerPen.Color = _viewAdapter.GetLayerColour(layerToDraw);
 
                 DrawSine(e, pointsToDraw, layerPen);
 
                 //Draw the layers second sine
-                pointsToDraw2 = _viewAdapter.getLayer2(layerToDraw);
+                pointsToDraw2 = _viewAdapter.GetLayer2(layerToDraw);
 
                 DrawSine(e, pointsToDraw2, layerPen);
 
@@ -909,7 +909,7 @@ namespace FeatureAnnotationTool
 
         private void DrawAllClusters(PaintEventArgs e)
         {
-            int numberOfClusters = _viewAdapter.getNumOfClusters();
+            int numberOfClusters = _viewAdapter.GetNumOfClusters();
             List<Point> pointsToDraw;
 
             for (int clusterNum = 0; clusterNum < numberOfClusters; clusterNum++)
@@ -1084,7 +1084,7 @@ namespace FeatureAnnotationTool
 
         private void DrawAllInclusions(PaintEventArgs e)
         {
-            int numberOfInclusions = _viewAdapter.getNumOfInclusions();
+            int numberOfInclusions = _viewAdapter.GetNumOfInclusions();
             List<Point> pointsToDraw;
 
             for (int inclusionNum = 0; inclusionNum < numberOfInclusions; inclusionNum++)
@@ -1092,7 +1092,7 @@ namespace FeatureAnnotationTool
                 inclusionPen.Color = _viewAdapter.GetInclusionColour(inclusionNum);
                 
                 //pointsToDraw = _viewAdapter.getInclusion(inclusionNum);
-                pointsToDraw = GetPointToDraw(_viewAdapter.getInclusion(inclusionNum));
+                pointsToDraw = GetPointToDraw(_viewAdapter.GetInclusion(inclusionNum));
                 //drawPointRectangles(e, pointsToDraw, inclusionPen);
 
                 drawInclusionLines(e, pointsToDraw, inclusionNum, numberOfInclusions);
@@ -2210,7 +2210,7 @@ namespace FeatureAnnotationTool
                     layerDepth = firstLayerPoint.Y - layerAmplitude;
                 }
 
-                _viewAdapter.createNewLayer(layerDepth, layerAmplitude, layerAzimuth);
+                _viewAdapter.CreateNewLayer(layerDepth, layerAmplitude, layerAzimuth);
             }
             else
             {
@@ -2244,7 +2244,7 @@ namespace FeatureAnnotationTool
 
         private void addFirstClusterPoint(int xPos, int yPos)
         {
-            _viewAdapter.createNewCluster();
+            _viewAdapter.CreateNewCluster();
             creatingCluster = true;
 
             if (xPos < boreholeWidth && xPos > rotationShift && rotationShift != 0)
@@ -3800,7 +3800,7 @@ namespace FeatureAnnotationTool
                     List<string> clusterProperties = null;
                     List<string> inclusionProperties = null;
 
-                    if (_viewAdapter.getNumOfLayers() > 0)
+                    if (_viewAdapter.GetNumOfLayers() > 0)
                     {
                         layerProperties = RequestLayerProperties(layerPropertiesForm);
 
@@ -3808,7 +3808,7 @@ namespace FeatureAnnotationTool
                             cancelExport = true;
                     }
 
-                    if (_viewAdapter.getNumOfClusters() > 0 && cancelExport == false)
+                    if (_viewAdapter.GetNumOfClusters() > 0 && cancelExport == false)
                     {
                         clusterProperties = RequestClusterProperties(clusterPropertiesForm);
 
@@ -3816,7 +3816,7 @@ namespace FeatureAnnotationTool
                             cancelExport = true;
                     }
 
-                    if (_viewAdapter.getNumOfInclusions() > 0 && cancelExport == false)
+                    if (_viewAdapter.GetNumOfInclusions() > 0 && cancelExport == false)
                     {
                         inclusionProperties = RequestInclusionProperties(inclusionPropertiesForm);
 
@@ -3824,7 +3824,7 @@ namespace FeatureAnnotationTool
                             cancelExport = true;
                     }
 
-                    if (cancelExport == false && (_viewAdapter.getNumOfLayers() > 0 || _viewAdapter.getNumOfClusters() > 0 || _viewAdapter.getNumOfInclusions() > 0))
+                    if (cancelExport == false && (_viewAdapter.GetNumOfLayers() > 0 || _viewAdapter.GetNumOfClusters() > 0 || _viewAdapter.GetNumOfInclusions() > 0))
                     {
                         SaveFileDialog saveDialog = new SaveFileDialog();
                         saveDialog.DefaultExt = "*.xlsx";
@@ -3869,7 +3869,7 @@ namespace FeatureAnnotationTool
                     List<string> clusterProperties = null;
                     List<string> inclusionProperties = null;
 
-                    if (_viewAdapter.getNumOfLayers() > 0)
+                    if (_viewAdapter.GetNumOfLayers() > 0)
                     {
                         layerProperties = RequestLayerProperties(layerPropertiesForm);
 
@@ -3921,7 +3921,7 @@ namespace FeatureAnnotationTool
                     List<string> clusterProperties = null;
                     List<string> inclusionProperties = null;
 
-                    if (_viewAdapter.getNumOfClusters() > 0)
+                    if (_viewAdapter.GetNumOfClusters() > 0)
                     {
                         clusterProperties = RequestClusterProperties(clusterPropertiesForm);
 
@@ -3973,7 +3973,7 @@ namespace FeatureAnnotationTool
                     List<string> clusterProperties = null;
                     List<string> inclusionProperties = null;
 
-                    if (_viewAdapter.getNumOfInclusions() > 0)
+                    if (_viewAdapter.GetNumOfInclusions() > 0)
                     {
                         inclusionProperties = RequestInclusionProperties(inclusionPropertiesForm);
 
@@ -4023,7 +4023,7 @@ namespace FeatureAnnotationTool
                 {
                     List<string> layerProperties = null;
 
-                    if (_viewAdapter.getNumOfLayers() > 0)
+                    if (_viewAdapter.GetNumOfLayers() > 0)
                     {
                         layerProperties = RequestLayerProperties(layerPropertiesForm);
 
@@ -4043,7 +4043,7 @@ namespace FeatureAnnotationTool
                         saveDialog.FileName.Length > 0)
                         {
                             StartProgressReport("Writing layers to file");
-                            _viewAdapter.writeLayersToText(saveDialog.FileName, layerProperties);
+                            _viewAdapter.WriteLayersToText(saveDialog.FileName, layerProperties);
                             EndProgressReport();
                         }
                     }
@@ -4074,7 +4074,7 @@ namespace FeatureAnnotationTool
                 {
                     List<string> clusterProperties = null;
 
-                    if (_viewAdapter.getNumOfClusters() > 0)
+                    if (_viewAdapter.GetNumOfClusters() > 0)
                     {
                         clusterProperties = RequestClusterProperties(clusterPropertiesForm);
 
@@ -4124,7 +4124,7 @@ namespace FeatureAnnotationTool
                 {
                     List<string> inclusionProperties = null;
 
-                    if (_viewAdapter.getNumOfInclusions() > 0)
+                    if (_viewAdapter.GetNumOfInclusions() > 0)
                     {
                         inclusionProperties = RequestInclusionProperties(inclusionPropertiesForm);
 
@@ -4216,7 +4216,7 @@ namespace FeatureAnnotationTool
             if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveDialog.FileName.Length > 0)
             {
                 StartProgressReport("Writing features file");
-                _viewAdapter.WriteLayersForWellCAD(saveDialog.FileName);
+                _viewAdapter.WriteLayersForWellCad(saveDialog.FileName);
                 EndProgressReport();
             }
         }
@@ -4384,7 +4384,7 @@ namespace FeatureAnnotationTool
         private void startThread()
         {
             // Initialize the object that the background worker calls.
-            FileTiler tiler = _viewAdapter.getNewTiler(1000);
+            FileTiler tiler = _viewAdapter.GetNewTiler(1000);
 
             if (autoDetectType.Equals("EdgeProcessing"))
             {
@@ -4660,7 +4660,7 @@ namespace FeatureAnnotationTool
                     fileName = dialog.FileName.ToString();
                     //boreholeName = dialog.SafeFileName.Remove(dialog.SafeFileName.Length - 4);
 
-                    _viewAdapter.openOTVFile(fileName);
+                    _viewAdapter.OpenOtvFile(fileName);
 
                     boreholePictureBox.Refresh();
                     changedSinceLastSave = false;

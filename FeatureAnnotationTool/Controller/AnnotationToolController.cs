@@ -27,31 +27,25 @@ namespace FeatureAnnotationTool.Controller
         /// Returns the azimuth of the selected layers top (lowest y-value) sine 
         /// </summary>
         /// <returns>The azimuth of the selected layers top sine</returns>
-        public int TopAzimuthOfSelectedLayer
+        public int GetTopAzimuthOfSelectedLayer()
         {
-            get { return _model.TopAzimuthOfSelectedLayer; }
+            return _model.GetTopAzimuthOfSelectedLayer();
         }
 
         /// <summary>
         /// Returns the azimuth of the selected layers bottom (highest y-value) sine 
         /// </summary>
         /// <returns>The azimuth of the selected layers bottom sine</returns>
-        public int BottomAzimuthOfSelectedLayer
+        public int GetBottomAzimuthOfSelectedLayer()
         {
-            get { return _model.BottomAzimuthOfSelectedLayer; }
+            return _model.GetBottomAzimuthOfSelectedLayer();
         }
 
         # region Borehole details properties
 
-        public string BoreholeName
-        {
-            get { return _model.BoreholeName ;}
-        }
+        public string BoreholeName => _model.BoreholeName;
 
-        public int BoreholeStartDepth
-        {
-            get { return _model.BoreholeStartDepth; }
-        }
+        public int BoreholeStartDepth => _model.BoreholeStartDepth;
 
         public int BoreholeEndDepth
         {
@@ -98,7 +92,7 @@ namespace FeatureAnnotationTool.Controller
             _model = m;
             _view = v;
 
-            _model.setAdapter(this);
+            _model.SetAdapter(this);
             _view.SetAdapter(this);
         }
 
@@ -126,14 +120,14 @@ namespace FeatureAnnotationTool.Controller
             _model.WriteAllFeaturesToExcel(fileName, layerPropertiesToInclude, clusterPropertiesToInclude, inclusionPropertiesToInclude);
         }
 
-        public void writeLayersToText(string fileName, List<string> layerPropertiesToIncude)
+        public void WriteLayersToText(string fileName, List<string> layerPropertiesToIncude)
         {
             _model.WriteLayersToText(fileName, layerPropertiesToIncude);
         }
 
-        public void WriteLayersForWellCAD(string fileName)
+        public void WriteLayersForWellCad(string fileName)
         {
-            _model.WriteLayersForWellCAD(fileName);
+            _model.WriteLayersForWellCad(fileName);
         }
 
         public void WriteClustersToText(string fileName, List<string> clusterPropertiesToIncude)
@@ -225,7 +219,7 @@ namespace FeatureAnnotationTool.Controller
 
         # endregion
 
-        public FileTiler getNewTiler(int sectionHeight)
+        public FileTiler GetNewTiler(int sectionHeight)
         {
             return _model.GetNewTiler(sectionHeight);
         }
@@ -359,9 +353,9 @@ namespace FeatureAnnotationTool.Controller
             _view.SetTitleName(boreholeName);
         }
 
-        public Bitmap getWholeBoreholeImage()
+        public Bitmap GetWholeBoreholeImage()
         {
-            return _model.getWholeBoreholeImage();
+            return _model.GetWholeBoreholeImage();
         }
         
         public void displayImage(Bitmap boreholeImage)
@@ -402,12 +396,12 @@ namespace FeatureAnnotationTool.Controller
         //    _model.otvFileOpened();
         //}
 
-        public void openOTVFile(string fileName)
+        public void OpenOtvFile(string fileName)
         {            
-                _model.OpenOTVFile(fileName);
+                _model.OpenOtvFile(fileName);
         }
 
-        public void openChannel(ReferencedChannel optvChannel, string workingPath)
+        public void OpenChannel(ReferencedChannel optvChannel, string workingPath)
         {
             _model.OpenChannel(optvChannel, workingPath);
         }
@@ -417,14 +411,14 @@ namespace FeatureAnnotationTool.Controller
             _view.SetRulerImage(ruler);
         }
 
-        public FileTiler getCurrentTiler()
+        public FileTiler GetCurrentTiler()
         {
-            return _model.getCurrentTiler();
+            return _model.GetCurrentTiler();
         }
 
         public void DeSelectFeature()
         {
-            _model.deSelectFeature();
+            _model.DeSelectFeature();
             _view.HideFeatureDetailsPropertyGrid();
         }
 
@@ -448,9 +442,9 @@ namespace FeatureAnnotationTool.Controller
             _view.SetBoreholeSectionsComboBoxItems(boreholeStartDepth, boreholeEndDepth);
         }
 
-        public void createNewLayer(int depth, int amplitude, int azimuth)
+        public void CreateNewLayer(int depth, int amplitude, int azimuth)
         {
-            _model.addNewLayer(depth, amplitude, azimuth);
+            _model.AddNewLayer(depth, amplitude, azimuth);
         }
 
         public void CreateNewLayer(double slope, int intercept)
@@ -458,29 +452,29 @@ namespace FeatureAnnotationTool.Controller
             _model.AddNewLayer(slope, intercept);
         }
 
-        public void createNewCluster()
+        public void CreateNewCluster()
         {
-            _model.addNewCluster();
+            _model.AddNewCluster();
         }
 
         public void CreateNewInclusion()
         {
-            _model.createNewInclusion();
+            _model.CreateNewInclusion();
         }
         
         public void AddToCurrentCluster(int xPoint, int yPoint)
         {
-            _model.addToCurrentCluster(xPoint, yPoint);
+            _model.AddToCurrentCluster(xPoint, yPoint);
         }
 
         public void AddToCurrentInclusion(int xPoint, int yPoint)
         {
-            _model.addToCurrentInclusion(xPoint, yPoint);
+            _model.AddToCurrentInclusion(xPoint, yPoint);
         }        
 
         public void MovePoint(Point movingPoint, Point destination)
         {
-            _model.movePoint(movingPoint, destination);
+            _model.MovePoint(movingPoint, destination);
         }
 
         public void AddPoint(Point addPoint, int addAfter)
@@ -490,27 +484,27 @@ namespace FeatureAnnotationTool.Controller
 
         public void DeletePoint(Point deletePoint)
         {
-            _model.deletePoint(deletePoint);
+            _model.DeletePoint(deletePoint);
         }
 
-        public int getNumOfLayers()
+        public int GetNumOfLayers()
         {
-            return _model.getNumOfLayers();
+            return _model.GetNumberOfLayers();
         }
 
-        public int getNumOfClusters()
+        public int GetNumOfClusters()
         {
-            return _model.getNumOfClusters();
+            return _model.GetNumOfClusters();
         }
 
-        public int getNumOfInclusions()
+        public int GetNumOfInclusions()
         {
-            return _model.getNumOfInclusions();
+            return _model.GetNumOfInclusions();
         }
 
         public bool IsFluidLevelSet()
         {
-            return _model.getIsFluidLevelSet();
+            return _model.GetIsFluidLevelSet();
         }
 
         public int FluidLevel
@@ -519,16 +513,16 @@ namespace FeatureAnnotationTool.Controller
             set { _model.FluidLevel = value; }
         }
 
-        public List<Point> getLayer1(int layerNum)
+        public List<Point> GetLayer1(int layerNum)
         {
-            List<Point> points = _model.getLayerPoints1(layerNum);
+            List<Point> points = _model.GetLayerPoints1(layerNum);
 
             return points;
         }
 
-        public List<Point> getLayer2(int layerNum)
+        public List<Point> GetLayer2(int layerNum)
         {
-            List<Point> points = _model.getLayerPoints2(layerNum);
+            List<Point> points = _model.GetLayerPoints2(layerNum);
 
             return points;
         }
@@ -550,21 +544,21 @@ namespace FeatureAnnotationTool.Controller
             return points;
         }
 
-        public List<Point> getInclusion(int inclusionNum)
+        public List<Point> GetInclusion(int inclusionNum)
         {
-            List<Point> points = _model.getInclusionPoints(inclusionNum);
+            List<Point> points = _model.GetInclusionPoints(inclusionNum);
 
             return points;
         }
 
         public bool OverCurrentFeature(int xPoint, int yPoint)
         {
-            return _model.getIsOverCurrentFeature(xPoint, yPoint);
+            return _model.GetIsOverCurrentFeature(xPoint, yPoint);
         }        
         
         public void DeleteCurrentFeature()
         {
-            _model.deleteCurrentFeature();
+            _model.DeleteCurrentFeature();
             _view.HideFeatureDetailsPropertyGrid();
         }
 
@@ -585,7 +579,7 @@ namespace FeatureAnnotationTool.Controller
 
         public void PointClicked(int xPoint, int yPoint)
         {
-            _model.setActiveFeatureType(xPoint, yPoint);
+            _model.SetActiveFeatureType(xPoint, yPoint);
         }
 
         public bool LayerAtLastClick
@@ -605,37 +599,37 @@ namespace FeatureAnnotationTool.Controller
 
         public void DeleteCluster(Cluster clusterToDelete)
         {
-            _model.deleteCluster(clusterToDelete);
+            _model.DeleteCluster(clusterToDelete);
         }
 
         public void DeleteInclusion(Inclusion inclusionToDelete)
         {
-            _model.deleteInclusion(inclusionToDelete);
+            _model.DeleteInclusion(inclusionToDelete);
         }
 
         public void ClusterComplete()
         {
-            _model.setLastClusterAsComplete();
+            _model.SetLastClusterAsComplete();
         }
 
         public void InclusionComplete()
         {
-            _model.setLastInclusionAsComplete();
+            _model.SetLastInclusionAsComplete();
         }
 
         public void MoveCurrentFeature(int sine, int xMove, int yMove)
         {
-            _model.moveCurrentFeature(sine,xMove, yMove);
+            _model.MoveCurrentFeature(sine,xMove, yMove);
         }
 
         public void ChangeTopAmplitudeOfCurrentLayer(int yMove)
         {
-            _model.changeTopAmplitudeOfSelectedLayer(yMove);
+            _model.ChangeTopAmplitudeOfSelectedLayer(yMove);
         }
 
         public void ChangeBottomAmplitudeOfCurrentLayer(int yMove)
         {
-            _model.changeBottomAmplitudeOfSelectedLayer(yMove);
+            _model.ChangeBottomAmplitudeOfSelectedLayer(yMove);
         }
 
         public void Reset()
@@ -645,7 +639,7 @@ namespace FeatureAnnotationTool.Controller
 
         public void SaveFeatures()
         {
-            _model.saveFeatures();
+            _model.SaveFeatures();
         }
 
         public void LoadFeaturesFile(string fileName)

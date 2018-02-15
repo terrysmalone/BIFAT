@@ -10,82 +10,80 @@ namespace FeatureAnnotationTool.Interfaces
 {
     /// <summary>
     /// Deals with calls from the controller to the model
-    /// 
-    /// Author - Terry Malone (trm8@aber.ac.uk)
     /// </summary>
     public interface IModel
     {        
-        void setAdapter(IModelAdapter a);
+        void SetAdapter(IModelAdapter a);
 
         void OpenBoreholeImageFile(string fileName, string boreholeName);
-        //void otvFileOpened();
-        void OpenOTVFile(string fileName);
 
-        void deSelectFeature();
+        void OpenOtvFile(string fileName);
 
-        void addNewLayer(int depth, int amplitude, int azimuth);
+        void DeSelectFeature();
 
-        List<Point> getLayerPoints1(int layerNum);
-        List<Point> getLayerPoints2(int layerNum);
+        void AddNewLayer(int depth, int amplitude, int azimuth);
+
+        List<Point> GetLayerPoints1(int layerNum);
+        List<Point> GetLayerPoints2(int layerNum);
 
         List<Point> GetClusterPoints(int clusterNum);
 
-        List<Point> getInclusionPoints(int inclusionNum);
+        List<Point> GetInclusionPoints(int inclusionNum);
 
-        int getNumOfLayers();
+        int GetNumberOfLayers();
 
-        int getNumOfClusters();
+        int GetNumOfClusters();
 
-        int getNumOfInclusions();
+        int GetNumOfInclusions();
         
-        bool getIsOverCurrentFeature(int xPoint, int yPoint);
+        bool GetIsOverCurrentFeature(int xPoint, int yPoint);
 
-        int TopAzimuthOfSelectedLayer { get; }
-        int BottomAzimuthOfSelectedLayer { get; }
+        int GetTopAzimuthOfSelectedLayer();
+        int GetBottomAzimuthOfSelectedLayer();
 
-        void deleteCurrentFeature();
+        void DeleteCurrentFeature();
 
         string CurrentFeatureType { get; }
 
-        void setActiveFeatureType(int xPoint, int yPoint);
+        void SetActiveFeatureType(int xPoint, int yPoint);
 
         object SelectedFeature { get; }
 
-        void moveCurrentFeature(int sine, int xMove, int yMove);
+        void MoveCurrentFeature(int sine, int xMove, int yMove);
 
-        void changeTopAmplitudeOfSelectedLayer(int yMove);
+        void ChangeTopAmplitudeOfSelectedLayer(int yMove);
         
-        void changeBottomAmplitudeOfSelectedLayer(int yMove);
+        void ChangeBottomAmplitudeOfSelectedLayer(int yMove);
         
-        void addNewCluster();
+        void AddNewCluster();
 
-        void addToCurrentCluster(int xPoint, int yPoint);
+        void AddToCurrentCluster(int xPoint, int yPoint);
 
-        void setLastClusterAsComplete();
+        void SetLastClusterAsComplete();
 
-        void deleteCluster(Cluster clusterToDelete);
+        void DeleteCluster(Cluster clusterToDelete);
 
-        void movePoint(Point movingPoint, Point destination);
+        void MovePoint(Point movingPoint, Point destination);
 
-        void deletePoint(Point deletePoint);
+        void DeletePoint(Point deletePoint);
 
-        void deleteInclusion(Inclusion inclusionToDelete);
+        void DeleteInclusion(Inclusion inclusionToDelete);
 
-        void createNewInclusion();
+        void CreateNewInclusion();
 
-        void addToCurrentInclusion(int xPoint, int yPoint);
+        void AddToCurrentInclusion(int xPoint, int yPoint);
 
-        void setLastInclusionAsComplete();
+        void SetLastInclusionAsComplete();
 
         void Reset();
 
         string BoreholeName { get; }
 
-        void saveFeatures();
+        void SaveFeatures();
 
         void LoadFeaturesFile(string fileName);
 
-        bool getIsFluidLevelSet();
+        bool GetIsFluidLevelSet();
 
         int FluidLevel{ get; set; }
 
@@ -93,7 +91,7 @@ namespace FeatureAnnotationTool.Interfaces
 
         void WriteAllFeaturesToExcel(string fileName, List<string> layerPropertiesToInclude, List<string> clusterPropertiesToInclude, List<string> inclusionPropertiesToInclude);
 
-        void WriteLayersForWellCAD(string fileName);
+        void WriteLayersForWellCad(string fileName);
 
         # endregion
 
@@ -109,9 +107,9 @@ namespace FeatureAnnotationTool.Interfaces
 
         void LoadFirstBoreholeSection();
 
-        FileTiler getCurrentTiler();
+        FileTiler GetCurrentTiler();
 
-        Bitmap getWholeBoreholeImage();
+        Bitmap GetWholeBoreholeImage();
 
         void CreateDepthLuminosityProfileInExcel();
 
@@ -171,7 +169,7 @@ namespace FeatureAnnotationTool.Interfaces
 
         void ChangeLayerGroupColour(string p, Color newColour);
 
-        void RenameLayerGroup(string p, string p_2);
+        void RenameLayerGroup(string p, string p2);
 
         int GetLayerGroupCount(string groupName);
 
@@ -211,7 +209,7 @@ namespace FeatureAnnotationTool.Interfaces
 
         void RemoveFluidLevel();
 
-        void RenameClusterGroup(string p, string p_2);
+        void RenameClusterGroup(string p, string p2);
 
         void DeleteClusterGroup(string p);
 
@@ -239,7 +237,7 @@ namespace FeatureAnnotationTool.Interfaces
 
         void DeleteInclusionGroup(string p);
 
-        void RenameInclusionGroup(string p, string p_2);
+        void RenameInclusionGroup(string p, string p2);
 
         int GetInclusionGroupCount(string p);
 

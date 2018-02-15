@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using BoreholeFeatures;
 using ImageTiler;
@@ -16,28 +13,36 @@ namespace FeatureAnnotationTool.Interfaces
     {
         void OpenBoreholeImageFile(string fileName, string boreholeName);
         
-        void openOTVFile(string fileName);
+        void OpenOtvFile(string fileName);
 
         void DeSelectFeature();
         
-        void createNewLayer(int firstDepth, int firstAmplitude, int firstAzimuth);
-        void createNewCluster();
+        void CreateNewLayer(int firstDepth, int firstAmplitude, int firstAzimuth);
 
-        List<Point> getLayer1(int count);
-        List<Point> getLayer2(int count);
+        void CreateNewCluster();
+
+        List<Point> GetLayer1(int count);
+
+        List<Point> GetLayer2(int count);
 
         List<Point> GetClusterPoints(int count);
-        List<Point> getInclusion(int count);
 
-        int getNumOfLayers();
-        int getNumOfClusters();
-        int getNumOfInclusions();
+        List<Point> GetInclusion(int count);
 
-        bool OverCurrentFeature(int p, int p_2);
+        int GetNumOfLayers();
 
-        int TopAzimuthOfSelectedLayer { get; }
-        int BottomAzimuthOfSelectedLayer { get; }
+        int GetNumOfClusters();
+
+        int GetNumOfInclusions();
+
+        bool OverCurrentFeature(int p, int p2);
+
+        int GetTopAzimuthOfSelectedLayer();
+
+        int GetBottomAzimuthOfSelectedLayer();
+
         object SelectedFeature { get; }
+
         string CurrentFeatureType { get; }
 
         void DeleteCurrentFeature();
@@ -47,6 +52,7 @@ namespace FeatureAnnotationTool.Interfaces
         void MoveCurrentFeature(int sineToMove, int xMove, int yMove);
 
         void ChangeTopAmplitudeOfCurrentLayer(int yMove);
+
         void ChangeBottomAmplitudeOfCurrentLayer(int yMove);
         
         void AddToCurrentCluster(int xPos, int yPos);
@@ -93,21 +99,21 @@ namespace FeatureAnnotationTool.Interfaces
 
         void LoadFirstBoreholeSection();
 
-        FileTiler getCurrentTiler();
+        FileTiler GetCurrentTiler();
 
-        Bitmap getWholeBoreholeImage();
+        Bitmap GetWholeBoreholeImage();
 
         void CreateDepthLuminosityProfileInExcel();
 
-        void openChannel(ReferencedChannel optvChannel, string workingPath);
+        void OpenChannel(ReferencedChannel optvChannel, string workingPath);
 
         void DeleteLayersInRange(int startDepth, int endDepth);
 
-        FileTiler getNewTiler(int sectionHeight);
+        FileTiler GetNewTiler(int sectionHeight);
 
         void JoinEdges(Layer previouslySelectedFeature, Layer currentlySelectedFeature);
 
-        void writeLayersToText(string fileName, List<string> layerPropertiesToInclude);
+        void WriteLayersToText(string fileName, List<string> layerPropertiesToInclude);
 
         void LoadLastBoreholeSection();
 
@@ -179,7 +185,7 @@ namespace FeatureAnnotationTool.Interfaces
         
         string ProjectType { get; set; }
 
-        void WriteLayersForWellCAD(string fileName);
+        void WriteLayersForWellCad(string fileName);
 
         void SaveGroups();
 
