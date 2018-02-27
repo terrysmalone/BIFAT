@@ -210,7 +210,7 @@ namespace BrightnessAnalysis
             {
                 Layer currentLayer = allLayers[i];
 
-                if (yPos > currentLayer.GetTopYPoint(xPos) - sectionStartDepth && yPos < currentLayer.getBottomYPoint(xPos) - sectionStartDepth)
+                if (yPos > currentLayer.GetTopYPoint(xPos) - sectionStartDepth && yPos < currentLayer.GetBottomYPoint(xPos) - sectionStartDepth)
                     return false;
             }
 
@@ -241,7 +241,7 @@ namespace BrightnessAnalysis
             {
                 Layer currentLayer = layersToInclude[i];
 
-                if (yPos > currentLayer.GetTopYPoint(xPos) - sectionStartDepth && yPos < currentLayer.getBottomYPoint(xPos) - sectionStartDepth)
+                if (yPos > currentLayer.GetTopYPoint(xPos) - sectionStartDepth && yPos < currentLayer.GetBottomYPoint(xPos) - sectionStartDepth)
                     return true;
             }
 

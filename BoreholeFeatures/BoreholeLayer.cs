@@ -6,20 +6,28 @@ namespace BoreholeFeatures
 {
     public sealed class BoreholeLayer : Layer
     {
-        public int FirstSineDepth => TopEdgeDepthMm;
+        public int TopSineAmplitude { get; private set; }
 
-        public int FirstSineAmplitude => TopSineAmplitudeInMm;
+        public int TopSineAmplitudeInMm => (int)(TopSineAmplitude * (double)m_DepthResolution);
 
-        public int FirstSineAzimuth => topAzimuth;
+        public int TopSineAzimuth { get; private set; }
+
+        public int TopSineAzimuthInMm => (int)(BottomSineAzimuth * (double)m_DepthResolution);
 
         public int SecondSineDepth => BottomEdgeDepthMm;
-
-        public int SecondSineAzimuth => bottomAzimuth;
-
-
-        private SineWave topSine;
-        private SineWave bottomSine;
         
+        public int BottomSineAzimuth { get; private set; }
+
+        public int BottomSineAzimuthInMm => (int)(BottomSineAzimuth * (double)m_DepthResolution);
+
+        public int BottomSineAmplitude { get; private set; }
+
+        public int BottomSineAmplitudeInMm => (int)(BottomSineAmplitude * (double)m_DepthResolution);
+        
+        private readonly SineWave m_TopSine;
+
+        private readonly SineWave m_BottomSine;
+
         /// <summary>
         /// Constructor method
         /// </summary>
@@ -40,20 +48,20 @@ namespace BoreholeFeatures
                              int sourceAzimuthResolution, 
                              int depthResolution)
         {
-            topDepthPixels = firstDepth;
-            topAmplitude = firstAmplitude;
-            topAzimuth = firstAzimuth;
-            bottomDepthPixels = secondDepth;
-            bottomAmplitude = secondAmplitude;
-            bottomAzimuth = secondAzimuth;
-            this.sourceAzimuthResolution = sourceAzimuthResolution;
-            this.depthResolution = depthResolution;
+            m_TopDepthPixels = firstDepth;
+            TopSineAmplitude = firstAmplitude;
+            TopSineAzimuth = firstAzimuth;
+            m_BottomDepthPixels = secondDepth;
+            BottomSineAmplitude = secondAmplitude;
+            BottomSineAzimuth = secondAzimuth;
+            m_SourceAzimuthResolution = sourceAzimuthResolution;
+            m_DepthResolution = depthResolution;
 
-            topSine = new SineWave(firstDepth, firstAzimuth, firstAmplitude, sourceAzimuthResolution);
-            bottomSine = new SineWave(secondDepth, secondAzimuth, secondAmplitude, sourceAzimuthResolution);
+            m_TopSine = new SineWave(firstDepth, firstAzimuth, firstAmplitude, sourceAzimuthResolution);
+            m_BottomSine = new SineWave(secondDepth, secondAzimuth, secondAmplitude, sourceAzimuthResolution);
             
-            timeAdded = DateTime.Now;
-            timeLastModified = DateTime.Now;
+            m_TimeAdded = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
 
             CalculateStartY();
             CalculateEndY();
@@ -62,17 +70,16 @@ namespace BoreholeFeatures
         /// <summary>
         /// Changes the amplitude of top (lowest y value) sine of the layer by a specified amount
         /// </summary>
-        /// <param name="changeAmplitudeBy">The amount to change the amplitude by</param>
-        public override void ChangeTopAmplitudeBy(int changeAmplitudeBy)
+        public void ChangeTopAmplitudeBy(int changeAmplitudeBy)
         {
-            topAmplitude = topAmplitude + changeAmplitudeBy;
+            TopSineAmplitude = TopSineAmplitude + changeAmplitudeBy;
 
-            if (topAmplitude < 0)
-                topAmplitude = 0;
+            if (TopSineAmplitude < 0)
+                TopSineAmplitude = 0;
 
-            topSine.change(topDepthPixels, topAzimuth, topAmplitude);
+            m_TopSine.change(m_TopDepthPixels, TopSineAzimuth, TopSineAmplitude);
             
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
 
             CalculateStartY();
             CalculateEndY();
@@ -81,17 +88,16 @@ namespace BoreholeFeatures
         /// <summary>
         /// Changes the amplitude of bottom (highest y value) sine of the layer by a specified amount
         /// </summary>
-        /// <param name="changeAmplitudeBy">The amount to change the amplitude by</param>
-        public override void ChangeBottomAmplitudeBy(int changeAmplitudeBy)
+        public void ChangeBottomAmplitudeBy(int changeAmplitudeBy)
         {
-            bottomAmplitude = bottomAmplitude + changeAmplitudeBy;
+            BottomSineAmplitude = BottomSineAmplitude + changeAmplitudeBy;
 
-            if (bottomAmplitude < 0)
-                bottomAmplitude = 0;
+            if (BottomSineAmplitude < 0)
+                BottomSineAmplitude = 0;
 
-            bottomSine.change(bottomDepthPixels, bottomAzimuth, bottomAmplitude);
+            m_BottomSine.change(m_BottomDepthPixels, BottomSineAzimuth, BottomSineAmplitude);
             
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
 
             CalculateStartY();
             CalculateEndY();
@@ -105,23 +111,23 @@ namespace BoreholeFeatures
         /// <param name="yMoveBy">The amount to move along the y-axis in pixels</param>
         public override void MoveEdge(int sineToMove, int xMoveBy, int yMoveBy)
         {
-            if (sineToMove == FIRST_EDGE)
+            if (sineToMove == m_FirstEdge)
             {
                 //Will not let the layer move below the second edge
-                if (topDepthPixels + yMoveBy <= bottomDepthPixels)
+                if (m_TopDepthPixels + yMoveBy <= m_BottomDepthPixels)
                 {
                     MoveFirstSine(xMoveBy, yMoveBy);
                 }
             }
-            else if (sineToMove == SECOND_EDGE)
+            else if (sineToMove == m_SecondEdge)
             {
                 //Will not let it move above the first edge
-                if (bottomDepthPixels + yMoveBy >= topDepthPixels)
+                if (m_BottomDepthPixels + yMoveBy >= m_TopDepthPixels)
                 {
                     MoveSecondSine(xMoveBy, yMoveBy);
                 }
             }
-            else if (sineToMove == BOTH_EDGES)
+            else if (sineToMove == m_BothEdges)
             {
                 MoveFirstSine(xMoveBy, yMoveBy);
                 MoveSecondSine(xMoveBy, yMoveBy);
@@ -130,7 +136,7 @@ namespace BoreholeFeatures
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
         /// <summary>
@@ -140,15 +146,15 @@ namespace BoreholeFeatures
         /// <param name="yMoveBy">Amount to move along the y-axis</param>
         private void MoveFirstSine(int xMoveBy, int yMoveBy)
         {
-            topDepthPixels = topDepthPixels + yMoveBy;
-            topAzimuth = topAzimuth + (int)(xMoveBy / (sourceAzimuthResolution / 360.0));
+            m_TopDepthPixels = m_TopDepthPixels + yMoveBy;
+            TopSineAzimuth = TopSineAzimuth + (int)(xMoveBy / (m_SourceAzimuthResolution / 360.0));
 
-            if (topAzimuth > 360)
-                topAzimuth -= 360;
-            else if (topAzimuth < 0)
-                topAzimuth += 360;
+            if (TopSineAzimuth > 360)
+                TopSineAzimuth -= 360;
+            else if (TopSineAzimuth < 0)
+                TopSineAzimuth += 360;
 
-            topSine.change(topDepthPixels, topAzimuth, topAmplitude);
+            m_TopSine.change(m_TopDepthPixels, TopSineAzimuth, TopSineAmplitude);
         }
 
         /// <summary>
@@ -158,15 +164,15 @@ namespace BoreholeFeatures
         /// <param name="yMoveBy">Amount to move along the y-axis</param>
         private void MoveSecondSine(int xMoveBy, int yMoveBy)
         {
-            bottomDepthPixels = bottomDepthPixels + yMoveBy;
-            bottomAzimuth = bottomAzimuth + (int)(xMoveBy / (sourceAzimuthResolution / (double)360));
+            m_BottomDepthPixels = m_BottomDepthPixels + yMoveBy;
+            BottomSineAzimuth = BottomSineAzimuth + (int)(xMoveBy / (m_SourceAzimuthResolution / (double)360));
 
-            if (bottomAzimuth > 360)
-                bottomAzimuth -= 360;
-            else if (bottomAzimuth < 0)
-                bottomAzimuth += 360;
+            if (BottomSineAzimuth > 360)
+                BottomSineAzimuth -= 360;
+            else if (BottomSineAzimuth < 0)
+                BottomSineAzimuth += 360;
 
-            bottomSine.change(bottomDepthPixels, bottomAzimuth, bottomAmplitude);
+            m_BottomSine.change(m_BottomDepthPixels, BottomSineAzimuth, BottomSineAmplitude);
         }
 
         # region Get methods
@@ -178,7 +184,7 @@ namespace BoreholeFeatures
         /// <returns></returns>
         public override int GetTopYPoint(int xPoint)
         {
-            return topSine.getY(xPoint);
+            return m_TopSine.getY(xPoint);
         }
 
         /// <summary>
@@ -186,9 +192,9 @@ namespace BoreholeFeatures
         /// </summary>
         /// <param name="xPoint"></param>
         /// <returns></returns>
-        public override int getBottomYPoint(int xPoint)
+        public override int GetBottomYPoint(int xPoint)
         {
-            return bottomSine.getY(xPoint);
+            return m_BottomSine.getY(xPoint);
         }
 
         /// <summary>
@@ -210,151 +216,136 @@ namespace BoreholeFeatures
         /// Group                       - The group the layer belongs to
         /// </summary>
         /// <returns>The layer's details</returns>
-        public override String GetDetails()
+        public override string GetDetails()
         {
-            String details;
-
             //Remove commas from the description
-            description = description.Replace(',', ' ');
+            m_Description = m_Description.Replace(',', ' ');
 
             //Get the layer properties
             WriteLayerProperties();
 
-            details = layerStartY + "," + layerEndY + "," + topDepthPixels + "," + topAzimuth + "," + topAmplitude + "," + bottomDepthPixels + "," + bottomAzimuth + "," + bottomAmplitude + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
-
-            return details;
+            return m_LayerStartY + "," + 
+                   m_LayerEndY + "," + 
+                   m_TopDepthPixels + "," + 
+                   TopSineAzimuth + "," + 
+                   TopSineAmplitude + "," + 
+                   m_BottomDepthPixels + "," + 
+                   BottomSineAzimuth + "," + 
+                   BottomSineAmplitude + "," + 
+                   m_LayerType + "," + 
+                   m_Description + "," + 
+                   m_Quality + "," + 
+                   m_TimeAdded + "," + 
+                   m_TimeLastModified + "," + 
+                   Group;            
         }
 
         public override int GetNumOfEdges()
         {
-            if (topAmplitude == bottomAmplitude && topAzimuth == bottomAzimuth && topDepthPixels == bottomDepthPixels)
+            if (TopSineAmplitude == BottomSineAmplitude && TopSineAzimuth == BottomSineAzimuth && m_TopDepthPixels == m_BottomDepthPixels)
                 return 1;
-            else
-                return 2;
+
+            return 2;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Returns the points of the layers first edge
         /// </summary>
-        /// <returns>A List of the points along the first edge</returns>
         public override List<Point> GetTopEdgePoints()
         {
-            return topSine.getSinePoints();
+            return m_TopSine.getSinePoints();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Returns the points of the layers second edge
         /// </summary>
-        /// <returns>A List of the points along the second edge</returns>
         public override List<Point> GetBottomEdgePoints()
         {
-            return bottomSine.getSinePoints();
+            return m_BottomSine.getSinePoints();
         }
 
         # endregion
 
         # region Set methods
 
-        public override void SetTopEdgeDepth(int topDepthPixels)
+        public void SetTopEdgeDepth(int topDepth)
         {
-            this.topDepthPixels = topDepthPixels;
+            m_TopDepthPixels = topDepth;
 
-            topSine.calculatePoints();
-            bottomSine.calculatePoints();
+            m_TopSine.calculatePoints();
+            m_BottomSine.calculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetBottomEdgeDepth(int bottomDepthPixels)
+        public void SetBottomEdgeDepth(int bottomDepthPixels)
         {
-            this.bottomDepthPixels = bottomDepthPixels;
+            this.m_BottomDepthPixels = bottomDepthPixels;
 
-            topSine.calculatePoints();
-            bottomSine.calculatePoints();
+            m_TopSine.calculatePoints();
+            m_BottomSine.calculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetTopSineAmplitude(int topAmplitude)
+        public void SetTopSineAmplitude(int topAmplitude)
         {
-            this.topAmplitude = topAmplitude;
+            this.TopSineAmplitude = topAmplitude;
 
-            topSine.calculatePoints();
-            bottomSine.calculatePoints();
+            m_TopSine.calculatePoints();
+            m_BottomSine.calculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetBottomSineAmplitude(int bottomAmplitude)
+        public void SetBottomSineAmplitude(int bottomAmplitude)
         {
-            this.bottomAmplitude = bottomAmplitude;
+            this.BottomSineAmplitude = bottomAmplitude;
 
-            topSine.calculatePoints();
-            bottomSine.calculatePoints();
+            m_TopSine.calculatePoints();
+            m_BottomSine.calculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetTopSineAzimuth(int topAzimuth)
+        public void SetTopSineAzimuth(int topAzimuth)
         {
-            this.topAzimuth = topAzimuth;
+            this.TopSineAzimuth = topAzimuth;
 
-            topSine.calculatePoints();
-            bottomSine.calculatePoints();
+            m_TopSine.calculatePoints();
+            m_BottomSine.calculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetBottomSineAzimuth(int bottomAzimuth)
+        public void SetBottomSineAzimuth(int bottomAzimuth)
         {
-            this.bottomAzimuth = bottomAzimuth;
+            this.BottomSineAzimuth = bottomAzimuth;
 
-            topSine.calculatePoints();
-            bottomSine.calculatePoints();
+            m_TopSine.calculatePoints();
+            m_BottomSine.calculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
-        }
-
-        public override void SetTopEdgeSlope(double firstEdgeSlope)
-        {
-            //Not implemented in borehole
-            throw new NotImplementedException();
-        }
-
-        public override void SetTopEdgeIntercept(int firstEdgeIntercept)
-        {
-            //Not implemented in borehole
-            throw new NotImplementedException();
-        }
-
-        public override void SetBottomEdgeSlope(double secondEdgeSlope)
-        {
-            //Not implemented in borehole
-            throw new NotImplementedException();
-        }
-
-        public override void SetBottomEdgeIntercept(int secondEdgeIntercept)
-        {
-            //Not implemented in borehole
-            throw new NotImplementedException();
+            m_TimeLastModified = DateTime.Now;
         }
 
         # endregion

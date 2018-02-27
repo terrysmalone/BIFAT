@@ -9,71 +9,61 @@ namespace BoreholeFeatures
     /// </summary>
     public abstract class Layer
     {
-        protected int sourceAzimuthResolution;
-        protected int depthResolution;
+        protected int m_SourceAzimuthResolution;
+        protected int m_DepthResolution;
 
-        protected int layerStartY, layerEndY;
-        protected int sourceStartDepth, sourceEndDepth;
-        protected string description = "";
-        protected string layerType = "";
-        protected int quality = 4;
+        protected int m_LayerStartY;
+        protected int m_LayerEndY;
 
-        //Borehole Layer
-        //Top sine attributes
-        protected int topAzimuth, topAmplitude;
-        protected int topDepthPixels;
+        protected int m_SourceStartDepth;
+        protected int m_SourceEndDepth;
+        protected string m_Description = "";
+        protected string m_LayerType = "";
+        protected int m_Quality = 4;
         
-        //Bottom sine attributes
-        protected int bottomAzimuth, bottomAmplitude;
-        protected int bottomDepthPixels;
-
-        //Core Layer
-        //Top line 
-        protected int topEdgeIntercept;
-        protected double topEdgeSlope;
-
-        //Bottom line
-        protected int bottomEdgeIntercept;
-        protected double bottomEdgeSlope;
-
-        protected int FIRST_EDGE = 1;
-        protected int SECOND_EDGE = 2;
-        protected int BOTH_EDGES = 3;
+        protected int m_TopDepthPixels;
         
-        private LayerProperties m_layerProperties;
+        protected int m_BottomDepthPixels;
 
-        protected DateTime timeAdded, timeLastModified;
+        protected int m_FirstEdge = 1;
+        protected int m_SecondEdge = 2;
+        protected int m_BothEdges = 3;
         
-        protected string[] allGroupNames;
+        private LayerProperties m_LayerProperties;
+
+        protected DateTime m_TimeAdded;
+        protected DateTime m_TimeLastModified;
+
+        protected string[] m_AllGroupNames;
         
         #region properties
         
-        public int StartDepth => (int)(layerStartY * (double)depthResolution + sourceStartDepth);
+        public int StartDepth => (int)(m_LayerStartY * (double)m_DepthResolution + m_SourceStartDepth);
         
-        public int EndDepth => (int)((layerEndY * (double)depthResolution) + sourceStartDepth);
+        public int EndDepth => (int)((m_LayerEndY * (double)m_DepthResolution) + m_SourceStartDepth);
         
         public string Group { get; set; }
         
         public int Quality
         {
-            get => quality;
+            get => m_Quality;
 
             set
             {
-                quality = value;
-                timeLastModified = DateTime.Now; 
+                m_Quality = value;
+                m_TimeLastModified = DateTime.Now; 
             }
 
         }
 
         public string Description
         {
-            get => description;
+            get => m_Description;
 
             set 
             { 
-                description = value;
-                timeLastModified = DateTime.Now;
+                m_Description = value;
+                m_TimeLastModified = DateTime.Now;
             }
         }
 
@@ -81,71 +71,71 @@ namespace BoreholeFeatures
 
         public bool LayerVoid
         {
-            get => m_layerProperties.HasFlag(LayerProperties.LayerVoid);
+            get => m_LayerProperties.HasFlag(LayerProperties.LayerVoid);
             set
             {
-                if(value) m_layerProperties |= LayerProperties.LayerVoid; 
-                else m_layerProperties &= ~LayerProperties.LayerVoid;
+                if(value) m_LayerProperties |= LayerProperties.LayerVoid; 
+                else m_LayerProperties &= ~LayerProperties.LayerVoid;
             }
         }
 
         public bool Clean
         {
-            get => m_layerProperties.HasFlag(LayerProperties.Clean);
+            get => m_LayerProperties.HasFlag(LayerProperties.Clean);
             set
             {
-                if (value) m_layerProperties |= LayerProperties.Clean;
-                else m_layerProperties &= ~LayerProperties.Clean;
+                if (value) m_LayerProperties |= LayerProperties.Clean;
+                else m_LayerProperties &= ~LayerProperties.Clean;
             }
         }
 
         public bool SmallBubbles
         {
-            get => m_layerProperties.HasFlag(LayerProperties.SmallBubbles);
+            get => m_LayerProperties.HasFlag(LayerProperties.SmallBubbles);
             set
             {
-                if (value) m_layerProperties |= LayerProperties.SmallBubbles;
-                else m_layerProperties &= ~LayerProperties.SmallBubbles;
+                if (value) m_LayerProperties |= LayerProperties.SmallBubbles;
+                else m_LayerProperties &= ~LayerProperties.SmallBubbles;
             }
         }
         
         public bool LargeBubbles
         {
-            get => m_layerProperties.HasFlag(LayerProperties.LargeBubbles);
+            get => m_LayerProperties.HasFlag(LayerProperties.LargeBubbles);
             set
             {
-                if (value) m_layerProperties |= LayerProperties.LargeBubbles;
-                else m_layerProperties &= ~LayerProperties.LargeBubbles;
+                if (value) m_LayerProperties |= LayerProperties.LargeBubbles;
+                else m_LayerProperties &= ~LayerProperties.LargeBubbles;
             }
         }
         
         public bool FineDebris
         {
-            get => m_layerProperties.HasFlag(LayerProperties.FineDebris);
+            get => m_LayerProperties.HasFlag(LayerProperties.FineDebris);
             set
             {
-                if (value) m_layerProperties |= LayerProperties.FineDebris;
-                else m_layerProperties &= ~LayerProperties.FineDebris;
+                if (value) m_LayerProperties |= LayerProperties.FineDebris;
+                else m_LayerProperties &= ~LayerProperties.FineDebris;
             }
         }
        
         public bool CoarseDebris
         {
-            get => m_layerProperties.HasFlag(LayerProperties.CoarseDebris);
+            get => m_LayerProperties.HasFlag(LayerProperties.CoarseDebris);
             set
             {
-                if (value) m_layerProperties |= LayerProperties.CoarseDebris;
-                else m_layerProperties &= ~LayerProperties.CoarseDebris;
+                if (value) m_LayerProperties |= LayerProperties.CoarseDebris;
+                else m_LayerProperties &= ~LayerProperties.CoarseDebris;
             }
         }
 
         public bool Diamicton
         {
-            get => m_layerProperties.HasFlag(LayerProperties.Diamicton);
+            get => m_LayerProperties.HasFlag(LayerProperties.Diamicton);
             set
             {
-                if (value) m_layerProperties |= LayerProperties.Diamicton;
-                else m_layerProperties &= ~LayerProperties.Diamicton;
+                if (value) m_LayerProperties |= LayerProperties.Diamicton;
+                else m_LayerProperties &= ~LayerProperties.Diamicton;
             }
         }
 
@@ -155,88 +145,48 @@ namespace BoreholeFeatures
         /// Returns the depth of the layers top edge
         /// </summary>
         /// <returns>The depth of the top sine</returns>
-        public int TopEdgeDepth => topDepthPixels;
+        public int TopEdgeDepth => m_TopDepthPixels;
 
         /// <summary>
         /// The depth of the layers bottom edge
         /// </summary>
-        public int BottomEdgeDepth => bottomDepthPixels;
+        public int BottomEdgeDepth => m_BottomDepthPixels;
 
         /// <summary>
         /// Returns the depth in millimetres of the top sine of the layer
         /// </summary>
         /// <returns>The depth in millimetres of the top sine</returns>
-        public int TopEdgeDepthMm => Convert.ToInt32(topDepthPixels 
-                                                     * (double)depthResolution 
-                                                     + sourceStartDepth);
+        public int TopEdgeDepthMm => Convert.ToInt32(m_TopDepthPixels 
+                                                     * (double)m_DepthResolution 
+                                                     + m_SourceStartDepth);
 
         /// <summary>
         /// Returns the depth in millimetres of the bottom sine of the layer
         /// </summary>
         /// <returns>The depth in millimetres of the bottom sine</returns>
-        public int BottomEdgeDepthMm => Convert.ToInt32(bottomDepthPixels 
-                                                        * (double)depthResolution 
-                                                        + sourceStartDepth);
-
-        /// <summary>
-        /// Returns the amplitude of the top edge (lowest y co-ordinates) in mm
-        /// </summary>
-        /// <returns>The top edges amplitude</returns>
-        public int TopSineAmplitudeInMm => (int)(topAmplitude * (double)depthResolution);
-
-        /// <summary>
-        /// The azimuth of the top sine (lowest y co-ordinates)
-        /// </summary>
-        public int TopSineAzimuth => topAzimuth;
-
-        /// <summary>
-        /// The azimuth of the bottom sine (highest y co-ordinates)
-        /// </summary>
-        public int BottomSineAzimuth => bottomAzimuth;
-
-        /// <summary>
-        /// The amplitude of the top sine (lowest y co-ordinates)
-        /// </summary>
-        public int TopSineAmplitude => topAmplitude;
-
-
-        /// <summary>
-        /// The amplitude of the bottom edge (highest y co-ordinates)
-        /// </summary>
-        public int BottomSineAmplitude => bottomAmplitude;
-
-        /// <summary>
-        /// The amplitude of the bottom edge (highest y co-ordinates)
-        /// </summary>
-        public int BottomSineAmplitudeInMm => (int)(bottomAmplitude * (double)depthResolution);
-
-        public double TopEdgeSlope => topEdgeSlope;
-
-        public int TopEdgeIntercept => topEdgeIntercept;
-
-        public double BottomEdgeSlope => bottomEdgeSlope;
-
-        public int BottomEdgeIntercept => bottomEdgeIntercept;
+        public int BottomEdgeDepthMm => Convert.ToInt32(m_BottomDepthPixels 
+                                                        * (double)m_DepthResolution 
+                                                        + m_SourceStartDepth);
 
         /// <summary>
         /// The layer's lowest y-point
         /// </summary>
-        public int StartY => layerStartY;
+        public int StartY => m_LayerStartY;
 
         /// <summary>
         /// The layer's highest y-point
         /// </summary>
-        public int EndY => layerEndY;
+        public int EndY => m_LayerEndY;
 
         /// <summary>
         /// The borehole's start depth
         /// </summary>
-        public int SourceStartDepth => sourceStartDepth;
+        public int SourceStartDepth => m_SourceStartDepth;
 
         /// <summary>
         /// The borehole's end depth
         /// </summary>
-        public int SourceEndDepth => sourceEndDepth;
+        public int SourceEndDepth => m_SourceEndDepth;
 
         /// <summary>
         /// The layer's type
@@ -246,7 +196,7 @@ namespace BoreholeFeatures
             get
             {
                 WriteLayerProperties();
-                return layerType;
+                return m_LayerType;
             }
         }
 
@@ -255,8 +205,8 @@ namespace BoreholeFeatures
         /// </summary>
         public DateTime TimeAdded
         {
-            get => timeAdded;
-            set => timeAdded = value;
+            get => m_TimeAdded;
+            set => m_TimeAdded = value;
         }
 
         /// <summary>
@@ -264,31 +214,23 @@ namespace BoreholeFeatures
         /// </summary>
         public DateTime TimeLastModified
         {
-            get => timeLastModified;
-            set => timeLastModified = value;
+            get => m_TimeLastModified;
+            set => m_TimeLastModified = value;
         }
 
         // The depth resolution (mm per pixel) of the borehole image
-        public int SourceDepthResolution => depthResolution;
+        public int SourceDepthResolution => m_DepthResolution;
 
         //  The azimuth resolution (number of pixels horizontally) of the borehole image
-        public int SourceAzimuthResolution => sourceAzimuthResolution;
-
-        public int TopEdgeInterceptMm => Convert.ToInt32(topEdgeIntercept 
-                                                         * (double)depthResolution 
-                                                         + sourceStartDepth);
-
-        public int BottomEdgeInterceptMm => Convert.ToInt32(bottomEdgeIntercept 
-                                                            * (double)depthResolution 
-                                                            + sourceStartDepth);
-
+        public int SourceAzimuthResolution => m_SourceAzimuthResolution;
+        
         public int DepthResolution
         {
-            get => depthResolution;
+            get => m_DepthResolution;
 
             set
             {
-                depthResolution = value;
+                m_DepthResolution = value;
 
                 CalculateStartY();
                 CalculateEndY();
@@ -305,14 +247,14 @@ namespace BoreholeFeatures
         {
             var topEdgePoints = GetTopEdgePoints();
             
-            layerStartY = (int)topEdgePoints[0].Y;
+            m_LayerStartY = topEdgePoints[0].Y;
 
             for (var sinePointPos = 1; sinePointPos < topEdgePoints.Count; sinePointPos++)
             {
-                var currentYPoint = (int)topEdgePoints[sinePointPos].Y;
+                var currentYPoint = topEdgePoints[sinePointPos].Y;
 
-                if (currentYPoint < layerStartY)
-                    layerStartY = currentYPoint;
+                if (currentYPoint < m_LayerStartY)
+                    m_LayerStartY = currentYPoint;
             }
         }
 
@@ -323,21 +265,18 @@ namespace BoreholeFeatures
         {
             var bottomEdgePoints = GetBottomEdgePoints();
 
-            layerEndY = bottomEdgePoints[0].Y;
-            int currentYPoint;
+            m_LayerEndY = bottomEdgePoints[0].Y;
 
-            for (int sinePointPos = 1; sinePointPos < bottomEdgePoints.Count; sinePointPos++)
+            for (var sinePointPos = 1; sinePointPos < bottomEdgePoints.Count; sinePointPos++)
             {
-                currentYPoint = (int)bottomEdgePoints[sinePointPos].Y;
+                var currentYPoint = bottomEdgePoints[sinePointPos].Y;
 
-                if (currentYPoint > layerEndY)
-                    layerEndY = currentYPoint;
+                if (currentYPoint > m_LayerEndY)
+                {
+                    m_LayerEndY = currentYPoint;
+                }
             }
         }
-
-        public abstract void ChangeTopAmplitudeBy(int changeAmplitudeBy);
-
-        public abstract void ChangeBottomAmplitudeBy(int changeAmplitudeBy);
 
         public abstract void MoveEdge(int edgeToMove, int xMoveBy, int yMoveBy);
 
@@ -346,41 +285,41 @@ namespace BoreholeFeatures
         /// </summary>
         internal void WriteLayerProperties()
         {
-            layerType = "";
+            m_LayerType = "";
 
-            if(m_layerProperties.HasFlag(LayerProperties.LayerVoid))
+            if(m_LayerProperties.HasFlag(LayerProperties.LayerVoid))
             {
-                layerType = string.Concat(layerType, "void ");
+                m_LayerType = string.Concat(m_LayerType, "void ");
             }
 
-            if (m_layerProperties.HasFlag(LayerProperties.Clean))
+            if (m_LayerProperties.HasFlag(LayerProperties.Clean))
             {
-                layerType = string.Concat(layerType, "clean ");
+                m_LayerType = string.Concat(m_LayerType, "clean ");
             }
 
-            if(m_layerProperties.HasFlag(LayerProperties.SmallBubbles))
+            if(m_LayerProperties.HasFlag(LayerProperties.SmallBubbles))
             {
-                layerType = string.Concat(layerType, "smallBubbles ");
+                m_LayerType = string.Concat(m_LayerType, "smallBubbles ");
             }
 
-            if (m_layerProperties.HasFlag(LayerProperties.LargeBubbles))
+            if (m_LayerProperties.HasFlag(LayerProperties.LargeBubbles))
             {
-                layerType = string.Concat(layerType, "largeBubbles ");
+                m_LayerType = string.Concat(m_LayerType, "largeBubbles ");
             }
 
-            if (m_layerProperties.HasFlag(LayerProperties.FineDebris))
+            if (m_LayerProperties.HasFlag(LayerProperties.FineDebris))
             {
-                layerType = string.Concat(layerType, "fineDebris ");
+                m_LayerType = string.Concat(m_LayerType, "fineDebris ");
             }
 
-            if (m_layerProperties.HasFlag(LayerProperties.CoarseDebris))
+            if (m_LayerProperties.HasFlag(LayerProperties.CoarseDebris))
             {
-                layerType = string.Concat(layerType, "coarseDebris ");
+                m_LayerType = string.Concat(m_LayerType, "coarseDebris ");
             }
 
-            if (m_layerProperties.HasFlag(LayerProperties.Diamicton))
+            if (m_LayerProperties.HasFlag(LayerProperties.Diamicton))
             {
-                layerType = string.Concat(layerType, "diamicton ");
+                m_LayerType = string.Concat(m_LayerType, "diamicton ");
             }
         }
 
@@ -400,7 +339,7 @@ namespace BoreholeFeatures
 
         public abstract int GetTopYPoint(int xPoint);
 
-        public abstract int getBottomYPoint(int xPoint);
+        public abstract int GetBottomYPoint(int xPoint);
 
         public abstract string GetDetails();
 
@@ -412,7 +351,7 @@ namespace BoreholeFeatures
 
         public string[] GetLayerGroupNames()
         {
-            return allGroupNames;
+            return m_AllGroupNames;
         }
 
         # endregion
@@ -422,10 +361,9 @@ namespace BoreholeFeatures
         /// <summary>
         /// Sets the start depth of the borehole
         /// </summary>
-        /// <param name="sourceStartDepth">The borehole's start depth</param>
-        public void SetBoreholeStartDepth(int sourceStartDepth)
+        public void SetBoreholeStartDepth(int sourceStart)
         {
-            this.sourceStartDepth = sourceStartDepth;
+            m_SourceStartDepth = sourceStart;
 
             CalculateStartY();
             CalculateEndY();
@@ -434,36 +372,15 @@ namespace BoreholeFeatures
         /// <summary>
         /// Sets the end depth of the borehole
         /// </summary>
-        /// <param name="endDepth">The borehole's end depth</param>
         public void SetBoreholeEndDepth(int endDepth)
         {
-            this.sourceEndDepth = endDepth;
+            m_SourceEndDepth = endDepth;
         }
-
-        public abstract void SetTopEdgeDepth(int topDepthPixels);
-
-        public abstract void SetBottomEdgeDepth(int bottomDepthPixels);
-
-        public abstract void SetTopSineAmplitude(int topAmplitude);
-
-        public abstract void SetBottomSineAmplitude(int bottomAmplitude);
-
-        public abstract void SetTopSineAzimuth(int topAzimuth);
-
-        public abstract void SetBottomSineAzimuth(int bottomAzimuth);
-
-        public void SetAllGroupNames(string[] allGroupNames)
+        
+        public void SetAllGroupNames(string[] groupNames)
         {
-            this.allGroupNames = allGroupNames;
+            m_AllGroupNames = groupNames;
         }
-
-        public abstract void SetTopEdgeSlope(double firstEdgeSlope);
-
-        public abstract void SetTopEdgeIntercept(int firstEdgeIntercept);
-
-        public abstract void SetBottomEdgeSlope(double secondEdgeSlope);
-
-        public abstract void SetBottomEdgeIntercept(int secondEdgeIntercept);
 
         # endregion          
     }

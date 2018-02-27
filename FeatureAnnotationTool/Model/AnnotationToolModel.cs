@@ -1949,7 +1949,7 @@ namespace FeatureAnnotationTool.Model
         {
             if (features.SelectedType.Equals("Layer"))
             {
-                Layer currentLayer = (Layer)features.SelectedFeature;
+                var currentLayer = (BoreholeLayer)features.SelectedFeature;
 
                 currentLayer.ChangeTopAmplitudeBy(changeBy);
             }
@@ -1963,7 +1963,7 @@ namespace FeatureAnnotationTool.Model
         {
             if (features.SelectedType.Equals("Layer"))
             {
-                Layer currentLayer = (Layer)features.SelectedFeature;
+                var currentLayer = (BoreholeLayer)features.SelectedFeature;
 
                 currentLayer.ChangeBottomAmplitudeBy(changeBy);
             }

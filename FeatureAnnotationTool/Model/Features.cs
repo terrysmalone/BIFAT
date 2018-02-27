@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using FeatureAnnotationTool;
-using FeatureAnnotationTool.Model;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using FeatureAnnotationTool.Interfaces;
 using BoreholeFeatures;
 //using Microsoft.Office.Core;
@@ -19,26 +15,21 @@ namespace FeatureAnnotationTool.Model
     /// Author - Terry Malone (trm8@aber.ac.uk)
     /// Version - 1.1 refactored
     /// </summary>
-    class Features
+    internal class Features
     {
-        object selectedFeature = "";
-        string selectedFeatureType = "";
-        private string boreholeName = "";
+        private object m_SelectedFeature = "";
+        private string m_SelectedFeatureType = "";
+        private string m_BoreholeName = "";
 
         private bool fluidLevelSet;
         private int fluidLevel;
 
-        private int sourceStartDepth = 0;
-
-        List<Layer> layers;
-        List<Cluster> clusters;
-        List<Inclusion> inclusions;
+        List<Layer> m_Layers;
+        List<Cluster> m_Clusters;
+        List<Inclusion> m_Inclusions;
 
         private int selectedLayerPosition;
 
-        private int depthResolution, azimuthResolution;
-
-        private bool layerAtCurrentClick = false;
         private bool clusterAtCurrentClick = false;
         private bool inclusionAtCurrentClick = false;
 
@@ -56,23 +47,11 @@ namespace FeatureAnnotationTool.Model
 
         #region properties
         
-        public int SourceStartDepth
-        {
-            get { return sourceStartDepth; }
-            set { sourceStartDepth = value; }
-        }
+        public int SourceStartDepth { get; set; } = 0;
 
-        public int DepthResolution
-        {
-            get { return depthResolution; }
-            set { depthResolution = value; }
-        }
+        public int DepthResolution { get; set; }
 
-        public int AzimuthResolution
-        {
-            get { return azimuthResolution; }
-            set { azimuthResolution = value; }
-        }
+        public int AzimuthResolution { get; set; }
 
         /// <summary>
         /// The boreholes fluid level
@@ -102,7 +81,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The selected feature</returns>
         public object SelectedFeature
         {
-            get { return selectedFeature; }
+            get { return m_SelectedFeature; }
         }
 
         /// <summary>
@@ -111,7 +90,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The type of feature which is currently selected</returns>
         public string SelectedType
         {
-            get { return selectedFeatureType; }
+            get { return m_SelectedFeatureType; }
         }
 
         /// <summary>
@@ -119,8 +98,8 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public string BoreholeName
         {
-            get { return boreholeName; }
-            set { boreholeName = value; }
+            get { return m_BoreholeName; }
+            set { m_BoreholeName = value; }
         }
 
         internal string CurrentFeaturesGroup
@@ -129,12 +108,12 @@ namespace FeatureAnnotationTool.Model
             {
                 string group = "";
 
-                if (selectedFeatureType == "Layer")
-                    group = ((Layer)selectedFeature).Group;
-                else if (selectedFeatureType == "Cluster")
-                    group = ((Cluster)selectedFeature).Group;
-                else if (selectedFeatureType == "Inclusion")
-                    group = ((Inclusion)selectedFeature).Group;
+                if (m_SelectedFeatureType == "Layer")
+                    group = ((Layer)m_SelectedFeature).Group;
+                else if (m_SelectedFeatureType == "Cluster")
+                    group = ((Cluster)m_SelectedFeature).Group;
+                else if (m_SelectedFeatureType == "Inclusion")
+                    group = ((Inclusion)m_SelectedFeature).Group;
 
                 return group;
             }
@@ -144,7 +123,7 @@ namespace FeatureAnnotationTool.Model
 
         public List<Layer> Layers
         {
-            get { return layers; }
+            get { return m_Layers; }
         }
 
         /// <summary>
@@ -152,7 +131,7 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public int NumOfLayers
         {
-            get { return layers.Count(); }
+            get { return m_Layers.Count(); }
         }
 
         /// <summary>
@@ -162,7 +141,8 @@ namespace FeatureAnnotationTool.Model
         {
             get
             {
-                Layer selectedLayer = (Layer)selectedFeature;
+                var selectedLayer = (BoreholeLayer)m_SelectedFeature;
+
                 return selectedLayer.TopSineAzimuth;
             }
         }
@@ -174,28 +154,26 @@ namespace FeatureAnnotationTool.Model
         {
             get
             {
-                Layer selectedLayer = (Layer)selectedFeature;
+                var selectedLayer = (BoreholeLayer)m_SelectedFeature;
+
                 return selectedLayer.BottomSineAzimuth;
             }
         }
 
-        internal bool LayerAtLastClick
-        {
-            get { return layerAtCurrentClick; }
-        }
+        internal bool LayerAtLastClick { get; private set; }
 
-        #endregion Layer properties
+#endregion Layer properties
 
         #region Cluster properties
 
         public List<Cluster> Clusters
         {
-            get { return clusters; }
+            get { return m_Clusters; }
         }
 
         public int NumOfClusters
         {
-            get { return clusters.Count(); }
+            get { return m_Clusters.Count(); }
         }
 
         internal bool ClusterAtLastClick
@@ -209,12 +187,12 @@ namespace FeatureAnnotationTool.Model
 
         public List<Inclusion> Inclusions
         {
-            get { return inclusions; }
+            get { return m_Inclusions; }
         }
 
         public int NumOfInclusions
         {
-            get { return inclusions.Count(); }
+            get { return m_Inclusions.Count(); }
         }
 
         internal bool InclusionAtLastClick
@@ -235,9 +213,9 @@ namespace FeatureAnnotationTool.Model
         {
             this._model = _model;
 
-            layers = new List<Layer>();
-            clusters = new List<Cluster>();
-            inclusions = new List<Inclusion>();
+            m_Layers = new List<Layer>();
+            m_Clusters = new List<Cluster>();
+            m_Inclusions = new List<Inclusion>();
 
             fluidLevelSet = false;
         }
@@ -249,8 +227,8 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void DeSelectFeature()
         {
-            selectedFeature = "";
-            selectedFeatureType = "";
+            m_SelectedFeature = "";
+            m_SelectedFeatureType = "";
         }
         
         /// <summary>
@@ -258,25 +236,25 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void DeleteActiveFeature()
         {
-            if (selectedFeatureType.Equals("Layer"))
+            if (m_SelectedFeatureType.Equals("Layer"))
             {
-                Layer activeLayer = (Layer)selectedFeature;
-                layers.Remove(activeLayer);
+                Layer activeLayer = (Layer)m_SelectedFeature;
+                m_Layers.Remove(activeLayer);
 
             }
-            else if (selectedFeatureType.Equals("Cluster"))
+            else if (m_SelectedFeatureType.Equals("Cluster"))
             {
-                Cluster activeCluster = (Cluster)selectedFeature;
-                clusters.Remove(activeCluster);
+                Cluster activeCluster = (Cluster)m_SelectedFeature;
+                m_Clusters.Remove(activeCluster);
             }
-            else if (selectedFeatureType.Equals("Inclusion"))
+            else if (m_SelectedFeatureType.Equals("Inclusion"))
             {
-                Inclusion activeInclusion = (Inclusion)selectedFeature;
-                inclusions.Remove(activeInclusion);
+                Inclusion activeInclusion = (Inclusion)m_SelectedFeature;
+                m_Inclusions.Remove(activeInclusion);
             }
 
-            selectedFeatureType = "";
-            selectedFeature = "";
+            m_SelectedFeatureType = "";
+            m_SelectedFeature = "";
         }
 
         #region Write features methods
@@ -287,7 +265,7 @@ namespace FeatureAnnotationTool.Model
         /// <param name="fileName">The name of the excel file to write to</param>
         public void WriteAllFeaturesToExcel(string fileName, List<string> layerPropertiesToInclude, List<string> clusterPropertiesToInclude, List<string> inclusionPropertiesToInclude)
         {
-            WriteFeaturesToExcel writeFeatures = new WriteFeaturesToExcel(fileName, layers, clusters, inclusions);
+            WriteFeaturesToExcel writeFeatures = new WriteFeaturesToExcel(fileName, m_Layers, m_Clusters, m_Inclusions);
 
             writeFeatures.SetLayerBrightnesses(layerBrightnesses);
             writeFeatures.SetClusterBrightnesses(clusterBrightnesses);
@@ -319,11 +297,11 @@ namespace FeatureAnnotationTool.Model
 
                 string lastItem = layerPropertiesToInclude[layerPropertiesToInclude.Count - 1];
 
-                for (int i = 0; i < layers.Count; i++)
+                for (int i = 0; i < m_Layers.Count; i++)
                 {
                     if (layerPropertiesToInclude.Contains("Start depth (mm)"))
                     {
-                        stream.Write(layers[i].StartDepth);
+                        stream.Write(m_Layers[i].StartDepth);
 
                         if(lastItem != "Start depth (mm)")
                             stream.Write(", ");
@@ -331,7 +309,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("End depth (mm)"))
                     {
-                        stream.Write(layers[i].EndDepth);
+                        stream.Write(m_Layers[i].EndDepth);
 
                         if (lastItem != "End depth (mm)")
                             stream.Write(", ");
@@ -339,7 +317,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top sine depth (mm)"))
                     {
-                        stream.Write(layers[i].TopEdgeDepthMm);
+                        stream.Write(m_Layers[i].TopEdgeDepthMm);
 
                         if (lastItem != "Top sine depth (mm)") 
                             stream.Write(", ");
@@ -347,7 +325,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top sine azimuth"))
                     {
-                        stream.Write(layers[i].TopSineAzimuth);
+                        stream.Write(((BoreholeLayer)m_Layers[i]).TopSineAzimuth);
 
                         if (lastItem != "Top sine azimuth") 
                             stream.Write(", ");
@@ -355,7 +333,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top sine amplitude (mm)"))
                     {
-                        stream.Write(layers[i].TopSineAmplitudeInMm);
+                        stream.Write(((BoreholeLayer)m_Layers[i]).TopSineAmplitudeInMm);
 
                         if (lastItem != "Top sine amplitude (mm)")
                             stream.Write(", ");
@@ -363,7 +341,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom sine depth (mm)"))
                     {
-                        stream.Write(layers[i].BottomEdgeDepthMm);
+                        stream.Write(m_Layers[i].BottomEdgeDepthMm);
 
                         if (lastItem != "Bottom sine depth (mm)")
                             stream.Write(", ");
@@ -371,7 +349,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom sine azimuth"))
                     {
-                        stream.Write(layers[i].BottomSineAzimuth);
+                        stream.Write(((BoreholeLayer)m_Layers[i]).BottomSineAzimuth);
 
                         if (lastItem != "Bottom sine azimuth")
                             stream.Write(", ");
@@ -379,7 +357,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom sine amplitude (mm)"))
                     {
-                        stream.Write(layers[i].BottomSineAmplitudeInMm);
+                        stream.Write(((BoreholeLayer)m_Layers[i]).BottomSineAmplitudeInMm);
 
                         if (lastItem != "Bottom sine amplitude (mm)")
                             stream.Write(", ");
@@ -389,7 +367,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top edge intercept (mm)"))
                     {
-                        stream.Write(layers[i].TopEdgeInterceptMm);
+                        stream.Write(((CoreLayer)m_Layers[i]).TopEdgeInterceptMm);
 
                         if (lastItem != "Top edge intercept (mm)")
                             stream.Write(", ");
@@ -397,7 +375,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Top edge slope"))
                     {
-                        stream.Write(layers[i].TopEdgeSlope);
+                        stream.Write(((CoreLayer)m_Layers[i]).TopEdgeSlope);
 
                         if (lastItem != "Top edge slope")
                             stream.Write(", ");
@@ -405,7 +383,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom edge intercept (mm)"))
                     {
-                        stream.Write(layers[i].BottomEdgeInterceptMm);
+                        stream.Write(((CoreLayer)m_Layers[i]).BottomEdgeInterceptMm);
 
                         if (lastItem != "Bottom edge intercept (mm)")
                             stream.Write(", ");
@@ -413,7 +391,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Bottom edge slope"))
                     {
-                        stream.Write(layers[i].BottomEdgeSlope);
+                        stream.Write(((CoreLayer)m_Layers[i]).BottomEdgeSlope);
 
                         if (lastItem != "Bottom edge slope")
                             stream.Write(", ");
@@ -423,7 +401,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Group"))
                     {
-                        stream.Write(layers[i].Group);
+                        stream.Write(m_Layers[i].Group);
 
                         if (lastItem != "Group")
                             stream.Write(", ");
@@ -431,7 +409,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Layer type"))
                     {
-                        stream.Write(layers[i].LayerType);
+                        stream.Write(m_Layers[i].LayerType);
 
                         if (lastItem != "Layer type")
                             stream.Write(", ");
@@ -439,7 +417,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Layer description"))
                     {
-                        stream.Write(layers[i].Description);
+                        stream.Write(m_Layers[i].Description);
 
                         if (lastItem != "Layer description")
                             stream.Write(", ");
@@ -447,7 +425,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (layerPropertiesToInclude.Contains("Layer quality"))
                     {
-                        stream.Write(layers[i].Quality);
+                        stream.Write(m_Layers[i].Quality);
 
                         if (lastItem != "Layer quality")
                             stream.Write(", ");
@@ -477,21 +455,21 @@ namespace FeatureAnnotationTool.Model
                 stream.WriteLine("Depth,Azimuth,Dip,Aperture");
                 stream.WriteLine("m,deg,deg,mm");
                 
-                for (int i = 0; i < layers.Count; i++)
+                for (int i = 0; i < m_Layers.Count; i++)
                 {
-                    WriteEdgeDetailsForWellCAD(layers[i], stream);
+                    WriteEdgeDetailsForWellCAD(m_Layers[i] as BoreholeLayer, stream);
                 }
             }
         }
 
-        private void WriteEdgeDetailsForWellCAD(Layer layer, StreamWriter stream)
+        private void WriteEdgeDetailsForWellCAD(BoreholeLayer layer, StreamWriter stream)
         {
             double wellDepth;
             double wellAzimuth;
             double wellDip;
             double wellThickness;
                         
-            wellDepth = (double)layer.TopEdgeDepthMm / 1000.0;
+            wellDepth = layer.TopEdgeDepthMm / 1000.0;
             wellAzimuth = (double)layer.TopSineAzimuth;
             wellDip = (double)layer.TopSineAmplitudeInMm;
             wellThickness = Math.Max((double)layer.TopEdgeDepthMm,(double)layer.BottomEdgeDepthMm) - Math.Min((double)layer.TopEdgeDepthMm, (double)layer.BottomEdgeDepthMm);
@@ -517,11 +495,11 @@ namespace FeatureAnnotationTool.Model
 
                 string lastItem = clusterPropertiesToInclude[clusterPropertiesToInclude.Count - 1];
 
-                for (int i = 0; i < clusters.Count; i++)
+                for (int i = 0; i < m_Clusters.Count; i++)
                 {
                     if (clusterPropertiesToInclude.Contains("Start depth (mm)"))
                     {
-                        stream.Write(clusters[i].StartDepth);
+                        stream.Write(m_Clusters[i].StartDepth);
 
                         if (lastItem != "Start depth (mm)")
                             stream.Write(", ");
@@ -529,7 +507,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("End depth (mm)"))
                     {
-                        stream.Write(clusters[i].EndDepth);
+                        stream.Write(m_Clusters[i].EndDepth);
 
                         if (lastItem != "End depth (mm)")
                             stream.Write(", ");
@@ -537,7 +515,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Top Y boundary"))
                     {
-                        stream.Write(clusters[i].TopYBoundary);
+                        stream.Write(m_Clusters[i].TopYBoundary);
 
                         if (lastItem != "Top Y boundary")
                             stream.Write(", ");
@@ -545,7 +523,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Bottom Y boundary"))
                     {
-                        stream.Write(clusters[i].BottomYBoundary);
+                        stream.Write(m_Clusters[i].BottomYBoundary);
 
                         if (lastItem != "Bottom Y boundary")
                             stream.Write(", ");
@@ -553,7 +531,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Left X boundary"))
                     {
-                        stream.Write(clusters[i].LeftXBoundary);
+                        stream.Write(m_Clusters[i].LeftXBoundary);
 
                         if (lastItem != "Left X boundary")
                             stream.Write(", ");
@@ -561,7 +539,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Right X boundary"))
                     {
-                        stream.Write(clusters[i].RightXBoundary);
+                        stream.Write(m_Clusters[i].RightXBoundary);
 
                         if (lastItem != "Right X boundary")
                             stream.Write(", ");
@@ -569,7 +547,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Points"))
                     {
-                        stream.Write(clusters[i].Points);
+                        stream.Write(m_Clusters[i].Points);
 
                         if (lastItem != "Points")
                             stream.Write(", ");
@@ -577,7 +555,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Cluster type"))
                     {
-                        stream.Write(clusters[i].ClusterType);
+                        stream.Write(m_Clusters[i].ClusterType);
 
                         if (lastItem != "Cluster type")
                             stream.Write(", ");
@@ -585,7 +563,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Cluster description"))
                     {
-                        stream.Write(clusters[i].Description);
+                        stream.Write(m_Clusters[i].Description);
 
                         if (lastItem != "Cluster description")
                             stream.Write(", ");
@@ -593,7 +571,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (clusterPropertiesToInclude.Contains("Mean cluster brightness"))
                     {
-                        stream.Write(clusters[i].Description);
+                        stream.Write(m_Clusters[i].Description);
 
                         if (lastItem != "Mean cluster brightness")
                             stream.Write(", ");
@@ -622,11 +600,11 @@ namespace FeatureAnnotationTool.Model
 
                 string lastItem = inclusionPropertiesToInclude[inclusionPropertiesToInclude.Count - 1];
 
-                for (int i = 0; i < inclusions.Count; i++)
+                for (int i = 0; i < m_Inclusions.Count; i++)
                 {
                     if (inclusionPropertiesToInclude.Contains("Start depth (mm)"))
                     {
-                        stream.Write(inclusions[i].StartDepth);
+                        stream.Write(m_Inclusions[i].StartDepth);
 
                         if (lastItem != "Start depth (mm)")
                             stream.Write(", ");
@@ -634,7 +612,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("End depth (mm)"))
                     {
-                        stream.Write(inclusions[i].EndDepth);
+                        stream.Write(m_Inclusions[i].EndDepth);
 
                         if (lastItem != "End depth (mm)")
                             stream.Write(", ");
@@ -642,7 +620,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Top Y boundary"))
                     {
-                        stream.Write(inclusions[i].TopYBoundary);
+                        stream.Write(m_Inclusions[i].TopYBoundary);
 
                         if (lastItem != "Top Y boundary")
                             stream.Write(", ");
@@ -650,7 +628,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Bottom Y boundary"))
                     {
-                        stream.Write(inclusions[i].BottomYBoundary);
+                        stream.Write(m_Inclusions[i].BottomYBoundary);
 
                         if (lastItem != "Bottom Y boundary")
                             stream.Write(", ");
@@ -658,7 +636,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Left X boundary"))
                     {
-                        stream.Write(inclusions[i].LeftXBoundary);
+                        stream.Write(m_Inclusions[i].LeftXBoundary);
 
                         if (lastItem != "Left X boundary")
                             stream.Write(", ");
@@ -666,7 +644,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Right X boundary"))
                     {
-                        stream.Write(inclusions[i].RightXBoundary);
+                        stream.Write(m_Inclusions[i].RightXBoundary);
 
                         if (lastItem != "Right X boundary")
                             stream.Write(", ");
@@ -674,7 +652,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Points"))
                     {
-                        stream.Write(inclusions[i].PointsString);
+                        stream.Write(m_Inclusions[i].PointsString);
 
                         if (lastItem != "Points")
                             stream.Write(", ");
@@ -682,7 +660,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Inclusion type"))
                     {
-                        stream.Write(inclusions[i].InclusionType);
+                        stream.Write(m_Inclusions[i].InclusionType);
 
                         if (lastItem != "Inclusion Type")
                             stream.Write(", ");
@@ -690,7 +668,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Inclusion description"))
                     {
-                        stream.Write(inclusions[i].Description);
+                        stream.Write(m_Inclusions[i].Description);
 
                         if (lastItem != "Inclusion Description")
                             stream.Write(", ");
@@ -698,7 +676,7 @@ namespace FeatureAnnotationTool.Model
 
                     if (inclusionPropertiesToInclude.Contains("Mean inclusion brightness"))
                     {
-                        stream.Write(inclusions[i].Description);
+                        stream.Write(m_Inclusions[i].Description);
 
                         if (lastItem != "Mean inclusion brightness")
                             stream.Write(", ");
@@ -726,7 +704,7 @@ namespace FeatureAnnotationTool.Model
         /// <param name="azimuth">The azimuth of the first edge of the layer</param>
         public void AddNewLayer(int depth, int amplitude, int azimuth)
         {
-            azimuth = (int)((float)azimuth / ((float)azimuthResolution / 360.0f));
+            azimuth = (int)((float)azimuth / ((float)AzimuthResolution / 360.0f));
 
             //layers.Add(new Layer(depth, amplitude, azimuth, depth, amplitude, azimuth, sourceAzimuthResolution, depthResolution));
 
@@ -735,19 +713,19 @@ namespace FeatureAnnotationTool.Model
             LayerTypeSelector layerTypeSelector;
 
             layerTypeSelector = new LayerTypeSelector("Borehole");
-            Layer layer = layerTypeSelector.setUpLayer(depth, amplitude, azimuth, depth, amplitude, azimuth, azimuthResolution, depthResolution);
+            Layer layer = layerTypeSelector.setUpLayer(depth, amplitude, azimuth, depth, amplitude, azimuth, AzimuthResolution, DepthResolution);
          
-            layers.Insert(insertPosition, layer);
+            m_Layers.Insert(insertPosition, layer);
 
             selectedLayerPosition = insertPosition;
                         
             //selectedLayerPosition = layers.Count - 1;
-            selectedFeature = layers[selectedLayerPosition];
-            selectedFeatureType = "Layer";
+            m_SelectedFeature = m_Layers[selectedLayerPosition];
+            m_SelectedFeatureType = "Layer";
 
             
             SetAllLayerGroupNames(allLayerGroups);
-            ((Layer)selectedFeature).Group = "Unspecified";
+            ((Layer)m_SelectedFeature).Group = "Unspecified";
             //layers[selectedLayerPosition].InitialiseModelAdapter(_model);
             SetStartDepth();
         }
@@ -759,20 +737,20 @@ namespace FeatureAnnotationTool.Model
             LayerTypeSelector layerTypeSelector;
             
             layerTypeSelector = new LayerTypeSelector("Core");
-            Layer layer = layerTypeSelector.setUpLayer(slope, intercept, slope, intercept, azimuthResolution, depthResolution);
+            Layer layer = layerTypeSelector.setUpLayer(slope, intercept, slope, intercept, AzimuthResolution, DepthResolution);
 
-            layers.Insert(insertPosition, layer);
+            m_Layers.Insert(insertPosition, layer);
 
             selectedLayerPosition = insertPosition;
 
 
             //selectedLayerPosition = layers.Count - 1;
-            selectedFeature = layers[selectedLayerPosition];
-            selectedFeatureType = "Layer";
+            m_SelectedFeature = m_Layers[selectedLayerPosition];
+            m_SelectedFeatureType = "Layer";
 
 
             SetAllLayerGroupNames(allLayerGroups);
-            ((Layer)selectedFeature).Group = "Unspecified";
+            ((Layer)m_SelectedFeature).Group = "Unspecified";
             //layers[selectedLayerPosition].InitialiseModelAdapter(_model);
             SetStartDepth();  
         }
@@ -791,7 +769,7 @@ namespace FeatureAnnotationTool.Model
             }
 
             int layerPosition = CalculateLayerInsertPosition(layerToAdd.TopEdgeDepth);
-            layers.Insert(layerPosition, layerToAdd);
+            m_Layers.Insert(layerPosition, layerToAdd);
 
             SetAllLayerGroupNames(allLayerGroups);
 
@@ -807,24 +785,24 @@ namespace FeatureAnnotationTool.Model
 
         private int CalculateLayerInsertPosition(int depth)
         {
-            if (layers.Count == 0)
+            if (m_Layers.Count == 0)
                 return 0;
 
-            if (layers.Count == 1)
+            if (m_Layers.Count == 1)
             {
-                if (depth < layers[0].TopEdgeDepth)
+                if (depth < m_Layers[0].TopEdgeDepth)
                     return 0;
                 else 
                     return 1;
             }
 
-            for (int i = 0; i < layers.Count; i++)
+            for (int i = 0; i < m_Layers.Count; i++)
             {
-                if(depth < layers[i].TopEdgeDepth)
+                if(depth < m_Layers[i].TopEdgeDepth)
                     return i;
             }
 
-            return layers.Count;
+            return m_Layers.Count;
         }
 
         /// <summary>
@@ -834,7 +812,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>A List of layer points</returns>
         public List<Point> GetLayerPoints1(int layerNum)
         {
-            return layers[layerNum].GetTopEdgePoints();
+            return m_Layers[layerNum].GetTopEdgePoints();
         }
 
         /// <summary>
@@ -844,7 +822,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>A List of layer points</returns>
         public List<Point> GetLayerPoints2(int layerNum)
         {
-            return layers[layerNum].GetBottomEdgePoints();
+            return m_Layers[layerNum].GetBottomEdgePoints();
         }
 
         /// <summary>
@@ -854,17 +832,17 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The group the layer belongs to</returns>
         public string GetLayerGroup(int layerNum)
         {
-            return layers[layerNum].Group;
+            return m_Layers[layerNum].Group;
         }
 
         public int GetLayerMin(int layerNum)
         {
-            return layers[layerNum].StartY;
+            return m_Layers[layerNum].StartY;
         }
 
         public int GetLayerMax(int layerNum)
         {
-            return layers[layerNum].EndY;
+            return m_Layers[layerNum].EndY;
         }
 
         internal void DeleteLayersInRange(int startDepth, int endDepth)
@@ -872,13 +850,13 @@ namespace FeatureAnnotationTool.Model
             int count = 0;
             bool stop = false;
 
-            while (count < layers.Count && stop == false)
+            while (count < m_Layers.Count && stop == false)
             {
-                Layer currentLayer = layers[count];
+                Layer currentLayer = m_Layers[count];
 
                 if (currentLayer.TopEdgeDepth >= startDepth && currentLayer.BottomEdgeDepth <= endDepth)
                 {
-                    layers.Remove(currentLayer);
+                    m_Layers.Remove(currentLayer);
                     count--;
                 }
                 else if (currentLayer.BottomEdgeDepth > endDepth)
@@ -890,16 +868,16 @@ namespace FeatureAnnotationTool.Model
 
         internal void DeleteAllLayers()
         {
-            layers.Clear();
+            m_Layers.Clear();
         }
 
         public void RemoveLayersWithQualityLessThan(int quality)
         {
-            for (int i = 0; i < layers.Count; i++)
+            for (var i = 0; i < m_Layers.Count; i++)
             {
-                if(layers[i].Quality < quality)                
+                if(m_Layers[i].Quality < quality)                
                 {
-                    layers.RemoveAt(i);
+                    m_Layers.RemoveAt(i);
                     i--;
                 }
             }
@@ -907,57 +885,54 @@ namespace FeatureAnnotationTool.Model
 
         public void JoinEdges(Layer previouslySelectedFeature, Layer currentlySelectedFeature)
         {
-            /*if (currentlySelectedFeature.getTopDepth() < previouslySelectedFeature.getTopDepth())
-            {
-                currentlySelectedFeature.setBottomDepth(previouslySelectedFeature.getTopDepth());
-                currentlySelectedFeature.setBottomAmplitude(previouslySelectedFeature.TopSineAmplitude);
-                currentlySelectedFeature.setBottomAzimuth(previouslySelectedFeature.TopSineAzimuth);
-            }
-            else
-            {
-                currentlySelectedFeature.setTopDepth(previouslySelectedFeature.getTopDepth());
-                currentlySelectedFeature.setTopAmplitude(previouslySelectedFeature.TopSineAmplitude);
-                currentlySelectedFeature.setTopAzimuth(previouslySelectedFeature.TopSineAzimuth);
-            }
-
-            currentlySelectedFeature.Group = previouslySelectedFeature.Group);
-
-            layers.Remove(previouslySelectedFeature);
-
-            currentlySelectedFeature.moveSine(3, 0, 0);*/
-
             if (previouslySelectedFeature.TopEdgeDepth < currentlySelectedFeature.TopEdgeDepth)
             {
                 if (type == "Borehole")
                 {
-                    previouslySelectedFeature.SetBottomEdgeDepth(currentlySelectedFeature.TopEdgeDepth);
-                    previouslySelectedFeature.SetBottomSineAmplitude(currentlySelectedFeature.TopSineAmplitude);
-                    previouslySelectedFeature.SetBottomSineAzimuth(currentlySelectedFeature.TopSineAzimuth);
+                    (previouslySelectedFeature as BoreholeLayer)?
+                        .SetBottomEdgeDepth(currentlySelectedFeature.TopEdgeDepth);
+
+                    (previouslySelectedFeature as BoreholeLayer)?
+                        .SetBottomSineAmplitude(((BoreholeLayer)currentlySelectedFeature).TopSineAmplitude);
+
+                    (previouslySelectedFeature as BoreholeLayer)?
+                        .SetBottomSineAzimuth(((BoreholeLayer)currentlySelectedFeature).TopSineAzimuth);
                 }
                 else
                 {
-                    previouslySelectedFeature.SetBottomEdgeSlope(currentlySelectedFeature.TopEdgeSlope);
-                    previouslySelectedFeature.SetBottomEdgeIntercept(currentlySelectedFeature.TopEdgeIntercept);
+                    (previouslySelectedFeature as CoreLayer)?
+                        .SetBottomEdgeSlope(((CoreLayer)currentlySelectedFeature).TopEdgeSlope);
+
+                    (previouslySelectedFeature as CoreLayer)?
+                        .SetBottomEdgeIntercept(((CoreLayer)currentlySelectedFeature).TopEdgeIntercept);
                 }
             }
             else
             {
                 if (type == "Borehole")
                 {
-                    previouslySelectedFeature.SetTopEdgeDepth(currentlySelectedFeature.TopEdgeDepth);
-                    previouslySelectedFeature.SetTopSineAmplitude(currentlySelectedFeature.TopSineAmplitude);
-                    previouslySelectedFeature.SetTopSineAzimuth(currentlySelectedFeature.TopSineAzimuth);
+                    (previouslySelectedFeature as BoreholeLayer)?
+                        .SetTopEdgeDepth(currentlySelectedFeature.TopEdgeDepth);
+
+                    (previouslySelectedFeature as BoreholeLayer)?
+                        .SetTopSineAmplitude(((BoreholeLayer)currentlySelectedFeature).TopSineAmplitude);
+
+                    (previouslySelectedFeature as BoreholeLayer)?
+                        .SetTopSineAzimuth(((BoreholeLayer)currentlySelectedFeature).TopSineAzimuth);
                 }
                 else
                 {
-                    previouslySelectedFeature.SetTopEdgeSlope(currentlySelectedFeature.TopEdgeSlope);
-                    previouslySelectedFeature.SetTopEdgeIntercept(currentlySelectedFeature.TopEdgeIntercept);
+                    (previouslySelectedFeature as CoreLayer)?
+                        .SetTopEdgeSlope(((CoreLayer)currentlySelectedFeature).TopEdgeSlope);
+
+                    (previouslySelectedFeature as CoreLayer)?
+                        .SetTopEdgeIntercept(((CoreLayer)currentlySelectedFeature).TopEdgeIntercept);
                 }
             }
 
-            layers.Remove(currentlySelectedFeature);
+            m_Layers.Remove(currentlySelectedFeature);
 
-            selectedFeature = previouslySelectedFeature;
+            m_SelectedFeature = previouslySelectedFeature;
 
             previouslySelectedFeature.MoveEdge(3, 0, 0);
         }
@@ -968,56 +943,63 @@ namespace FeatureAnnotationTool.Model
         /// <param name="layerToSplit">The two edge layer to be split</param>
         public void SplitLayer(Layer layerToSplit)
         {
-            int position = layers.IndexOf(layerToSplit);
-            //int position = layers.FindIndex();
-
-            LayerTypeSelector layerTypeSelector;
-
-            layerTypeSelector = new LayerTypeSelector(type);
+            var position = m_Layers.IndexOf(layerToSplit);
+            
+            var layerTypeSelector = new LayerTypeSelector(type);
 
             Layer firstLayer, secondLayer;
 
             if (type == "Borehole")
             {
-                firstLayer = layerTypeSelector.setUpLayer(layerToSplit.TopEdgeDepth, layerToSplit.TopSineAmplitude, layerToSplit.TopSineAzimuth, layerToSplit.TopEdgeDepth, layerToSplit.TopSineAmplitude, layerToSplit.TopSineAzimuth, azimuthResolution, depthResolution);
-                secondLayer = layerTypeSelector.setUpLayer(layerToSplit.BottomEdgeDepth, layerToSplit.BottomSineAmplitude, layerToSplit.BottomSineAzimuth, layerToSplit.BottomEdgeDepth, layerToSplit.BottomSineAmplitude, layerToSplit.BottomSineAzimuth, azimuthResolution, depthResolution);
+                var layer = layerToSplit as BoreholeLayer;
+
+                firstLayer = layerTypeSelector.setUpLayer(layer.TopEdgeDepth, 
+                                                          layer.TopSineAmplitude, 
+                                                          layer.TopSineAzimuth, 
+                                                          layer.TopEdgeDepth, 
+                                                          layer.TopSineAmplitude, 
+                                                          layer.TopSineAzimuth, 
+                                                          AzimuthResolution, 
+                                                          DepthResolution);
+
+                secondLayer = layerTypeSelector.setUpLayer(layer.BottomEdgeDepth, 
+                                                           layer.BottomSineAmplitude, 
+                                                           layer.BottomSineAzimuth, 
+                                                           layer.BottomEdgeDepth, 
+                                                           layer.BottomSineAmplitude, 
+                                                           layer.BottomSineAzimuth, 
+                                                           AzimuthResolution, 
+                                                           DepthResolution);
             }
             else
             {
-                firstLayer = layerTypeSelector.setUpLayer(layerToSplit.TopEdgeSlope, layerToSplit.TopEdgeIntercept, layerToSplit.TopEdgeSlope, layerToSplit.TopEdgeIntercept, azimuthResolution, depthResolution);
-                secondLayer = layerTypeSelector.setUpLayer(layerToSplit.BottomEdgeSlope, layerToSplit.BottomEdgeIntercept, layerToSplit.BottomEdgeSlope, layerToSplit.BottomEdgeIntercept, azimuthResolution, depthResolution);
+                var layer = layerToSplit as CoreLayer;
+
+                firstLayer = layerTypeSelector.setUpLayer(layer.TopEdgeSlope, 
+                                                          layer.TopEdgeIntercept, 
+                                                          layer.TopEdgeSlope, 
+                                                          layer.TopEdgeIntercept, 
+                                                          AzimuthResolution, 
+                                                          DepthResolution);
+
+                secondLayer = layerTypeSelector.setUpLayer(layer.BottomEdgeSlope, 
+                                                           layer.BottomEdgeIntercept, 
+                                                           layer.BottomEdgeSlope, 
+                                                           layer.BottomEdgeIntercept, 
+                                                           AzimuthResolution, 
+                                                           DepthResolution);
             
             }
-            //firstLayer.InitialiseModelAdapter(_model);
-            //secondLayer.InitialiseModelAdapter(_model);
-
+            
             firstLayer.Group = layerToSplit.Group;
             secondLayer.Group = layerToSplit.Group;
             
-            /*
-            firstLayer.Clean = layerToSplit.Clean;
-            firstLayer.CoarseDebris = layerToSplit.CoarseDebris;
-            firstLayer.Diamicton = layerToSplit.Diamicton;
-            firstLayer.FineDebris = layerToSplit.FineDebris;
-            firstLayer.LargeBubbles = layerToSplit.LargeBubbles;
-            firstLayer.LayerVoid = layerToSplit.LayerVoid;
-            firstLayer.SmallBubbles = layerToSplit.SmallBubbles;
+            m_Layers.Insert(position, secondLayer);
+            m_Layers.Insert(position, firstLayer);
 
-            secondLayer.Clean = layerToSplit.Clean;
-            secondLayer.CoarseDebris = layerToSplit.CoarseDebris;
-            secondLayer.Diamicton = layerToSplit.Diamicton;
-            secondLayer.FineDebris = layerToSplit.FineDebris;
-            secondLayer.LargeBubbles = layerToSplit.LargeBubbles;
-            secondLayer.LayerVoid = layerToSplit.LayerVoid;
-            secondLayer.SmallBubbles = layerToSplit.SmallBubbles;
-            */
+            m_Layers.Remove(layerToSplit);
 
-            layers.Insert(position, secondLayer);
-            layers.Insert(position, firstLayer);
-
-            layers.Remove(layerToSplit);
-
-            selectedFeature = layers[position];
+            m_SelectedFeature = m_Layers[position];
         }
 
         # endregion
@@ -1026,41 +1008,50 @@ namespace FeatureAnnotationTool.Model
 
         internal void ChangeLayerGroupName(string groupNameBefore, string groupNameAfter)
         {
-            for (int i = 0; i < layers.Count; i++)
+            foreach (var layer in m_Layers)
             {
-                if (layers[i].Group == groupNameBefore)
-                    layers[i].Group = groupNameAfter;
+                if (layer.Group == groupNameBefore)
+                {
+                    layer.Group = groupNameAfter;
+                }
             }
         }
 
         internal void ChangeClusterGroupName(string groupNameBefore, string groupNameAfter)
         {
-            for (int i = 0; i < clusters.Count; i++)
+            foreach (var t in m_Clusters)
             {
-                if (clusters[i].Group == groupNameBefore)
-                    clusters[i].Group = groupNameAfter;
+                if (t.Group == groupNameBefore)
+                {
+                    t.Group = groupNameAfter;
+                }
             }
+
         }
 
         internal void ChangeInclusionGroupName(string groupNameBefore, string groupNameAfter)
         {
-            for (int i = 0; i < inclusions.Count; i++)
+            foreach (var t in m_Inclusions)
             {
-                if (inclusions[i].Group == groupNameBefore)
-                    inclusions[i].Group = groupNameAfter;
+                if (t.Group == groupNameBefore)
+                {
+                    t.Group = groupNameAfter;
+                }
             }
         }
 
         internal int GetLayerGroupCount(string groupName)
         {
-            int count = 0;
+            var count = 0;
 
-            for (int i = 0; i < layers.Count; i++)
+            foreach (var layer in m_Layers)
             {
-                string layerName = layers[i].Group;
+                var layerName = layer.Group;
 
                 if (layerName == groupName)
+                {
                     count++;
+                }
             }
 
             return count;
@@ -1069,32 +1060,12 @@ namespace FeatureAnnotationTool.Model
 
         internal int GetClusterGroupCount(string groupName)
         {
-            int count = 0;
-
-            for (int i = 0; i < clusters.Count; i++)
-            {
-                string clusterName = clusters[i].Group;
-
-                if (clusterName == groupName)
-                    count++;
-            }
-
-            return count;
+            return m_Clusters.Select(t => t.Group).Count(clusterName => clusterName == groupName);
         }
 
         internal int GetInclusionGroupCount(string groupName)
         {
-            int count = 0;
-
-            for (int i = 0; i < inclusions.Count; i++)
-            {
-                string inclusionName = inclusions[i].Group;
-
-                if (inclusionName == groupName)
-                    count++;
-            }
-
-            return count;
+            return m_Inclusions.Select(t => t.Group).Count(inclusionName => inclusionName == groupName);
         }
 
         # endregion
@@ -1103,7 +1074,7 @@ namespace FeatureAnnotationTool.Model
 
         public string GetClusterGroup(int clusterNum)
         {
-            return clusters[clusterNum].Group;
+            return m_Clusters[clusterNum].Group;
         }
 
         /// <summary>
@@ -1111,12 +1082,15 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void AddCluster()
         {
-            clusters.Add(new Cluster(azimuthResolution, depthResolution));
-            selectedFeature = clusters[clusters.Count - 1];
-            selectedFeatureType = "Cluster";
+            m_Clusters.Add(new Cluster(AzimuthResolution, DepthResolution));
+
+            m_SelectedFeature = m_Clusters[m_Clusters.Count - 1];
+
+            m_SelectedFeatureType = "Cluster";
 
             SetAllClusterGroupNames(allClusterGroups);
-            ((Cluster)selectedFeature).Group = "Unspecified";
+
+            ((Cluster)m_SelectedFeature).Group = "Unspecified";
 
             SetStartDepth();
         }
@@ -1124,10 +1098,9 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Deletes a specified cluster from the features
         /// </summary>
-        /// <param name="clusterToDelete">The cluster to delete</param>
         public void DeleteCluster(Cluster clusterToDelete)
         {
-            clusters.Remove(clusterToDelete);
+            m_Clusters.Remove(clusterToDelete);
         }
 
         /// <summary>
@@ -1135,7 +1108,7 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void DeleteAllClusters()
         {
-            clusters.Clear();
+            m_Clusters.Clear();
         }
 
         /// <summary>
@@ -1143,8 +1116,8 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void SetLastClusterAsComplete()
         {
-            clusters[clusters.Count - 1].CheckFeatureIsWithinImageBounds();
-            clusters[clusters.Count - 1].IsComplete = true;
+            m_Clusters[m_Clusters.Count - 1].CheckFeatureIsWithinImageBounds();
+            m_Clusters[m_Clusters.Count - 1].IsComplete = true;
         }
 
         /// <summary>
@@ -1153,7 +1126,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The number of clusters</returns>
         public int GetNumOfClusters()
         {
-            return clusters.Count();
+            return m_Clusters.Count();
         }
 
         /// <summary>
@@ -1163,7 +1136,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The List of Cluster Points</returns>
         public List<Point> GetClusterPoints(int clusterNum)
         {
-            return clusters[clusterNum].Points;
+            return m_Clusters[clusterNum].Points;
         }
 
         # endregion
@@ -1172,7 +1145,7 @@ namespace FeatureAnnotationTool.Model
 
         public string GetInclusionGroup(int inclusionNum)
         {
-            return inclusions[inclusionNum].Group;
+            return m_Inclusions[inclusionNum].Group;
         }
 
         /// <summary>
@@ -1180,12 +1153,12 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void AddInclusion()
         {
-            inclusions.Add(new Inclusion(azimuthResolution, depthResolution));
-            selectedFeature = inclusions[inclusions.Count - 1];
-            selectedFeatureType = "Inclusion";
+            m_Inclusions.Add(new Inclusion(AzimuthResolution, DepthResolution));
+            m_SelectedFeature = m_Inclusions[m_Inclusions.Count - 1];
+            m_SelectedFeatureType = "Inclusion";
 
             SetAllInclusionGroupNames(allInclusionGroups);
-            ((Inclusion)selectedFeature).Group = "Unspecified";
+            ((Inclusion)m_SelectedFeature).Group = "Unspecified";
             
             SetStartDepth();
         }
@@ -1196,7 +1169,7 @@ namespace FeatureAnnotationTool.Model
         /// <param name="inclusionToDelete">The inclusion to delete</param>
         public void DeleteInclusion(Inclusion inclusionToDelete)
         {
-            inclusions.Remove(inclusionToDelete);
+            m_Inclusions.Remove(inclusionToDelete);
         }
 
         /// <summary>
@@ -1204,7 +1177,7 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void DeleteAllInclusions()
         {
-            inclusions.Clear();
+            m_Inclusions.Clear();
         }
 
         /// <summary>
@@ -1212,8 +1185,8 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void SetLastInclusionAsComplete()
         {
-            inclusions[inclusions.Count - 1].CheckFeatureIsWithinImageBounds();
-            inclusions[inclusions.Count - 1].IsComplete = true;
+            m_Inclusions[m_Inclusions.Count - 1].CheckFeatureIsWithinImageBounds();
+            m_Inclusions[m_Inclusions.Count - 1].IsComplete = true;
         }
 
         /// <summary>
@@ -1222,7 +1195,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The number of inclusions</returns>
         public int GetNumOfInlcusions()
         {
-            return inclusions.Count();
+            return m_Inclusions.Count();
         }
 
         /// <summary>
@@ -1232,7 +1205,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The List of Points</returns>
         public List<Point> GetInclusionPoints(int inclusionNum)
         {
-            return inclusions[inclusionNum].Points;
+            return m_Inclusions[inclusionNum].Points;
         }
 
         # endregion
@@ -1241,21 +1214,21 @@ namespace FeatureAnnotationTool.Model
 
         internal int GetPositionOf(Layer feature)
         {
-            int position = layers.IndexOf(feature);
+            int position = m_Layers.IndexOf(feature);
 
             return position;
         }
 
         internal int GetPositionOf(Cluster feature)
         {
-            int position = clusters.IndexOf(feature);
+            int position = m_Clusters.IndexOf(feature);
 
             return position;
         }
 
         internal int GetPositionOf(Inclusion feature)
         {
-            int position = inclusions.IndexOf(feature);
+            int position = m_Inclusions.IndexOf(feature);
 
             return position;
         }
@@ -1269,13 +1242,13 @@ namespace FeatureAnnotationTool.Model
         {
             List<Layer> layersInGroups = new List<Layer>();
 
-            for(int i=0; i<layers.Count; i++)
+            for(int i=0; i<m_Layers.Count; i++)
             {
                 for (int j = 0; j < groupNames.Count; j++)
                 {
-                    if (layers[i].Group == groupNames[j])
+                    if (m_Layers[i].Group == groupNames[j])
                     {
-                        layersInGroups.Add(layers[i]);
+                        layersInGroups.Add(m_Layers[i]);
                         break;
                     }
                 }
@@ -1293,21 +1266,21 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         public void SetStartDepth()
         {
-            if (selectedFeatureType.Equals("Layer"))
+            if (m_SelectedFeatureType.Equals("Layer"))
             {
-                Layer currentLayer = (Layer)selectedFeature;
-                currentLayer.SetBoreholeStartDepth(sourceStartDepth);
-                Console.WriteLine("In FeaturesList - start depth being added: " + sourceStartDepth);
+                Layer currentLayer = (Layer)m_SelectedFeature;
+                currentLayer.SetBoreholeStartDepth(SourceStartDepth);
+                Console.WriteLine("In FeaturesList - start depth being added: " + SourceStartDepth);
             }
-            else if (selectedFeatureType.Equals("Cluster"))
+            else if (m_SelectedFeatureType.Equals("Cluster"))
             {
-                Cluster currentCluster = (Cluster)selectedFeature;
-                currentCluster.SourceStartDepth = sourceStartDepth;
+                Cluster currentCluster = (Cluster)m_SelectedFeature;
+                currentCluster.SourceStartDepth = SourceStartDepth;
             }
-            else if (selectedFeatureType.Equals("Inclusion"))
+            else if (m_SelectedFeatureType.Equals("Inclusion"))
             {
-                Inclusion currentInclusion = (Inclusion)selectedFeature;
-                currentInclusion.SourceStartDepth = sourceStartDepth;
+                Inclusion currentInclusion = (Inclusion)m_SelectedFeature;
+                currentInclusion.SourceStartDepth = SourceStartDepth;
             }
 
         }
@@ -1321,7 +1294,7 @@ namespace FeatureAnnotationTool.Model
         /// <param name="yPoint">The y position to check</param>
         public void setActiveFeatureType(int xPoint, int yPoint)
         {
-            layerAtCurrentClick = false;
+            LayerAtLastClick = false;
             clusterAtCurrentClick = false;
             inclusionAtCurrentClick = false;
 
@@ -1337,28 +1310,28 @@ namespace FeatureAnnotationTool.Model
             int high, low;
 
             //Check layers
-            for (int i = 0; i < layers.Count; i++)
+            for (int i = 0; i < m_Layers.Count; i++)
             {
-                low = layers[i].GetTopEdgePoints()[xPoint].Y;
-                high = layers[i].GetBottomEdgePoints()[xPoint].Y;
+                low = m_Layers[i].GetTopEdgePoints()[xPoint].Y;
+                high = m_Layers[i].GetBottomEdgePoints()[xPoint].Y;
 
                 if (yPoint > low - 6 && yPoint < high + 6)
                 {
-                    if (selectedFeatureType.Equals("Cluster") && clusters[clusters.Count - 1].IsComplete == false)
+                    if (m_SelectedFeatureType.Equals("Cluster") && m_Clusters[m_Clusters.Count - 1].IsComplete == false)
                     {
-                        clusters.Remove((Cluster)selectedFeature);
+                        m_Clusters.Remove((Cluster)m_SelectedFeature);
                     }
-                    else if (selectedFeatureType.Equals("Inclusion") && inclusions[inclusions.Count - 1].IsComplete == false)
+                    else if (m_SelectedFeatureType.Equals("Inclusion") && m_Inclusions[m_Inclusions.Count - 1].IsComplete == false)
                     {
-                        inclusions.Remove((Inclusion)selectedFeature);
+                        m_Inclusions.Remove((Inclusion)m_SelectedFeature);
                     }
 
                     //Same for inclusion
 
-                    selectedFeatureType = "Layer";
-                    selectedFeature = layers[i];
+                    m_SelectedFeatureType = "Layer";
+                    m_SelectedFeature = m_Layers[i];
 
-                    layerAtCurrentClick = true;
+                    LayerAtLastClick = true;
                 }
             }
         }
@@ -1370,20 +1343,20 @@ namespace FeatureAnnotationTool.Model
         /// <param name="yPoint"></param>
         public bool CheckIfClusterIsAtPoint(int xPoint, int yPoint)
         {
-            for (int i = 0; i < clusters.Count; i++)
+            for (int i = 0; i < m_Clusters.Count; i++)
             {
-                List<Point> clusterPoints = clusters[i].Points;
+                List<Point> clusterPoints = m_Clusters[i].Points;
 
                 if (isPointWithinPolygon(xPoint, yPoint, clusterPoints))
                 {
 
-                    if (selectedFeatureType.Equals("Inclusion") && inclusions[inclusions.Count - 1].IsComplete == false)
+                    if (m_SelectedFeatureType.Equals("Inclusion") && m_Inclusions[m_Inclusions.Count - 1].IsComplete == false)
                     {
-                        inclusions.Remove((Inclusion)selectedFeature);
+                        m_Inclusions.Remove((Inclusion)m_SelectedFeature);
                     }
 
-                    selectedFeatureType = "Cluster";
-                    selectedFeature = clusters[i];
+                    m_SelectedFeatureType = "Cluster";
+                    m_SelectedFeature = m_Clusters[i];
 
                     clusterAtCurrentClick = true;
 
@@ -1391,18 +1364,18 @@ namespace FeatureAnnotationTool.Model
                 }
                 else if (PointsAreNegative(clusterPoints))
                 {
-                    clusterPoints = MoveAllPointsXparameter(clusterPoints, azimuthResolution);
+                    clusterPoints = MoveAllPointsXparameter(clusterPoints, AzimuthResolution);
 
                     if (isPointWithinPolygon(xPoint, yPoint, clusterPoints))
                     {
 
-                        if (selectedFeatureType.Equals("Inclusion") && inclusions[inclusions.Count - 1].IsComplete == false)
+                        if (m_SelectedFeatureType.Equals("Inclusion") && m_Inclusions[m_Inclusions.Count - 1].IsComplete == false)
                         {
-                            inclusions.Remove((Inclusion)selectedFeature);
+                            m_Inclusions.Remove((Inclusion)m_SelectedFeature);
                         }
 
-                        selectedFeatureType = "Cluster";
-                        selectedFeature = clusters[i];
+                        m_SelectedFeatureType = "Cluster";
+                        m_SelectedFeature = m_Clusters[i];
 
                         clusterAtCurrentClick = true;
 
@@ -1411,18 +1384,18 @@ namespace FeatureAnnotationTool.Model
                 }
                 else if (PointsArePositive(clusterPoints))
                 {
-                    clusterPoints = MoveAllPointsXparameter(clusterPoints, -azimuthResolution);
+                    clusterPoints = MoveAllPointsXparameter(clusterPoints, -AzimuthResolution);
 
                     if (isPointWithinPolygon(xPoint, yPoint, clusterPoints))
                     {
 
-                        if (selectedFeatureType.Equals("Inclusion") && inclusions[inclusions.Count - 1].IsComplete == false)
+                        if (m_SelectedFeatureType.Equals("Inclusion") && m_Inclusions[m_Inclusions.Count - 1].IsComplete == false)
                         {
-                            inclusions.Remove((Inclusion)selectedFeature);
+                            m_Inclusions.Remove((Inclusion)m_SelectedFeature);
                         }
 
-                        selectedFeatureType = "Cluster";
-                        selectedFeature = clusters[i];
+                        m_SelectedFeatureType = "Cluster";
+                        m_SelectedFeature = m_Clusters[i];
 
                         clusterAtCurrentClick = true;
                         
@@ -1449,7 +1422,7 @@ namespace FeatureAnnotationTool.Model
         {
             for (int i = 0; i < points.Count; i++)
             {
-                if (points[i].X >= azimuthResolution)
+                if (points[i].X >= AzimuthResolution)
                     return true;
             }
 
@@ -1470,19 +1443,19 @@ namespace FeatureAnnotationTool.Model
 
         public bool checkIfInclusionIsAtPoint(int xPoint, int yPoint)
         {
-            for (int i = 0; i < inclusions.Count; i++)
+            for (int i = 0; i < m_Inclusions.Count; i++)
             {
-                List<Point> inclusionPoints = inclusions[i].Points;
+                List<Point> inclusionPoints = m_Inclusions[i].Points;
 
                 if (isPointWithinPolygon(xPoint, yPoint, inclusionPoints))
                 {
-                    if (selectedFeatureType.Equals("Cluster") && clusters[clusters.Count - 1].IsComplete == false)
+                    if (m_SelectedFeatureType.Equals("Cluster") && m_Clusters[m_Clusters.Count - 1].IsComplete == false)
                     {
-                        clusters.Remove((Cluster)selectedFeature);
+                        m_Clusters.Remove((Cluster)m_SelectedFeature);
                     }
 
-                    selectedFeatureType = "Inclusion";
-                    selectedFeature = inclusions[i];
+                    m_SelectedFeatureType = "Inclusion";
+                    m_SelectedFeature = m_Inclusions[i];
 
                     inclusionAtCurrentClick = true;
 
@@ -1490,17 +1463,17 @@ namespace FeatureAnnotationTool.Model
                 }
                 else if (PointsAreNegative(inclusionPoints))
                 {
-                    inclusionPoints = MoveAllPointsXparameter(inclusionPoints, azimuthResolution);
+                    inclusionPoints = MoveAllPointsXparameter(inclusionPoints, AzimuthResolution);
 
                     if (isPointWithinPolygon(xPoint, yPoint, inclusionPoints))
                     {
-                        if (selectedFeatureType.Equals("Cluster") && clusters[clusters.Count - 1].IsComplete == false)
+                        if (m_SelectedFeatureType.Equals("Cluster") && m_Clusters[m_Clusters.Count - 1].IsComplete == false)
                         {
-                            clusters.Remove((Cluster)selectedFeature);
+                            m_Clusters.Remove((Cluster)m_SelectedFeature);
                         }
 
-                        selectedFeatureType = "Inclusion";
-                        selectedFeature = inclusions[i];
+                        m_SelectedFeatureType = "Inclusion";
+                        m_SelectedFeature = m_Inclusions[i];
 
                         inclusionAtCurrentClick = true;
 
@@ -1509,17 +1482,17 @@ namespace FeatureAnnotationTool.Model
                 }
                 else if (PointsArePositive(inclusionPoints))
                 {
-                    inclusionPoints = MoveAllPointsXparameter(inclusionPoints, -azimuthResolution);
+                    inclusionPoints = MoveAllPointsXparameter(inclusionPoints, -AzimuthResolution);
 
                     if (isPointWithinPolygon(xPoint, yPoint, inclusionPoints))
                     {
-                        if (selectedFeatureType.Equals("Cluster") && clusters[clusters.Count - 1].IsComplete == false)
+                        if (m_SelectedFeatureType.Equals("Cluster") && m_Clusters[m_Clusters.Count - 1].IsComplete == false)
                         {
-                            clusters.Remove((Cluster)selectedFeature);
+                            m_Clusters.Remove((Cluster)m_SelectedFeature);
                         }
 
-                        selectedFeatureType = "Inclusion";
-                        selectedFeature = inclusions[i];
+                        m_SelectedFeatureType = "Inclusion";
+                        m_SelectedFeature = m_Inclusions[i];
 
                         inclusionAtCurrentClick = true;
 
@@ -1581,7 +1554,7 @@ namespace FeatureAnnotationTool.Model
 
         public void SetLayers(List<Layer> layers)
         {
-            this.layers = layers;
+            this.m_Layers = layers;
 
             for (int i = 0; i < layers.Count; i++)
             {
@@ -1598,7 +1571,7 @@ namespace FeatureAnnotationTool.Model
 
         public void SetClusters(List<Cluster> clusters)
         {
-            this.clusters = clusters;
+            this.m_Clusters = clusters;
             
             for (int i = 0; i < clusters.Count; i++)
             {
@@ -1615,7 +1588,7 @@ namespace FeatureAnnotationTool.Model
 
         public void SetInclusions(List<Inclusion> inclusions)
         {
-            this.inclusions = inclusions;
+            this.m_Inclusions = inclusions;
 
             for (int i = 0; i < inclusions.Count; i++)
             {
@@ -1634,9 +1607,9 @@ namespace FeatureAnnotationTool.Model
         {
             this.allLayerGroups = allGroups;
 
-            for (int i = 0; i < layers.Count; i++)
+            for (int i = 0; i < m_Layers.Count; i++)
             {
-                layers[i].SetAllGroupNames(allGroups);
+                m_Layers[i].SetAllGroupNames(allGroups);
             }
         }
 
@@ -1644,9 +1617,9 @@ namespace FeatureAnnotationTool.Model
         {
             this.allClusterGroups = allGroups;
 
-            for (int i = 0; i < clusters.Count; i++)
+            for (int i = 0; i < m_Clusters.Count; i++)
             {
-                clusters[i].SetAllGroupNames(allGroups);
+                m_Clusters[i].SetAllGroupNames(allGroups);
             }
         }
 
@@ -1654,9 +1627,9 @@ namespace FeatureAnnotationTool.Model
         {
             this.allInclusionGroups = allGroups;
 
-            for (int i = 0; i < inclusions.Count; i++)
+            for (int i = 0; i < m_Inclusions.Count; i++)
             {
-                inclusions[i].SetAllGroupNames(allGroups);
+                m_Inclusions[i].SetAllGroupNames(allGroups);
             }
         }
 
@@ -1684,12 +1657,12 @@ namespace FeatureAnnotationTool.Model
 
         internal void ChangeSelectedFeaturesGroup(string group)
         {
-            if(selectedFeatureType == "Layer")
-                ((Layer)selectedFeature).Group = group;
-            else if (selectedFeatureType == "Cluster")
-                ((Cluster)selectedFeature).Group = group;
-            else if (selectedFeatureType == "Inclusion")
-                ((Inclusion)selectedFeature).Group = group;
+            if(m_SelectedFeatureType == "Layer")
+                ((Layer)m_SelectedFeature).Group = group;
+            else if (m_SelectedFeatureType == "Cluster")
+                ((Cluster)m_SelectedFeature).Group = group;
+            else if (m_SelectedFeatureType == "Inclusion")
+                ((Inclusion)m_SelectedFeature).Group = group;
         }
     }
 }

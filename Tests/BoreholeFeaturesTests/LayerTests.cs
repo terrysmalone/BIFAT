@@ -20,14 +20,14 @@ namespace BoreholeFeaturesTests
 
             var layerTypeSelector = new LayerTypeSelector("Borehole");
 
-            var testLayer = layerTypeSelector.setUpLayer(firstDepth, 
-                                                         firstAmplitude, 
-                                                         firstAzimuth, 
-                                                         secondDepth, 
-                                                         secondAmplitude, 
-                                                         secondAzimuth, 
-                                                         azimuthResolution: 360, 
-                                                         depthResolution: 1);
+            var testLayer = (BoreholeLayer)layerTypeSelector.setUpLayer(firstDepth, 
+                                                                        firstAmplitude, 
+                                                                        firstAzimuth, 
+                                                                        secondDepth, 
+                                                                        secondAmplitude, 
+                                                                        secondAzimuth, 
+                                                                        azimuthResolution: 360, 
+                                                                        depthResolution: 1);
 
             Assert.That(testLayer.TopEdgeDepth, Is.EqualTo(firstDepth));
             Assert.That(testLayer.BottomEdgeDepth, Is.EqualTo(secondDepth));
@@ -68,14 +68,14 @@ namespace BoreholeFeaturesTests
 
             var layerTypeSelector = new LayerTypeSelector("Borehole");
 
-            var testLayer = layerTypeSelector.setUpLayer(firstDepth, 
-                                                         firstAmplitude, 
-                                                         firstAzimuth, 
-                                                         secondDepth, 
-                                                         secondAmplitude, 
-                                                         secondAzimuth, 
-                                                         360, 
-                                                         1);
+            var testLayer = (BoreholeLayer)layerTypeSelector.setUpLayer(firstDepth, 
+                                                                        firstAmplitude, 
+                                                                        firstAzimuth, 
+                                                                        secondDepth, 
+                                                                        secondAmplitude, 
+                                                                        secondAzimuth, 
+                                                                        360, 
+                                                                        1);
             
             testLayer.SetBoreholeStartDepth(300);
 
@@ -185,7 +185,7 @@ namespace BoreholeFeaturesTests
 
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
 
-            var testLayer = layerTypeSelector.setUpLayer(100, 10, 360, 200, 10, 360, 720, 1);
+            var testLayer = (BoreholeLayer)layerTypeSelector.setUpLayer(100, 10, 360, 200, 10, 360, 720, 1);
 
             testLayer.ChangeBottomAmplitudeBy(10);
             DateTime timeLastModifiedTimeStamp = DateTime.Now;
@@ -243,7 +243,7 @@ namespace BoreholeFeaturesTests
 
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
 
-            var testLayer = layerTypeSelector.setUpLayer(firstDepth, firstAmplitude, firstAzimuth, secondDepth, secondAmplitude, secondAzimuth, 360, 1);
+            var testLayer = (BoreholeLayer)layerTypeSelector.setUpLayer(firstDepth, firstAmplitude, firstAzimuth, secondDepth, secondAmplitude, secondAzimuth, 360, 1);
 
             Assert.IsTrue(testLayer.TopSineAmplitude == 15, "First amplitude should now be 15.  It is " + testLayer.TopSineAmplitude);
             Assert.IsTrue(testLayer.BottomSineAmplitude == 13, "First amplitude should now be 13.  It is " + testLayer.BottomSineAmplitude);
@@ -273,7 +273,14 @@ namespace BoreholeFeaturesTests
 
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
 
-            var testLayer = layerTypeSelector.setUpLayer(firstDepth, firstAmplitude, firstAzimuth, secondDepth, secondAmplitude, secondAzimuth, 360, 1);
+            var testLayer = (BoreholeLayer)layerTypeSelector.setUpLayer(firstDepth, 
+                                                                        firstAmplitude, 
+                                                                        firstAzimuth, 
+                                                                        secondDepth, 
+                                                                        secondAmplitude, 
+                                                                        secondAzimuth, 
+                                                                        360, 
+                                                                        1);
 
             Assert.IsTrue(testLayer.TopEdgeDepth == 210, "First depth should be 210");
             Assert.IsTrue(testLayer.BottomEdgeDepth == 510, "First depth should be 510");
@@ -319,7 +326,14 @@ namespace BoreholeFeaturesTests
 
             LayerTypeSelector layerTypeSelector = new LayerTypeSelector("Borehole");
 
-            var testLayer = layerTypeSelector.setUpLayer(firstDepth, firstAmplitude, firstAzimuth, secondDepth, secondAmplitude, secondAzimuth, 720, 2);
+            var testLayer = (BoreholeLayer)layerTypeSelector.setUpLayer(firstDepth, 
+                                                                        firstAmplitude, 
+                                                                        firstAzimuth, 
+                                                                        secondDepth, 
+                                                                        secondAmplitude, 
+                                                                        secondAzimuth, 
+                                                                        720, 
+                                                                        2);
 
             Assert.IsTrue(testLayer.TopEdgeDepth == 210, "First depth should be 210");
             Assert.IsTrue(testLayer.BottomEdgeDepth == 510, "First depth should be 510");

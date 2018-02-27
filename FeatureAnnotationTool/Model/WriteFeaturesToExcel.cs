@@ -218,31 +218,51 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Top sine azimuth"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopSineAzimuth));
+                    addCell(layersCells, 
+                            row, 
+                            currentColumn, 
+                            Convert.ToString(((BoreholeLayer)layers[i]).TopSineAzimuth));
+
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Top sine amplitude (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopSineAmplitudeInMm));
+                    addCell(layersCells, 
+                            row, 
+                            currentColumn, 
+                            Convert.ToString(((BoreholeLayer)layers[i]).TopSineAmplitudeInMm));
+
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Bottom sine depth (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeDepthMm));
+                    addCell(layersCells, 
+                            row, 
+                            currentColumn, 
+                            Convert.ToString(layers[i].BottomEdgeDepthMm));
+
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Bottom sine azimuth"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomSineAzimuth));
+                    addCell(layersCells, 
+                            row, 
+                            currentColumn, 
+                            Convert.ToString(((BoreholeLayer)layers[i]).BottomSineAzimuth));
+
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Bottom sine amplitude (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomSineAmplitudeInMm));
+                    addCell(layersCells, 
+                            row, 
+                            currentColumn, 
+                            Convert.ToString(((BoreholeLayer)layers[i]).BottomSineAmplitudeInMm));
+
                     currentColumn++;
                 }
 
@@ -252,25 +272,25 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Top edge intercept (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopEdgeInterceptMm));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(((CoreLayer)layers[i]).TopEdgeInterceptMm));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Top edge slope"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].TopEdgeSlope));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(((CoreLayer)layers[i]).TopEdgeSlope));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Bottom edge intercept (mm)"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeInterceptMm));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(((CoreLayer)layers[i]).BottomEdgeInterceptMm));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Bottom edge slope"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].BottomEdgeSlope));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(((CoreLayer)layers[i]).BottomEdgeSlope));
                     currentColumn++;
                 }
 
@@ -278,25 +298,25 @@ namespace FeatureAnnotationTool.Model
 
                 if (layerPropertiesToInclude.Contains("Group"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].Group));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(layers[i].Group));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Layer type"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].LayerType));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(layers[i].LayerType));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Layer description"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].Description));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(layers[i].Description));
                     currentColumn++;
                 }
 
                 if (layerPropertiesToInclude.Contains("Layer quality"))
                 {
-                    addCell(layersCells, row, currentColumn, System.Convert.ToString(layers[i].Quality));
+                    addCell(layersCells, row, currentColumn, Convert.ToString(layers[i].Quality));
                     currentColumn++;
                 }
 

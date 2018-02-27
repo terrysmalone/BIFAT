@@ -14,30 +14,17 @@ namespace BoreholeFeatures
     /// </summary>
     internal class LayerLine
     {
-        private int intercept;
-        private double slope;
         private int sourceAzimuthResolution;
 
-        private List<Point> linePoints = new List<Point>();
+#region properties
 
-        #region properties
+        public List<Point> Points { get; } = new List<Point>();
 
-        public List<Point> Points
-        {
-            get { return linePoints; }
-        }
+        public int Intercept { get; private set; }
 
-        public int Intercept
-        {
-            get { return intercept; }
-        }
+        public double Slope { get; private set; }
 
-        public double Slope
-        {
-            get { return slope; }
-        }
-
-        #endregion properties
+#endregion properties
 
         #region constructor
 
@@ -50,12 +37,12 @@ namespace BoreholeFeatures
         {
             this.sourceAzimuthResolution = sourceAzimuthResolution;
 
-            slope = (double)(point1.Y - point2.Y) / (double)(point1.X - point2.X);
+            Slope = (double)(point1.Y - point2.Y) / (double)(point1.X - point2.X);
 
             //intercept = y - (slope*x)
-            double interceptDouble = point1.Y - (slope * point1.X);
+            double interceptDouble = point1.Y - (Slope * point1.X);
 
-            intercept = (int)Math.Round(interceptDouble, MidpointRounding.AwayFromZero);
+            Intercept = (int)Math.Round(interceptDouble, MidpointRounding.AwayFromZero);
 
             CalculatePoints();
         }
@@ -68,8 +55,8 @@ namespace BoreholeFeatures
         public LayerLine(double slope, int intercept, int sourceAzimuthResolution)
         {
             this.sourceAzimuthResolution = sourceAzimuthResolution;
-            this.intercept = intercept;
-            this.slope = slope;
+            this.Intercept = intercept;
+            this.Slope = slope;
 
             CalculatePoints();
         }
@@ -81,15 +68,15 @@ namespace BoreholeFeatures
         /// </summary>
         public void CalculatePoints()
         {
-            linePoints.Clear();
+            Points.Clear();
             int xPoint, yPoint; 
 
             for (int i = 0; i < sourceAzimuthResolution; i++)
             {
                 xPoint = i;
-                yPoint = (int)Math.Round(intercept + ((double)slope * (double)xPoint));
+                yPoint = (int)Math.Round(Intercept + ((double)Slope * (double)xPoint));
 
-                linePoints.Add(new Point(xPoint, yPoint));
+                Points.Add(new Point(xPoint, yPoint));
             }
         } 
         
@@ -102,7 +89,7 @@ namespace BoreholeFeatures
         /// <returns></returns>
         public int GetY(int atX)
         {
-            int y = (int)linePoints[atX].Y;
+            int y = (int)Points[atX].Y;
             return y;
         }
 
@@ -110,8 +97,8 @@ namespace BoreholeFeatures
 
         public void Change(double slope, int intercept)
         {
-            this.slope = slope;
-            this.intercept = intercept;
+            this.Slope = slope;
+            this.Intercept = intercept;
 
             CalculatePoints();
         }

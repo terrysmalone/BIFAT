@@ -6,42 +6,50 @@ namespace BoreholeFeatures
 {
     public sealed class CoreLayer : Layer
     {
-        public int TopEdgeIntercept => TopEdgeInterceptMm;
+        public int TopEdgeInterceptMm => Convert.ToInt32(TopEdgeIntercept
+                                                         * (double)m_DepthResolution
+                                                         + m_SourceStartDepth);
 
-        public double TopEdgeSlope => TopEdgeSlope;
+        public int BottomEdgeInterceptMm => Convert.ToInt32(TopEdgeIntercept
+                                                            * (double)m_DepthResolution
+                                                            + m_SourceStartDepth);
 
-        public int BottomEdgeIntercept => BottomEdgeInterceptMm;
-        
-        public double BottomEdgeSlope => BottomEdgeSlope;
+        public int TopEdgeIntercept { get; private set; }
 
-        //private int topEdgeIntercept, bottomEdgeIntercept;
-        //private double topEdgeSlope, bottomEdgeSlope;
+        public double TopEdgeSlope { get; private set; }
 
-        private LayerLine topLine;
-        private LayerLine bottomLine;
+        public int BottomEdgeIntercept { get; private set; }
 
-        //private List<Point> topLinePoints;
-        //private List<Point> bottomLinePoints;
-        
-        public CoreLayer(double firstSlope, int firstIntercept, double secondSlope, int secondIntercept, int sourceAzimuthResolution, int depthResolution)
+        public double BottomEdgeSlope { get; private set; }
+
+        private readonly LayerLine m_TopLine;
+        private readonly LayerLine m_BottomLine;
+
+
+        public CoreLayer(double firstSlope, 
+                         int firstIntercept, 
+                         double secondSlope, 
+                         int secondIntercept, 
+                         int sourceAzimuthResolution, 
+                         int depthResolution)
         {
-            this.topDepthPixels = firstIntercept;
-            this.bottomDepthPixels = secondIntercept;
+            m_TopDepthPixels = firstIntercept;
+            m_BottomDepthPixels = secondIntercept;
 
-            this.depthResolution = depthResolution;
-            this.sourceAzimuthResolution = sourceAzimuthResolution;
+            this.m_DepthResolution = depthResolution;
+            this.m_SourceAzimuthResolution = sourceAzimuthResolution;
 
-            topLine = new LayerLine(firstSlope, firstIntercept, sourceAzimuthResolution);
-            bottomLine = new LayerLine(secondSlope, secondIntercept, sourceAzimuthResolution);
+            m_TopLine = new LayerLine(firstSlope, firstIntercept, sourceAzimuthResolution);
+            m_BottomLine = new LayerLine(secondSlope, secondIntercept, sourceAzimuthResolution);
 
-            topEdgeIntercept = topLine.Intercept;
-            topEdgeSlope = topLine.Slope;
+            TopEdgeIntercept = m_TopLine.Intercept;
+            TopEdgeSlope = m_TopLine.Slope;
 
-            bottomEdgeIntercept = bottomLine.Intercept;
-            bottomEdgeSlope = bottomLine.Slope;
+            BottomEdgeIntercept = m_BottomLine.Intercept;
+            BottomEdgeSlope = m_BottomLine.Slope;
 
-            timeAdded = DateTime.Now;
-            timeLastModified = DateTime.Now;
+            m_TimeAdded = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
 
             CalculateStartY();
             CalculateEndY();
@@ -55,23 +63,23 @@ namespace BoreholeFeatures
         /// <param name="yMoveBy">The amount to move along the y-axis in pixels</param>
         public override void MoveEdge(int edgeToMove, int xMoveBy, int yMoveBy)
         {
-            if (edgeToMove == FIRST_EDGE)
+            if (edgeToMove == m_FirstEdge)
             {
                 //Will not let the layer move below the second edge
-                if (topDepthPixels + yMoveBy <= bottomDepthPixels)
+                if (m_TopDepthPixels + yMoveBy <= m_BottomDepthPixels)
                 {
                     MoveTopEdge(xMoveBy, yMoveBy);
                 }
             }
-            else if (edgeToMove == SECOND_EDGE)
+            else if (edgeToMove == m_SecondEdge)
             {
                 //Will not let it move above the first edge
-                if (bottomDepthPixels + yMoveBy >= topDepthPixels)
+                if (m_BottomDepthPixels + yMoveBy >= m_TopDepthPixels)
                 {
                     MoveBottomEdge(xMoveBy, yMoveBy);
                 }
             }
-            else if (edgeToMove == BOTH_EDGES)
+            else if (edgeToMove == m_BothEdges)
             {
                 MoveTopEdge(xMoveBy, yMoveBy);
                 MoveBottomEdge(xMoveBy, yMoveBy);
@@ -80,143 +88,92 @@ namespace BoreholeFeatures
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
         private void MoveBottomEdge(int xMoveBy, int yMoveBy)
         {
             //Point point = new Point(bottomLine.Points[0].X + xMoveBy, bottomLine.Points[0].Y + yMoveBy);
-            Point point = new Point(0 + xMoveBy, bottomEdgeIntercept + yMoveBy);
+            Point point = new Point(0 + xMoveBy, BottomEdgeIntercept + yMoveBy);
 
-            bottomEdgeIntercept = (int)Math.Round(point.Y - (bottomEdgeSlope * (double)point.X));
-            bottomLine.Change(bottomLine.Slope, bottomEdgeIntercept);
+            BottomEdgeIntercept = (int)Math.Round(point.Y - (BottomEdgeSlope * (double)point.X));
+            m_BottomLine.Change(m_BottomLine.Slope, BottomEdgeIntercept);
 
             //Effectively the same value topDepthPixels is used for borehole layer but added here to avoid errors
-            bottomDepthPixels = bottomLine.Intercept;
-            bottomEdgeIntercept = bottomLine.Intercept;
+            m_BottomDepthPixels = m_BottomLine.Intercept;
+            BottomEdgeIntercept = m_BottomLine.Intercept;
 
-            bottomEdgeSlope = bottomLine.Slope;
+            BottomEdgeSlope = m_BottomLine.Slope;
         }
 
         private void MoveTopEdge(int xMoveBy, int yMoveBy)
         {    
-            Point point = new Point(0 + xMoveBy, topEdgeIntercept + yMoveBy);
+            Point point = new Point(0 + xMoveBy, TopEdgeIntercept + yMoveBy);
 
-            topEdgeIntercept = (int)Math.Round(point.Y - (topEdgeSlope * (double)point.X));
-            topLine.Change(topLine.Slope, topEdgeIntercept);
+            TopEdgeIntercept = (int)Math.Round(point.Y - (TopEdgeSlope * (double)point.X));
+            m_TopLine.Change(m_TopLine.Slope, TopEdgeIntercept);
             
             //Effectively the same value topDepthPixels is used for borehole layer but added here to avoid errors
-            topDepthPixels = topLine.Intercept;    
-            topEdgeIntercept = topLine.Intercept;
+            m_TopDepthPixels = m_TopLine.Intercept;    
+            TopEdgeIntercept = m_TopLine.Intercept;
 
-            topEdgeSlope = topLine.Slope;
+            TopEdgeSlope = m_TopLine.Slope;
         }
 
-        public override void ChangeTopAmplitudeBy(int amount)
+        public void SetTopEdgeSlope(double firstEdgeSlope)
         {
-            //Not implementable in core layer
-            //throw new NotImplementedException();
-        }
+            TopEdgeSlope = firstEdgeSlope;
 
-        public override void ChangeBottomAmplitudeBy(int amount)
-        {
-            //Not implementable in core layer
-            //throw new NotImplementedException();
-        }
-
-        # region set methods
-
-        public override void SetTopEdgeDepth(int topDepthPixels)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override void SetTopSineAzimuth(int topAzimuth)
-        {
-            //Not implementable in core layer
-            //throw new NotImplementedException();
-        }
-
-        public override void SetTopSineAmplitude(int topAmplitude)
-        {
-            //Not implementable in core layer
-            //throw new NotImplementedException();
-        }
-
-        public override void SetBottomEdgeDepth(int bottomDepthPixels)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override void SetBottomSineAzimuth(int bottomtopAzimuth)
-        {
-            //Not implementable in core layer
-            //throw new NotImplementedException();
-        }
-
-        public override void SetBottomSineAmplitude(int bottomAmplitude)
-        {
-            //Not implementable in core layer
-            //throw new NotImplementedException();
-        }
-
-        public override void SetTopEdgeSlope(double firstEdgeSlope)
-        {
-            this.topEdgeSlope = firstEdgeSlope;
-
-            topLine.Change(topEdgeSlope, topLine.Intercept);
-            topLine.CalculatePoints();
+            m_TopLine.Change(TopEdgeSlope, m_TopLine.Intercept);
+            m_TopLine.CalculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetTopEdgeIntercept(int firstEdgeIntercept)
+        public void SetTopEdgeIntercept(int firstEdgeIntercept)
         {
-            this.topEdgeIntercept = firstEdgeIntercept;
+            this.TopEdgeIntercept = firstEdgeIntercept;
 
-            topLine.Change(topLine.Slope, topEdgeIntercept);
+            m_TopLine.Change(m_TopLine.Slope, TopEdgeIntercept);
             
-            topLine.CalculatePoints();
+            m_TopLine.CalculatePoints();
             
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetBottomEdgeSlope(double secondEdgeSlope)
+        public void SetBottomEdgeSlope(double secondEdgeSlope)
         {
-            this.bottomEdgeSlope = secondEdgeSlope;
+            this.BottomEdgeSlope = secondEdgeSlope;
 
-            bottomLine.Change(bottomEdgeSlope, bottomLine.Intercept);
+            m_BottomLine.Change(BottomEdgeSlope, m_BottomLine.Intercept);
             
-            bottomLine.CalculatePoints();
+            m_BottomLine.CalculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
 
-        public override void SetBottomEdgeIntercept(int secondEdgeIntercept)
+        public void SetBottomEdgeIntercept(int secondEdgeIntercept)
         {
-            this.bottomEdgeIntercept = secondEdgeIntercept;
+            this.BottomEdgeIntercept = secondEdgeIntercept;
 
-            bottomLine.Change(bottomLine.Slope, bottomEdgeIntercept);
-
-            //topLine.CalculatePoints();
-            bottomLine.CalculatePoints();
+            m_BottomLine.Change(m_BottomLine.Slope, BottomEdgeIntercept);
+            
+            m_BottomLine.CalculatePoints();
 
             CalculateStartY();
             CalculateEndY();
 
-            timeLastModified = DateTime.Now;
+            m_TimeLastModified = DateTime.Now;
         }
-
-        # endregion
 
         # region Get methods
 
@@ -227,7 +184,7 @@ namespace BoreholeFeatures
         /// <returns></returns>
         public override int GetTopYPoint(int xPoint)
         {
-            return topLine.GetY(xPoint);
+            return m_TopLine.GetY(xPoint);
         }
 
         /// <summary>
@@ -235,19 +192,19 @@ namespace BoreholeFeatures
         /// </summary>
         /// <param name="xPoint"></param>
         /// <returns></returns>
-        public override int getBottomYPoint(int xPoint)
+        public override int GetBottomYPoint(int xPoint)
         {
-            return bottomLine.GetY(xPoint);
+            return m_BottomLine.GetY(xPoint);
         }
 
-        private double GetTopEdgeSlopeMM()
+        private double GetTopEdgeSlopeMm()
         {
-            return topEdgeSlope * (double)depthResolution;
+            return TopEdgeSlope * (double)m_DepthResolution;
         }
 
-        private double GetBottomEdgeSlopeMM()
+        private double GetBottomEdgeSlopeMm()
         {
-            return bottomEdgeSlope * (double)depthResolution;
+            return BottomEdgeSlope * (double)m_DepthResolution;
         }
 
         /// <summary>
@@ -267,27 +224,34 @@ namespace BoreholeFeatures
         /// Group                       - The group the layer belongs to
         /// </summary>
         /// <returns>The layer's details</returns>
-        public override String GetDetails()
+        public override string GetDetails()
         {
-            String details;
-
             //Remove commas from the description
-            description = description.Replace(',', ' ');
+            m_Description = m_Description.Replace(',', ' ');
 
             //Get the layer properties
             WriteLayerProperties();
 
-            details = layerStartY + "," + layerEndY + "," + topEdgeIntercept + "," + topEdgeSlope + "," + bottomEdgeIntercept + "," + bottomEdgeSlope + "," + layerType + "," + description + "," + quality + "," + timeAdded + "," + timeLastModified + "," + Group;
-
-            return details;
+            return m_LayerStartY + "," + 
+                   m_LayerEndY + "," + 
+                   TopEdgeIntercept + "," + 
+                   TopEdgeSlope + "," + 
+                   BottomEdgeIntercept + "," + 
+                   BottomEdgeSlope + "," + 
+                   m_LayerType + "," + 
+                   m_Description + "," + 
+                   m_Quality + "," + 
+                   m_TimeAdded + "," + 
+                   m_TimeLastModified + "," + 
+                   Group;
         }
 
         public override int GetNumOfEdges()
         {
-            if (topEdgeIntercept == bottomEdgeIntercept && topEdgeSlope == bottomEdgeSlope)
+            if (TopEdgeIntercept == BottomEdgeIntercept && TopEdgeSlope == BottomEdgeSlope)
                 return 1;
-            else
-                return 2;
+
+            return 2;
         }
 
         /// <summary>
@@ -296,7 +260,7 @@ namespace BoreholeFeatures
         /// <returns>A List of the points along the first edge</returns>
         public override List<Point> GetTopEdgePoints()
         {
-            return topLine.Points;
+            return m_TopLine.Points;
         }
 
         /// <summary>
@@ -305,7 +269,7 @@ namespace BoreholeFeatures
         /// <returns>A List of the points along the second edge</returns>
         public override List<Point> GetBottomEdgePoints()
         {
-            return bottomLine.Points;
+            return m_BottomLine.Points;
         }
 
         # endregion

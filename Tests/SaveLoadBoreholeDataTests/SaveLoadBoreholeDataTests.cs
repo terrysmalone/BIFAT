@@ -468,7 +468,7 @@ namespace SaveLoadBoreholeDataTests
 
             Assert.IsTrue(returnedLayers.Count == 3, "There should be 3 returned layers. There are " + returnedLayers.Count);
 
-            Assert.IsTrue(returnedLayers[0].BottomSineAzimuth == 110, "Bottom sine azimuth should be 110. It is " + returnedLayers[0].BottomSineAzimuth);
+            Assert.IsTrue(((BoreholeLayer)returnedLayers[0]).BottomSineAzimuth == 110, "Bottom sine azimuth should be 110. It is " + ((BoreholeLayer)returnedLayers[0]).BottomSineAzimuth);
             Assert.IsTrue(returnedLayers[0].TopEdgeDepth == 100, "Top depth should be 100. It is " + returnedLayers[0].TopEdgeDepth);
 
             Assert.IsTrue(returnedLayers[1].TopEdgeDepth == 300, "Top depth should be 300. It is " + returnedLayers[1].TopEdgeDepth);
@@ -483,7 +483,7 @@ namespace SaveLoadBoreholeDataTests
 
             Assert.IsTrue(returnedLayers.Count == 2, "There should be 2 returned layers. There are " + returnedLayers.Count);
 
-            Assert.IsTrue(returnedLayers[0].BottomSineAzimuth == 110, "Bottom sine azimuth should be 110. It is " + returnedLayers[0].BottomSineAzimuth);
+            Assert.IsTrue(((BoreholeLayer)returnedLayers[0]).BottomSineAzimuth == 110, "Bottom sine azimuth should be 110. It is " + ((BoreholeLayer)returnedLayers[0]).BottomSineAzimuth);
             Assert.IsTrue(returnedLayers[0].TopEdgeDepth == 100, "Top depth should be 100. It is " + returnedLayers[0].TopEdgeDepth);
 
             Assert.IsTrue(returnedLayers[1].TopEdgeDepth == 1, "Top depth should be 1. It is " + returnedLayers[1].TopEdgeDepth);
