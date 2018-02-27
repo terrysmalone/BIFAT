@@ -70,7 +70,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The ffeature type</returns>
         public string SelectedFeatureType
         {
-            get { return features.SelectedType; }
+            get { return features.SelectedFeatureType; }
         }
 
         /// <summary>
@@ -99,30 +99,22 @@ namespace FeatureAnnotationTool.Model
         /// Returns the azimuth of the selected layers top (lowest y value) sine 
         /// </summary>
         /// <returns>The azimuth of the layers top sine</returns>
-        public int TopAzimuthOfSelectedLayer
+        public int GetTopAzimuthOfSelectedLayer()
         {
-            get
-            {
-                if (features.SelectedType.Equals("Layer"))
-                    return features.TopAzimuthOfSelectedLayer;
-                else
-                    return 0;
-            }
+                return features.SelectedFeatureType.Equals("Layer") 
+                    ? features.GetTopAzimuthOfSelectedLayer() 
+                    : 0;
         }
 
         /// <summary>
         /// Returns the azimuth of the selected layers bottom (highest y value) sine 
         /// </summary>
         /// <returns>The azimuth of the layers bottom sine</returns>
-        public int BottomAzimuthOfSelectedLayer
+        public int GetBottomAzimuthOfSelectedLayer()
         {
-            get
-            {
-                if (features.SelectedType.Equals("Layer"))
-                    return features.BottomAzimuthOfSelectedLayer;
-                else
-                    return 0;
-            }
+            return features.SelectedFeatureType.Equals("Layer") 
+                ? features.GetBottomAzimuthOfSelectedLayer() 
+                : 0;
         }
 
         /// <summary>
@@ -131,7 +123,7 @@ namespace FeatureAnnotationTool.Model
         /// <returns>The feature type</returns>
         public string CurrentFeatureType
         {
-            get { return features.SelectedType; }
+            get { return features.SelectedFeatureType; }
         }
 
         /// <summary>
@@ -279,7 +271,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Method which opens A .HED and .OTV file and gets the required information from it
         /// </summary>
-        public void OpenOTVFile(string fileName)
+        public void OpenOtvFile(string fileName)
         {
             Cursor.Current = Cursors.WaitCursor;
             type = "Borehole";
@@ -807,7 +799,7 @@ namespace FeatureAnnotationTool.Model
             }
         }
 
-        public Bitmap getWholeBoreholeImage()
+        public Bitmap GetWholeBoreholeImage()
         {
             return tiler.GetWholeBoreholeImage();
         }
@@ -1034,9 +1026,9 @@ namespace FeatureAnnotationTool.Model
         /// Writes a .war file containing all layers for use in WellCAD as a structure log
         /// </summary>
         /// <param name="fileName"></param>
-        public void WriteLayersForWellCAD(string fileName)
+        public void WriteLayersForWellCad(string fileName)
         {
-            features.WriteLayersForWellCAD(fileName);
+            features.WriteLayersForWellCad(fileName);
         }
 
         public void WriteClustersToText(string fileName, List<string> clusterPropertiesToInclude)
@@ -1693,7 +1685,7 @@ namespace FeatureAnnotationTool.Model
 
         # region save features methods
 
-        public void saveFeatures()
+        public void SaveFeatures()
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -1815,7 +1807,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Deletes the current feature
         /// </summary>
-        public void deleteCurrentFeature()
+        public void DeleteCurrentFeature()
         {
             features.DeleteActiveFeature();
         }
@@ -1823,7 +1815,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Calls the features method which deselects the currently selected feature
         /// </summary>
-        public void deSelectFeature()
+        public void DeSelectFeature()
         {
             if (features.SelectedFeature != null)
                 features.DeSelectFeature();
@@ -1834,14 +1826,14 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="movingPoint">The point position before move</param>
         /// <param name="destination">The point position after move</param>
-        public void movePoint(Point movingPoint, Point destination)
+        public void MovePoint(Point movingPoint, Point destination)
         {
-            if (features.SelectedType.Equals("Cluster"))
+            if (features.SelectedFeatureType.Equals("Cluster"))
             {
                 Cluster currentCluster = (Cluster)features.SelectedFeature;
                 currentCluster.MovePoint(movingPoint, destination);
             }
-            else if (features.SelectedType.Equals("Inclusion"))
+            else if (features.SelectedFeatureType.Equals("Inclusion"))
             {
                 Inclusion currentInclusion = (Inclusion)features.SelectedFeature;
                 currentInclusion.MovePoint(movingPoint, destination);
@@ -1854,19 +1846,19 @@ namespace FeatureAnnotationTool.Model
         /// <param name="edgeToMove">First or Second edge (Layer only)</param>
         /// <param name="xMove">The x position to move the feature to</param>
         /// <param name="yMove">The y position to move the feature to</param>
-        public void moveCurrentFeature(int edgeToMove, int xMove, int yMove)
+        public void MoveCurrentFeature(int edgeToMove, int xMove, int yMove)
         {
-            if (features.SelectedType.Equals("Layer"))
+            if (features.SelectedFeatureType.Equals("Layer"))
             {
                 Layer currentLayer = (Layer)features.SelectedFeature;
                 currentLayer.MoveEdge(edgeToMove, xMove, yMove);
             }
-            else if (features.SelectedType.Equals("Cluster"))
+            else if (features.SelectedFeatureType.Equals("Cluster"))
             {
                 Cluster currentCluster = (Cluster)features.SelectedFeature;
                 currentCluster.MoveCluster(xMove, yMove);
             }
-            else if (features.SelectedType.Equals("Inclusion"))
+            else if (features.SelectedFeatureType.Equals("Inclusion"))
             {
                 Inclusion currentInclusion = (Inclusion)features.SelectedFeature;
                 currentInclusion.MoveInclusion(xMove, yMove);
@@ -1881,12 +1873,12 @@ namespace FeatureAnnotationTool.Model
         /// <param name="addPoint"></param>
         public void AddPoint(Point addPoint, int addAfter)
         {
-            if (features.SelectedType.Equals("Cluster"))
+            if (features.SelectedFeatureType.Equals("Cluster"))
             {
                 Cluster currentCluster = (Cluster)features.SelectedFeature;
                 currentCluster.AddPoint(addPoint, addAfter);
             }
-            else if (features.SelectedType.Equals("Inclusion"))
+            else if (features.SelectedFeatureType.Equals("Inclusion"))
             {
                 Inclusion currentInclusion = (Inclusion)features.SelectedFeature;
                 currentInclusion.AddPoint(addPoint, addAfter);
@@ -1897,14 +1889,14 @@ namespace FeatureAnnotationTool.Model
         /// Deletes a point from the currently selected feature (Cluster or inclusion only)
         /// </summary>
         /// <param name="deletePoint">The p[osition of the point to delete</param>
-        public void deletePoint(Point deletePoint)
+        public void DeletePoint(Point deletePoint)
         {
-            if (features.SelectedType.Equals("Cluster"))
+            if (features.SelectedFeatureType.Equals("Cluster"))
             {
                 Cluster currentCluster = (Cluster)features.SelectedFeature;
                 currentCluster.RemovePoint(deletePoint);
             }
-            else if (features.SelectedType.Equals("Inclusion"))
+            else if (features.SelectedFeatureType.Equals("Inclusion"))
             {
                 Inclusion currentInclusion = (Inclusion)features.SelectedFeature;
                 currentInclusion.RemovePoint(deletePoint);
@@ -1919,7 +1911,7 @@ namespace FeatureAnnotationTool.Model
         /// <param name="depth">The depth of the layer</param>
         /// <param name="amplitude">The amplitude of the layer</param>
         /// <param name="azimuth">The azimuth of the layer</param>
-        public void addNewLayer(int depth, int amplitude, int azimuth)
+        public void AddNewLayer(int depth, int amplitude, int azimuth)
         {
             features.AddNewLayer(depth, amplitude, azimuth);
         }
@@ -1945,9 +1937,9 @@ namespace FeatureAnnotationTool.Model
         /// Changes the amplitude of the top sine of the current layer by a specified amount
         /// </summary>
         /// <param name="changeBy">The amount to change the amplitude by</param>
-        public void changeTopAmplitudeOfSelectedLayer(int changeBy)
+        public void ChangeTopAmplitudeOfSelectedLayer(int changeBy)
         {
-            if (features.SelectedType.Equals("Layer"))
+            if (features.SelectedFeatureType.Equals("Layer"))
             {
                 Layer currentLayer = (Layer)features.SelectedFeature;
 
@@ -1959,9 +1951,9 @@ namespace FeatureAnnotationTool.Model
         /// Changes the amplitude of the bottom sine of the current layer by a specified amount
         /// </summary>
         /// <param name="changeBy">The amount to change the amplitude by</param>
-        public void changeBottomAmplitudeOfSelectedLayer(int changeBy)
+        public void ChangeBottomAmplitudeOfSelectedLayer(int changeBy)
         {
-            if (features.SelectedType.Equals("Layer"))
+            if (features.SelectedFeatureType.Equals("Layer"))
             {
                 Layer currentLayer = (Layer)features.SelectedFeature;
 
@@ -2096,7 +2088,7 @@ namespace FeatureAnnotationTool.Model
         {
             Color layerColor = new Color();
 
-            if (features.NumOfLayers > layerNum)
+            if (features.Layers.Count > layerNum)
             {
                 string group = features.GetLayerGroup(layerNum);
 
@@ -2421,7 +2413,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Adds a new cluster to the Features
         /// </summary>
-        public void addNewCluster()
+        public void AddNewCluster()
         {
             features.AddCluster();
         }
@@ -2431,7 +2423,7 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="xPoint">The x position of the point to add</param>
         /// <param name="yPoint">The y position of the point to add</param>
-        public void addToCurrentCluster(int xPoint, int yPoint)
+        public void AddToCurrentCluster(int xPoint, int yPoint)
         {
             Cluster currentCluster = (Cluster)features.SelectedFeature;
             currentCluster.AddPoint(new Point(xPoint, yPoint));
@@ -2441,7 +2433,7 @@ namespace FeatureAnnotationTool.Model
         /// Deletes the specified cluster from the Features
         /// </summary>
         /// <param name="clusterToDelete">The number of the cluster to delete</param>
-        public void deleteCluster(Cluster clusterToDelete)
+        public void DeleteCluster(Cluster clusterToDelete)
         {
             features.DeleteCluster(clusterToDelete);
         }
@@ -2458,7 +2450,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Adds a new inclusion to the Features
         /// </summary>
-        public void createNewInclusion()
+        public void CreateNewInclusion()
         {
             features.AddInclusion();
         }
@@ -2468,7 +2460,7 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="xPoint">The x position of the point to add</param>
         /// <param name="yPoint">The y position of the point to add</param>
-        public void addToCurrentInclusion(int xPoint, int yPoint)
+        public void AddToCurrentInclusion(int xPoint, int yPoint)
         {
             Inclusion currentInclusion = (Inclusion)features.SelectedFeature;
             currentInclusion.AddPoint(new Point(xPoint, yPoint));
@@ -2478,7 +2470,7 @@ namespace FeatureAnnotationTool.Model
         /// Deletes the specified inclusion from the Features
         /// </summary>
         /// <param name="inclusionToDelete">The number of the inclusion to delete</param>
-        public void deleteInclusion(Inclusion inclusionToDelete)
+        public void DeleteInclusion(Inclusion inclusionToDelete)
         {
             features.DeleteInclusion(inclusionToDelete);
         }
@@ -2498,7 +2490,7 @@ namespace FeatureAnnotationTool.Model
         /// Sets the model adapter
         /// </summary>
         /// <param name="a"></param>
-        public void setAdapter(IModelAdapter _modelAdapter)
+        public void SetAdapter(IModelAdapter _modelAdapter)
         {
             this._modelAdapter = _modelAdapter;
         }
@@ -2513,9 +2505,9 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="xPoint">The x position to check</param>
         /// <param name="yPoint">The y position to check</param>
-        public void setActiveFeatureType(int xPoint, int yPoint)
+        public void SetActiveFeatureType(int xPoint, int yPoint)
         {
-            features.setActiveFeatureType(xPoint, yPoint);
+            features.SetActiveFeatureType(xPoint, yPoint);
         }
 
         public bool LayerAtLastClick
@@ -2537,7 +2529,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Sets the last added cluster as completed
         /// </summary>
-        public void setLastClusterAsComplete()
+        public void SetLastClusterAsComplete()
         {
             features.SetLastClusterAsComplete();
         }
@@ -2545,7 +2537,7 @@ namespace FeatureAnnotationTool.Model
         /// <summary>
         /// Sets the last added inclusion as completed
         /// </summary>
-        public void setLastInclusionAsComplete()
+        public void SetLastInclusionAsComplete()
         {
             features.SetLastInclusionAsComplete();
         }
@@ -2563,16 +2555,16 @@ namespace FeatureAnnotationTool.Model
         /// Returns the number of layers after getting it from the Features
         /// </summary>
         /// <returns>The number of layers in the Features</returns>
-        public int getNumOfLayers()
+        public int GetNumberOfLayers()
         {
-            return features.NumOfLayers;
+            return features.Layers.Count;
         }
 
         /// <summary>
         /// Returns the number of clusters after getting it from the Features
         /// </summary>
         /// <returns>The number of layers in the Features</returns>
-        public int getNumOfClusters()
+        public int GetNumOfClusters()
         {
             return features.GetNumOfClusters();
         }
@@ -2581,7 +2573,7 @@ namespace FeatureAnnotationTool.Model
         /// Returns the number of inclusions after getting it from the Features
         /// </summary>
         /// <returns>The number of inclusions in the Features</returns>
-        public int getNumOfInclusions()
+        public int GetNumOfInclusions()
         {
             return features.NumOfInclusions;
         }
@@ -2591,7 +2583,7 @@ namespace FeatureAnnotationTool.Model
         /// is set or not
         /// </summary>
         /// <returns>True if level is set false if not</returns>
-        public bool getIsFluidLevelSet()
+        public bool GetIsFluidLevelSet()
         {
             return features.FluidLevelSet;
         }
@@ -2601,9 +2593,9 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="layerNum">The layer number</param>
         /// <returns>The List of Points</returns>
-        public List<Point> getLayerPoints1(int layerNum)
+        public List<Point> GetLayerPoints1(int layerNum)
         {
-            if (features.NumOfLayers > layerNum)
+            if (features.Layers.Count > layerNum)
                 return features.GetLayerPoints1(layerNum);
             else
                 return null;
@@ -2614,9 +2606,9 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="layerNum">The layer number</param>
         /// <returns>The List of Points</returns>
-        public List<Point> getLayerPoints2(int layerNum)
+        public List<Point> GetLayerPoints2(int layerNum)
         {
-            if (features.NumOfLayers > layerNum)
+            if (features.Layers.Count > layerNum)
                 return features.GetLayerPoints2(layerNum);
             else
                 return null;
@@ -2651,7 +2643,7 @@ namespace FeatureAnnotationTool.Model
         /// </summary>
         /// <param name="clusterNum">The inclusion number</param>
         /// <returns>The List of Points</returns>
-        public List<Point> getInclusionPoints(int inclusionNum)
+        public List<Point> GetInclusionPoints(int inclusionNum)
         {
             if (features.NumOfInclusions > inclusionNum)
                 return features.GetInclusionPoints(inclusionNum);
@@ -2665,11 +2657,11 @@ namespace FeatureAnnotationTool.Model
         /// <param name="xPoint">The x position to check</param>
         /// <param name="yPoint">The y posiition to check</param>
         /// <returns>True if there is a feature at the given point, false if there is not</returns>
-        public bool getIsOverCurrentFeature(int xPoint, int yPoint)
+        public bool GetIsOverCurrentFeature(int xPoint, int yPoint)
         {
             object selectedFeature = features.SelectedFeature;
 
-            if (features.SelectedType.Equals("Layer"))
+            if (features.SelectedFeatureType.Equals("Layer"))
             {
                 Layer selectedLayer = (Layer)selectedFeature;
                 int low, high;
@@ -2682,7 +2674,7 @@ namespace FeatureAnnotationTool.Model
                 else
                     return false;
             }
-            else if (features.SelectedType.Equals("Cluster") || features.SelectedType.Equals("Inclusion"))
+            else if (features.SelectedFeatureType.Equals("Cluster") || features.SelectedFeatureType.Equals("Inclusion"))
             {
                 if (CheckIfPointIsWithinShapeBounds(xPoint, yPoint, selectedFeature) == true)
                 {
@@ -2733,14 +2725,14 @@ namespace FeatureAnnotationTool.Model
             int topYBoundary = 0;
             int bottomYBoundary = 0;
 
-            if (features.SelectedType.Equals("Cluster"))
+            if (features.SelectedFeatureType.Equals("Cluster"))
             {
                 leftXBoundary = ((Cluster)selectedFeature).LeftXBoundary;
                 rightXBoundary = ((Cluster)selectedFeature).RightXBoundary;
                 topYBoundary = ((Cluster)selectedFeature).TopYBoundary;
                 bottomYBoundary = ((Cluster)selectedFeature).BottomYBoundary;                
             }
-            else if (features.SelectedType.Equals("Inclusion"))
+            else if (features.SelectedFeatureType.Equals("Inclusion"))
             {
                 leftXBoundary = ((Inclusion)selectedFeature).LeftXBoundary;
                 rightXBoundary = ((Inclusion)selectedFeature).RightXBoundary;
@@ -2816,7 +2808,7 @@ namespace FeatureAnnotationTool.Model
             return sectionEnd;
         }
 
-        public FileTiler getCurrentTiler()
+        public FileTiler GetCurrentTiler()
         {
             return tiler;
         }
