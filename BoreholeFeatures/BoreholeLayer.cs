@@ -242,8 +242,12 @@ namespace BoreholeFeatures
 
         public override int GetNumOfEdges()
         {
-            if (TopSineAmplitude == BottomSineAmplitude && TopSineAzimuth == BottomSineAzimuth && m_TopDepthPixels == m_BottomDepthPixels)
+            if(TopSineAmplitude == BottomSineAmplitude &&
+               TopSineAzimuth == BottomSineAzimuth &&
+               m_TopDepthPixels == m_BottomDepthPixels)
+            {
                 return 1;
+            }
 
             return 2;
         }
@@ -285,7 +289,7 @@ namespace BoreholeFeatures
 
         public void SetBottomEdgeDepth(int bottomDepthPixels)
         {
-            this.m_BottomDepthPixels = bottomDepthPixels;
+            m_BottomDepthPixels = bottomDepthPixels;
 
             m_TopSine.calculatePoints();
             m_BottomSine.calculatePoints();
@@ -298,7 +302,7 @@ namespace BoreholeFeatures
 
         public void SetTopSineAmplitude(int topAmplitude)
         {
-            this.TopSineAmplitude = topAmplitude;
+            TopSineAmplitude = topAmplitude;
 
             m_TopSine.calculatePoints();
             m_BottomSine.calculatePoints();
@@ -311,7 +315,7 @@ namespace BoreholeFeatures
 
         public void SetBottomSineAmplitude(int bottomAmplitude)
         {
-            this.BottomSineAmplitude = bottomAmplitude;
+            BottomSineAmplitude = bottomAmplitude;
 
             m_TopSine.calculatePoints();
             m_BottomSine.calculatePoints();
@@ -324,7 +328,7 @@ namespace BoreholeFeatures
 
         public void SetTopSineAzimuth(int topAzimuth)
         {
-            this.TopSineAzimuth = topAzimuth;
+            TopSineAzimuth = topAzimuth;
 
             m_TopSine.calculatePoints();
             m_BottomSine.calculatePoints();
@@ -337,7 +341,7 @@ namespace BoreholeFeatures
 
         public void SetBottomSineAzimuth(int bottomAzimuth)
         {
-            this.BottomSineAzimuth = bottomAzimuth;
+            BottomSineAzimuth = bottomAzimuth;
 
             m_TopSine.calculatePoints();
             m_BottomSine.calculatePoints();

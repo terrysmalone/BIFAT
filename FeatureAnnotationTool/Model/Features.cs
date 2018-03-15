@@ -1554,7 +1554,7 @@ namespace FeatureAnnotationTool.Model
 
         public void SetLayers(List<Layer> layers)
         {
-            this.m_Layers = layers;
+            m_Layers = layers;
 
             for (var i = 0; i < layers.Count; i++)
             {
@@ -1607,7 +1607,7 @@ namespace FeatureAnnotationTool.Model
         {
             this.allLayerGroups = allGroups;
 
-            for (int i = 0; i < m_Layers.Count; i++)
+            for (var i = 0; i < m_Layers.Count; i++)
             {
                 m_Layers[i].SetAllGroupNames(allGroups);
             }
@@ -1617,7 +1617,7 @@ namespace FeatureAnnotationTool.Model
         {
             this.allClusterGroups = allGroups;
 
-            for (int i = 0; i < m_Clusters.Count; i++)
+            for (var i = 0; i < m_Clusters.Count; i++)
             {
                 m_Clusters[i].SetAllGroupNames(allGroups);
             }
@@ -1627,7 +1627,7 @@ namespace FeatureAnnotationTool.Model
         {
             this.allInclusionGroups = allGroups;
 
-            for (int i = 0; i < m_Inclusions.Count; i++)
+            for (var i = 0; i < m_Inclusions.Count; i++)
             {
                 m_Inclusions[i].SetAllGroupNames(allGroups);
             }
