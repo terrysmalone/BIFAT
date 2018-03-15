@@ -220,14 +220,13 @@ namespace BoreholeFeatures
             get => m_TimeLastModified;
             set => m_TimeLastModified = value;
         }
-
-        // The depth resolution (mm per pixel) of the borehole image
-        public int SourceDepthResolution => m_DepthResolution;
-
+        
+       
         //  The azimuth resolution (number of pixels horizontally) of the borehole image
         public int SourceAzimuthResolution => m_SourceAzimuthResolution;
-        
-        public int DepthResolution
+
+        // The depth resolution (mm per pixel) of the borehole image
+        public int SourceDepthResolution
         {
             get => m_DepthResolution;
 

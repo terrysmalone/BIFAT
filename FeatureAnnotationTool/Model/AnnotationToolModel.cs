@@ -1936,7 +1936,7 @@ namespace FeatureAnnotationTool.Model
         public void AddCompleteLayer(Layer layerToAdd)
         {
             layerToAdd.SetBoreholeStartDepth(boreholeStartDepth);
-            layerToAdd.DepthResolution = depthResolution;
+            layerToAdd.SourceDepthResolution = depthResolution;
 
             features.AddCompleteLayer(layerToAdd);
         }
