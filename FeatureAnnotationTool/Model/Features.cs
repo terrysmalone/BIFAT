@@ -1556,7 +1556,7 @@ namespace FeatureAnnotationTool.Model
         {
             this.m_Layers = layers;
 
-            for (int i = 0; i < layers.Count; i++)
+            for (var i = 0; i < layers.Count; i++)
             {
                 if (layers[i].Group == null)
                 {

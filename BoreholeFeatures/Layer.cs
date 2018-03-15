@@ -9,6 +9,7 @@ namespace BoreholeFeatures
     /// </summary>
     public abstract class Layer
     {
+        // ReSharper disable InconsistentNaming
         protected int m_SourceAzimuthResolution;
         protected int m_DepthResolution;
 
@@ -28,16 +29,18 @@ namespace BoreholeFeatures
         protected int m_FirstEdge = 1;
         protected int m_SecondEdge = 2;
         protected int m_BothEdges = 3;
-        
-        private LayerProperties m_LayerProperties;
 
         protected DateTime m_TimeAdded;
         protected DateTime m_TimeLastModified;
 
         protected string[] m_AllGroupNames;
-        
+
+        private LayerProperties m_LayerProperties;
+
+        // ReSharper restore InconsistentNaming
+
         #region properties
-        
+
         public int StartDepth => (int)(m_LayerStartY * (double)m_DepthResolution + m_SourceStartDepth);
         
         public int EndDepth => (int)((m_LayerEndY * (double)m_DepthResolution) + m_SourceStartDepth);
