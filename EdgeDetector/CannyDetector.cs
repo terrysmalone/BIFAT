@@ -130,7 +130,6 @@ namespace EdgeDetector
             SetDefaults();
 
             pixelData = new int[imageSize];
-            //SetUpData();
 
             ConvertDataFromRGB(rawIntData);
         }
@@ -316,7 +315,7 @@ namespace EdgeDetector
         /// </summary>
         private void performConvolution()
         {
-            for (int x = initX; x <= maxX; x++) // for (int x = initX; x < maxX; x++)
+            for (int x = initX; x <= maxX; x++)
             {
                 for (int y = initY; y <= maxY; y += imageWidth)
                 {
@@ -831,7 +830,6 @@ namespace EdgeDetector
         }
 
         # endregion
-
     }
 }
 
