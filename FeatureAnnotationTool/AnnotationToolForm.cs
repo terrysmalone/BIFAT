@@ -2590,7 +2590,7 @@ namespace FeatureAnnotationTool
 
         private void changeToAlterLayerCursor()
         {
-            int currentAzimuth = (int)(((double)_viewAdapter.TopAzimuthOfSelectedLayer / (double)360) * (double)boreholeWidth);
+            int currentAzimuth = (int)(((double)_viewAdapter.GetTopAzimuthOfSelectedLayer() / (double)360) * (double)boreholeWidth);
 
             if (_viewAdapter.ImageType == "Borehole")
             {
@@ -2639,9 +2639,9 @@ namespace FeatureAnnotationTool
             int secondEdgePoint = selectedLayer.GetBottomEdgePoints()[xMousePos].Y;
 
             if (secondEdgePoint - yMousePos > yMousePos - firstEdgePoint)
-                currentAzimuth = (int)(((double)_viewAdapter.TopAzimuthOfSelectedLayer / (double)360) * (double)boreholeWidth);
+                currentAzimuth = (int)(((double)_viewAdapter.GetTopAzimuthOfSelectedLayer() / (double)360) * (double)boreholeWidth);
             else
-                currentAzimuth = (int)(((double)_viewAdapter.BottomAzimuthOfSelectedLayer / (double)360) * (double)boreholeWidth);
+                currentAzimuth = (int)(((double)_viewAdapter.GetBottomAzimuthOfSelectedLayer() / (double)360) * (double)boreholeWidth);
 
             return currentAzimuth;
         }
@@ -3021,7 +3021,7 @@ namespace FeatureAnnotationTool
 
         private void checkWhatTypeOfAlterToPerformOnLayer()
         {
-            int currentAzimuth = (int)(((double)_viewAdapter.TopAzimuthOfSelectedLayer / (double)360) * (double)boreholeWidth);
+            int currentAzimuth = (int)(((double)_viewAdapter.GetTopAzimuthOfSelectedLayer() / (double)360) * (double)boreholeWidth);
 
             if (previousX < currentAzimuth + 50 && previousX > currentAzimuth - 50)
                 alteringWholeAmplitude = true;
@@ -3048,7 +3048,7 @@ namespace FeatureAnnotationTool
 
         private void checkWhatTypeOfAlterToPerformOnTopEdge()
         {
-            int currentAzimuth = (int)(((double)_viewAdapter.TopAzimuthOfSelectedLayer / (double)360) * (double)boreholeWidth);
+            int currentAzimuth = (int)(((double)_viewAdapter.GetTopAzimuthOfSelectedLayer() / (double)360) * (double)boreholeWidth);
 
             if (previousX < currentAzimuth + 50 && previousX > currentAzimuth - 50)
                 alteringTopAmplitude = true;
@@ -3058,7 +3058,7 @@ namespace FeatureAnnotationTool
 
         private void checkWhatTypeOfAlterToPerformOnBottomEdge()
         {
-            int currentAzimuth = (int)(((double)_viewAdapter.BottomAzimuthOfSelectedLayer / (double)360) * (double)boreholeWidth);
+            int currentAzimuth = (int)(((double)_viewAdapter.GetBottomAzimuthOfSelectedLayer() / (double)360) * (double)boreholeWidth);
 
             if (previousX < currentAzimuth + 50 && previousX > currentAzimuth - 50)
                 alteringBottomAmplitude = true;

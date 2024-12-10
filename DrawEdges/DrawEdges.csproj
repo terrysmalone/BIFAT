@@ -34,9 +34,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BoreholeFeatures">
-      <HintPath>..\BoreholeFeatures\bin\Debug\BoreholeFeatures.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -58,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BoreholeFeatures\BoreholeFeatures.csproj">
+      <Project>{080d9482-3176-4022-badc-582982fb17f3}</Project>
+      <Name>BoreholeFeatures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edges\Edges.csproj">
       <Project>{7ECBAB21-48CF-4C33-A698-53BCAA8510A7}</Project>
       <Name>Edges</Name>
